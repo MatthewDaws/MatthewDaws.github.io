@@ -1,3 +1,7 @@
+# To mirror Github...
+safe: true
+lsi: false
+
 # Dependencies
 markdown:         redcarpet
 #markdown: kramdown
