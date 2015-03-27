@@ -34,13 +34,6 @@ I'm converted to Python 3, and mainly use Windows right now, a combination which
 
 * Jekyll on Windows: [Syntax highlighting](https://github.com/juthilo/run-jekyll-on-windows/blob/gh-pages/3-syntax-highlighting.md)
 
-* For now we'll do it manually with the {% raw %} `{% highlight html %} ... {% endhighlight %}` {% endraw %} form.
-
-```html
-<p>This is an <strong>example</strong></p>
-```
-
 * This all worked absolutely fine locally, but wouldn't work when I uploaded it to GitHub.  After a massive amount of trial and error, and some cryptic error messages, I finally got a useful error message: `rouge` isn't supported by GitHub at present.  So we comment this out in the `_config.yml` file and it all works!
 
-
-
+* A final wrickle is that, either locally, or on GitHub, I couldn't get automatic syntax highlighting to work.  So, for now, we'll do it manually with the {% raw %} `{% highlight html %} ... {% endhighlight %}` {% endraw %} form.

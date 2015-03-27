@@ -3,12 +3,12 @@ safe: true
 lsi: false
 
 # Dependencies
-#markdown:          kramdown
+markdown:          kramdown
 # Must comment this out when uploading to GitHub
 #highlighter:      rouge
 
-#kramdown:
-#  input: GFM
+kramdown:
+  input: GFM
 
 # Permalinks
 #permalink:        pretty
