@@ -6,7 +6,7 @@ lsi: false
 #markdown:         redcarpet
 markdown:          kramdown
 #highlighter:      pygments
-#highlighter:      rouge
+highlighter:      rouge
 
 kramdown:
   input: GFM
