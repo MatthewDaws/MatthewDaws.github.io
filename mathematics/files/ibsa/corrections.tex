@@ -1,0 +1,315 @@
+\documentclass[twoside,12pt,a4paper]{article}
+
+\usepackage[margin=2cm]{geometry}
+%\usepackage{times}
+\usepackage{amsmath,amssymb,amsthm,latexsym}
+%\usepackage{amsfonts}
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Theorem}
+\newtheorem{corollary}[proposition]{Corollary}
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{claim}[proposition]{Claim}
+\newtheorem{definition}[proposition]{Definition}
+\newtheorem{conjecture}[proposition]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{example}[proposition]{Example}
+\newtheorem{remark}[proposition]{Remark}
+
+\newcommand{\mc}{\mathcal}
+\newcommand{\Sp}{\operatorname{Sp}}
+
+\begin{document}
+
+\noindent{MATH5002: Ongoing corrections and comments}
+
+\section{Theorem 3.26}
+
+At the top of page~124, why is it ``elementary to see'' that $f(A)$ is open?
+
+By a ``topological vector space'' I mean a vector space which has a topology making
+the vector space operations continuous.  Any normed space, or locally convex space,
+is a topological vector space.
+
+\begin{lemma}
+Let $E$ be a topological vector space, and let $f:E\rightarrow\mathbb R$ be a
+continuous linear functional.  Then either $f=0$ or $f$ is an open mapping.
+\end{lemma}
+\begin{proof}
+Suppose $f\not=0$, so there is $x_0\in E$ with $f(x_0)\not=0$.
+Let $A\subseteq E$ be open, and let $a\in A$.  As $f(x_0)\not=0$ we can
+find some scalar $\lambda$ such that $f(\lambda x_0) = \lambda f(x_0)$ does
+not equal $f(a)$.  Set $x_1=\lambda x_0$.  Consider the function
+$\varphi:\mathbb R\rightarrow E; t\mapsto tx_1 +(1-t)a$.  This is continuous
+(as it only involves the vector space operations) and $\varphi(0)=a\in A$.
+As $A$ is open, there is $\epsilon>0$ such that $\varphi(t)\in A$ if
+$-\epsilon < t <\epsilon$.  Then consider the set $\{ f(\varphi(t)) :
+-\epsilon < t <\epsilon\}$, which is the image of a line segment under a linear
+map, and is hence the open interval between $-\epsilon f(x_1) + (1+\epsilon)
+f(a)$ and $\epsilon f(x_1) + (1-\epsilon) f(a)$.  The actual values are
+irrelevant-- the point is that $f(x_1)\not=f(a)$, so this is a proper open
+interval containing $f(a)$.  Thus every point in $f(A)$ has an open
+neighbourhood, and we conclude that $f(A)$ is open.
+\end{proof}
+
+In the proof of part (iii) (also on page~124) it's written ``since $A$
+is compact, there is a convex open neighbourhood $V$ of $0_E$ with $(A+V)
+\cap B=\emptyset$''.  Why is this?  We first need a lemma.
+
+\begin{lemma}
+Let $E$ be a real locally convex space.  For each $x\in E$ and each
+open set $U$ containing $x$, there is a convex open neighbourhood $W$ of
+$0_E$ with $x+W+W \subseteq U$, where $x+W+W=\{ x+w+v : w,v\in W \}$.
+\end{lemma}
+\begin{proof}
+As the topology is translation invariant, $U=x+V$ for some open set $V$
+containing $0$.  As addition is continuous and $0_E+0_E=0_E$, there are
+neighbourhoods $V_1,V_2$ of $0_E$ with $V_1+V_2 \subseteq V$.  As the
+topology is locally convex, we can find a convex open neighbourhood $W$ of
+$0_E$ with $W\subseteq V_1\cap V_2$.  Thus $W+W\subseteq V$, or equivalently,
+$x+W+W \subseteq U$.
+\end{proof}
+
+We now show the claimed result.  For each $a\in A$, as $B$ is closed
+and $a\not\in B$, by the lemma, there is a convex open neighbourhood $W_a$
+of $0_E$ with $a+W_a+W_a \cap B = \emptyset$.  Then the family
+$\{ a+W_a : a\in A \}$ is an open cover for $A$, so as $A$ is
+compact, there is a finite subcover, say $\{ a_i+W_{a_i} : 1\leq i\leq n\}$.
+Set $V=W_{a_1} \cap\cdots\cap W_{a_n}$, which is a convex open neighbourhood
+of $0_E$.  Then
+\[ A+V \subseteq \bigcup_{i=1}^n a_i + W_{a_i} + V
+\subseteq \bigcup_{i=1}^n a_i + W_{a_i} + W_{a_i}, \]
+which is disjoint from $B$, as required.
+
+
+
+\section{Lemma~3.38}
+
+Let $T:E\rightarrow F$ be a (bounded) linear map.
+The first part of this lemma suggests that it is obvious to see that if
+\[ \text{for all } y\in F \text{ there is }x\in E \text{ with }
+T(x)=y, \|x\|\leq K\|y\|, \]
+then $T$ is open.  Why is this?
+
+Well, let $U\subseteq E$ be open.  Then let $y_0\in T(U)$, so $y_0=T(x_0)$ for some
+$x_0\in U$.  As $U$ is open, $B(x_0,\epsilon)\subseteq U$ for some $\epsilon>0$.
+Let $z\in F$ with $\|z\| < \epsilon/K$, so by assumption, there is $x'\in E$ with
+$T(x')=z$ and $\|x'\|\leq K\|z\|<\epsilon$.  Then $x_0+x' \in B(x_0,\epsilon)\subseteq U$
+and $T(x_0+x') = y_0+z$.  As $z$ was arbitrary, we've shown that $B(y_0,\epsilon/K)
+\subseteq T(U)$.  As $y_0$ are arbitrary, we've shown that $T(U)$ is open.
+
+If you think about it for a moment, we have actually just proved the following lemma:
+
+\begin{lemma}
+Let $E,F$ be normed space and $T:E\rightarrow F$ be linear.  Let $B=\{x\in E:
+\|x\|<1\}$ be the open unit ball of $E$, and suppose that $T(B)$ contains an open
+neighbourhood of $0$.  Then $T$ is open.
+\end{lemma}
+
+
+
+
+\section{Theorem~3.40}
+
+What is the ``elementary argument'' in the proof.  I think it is the following.
+
+We know that $\overline{T(B_N)}$ has non-empty interior, which means we can find
+$y\in \overline{T(B_N)}$ and $\epsilon>0$ with $B(y,\epsilon) \subseteq 
+\overline{T(B_N)}$.  Thus we can find $(x_n)\subseteq E$ with $\|x_n\|< N$ for all
+$n$, and with
+$T(x_n)\rightarrow y$.  Let $w\in F$ with $\|w\| < \epsilon/2$.  Then
+$y+2w \in B(y,\epsilon) \subseteq \overline{T(B_N)}$ and so we can find 
+$(x_n')\subseteq E$ with $\|x_n'\|<N$ for all $n$,
+and with $T(x_n')\rightarrow y+2w$.  Then
+\[ \Big\| \frac{1}{2}(x_n'-x_n) \Big\| < N \text{ for all }n, \quad
+\text{and}\quad T\Big( \frac{1}{2}(x_n'-x_n) \Big)
+\rightarrow \frac12(y+2w - y) = w. \]
+That is, $w\in \overline{T(B_N)}$.  We've hence shown that $B(0,\epsilon/2)
+\subseteq \overline{T(B_N)}$, which is what we need.
+
+
+\section{Section~5.3: The Jacobson Radical}
+
+Let $A$ be a unital algebra.  For a left ideal $L$ of $A$, define
+$L:A=\{a\in A:ab\in L \ (b\in A) \}$ which agrees with the kernel of the natural
+representation of $A$ on $A/L$.  An ideal is \emph{primitive} if it equals $L:A$
+for some maximal left ideal $L$; equivalently, the primitive ideals are the
+kernels of irreducible representations.
+
+If $A$ is a Banach algebra, then a maximal (left) ideal must be closed.
+If $L$ is closed, then so is $L:A$.
+Thus primitive ideals are automatically closed.
+
+If $A$ is commutative and Banach, then the maximal ideals correspond to the
+kernels of characters.  It's claimed in the book (page~231) that it's ``obvious''
+that the primitive ideals are simply the maximal ideals.
+
+\begin{lemma}
+In a commutative unital algebra $A$, the primitive ideals are the maximal ideals.
+\end{lemma}
+\begin{proof}
+Let $M\subseteq A$ be a maximal ideal.  Then by a standard Zorn's lemma
+argument, there is a maximal left ideal $L$ containing $M$.  Set $P=L:A$,
+so $P$ is primitive.  If $m\in M$, then for $b\in A$, also $mb\in M \subseteq
+L$; it follows that $m\in L:A=P$ so $M\subseteq P$.  As $M$ is maximal, we
+conclude that $M=P$ is primitive (and we didn't use that $A$ is commutative).
+
+Conversely, let $P$ be a primitive ideal, so $P=L:A$ for some maximal left ideal
+$L$.  As $A$ is commutative, $L$ is a maximal (two-sided) ideal and so if
+$a\in L$ and $b\in A$, then $ab\in L$; this shows that $L\subseteq L:A=P$.
+By maximality, $L=P$ and so $P$ is a maximal ideal.
+\end{proof}
+
+\{With hindsight that was easy!  But the book starts talking about characters,
+which seems misleading to me.\}
+
+
+
+\section{Comments on various exercises}
+
+\subsection{Exercise 2.9}
+
+To show that $C(\mathbb I)$ is isomorphic to $C(\mathbb I)\oplus C(\mathbb I)$
+is pretty hard-- this is proved in Banach's book, for example!  I cannot
+see how to give a nice ``hint''.
+
+
+\subsection{Exercise 4.4}
+
+This is very hard.  Here are some hints which make it (a bit) easier:
+\begin{itemize}
+\item Suppose that the exercise is true for Banach algebras of the
+form $\mathcal B(E)$.  Let $A\rightarrow\mathcal B(A); a\mapsto L_a$ where
+$L_a(b)=ab$, the left-regular representation.  Use this to show the result.
+\item Suppose that  the exercise is true for Banach algebras of the
+form $\mathcal B(E^*)$.  Show that it's true for $\mathcal B(E)$.
+\item Use the Krein-Milman theorem applied to the unit ball of $E^*$,
+to show that the exercise is true for Banach algebras of the
+form $\mathcal B(E^*)$.
+\end{itemize}
+
+
+\subsection{Exercise 4.5}
+
+This appears to be false under any reasonable interpretation.
+
+
+\subsection{Exercise 4.9}
+
+Of course, this should ask you to show that $LR=I_H$ but $RL\not=I_H$.
+
+
+\subsection{Exercise 4.10}
+
+This is false, as stated.  We have that $\|T\|\leq 1$ and that
+$\bigcap_n T^n(E) = \{0\}$ (notice the typo here in the question).
+It is true that $0\in\Sp(T)$ and that $T$ has no eigenvalues.  You can
+follow the construction with the operators $U_\zeta$ to show correctly
+that $\Sp(T)$ is rotationally invariant.  So $\Sp(T)$ is a union of
+circles, all inside the closed unit disc in $\mathbb C$.  However, this
+does not mean that $\Sp(T)$ is itself a disc (or $\{0\}$).
+
+It is easy to see that
+\[ T^n(x_1,x_2,x_3,\cdots) = (0,\cdots,0,w_1w_2\cdots w_nx_1,
+w_2w_3\cdots w_{n+1}x_2, \cdots), \]
+where there are $n$ zeros.  It follows that
+\[ \|T^n\| = \sup_{m\geq 1} \| w_m \cdots w_{m+n-1} \|
+\implies \rho(T) = \lim_n \sup_{m\geq 1} \| w_m \cdots w_{m+n-1} \|^{1/n}. \]
+
+\subsubsection{Counter-example}
+
+Define
+\[ w_n = \begin{cases} 1/k &: n=2^k \text{ for some }k\in\mathbb N, \\
+1 &: \text{otherwise}. \end{cases} \]
+Because the gaps between successive powers of $2$ increase without bound,
+it follows from the above formula that $\rho(T)=1$.  By rotational invariance,
+$\Sp(T)$ must contain the unit circle.
+
+We'll now show that $0\in\Sp_{\text{ap}}(T)$, 
+
+
+
+
+\subsection{Exercise 4.11(i)}
+
+$K$ is a compact Hausdorff space, $F\subseteq K$ is closed, we define
+\[ I(F) = \{ f\in C(K) : f|F=0 \}. \]
+This is a closed ideal in $C(K)$ (which is not too hard to show).
+
+Why does every closed ideal arise in this way?  I think that this is slightly
+tricky to answer.  Let $J\subseteq C(K)$ be a closed ideal, and then set
+\[ F = \{ k\in K : f(k)=0 \ (f\in J) \}. \]
+It's not too hard to show that this is a closed subset of $K$, and that
+$J \subseteq I(F)$.  But why do we have equality?
+
+Form the quotient algebra $A=C(K)/J$, so that $A$ is a commutative
+Banach algebra.
+
+\begin{claim}
+With notation as above, $A$ is semi-simple, that is, the Gelfand
+transform $\mc G:A\rightarrow C(\Phi_A)$ is injective.
+\end{claim}
+
+If we believe this, then suppose that $J\not=I(F)$.  Thus there is
+$g\in I(F)$ with $g\not\in J$, and so $g+J\not=0$ in $A$, and so
+$\mc G(g+J)\not=0$.  Thus there is a character $\varphi$ on $A$ with
+$\varphi(g+J)\not=0$.  Then $\phi:C(K)\rightarrow\mathbb C; f\mapsto
+\varphi(f+J)$ is a character on $C(K)$, and so there is $k\in K$ with
+$\phi(f)=f(k)$ for all $f$.  Thus $g(k)\not=0$.  As $g\in I(F)$, we must
+have that $k\not\in F$.  However, for any $f\in J$ we have that $f(k)=
+\phi(f) = \varphi(f+J)=0$, and so $k\in F$, contradiction.  So $J=I(F)$.
+
+How do we prove the claim?  We could use that $C(K)$ is a C$^*$-algebra,
+that $J$ is $*$-closed, and that thus $C(K)/J$ is also a C$^*$-algebra.
+Then use that the Gelfand transform of a commutative C$^*$-algebra is
+always injective (actually, an isomorphism).
+
+\subsubsection{A direct proof}
+
+Again let $g\in I(F)$.  For $\epsilon>0$ let $U=\{ k\in K : |g(k)|<\epsilon\}$
+so $U$ is an open set containing $F$.  For each $x\not\in U$, as $x\not\in K$,
+we can find $f_x\in J$ with $f_x(x)=1$ say (by definition of $F$ we can find
+$f_x\in J$ with $f_x(x)\not=0$, and then rescale).  Then $U_x=\{ k\in K:
+|f_x(k)|>1/2 \}$ is open and contains $x$.  As $K\setminus U$ is
+closed, hence compact, we can find $x_1,\cdots,x_n$ with $U_{x_1}\cup
+\cdots\cup U_{x_n} \supseteq K\setminus U$.
+
+Given $f\in J$, notice that $|f|^2 = f \overline{f} \in J$ as $J$ is an ideal.
+Thus $h = |f_{x_1}|^2 + \cdots + |f_{x_n}|^2\in J$.  Then $h(k)=0$ for each
+$k\in F$, while for each $x\not\in U$, there is $i$ with $x\in U_{x_i}$, and so
+$h(x)>(1/2)^2 = 1/4$.  
+
+Now consider\footnote{Thanks to George Berkley for point this trick out.}
+$g_n\in C(K)$ defined by
+\[ g_n(x) = g(x) \frac{n h(x)}{1+nh(x)}. \]
+Notice that $nh(x)/(1+nh(x)) \in [0,1)$ for all $x$ and $n$.
+If $x\not\in U$ then $h(x)>1/4$ and so $nh(x)/(1+nh(x)) \rightarrow 1$ as
+$n\rightarrow\infty$, \emph{uniformly} for $x\not\in U$.  In particular, if
+$n$ is large, then $|g_n(x)-g(x)| < \epsilon$ for all $x\not\in U$.
+If $x\in U$ then $|g(x)|<\epsilon$ and so also $|g_n(x)|<\epsilon$, and so
+$|g_n(x)-g(x)| < 2\epsilon$.  We conclude that for $n$ large, $g_n$ approximates
+$g$ in the supremum norm.  However, notice that
+\[ g_n = \frac{ng}{1+nh} h, \]
+and so as $J$ is an ideal, $g_n\in J$.
+As $J$ is closed, we conclude that $g\in J$, as required.
+
+\subsection{An example}
+
+Consider $B=C^1([0,1])$ the continuous
+differentiable functions on $[0,1]$ with the norm $\|f\|=\|f\|_\infty + 
+\|f'\|_\infty$.  This is a natural Banach function algebra on $[0,1]$
+(see Exercise~4.12).
+
+Let $J$ be the collection of functions with $f(1/2)=f'(1/2)=0$.
+This is a linear subspace, and an ideal, as for any $g$,
+\[ (gf)(1/2) =0, \qquad (gf)'(1/2) = g'(1/2)f(1/2) + g(1/2) f'(1/2) =0. \]
+It's easy to see that it's closed (thanks to the norm we used).  However,
+I claim that the associated $F$ must be $\{1/2\}$, and so $I(F)\not=J$.
+Indeed, the function $f(x)=(x-1/2)^2$ is in $J$ but vanishes only at $1/2$.
+
+What goes wrong with the above proof?  The problem is that while $\|g_n-g\|$
+is small, we have no control over $\| g_n' - g'\|$.
+
+
+\end{document}

@@ -1,0 +1,262 @@
+\documentclass[twoside,12pt,a4paper]{article}
+
+\usepackage[margin=2cm]{geometry}
+%\usepackage{times}
+\usepackage{amsmath,amssymb,amsthm,latexsym}
+%\usepackage{amsfonts}
+
+
+\newcommand{\Sp}{\operatorname{Sp}}
+\newcommand{\mc}{\mathcal}
+
+\begin{document}
+
+\noindent{\Large\textbf{Reading course: Banach spaces and algebras}
+(MATH5002)}
+
+\bigskip
+
+Here are some further exercises, loosely collected under the same
+headings I have used elsewhere.  Some questions might be harder than
+I expect!
+
+\section{Revision of normed spaces; dual spaces; Hahn-Banach}
+
+
+
+
+
+\section{Weak and weak$^*$-topologies; second duals; geometric forms of
+Hahn-Banach; Krein-Milman}
+
+\begin{itemize}
+\item Let $E$ be a normed space, and let $(x_n)$ be a sequence in $E$ which
+converges weakly to $x$.  Show that we can find a sequence $(y_n)$ in $E$,
+which converges to $x$ in norm, and with $y_n$ in the convex hull of
+$\{ x_1,x_2,\cdots,x_n \}$, for each $n$.
+\item Let $E$ be an infinite dimensional normed space.  Show that the 
+weak closure of the unit sphere $S=\{ x\in E : \|x\|=1\}$ is precisely
+the closed unit ball of $E$.
+\item Give $[0,1]$ Lebesgue measure (though this question works for
+any ``reasonable'' measure space).  Let $1<p<\infty$.  Show that the
+extreme points of the closed unit ball of $L^p([0,1])$ is the
+unit sphere, $\{ f\in L^p([0,1]) : \|f\|_p=1\}$.
+\item What are the extreme points of the closed unit ball of $L^1([0,1])$?
+\item What are the extreme points of the closed unit ball of $\ell^1$?
+\end{itemize}
+
+
+\section{Baire category, Open Mapping, Closed Graph, Uniform boundedness
+theorems}
+
+\begin{itemize}
+\item Let $E$ be a vector space, and let $\|\cdot\|_1$ and $\|\cdot\|_2$
+be norms on $E$ such that $E$ is Banach for either norm.  Let $\tau_1$
+and $\tau_2$ be the corresponding topologies on $E$, and suppose that
+$\tau_1 \subseteq \tau_2$ (that is, if a subset of $E$ is open for
+$\|\cdot\|_1$ then it's open for $\|\cdot\|_2$).  Show that $\tau_1=\tau_2$.
+\item Let $1\leq p\leq\infty$.  Let $(a_{i,j})$ be an infinite matrix,
+and suppose that $(Ax)_i = \sum_j a_{i,j} x_j$ is an element of $\ell^p$,
+whenever $x=(x_j)\in\ell^p$.  Show that $A$ defines a bounded linear map
+on $\ell^p$.
+\item Let $E$ be a normed space, let $(f_n)$ be a sequence in $E^*$ which
+converges weak$^*$ to $f\in E^*$.  Show that there is $K>0$ such that
+$\|f_n\|\leq K$ for all $n$.
+\end{itemize}
+
+
+\section{Basics of Banach algebras; constructions; group of units}
+
+\begin{itemize}
+\item Let $A$ be an algebra.  Suppose that there are $a\in A$ and
+a sequence $(b_n)$ in $A$, each $b_n$ is non-zero, such that
+$ab_n = nb_n$ for all $n$.  Show that there is no algebra norm on $A$.
+
+Use this result to show that $C(\mathbb R)$, the algebra of all continuous
+functions on $\mathbb R$, cannot be given an algebra norm.
+
+\item Let $A$ be a commutative Banach algebra such that for each $a\in A$,
+there is $n\in\mathbb N$ with $a^n=0$.  Prove that there is $N\in\mathbb N$
+with $a^N=0$ for all $a\in A$.  \emph{Hint:} Baire Category.
+
+Can you prove the same for a non-commutative Banach algebra?
+\end{itemize}
+
+
+\section{Spectrum; Characters; Gelfand Theory}
+
+\begin{itemize}
+\item Let $A$ be a Banach algebra, and let $a,b\in A$.  Show that
+$\Sp(ab)\setminus\{0\} = \Sp(ba)\setminus\{0\}$ (this is probably in
+the book-- check that you understand the proof!)
+
+Can it happen that $\Sp(ab)\not=\Sp(ba)$?
+
+Give a proof (by contradiction!) that $ab-ba$ cannot be a multiple
+of $1$ (assuming that $A$ is unital).
+
+\item Find examples of $2\times 2$ complex matrices $A,B$ such that
+$\rho(AB) > \rho(A)\rho(B)$ and $\rho(A+B) > \rho(A) + \rho(B)$.
+\emph{Hint:} Remember that $\Sp(A)$ is just the collection of eigenvalues
+of $A$.
+
+\item Let $A$ be a Banach algebra, and suppose that for $C>0$, we have
+that $\|a\| \leq C \rho(a)$ for all $a\in A$.  Show that $A$ is
+commutative.
+
+\emph{Hint:} Let $a,b\in A$, and define $f(z) = e^{-za} b e^{za}$, for
+$z\in\mathbb C$.  Prove that $f$ is analytic and constant.  Deduce the
+result from this.
+\end{itemize}
+
+
+\section{Commutative Banach algebras; holomorphic functional calculus}
+
+\begin{itemize}
+\item Let $A$ be a Banach algebra, let $a\in A$, and suppose that $0$
+and $\infty$ belongs to the same unbounded component of
+$\mathbb C\setminus\Sp(a)$.  Show that:
+\begin{enumerate}
+\item $a=e^b$ for some $b\in A$;
+\item for any $n\in\mathbb N$ there is $c\in A$ with $c^n = a$.
+\item for $\epsilon>0$, we can find a complex polynomial $P$ such that
+$\| a^{-1} - P(a) \| < \epsilon$.
+\end{enumerate}
+Show that if $M$ is an $n\times n$ invertible matrix, then $M=e^L$ for
+some matrix $L$.
+\end{itemize}
+
+
+\section{C$^*$-algebras; continuous functional calculus}
+
+\begin{enumerate}
+\item Let $A$ be a C$^*$-algebra, and let $a\in A$.  Supposing that
+$a$ is normal, show that $\Sp(a^*a) = \{ |\lambda|^2 : \lambda\in\Sp(a) \}$.
+Is this always true if $a$ is not normal?
+\item Let $X$ be a compact Hausdorff space, let $A=C(X)$ with the usual
+norm.  Let $\|\cdot\|_0$ be some other algebra norm on $A$ (we do not assume
+that $(A,\|\cdot\|_0)$ is Banach).  Show that:
+\begin{enumerate}
+\item Let $B$ be the completion of $(A,\|\cdot\|_0)$, so that $B$ is
+a Banach algebra.  Let $E$ be the collection of all characters $\varphi$ on
+$B$, restricted to the algebra $A$.  Show that $E$ forms a non-empty,
+closed subset of the character space of $A$ (which we identify with $X$).
+\item Using Urysohn's Lemma, show that if $E\not=X$, then there are non-zero
+$a,b\in A$ with $ab=0$ but with $\varphi(a)=1$ for all $\varphi\in E$.
+Show that this leads to a contradiction; so $E=X$.
+\item Deduce that for each $f\in A$, we have $\|f\| = \rho_B(f)$.
+\item Deduce that $\|f\| \leq \|f\|_0$ for each $f\in A$.
+\end{enumerate}
+\item Let $X,Y$ be compact Hausdorff spaces, and let $T:C(X)\rightarrow C(Y)$
+be a unital homomorphism.  Show that there is a continuous map $f:Y\rightarrow
+X$ such that $T(a) = a\circ f$ for all $a\in C(X)$.
+
+If you know what the words mean: Show that the category of compact Hausdorff
+spaces with continuous maps is anti-equivalent to the category of
+unital commutative C$^*$-algebras with unital homomorphisms.
+\item In the book, Corollary~2.19 is stated for C$^*$-algebras $A$ and $B$.
+Prove that the result still holds if $A$ is merely a Banach $*$-algebra.
+\item Consider the Hilbert space $H = \ell^2 = \ell^2(\mathbb N)$, with the
+standard orthonormal basis $(e_n)$ (so $e_1=(1,0,0,\cdots), e_2=(0,1,0,\cdots)$
+and so forth).  Let $(a_n)$ be a sequence of complex numbers.  Show that
+there is a bounded linear operator $T$ on $H$ with $T(e_n) = a_n e_n$ for
+all $n$, if and only if $(a_n)$ is a bounded sequence.  Show that $T$ is
+a normal operator.  In terms of the sequence $(a_n)$, determine when $T$ is:
+(i) unitary, (ii) self-adjoint.
+\item We continue with the same notation.  For $T$ defined by a
+sequence $(a_n)$, determine the spectrum of $T$.
+\item We continue with the same notation.  Let $A$ be the C$^*$-algebra
+(in $\mathcal B(H)$) generated by $T$.  Show that:
+\begin{enumerate}
+\item As $T^*T = TT^*$, we can talk about a ``polynomial in $T$ and $T^*$''.
+Show that the collection of all such polynomials, $\mathbb C[T,T^*]$ is
+dense in $A$. \emph{Hint:} By definition, $A$ is the smallest C$^*$-algebra
+containing $T$.  Show that any C$^*$-algebra containing $T$ contains
+$\mathbb C[T,T^*]$, and then show that the closure of $\mathbb C[T,T^*]$
+is a C$^*$-algebra.
+\item It follows that $A$ is commutative.  Using the results of Section~6.4
+in the book, show that if $\varphi\in\Phi_A$, then $\varphi$ is uniquely
+determined by the value $\varphi(T)$.
+\item By Commutative Gel'fand--Naimark (Theorem~6.24) $A$ is isomorphic to
+$C(\Phi_A)$.  Show that the compact Hausdorff spaces $\Phi_A$ and $\Sp(T)$
+are homeomorphic.
+\emph{Hint:} Show firstly that the map $\Phi_A\rightarrow \Sp(T);
+\varphi\mapsto\varphi(T)$ is well-defined and injective.  Now prove that
+it is surjective (and then appeal to the result that a continuous bijection
+between compact, Hausdorff spaces is a homeomorphism).
+\end{enumerate}
+\item We continue with the same notation.  Let $f$ be a continuous function
+on the spectrum of $T$, so by the Continuous Functional Calculus, we can
+make sense of $f(T)$.  Now consider the map $\Phi:C(\Sp(T)) \rightarrow
+\mathcal B(H)$ which maps $f$ to $S$, where
+\[ S(e_n) = f(a_n) e_n \qquad \text{for all $n$}. \]
+Using the previous two questions, show that this is well-defined
+(that is, $f(a_n)$ makes sense, and that $S$ is bounded).  Show that $\Phi$
+is a unital $*$-homomorphism with $\Phi(Z)=T$.  Conclude that $\Phi$ agrees
+with the Continuous Functional Calculus.
+\emph{Remark:} So in this case, we have a very concrete picture of what
+the Continuous Functional Calculus actually is!
+\end{enumerate}
+
+
+
+
+\section{Representation theory; modules; radicals; uniqueness of norm}
+
+\begin{itemize}
+\item I find the discussion in Section~5.3 hard to follow.
+Check \emph{carefully} that you understand why the definition of the
+Radical given for commutative algebras on page~193 agrees with the general
+definition give on page~232.
+
+\item This one is in the book, but let's try to give a nicer proof.
+Firstly, check that you understand that a unital commutative Banach
+algebra $A$ is semisimple if and only if the Gelfand transform
+$\mc G:A\rightarrow C(\Phi_A)$ is injective.
+
+\smallskip
+\noindent\textbf{Theorem:} Let $A$ and $B$ be unital commutative Banach
+algebras, with $B$ semisimple.  Then any unital homomorphism $T:A\rightarrow B$
+is continuous.
+\smallskip
+
+Here is a strategy for proving this:
+\begin{itemize}
+\item Let $\varphi$ be a character on $B$.  Show that $\phi = \varphi\circ T$
+is a character on $A$, and hence conclude that $\phi$ is bounded.
+\item Let $(a_n)$ be a sequence in $A$ converging to $0$, and suppose
+that $b = \lim_n T(a_n)$ exists in $B$.  Show that $\mc G(b)=0$, and hence that
+$b=0$.
+\item Use the closed graph theorem to conclude that $T$ is continuous.
+\item Now write all that up neatly!
+\end{itemize}
+\item Check that you understand why this result implies that a unital commutative
+semisimple Banach algebra has a unique (complete algebra) norm.
+\end{itemize}
+
+
+
+\section{Applications and examples to group algebras}
+
+
+
+
+\section{More additional questions on later parts of the course}
+
+\begin{itemize}
+\item Let $u$ be a unitary element in a unital C$^*$-algebra $A$.
+Suppose that $\Sp(u)$ is not the whole of the unit circle.  Show that
+there is $a\in A$ with $a^*=a$ and $u = \exp(ia)$.
+\emph{Hint:} Functional calculus.
+\item Let $\mathbb T$ be the unit circle in $\mathbb C$, and let
+$u\in C(\mathbb T)$ be the element $u(z)=z$.  Show that there is no
+$a\in C(\mathbb T)$ with $u=\exp(ia)$.
+\item Let $T,S\in\mc B(H)$ satisfy $T^*T \leq S^*S$.  (Recall that
+for $A,B\in\mc B(H)$ we define $A\leq B$ to mean that $(Ax|x) \leq (Bx|x)$
+for all $x\in H$).  Show that there exists $U\in\mc B(H)$ with
+$T=US$ and $\|U\|\leq 1$.  \emph{Hint:} Show that $U:S(H)\rightarrow H;
+S(x)\mapsto T(x)$ is well-defined, linear, and bounded.  Extend $U$ to
+all of $H$ by orthogonal decomposition.
+\end{itemize}
+
+\end{document}

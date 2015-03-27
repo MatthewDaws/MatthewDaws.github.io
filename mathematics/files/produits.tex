@@ -1,0 +1,1668 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,latexsym}
+\usepackage[all]{xy}
+\usepackage{showkeys}
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Theorem}
+\newtheorem{corollary}[proposition]{Corollary}
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{claim}[proposition]{Claim}
+\newtheorem{definition}[proposition]{Definition}
+\newtheorem{conjecture}[proposition]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{example}[proposition]{Example}
+\newtheorem{examples}[proposition]{Examples}
+\newtheorem{remark}[proposition]{Remark}
+\newtheorem{remarks}[proposition]{Remarks}
+
+\newcommand{\ip}[2]{{\langle {#1} , {#2} \rangle}}
+\newcommand{\mc}{\mathcal}
+\newcommand{\unit}[1]{\tilde{#1}}
+\newcommand{\alg}{{\operatorname{alg}}}
+\newcommand{\lin}{{\operatorname{lin}}}
+
+\begin{document}
+
+\title{Commentary on ``Unitaires multiplicatifs et dualit\'e pour les
+produits crois\'es de $C^*$-alg\`ebres''}
+\author{Matthew Daws}
+\maketitle
+
+\begin{abstract}
+We 
+\end{abstract}
+
+\section{Notation}
+
+The original paper assumed throughout that Hilbert spaces are separable.
+We shall try hard \emph{not} to use this assumption.  Exceptions are:
+Proposition~\ref{prop:4}.
+
+We shall follow the convention that inner products are linear on the right.
+We write $\otimes$ for various completed tensor products, which should
+be clear by context (either Hilbert space, or the minimal C$^*$-algebraic,
+tensor products).
+
+Given $H$ a Hilbert space and $\xi\in H$, define
+\[ \theta_\xi, \theta'_\xi\in\mc B(H,H\otimes H); \qquad
+\theta_\xi(\eta) = \xi\otimes\eta, \quad
+\theta'_\xi(\eta) = \eta\otimes\xi \qquad (\eta\in H). \]
+Similarly, for $i=1,2,3$, define $\theta_{i,\xi}\in\mc B(H\otimes H,
+H\otimes H\otimes H)$ by $\theta_{1,\xi}(\eta\otimes\zeta)
+= \xi\otimes\eta\otimes\zeta$, $\theta_{2,\xi}(\eta\otimes\zeta)
+= \eta\otimes\xi\otimes\zeta$ and $\theta_{3,\xi}(\eta\otimes\zeta)
+= \eta\otimes\zeta\otimes\xi$.
+
+For $T\in\mc B(H\otimes H)$, we define $T_{12}, T_{13}, T_{23} \in
+\mc B(H\otimes H\otimes H)$ using the usual leg-numbering notation.
+Notice that $T_{12} \theta_{3,\xi} = \theta_{3,\xi} T$,
+$T_{13} \theta_{2,\xi} = \theta_{2,\xi} T$ and
+$T_{23} \theta_{1,\xi} = \theta_{1,\xi} T$.  Similarly, if
+$\Sigma\in\mc B(H\otimes H)$ denotes the ``swap map'', then
+$T_{21} = \Sigma T_{12} \Sigma$, and so forth.
+
+We shall also sometimes work with Hilbert C$^*$-modules (see,
+for example, \cite{lance}.  For a Hilbert C$^*$-module $E$ over $A$,
+we shall write (in a non-standard way) $\mc B(E)$ for the adjointable
+maps on $E$.
+
+Given $T\in\mc B(H\otimes H)$ and $\omega\in \mc B(H)_*$, we define
+the slice maps $(\omega\otimes\iota)(T)$ and $(\iota\otimes\omega)(T)$
+as usual.  Notice that
+\[ \big( \xi \big| (\iota\otimes\omega)(T) \eta \big)
+= \ip{\theta_\xi^* T \theta_\eta}{\omega}, \quad
+\big( \xi \big| (\omega\otimes\iota)(T) \eta \big)
+= \ip{{\theta'_\xi}^* T \theta'_\eta}{\omega}. \]
+
+Given a C$^*$-algebra $A$, we denote by $\unit{A}$ the C$^*$-algebra given
+by adjoining a unit, and we denote by $M(A)$ the multiplier algebra of $A$
+(see \cite[3.12]{r33}).  If $J$ is a closed two-sided ideal in $A$, let
+$M(A;J) = \{ m\in M(A) : mA + Am \subseteq J \}$.  Clearly $M(A;J)$ is a
+sub-C$^*$-algebra of $M(A)$.  Restricting each element of $M(A)$ to $J$
+defines a member of $M(J)$; indeed, for $m\in M(A)$ and $a\in J$, if $(e_i)$
+is an approximate identity for $A$, then $ma = \lim_i (e_im)a \in J$, and
+similarly $am\in J$.  Thus we get a $*$-homomorphism $M(A) \rightarrow M(J)$,
+and so a $*$-homomorphism $M(A;J) \rightarrow M(J)$.  This latter map is
+injective, as if $m\in M(A;J)$ with $mJ=\{0\}=Jm$, then for $a\in A$, and
+$(f_i)$ an approximate identity for $J$, then $am = \lim a(mf_i) = 0$,
+as $am\in J$; similarly $ma=0$ and so $m=0$.  Thus we can also regard
+$M(A;J)$ as a sub-C$^*$-algebra of $M(J)$.
+
+Recall that a $*$-homomorphism $\pi:A\rightarrow M(B)$ is \emph{non-degenerate}
+if $\pi(e_i)\rightarrow 1$ strictly (meaning that $\lim_i \pi(e_i)b =
+\lim_i b\pi(e_i) = b$ for $b\in B$) for a (or equivalently, any) approximate
+identity $(e_i)$ for $A$.  This is equivalent to asking that $\pi$ extends to
+a strictly-continuous, unital $*$-homomorphism $\pi:M(A)\rightarrow M(B)$.
+(This notion is termed ``sp\'ecial'' in \cite{r50}).
+
+\begin{definition}[D\'efinition 0.1]
+A \emph{Hopf-C$^*$-algebra} is a pair $(A,\delta)$ where $A$ is a C$^*$-algebra
+and $\delta:A\rightarrow M(\unit{A}\otimes A + A\otimes\unit{A};A\otimes A)$
+is a non-degenerate $*$-homomorphism (notice that this means that
+$\delta$ is a non-degenerate $*$-homomorphism $A\rightarrow M(A\otimes A)$
+such that $\delta(a)(1\otimes b), \delta(a)(b\otimes 1) \in A\otimes A$)
+with
+\[ \xymatrix{ A \ar[r]^-{\delta} \ar[d]^{\delta} & M(A\otimes A)
+\ar[d]^{\iota\otimes\delta} \\ M(A\otimes A) \ar[r]^-{\delta\otimes\iota} &
+M(A\otimes A\otimes A). } \]
+We call $\delta$ the \emph{coproduct} of $A$.  We say that $A$ is
+right simplifiable (or left simplifiable) if $\delta(A)(1\otimes A)$ is linearly
+dense in $A\otimes A$ (respectively $\delta(A)(A\otimes 1)$).  We say that
+$A$ is bisimplifiable if $A$ is left and right simplifiable.
+\end{definition}
+
+Be aware that this clashes with \cite[1.1]{r2}.  Given a Hilbert space $H$,
+we can form the interior tensor product (see \cite[Chapter~4]{lance})
+$(H\otimes A) \otimes_\delta (A\otimes A)$.  Recall that this is the completion
+of $(H\otimes A) \otimes_\alg (A\otimes A) / X$ where $X$ is the linear span of
+elements of the form $(\xi\otimes ab)\otimes(c\otimes d) - (\xi\otimes a)
+\otimes \delta(b)(c\otimes d)$.  A little bit of work shows that we can
+identify, as $A\otimes A$-modules, the spaces $(H\otimes A) \otimes_\delta
+(A\otimes A)$ and $H\otimes A\otimes A$ by the map
+$(\xi\otimes a)\otimes(c\otimes d) \mapsto \xi\otimes \delta(a)(c\otimes d)$.
+
+\begin{definition}[D\'efinition 0.2]
+A \emph{coaction} of a Hopf-C$^*$-algebra on a C$^*$-algebra $B$ is a
+non-degenerate $*$-homomorphism $\delta_B:B\rightarrow M(\unit{B}\otimes A;
+B\otimes A)$ such that the following diagram commutes:
+\[ \xymatrix{ B \ar[r]^-{\delta_B} \ar[d]^{\delta_B} & M(B\otimes A)
+\ar[d]^{\iota\otimes\delta} \\ M(B\otimes A) \ar[r]^-{\delta_B\otimes\iota}
+& M(B\otimes A\otimes A). } \]
+(Again, this means that $\delta_B(b)(1\otimes a) \in B\otimes A$).
+A C$^*$-algebra $B$ with a coaction $\delta_B$ of a Hopf-C$^*$-algebra
+$(A,\delta)$ is an \emph{$A$-algebra} if additionally $\delta_B$ is injective,
+and $\delta_B(B)(1\otimes A)$ is linearly dense in $B\otimes A$.
+\end{definition}
+
+\begin{definition}[D\'efinition 0.3]
+Let $A$ be a Hopf-C$^*$-algebra.  A \emph{unitary corepresentation} of $A$ on a
+Hilbert space (or Hilbert C$^*$-module) $H$ is a unitary $u\in\mc B(H\otimes A)$
+such that $(\iota\otimes\delta)(u) = u_{12} u_{13}$; alternatively, in
+\[ (H\otimes A)\otimes_\delta (A\otimes A) \cong H\otimes A\otimes A
+\quad\text{we have}\quad u\otimes_\delta 1 = u_{12} u_{13}. \]
+Let $B$ be a C$^*$-algebra with a coaction $\delta_B$ of $(A,\delta)$.
+A \emph{covariant representation} of $(B,\delta_B)$ is a pair $(\pi,u)$ where
+$\pi:B\rightarrow\mc B(H)$ is a $*$-representation, and $u$ is a unitary
+corepresentation of $A$, such that $(\pi\otimes\iota)\delta_B(b)
+= u(\pi(b)\otimes 1)u^*$ for each $b\in B$.
+\end{definition}
+
+Remember that $\mc B(H\otimes A) \cong M(\mc B_0(H)\otimes A)$, so if $H$ is
+a Hilbert space, we can phrase the above without reference to Hilbert C$^*$-modules.
+
+\begin{definition}[D\'efinition 0.4]
+Let $B$ be a C$^*$-algebra with a coaction $\delta_B$ of $(A,\delta)$.
+A unitary $u\in M(B\otimes A)$ is a \emph{cocycle for $\delta_B$} if
+\[ u_{12} (\delta_B\otimes\iota)(u) = (\iota\otimes\delta)(u). \]
+If $u$ is a cocycle for $\delta_B$, the map $\delta_{B,u}:B\rightarrow
+M(B\otimes A); x\mapsto u \delta_B(x) u^*$ satisfies $(\delta_{B,u}\otimes\iota)
+\delta_{B,u} = (\iota\otimes\delta)\delta_{B,u}$, and hence is a coaction.
+\end{definition}
+
+Finally, we recall the notion of morphism for the category of Hopf-C$^*$-algebras.
+
+\begin{definition}[D\'efinition 0.5]
+Let $(S,\delta)$ and $(S',\delta')$ be Hopf-C$^*$-algebras.  A \emph{morphism}
+$(S,\delta) \rightarrow (S',\delta')$ is a non-degenerate $*$-homomorphism
+$\phi:S\rightarrow M(S')$ with $(\phi\otimes\phi)\delta = \delta'\phi$.
+\end{definition}
+
+\section{Definitions}
+
+Consult \cite{r30} for motivations on studying the Pentagonal equation.
+
+\begin{definition}[D\'efinition 1.1]
+A unitary $V\in\mc B(H\otimes H)$ is \emph{multiplicative} if it
+satisfies the \emph{pentagonal equation}:
+\[ V_{12} V_{13} V_{23} = V_{23} V_{12}. \]
+\end{definition}
+
+\begin{examples}[Exemples 1.2]\label{eg:1}
+\begin{enumerate}
+\item\begin{itemize}
+\item The identity $1\in\mc B(H\otimes H)$ is a multiplicative unitary.
+\item\label{eg:1.2} If $V$ is a multiplicative unitary and $U\in\mc B(H,H')$
+is a unitary, then $W=(U\otimes U)V(U^*\otimes U^*)$ is a multiplicative
+unitary on $H'$.  We say that $V$ and $W$ are \emph{equivalent}.
+\item If $V$ is a multiplicative unitary and $\Sigma\in\mc B(H\otimes H)$
+is the swap map, then $\Sigma V^* \Sigma$ is also a multiplicative unitary.
+We say that $V$ and $W$ are \emph{opposite} if $V$ and $\Sigma W^* \Sigma$
+are equivalent.
+\item If $V$ and $W$ are two multiplicative unitaries on $H$ and $K$,
+respectively, then $V_{13} W_{24} \in \mc B(H\otimes K\otimes H\otimes K)$
+is a multiplicative unitary on $H\otimes K$.  We call this the
+\emph{tensor product} of $V$ and $W$, sometimes denoted (abusively) by
+$V\otimes W$.  Notice that $V\otimes W$ and $W\otimes V$ are equivalent.
+\end{itemize}
+\item If $G$ is a locally compact group with right Haar measure $dg$, then
+$V_G(\xi)(s,t) = \xi(st,t)$ is a multiplicative unitary on $L^2(G,dg)$.
+\item If $W$ is the fundamental unitary of a Kac algebra (see \cite{r6},
+\cite{r13} and \cite{r17}) then $V=W^*$ is a multiplicative unitary.
+\item\label{eg:1.4} If $(A,\delta)$ is a Hopf-C$^*$-algebra, and $\phi$
+is a right Haar measure on $A$ (so $\phi\in A^*$ is a state with
+$(\phi\otimes\mu)\delta(a) = \phi(a) \mu(1)$ for $a\in A,\mu\in A^*$),
+then let $(H,\pi,\xi)$ be the cyclic GNS construction for $\phi$.
+If we define $V_\phi$ by $V_\phi(\pi(x)\xi\otimes\eta)
+= (\pi\otimes\pi)(\delta(x))(\xi\otimes\eta)$ for $\eta\in H$, then
+$V_\phi$ is an isometry which satisfies the pentagonal equation.
+If $V_\phi$ surjects, then it is a multiplicative unitary; this is
+the case of a compact quantum group in the sense of Woronowicz, \cite{r54}.
+\item Let $(A,\delta)$ be a Hopf-C$^*$-algebra.  The coproduct $\delta$ is
+a coaction of $A$ on itself.  If also $(\pi,u)$ is a covariant representation
+of $(A,\delta)$ on a Hilbert space $H$.  So $(\iota\otimes\delta)(u) = u_{12}
+u_{13}$ and $(\pi\otimes\iota)\delta(a) = u(\pi(a)\otimes 1)u^*$ for $a\in A$.
+Setting $V=(\iota\otimes\pi)(u)$, we see that $V$ is a multiplicative unitary.
+\item Another interpretation of the pentagonal equation is the following:
+
+If $A$ is a finite-dimensional Hopf algebra, and let $E$ be the algebra of
+linear maps $A\rightarrow A$.  We identify $E$ with $A^*\otimes A$,
+and let $v\in A^*\otimes A$ be the identity map.  Define a homomorphism
+$L:A\rightarrow E$ by $L(a)(b) = ab$.  Recall that $A^*$ becomes an algebra
+for the product
+\[ \ip{xy}{a} = \ip{x\otimes y}{\delta(a)} \qquad
+(x,y\in A^*, a\in A). \]
+For $x\in A^*$ and $a\in A$, we let $\rho(x)(a) = (\iota\otimes x)\delta(a)$,
+so $\rho$ is a homomorphism $A^* \rightarrow E$.
+
+\begin{proposition}[Page~431]
+\begin{enumerate}
+\item\label{prop:1.1} For $a\in A, x\in A^*$, write
+  $\delta(a) = \sum_i a_i \otimes b_i$;
+  then $\rho(x) L(a) = \sum_i L(a_i) \rho(xb_i)$.
+\item\label{prop:1.2} For $a\in A$, we have that
+  $(\rho\otimes\iota)(v) (L(a)\otimes 1)
+  = (L\otimes\iota)(\delta(a))(\rho\otimes\iota)(v)$ in $E\otimes A$.
+\item\label{prop:1.3} We have that $(\iota\otimes\delta)(v)=v_{12} v_{13}$.
+\item\label{prop:1.4} In $A^*\otimes E\otimes A$, we have that
+\[ ((\iota\otimes L)(v))_{12} v_{13} ((\rho\otimes\iota)(v))_{23}
+= ((\rho\otimes\iota)(v))_{23} ((\iota\otimes L)(v))_{12}. \]
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+For (\ref{prop:1.1}), given $b\in A$, we have that $\rho(x) L(a) b
+= \rho(x)(ab) = (\iota\otimes x)\delta(ab)
+= \sum_i a_i (\iota\otimes xb_i)\delta(b)
+= \sum_i L(a_i) \rho(xb_i) b$, as claimed.
+
+For (\ref{prop:1.2}), given $x\in A^*$, we have that $(\iota\otimes x)(v) = x$,
+and so $(\iota\otimes x)((\rho\otimes\iota)(v)) = \rho(x)$.  Thus, using part
+(\ref{prop:1.1}),
+\begin{align*}
+(\iota\otimes x)((\rho\otimes\iota)(v)(L(a)\otimes 1)) &= \rho(x)L(a)
+= \sum_i L(a_i) \rho(xb_i) \\
+&= (\iota\otimes x) \sum_i (L(a_i)\otimes b_i)(\rho\otimes\iota)(v) \\
+&= (\iota\otimes x)((L\otimes\iota)(\delta(a))(\rho\otimes\iota)(v)).
+\end{align*}
+As $x$ was arbitrary, this shows (\ref{prop:1.2}).
+
+Now let $x,y\in A^*$ and $a\in A=A^{**}$.  Then $(a\otimes\iota)(v)=a$,
+$(\iota\otimes x)(v)=x$ and $(\iota\otimes y)(v)=y$.  Thus
+\[ \ip{a\otimes x\otimes y}{(\iota\otimes\delta)(v)} = 
+\ip{x\otimes y}{\delta(a)} = \ip{xy}{a}. \]
+However, also
+\[ \ip{a\otimes x\otimes y}{v_{12} v_{13}}
+= \ip{(\iota\otimes x)(v) (\iota\otimes y)(v)}{a}
+= \ip{xy}{a}. \]
+Thus we have shown (\ref{prop:1.3}).
+
+Finally, by (\ref{prop:1.2}), we see that
+\[ ((\rho\otimes\iota)(v))_{23} ((\iota\otimes L)(v))_{12}
+= (\iota\otimes L\otimes\iota)(\iota\otimes\delta)(v)
+((\rho\otimes\iota)(v))_{23}. \]
+By (\ref{prop:1.3}), this is equal to
+$((\iota\otimes L)(v))_{12} v_{13} ((\rho\otimes\iota)(v))_{23}$,
+as required to show (\ref{prop:1.4}).
+\end{proof}
+
+\begin{corollary}[Page~431]
+The operator $V=(\rho\otimes L(v)$ satisfies the pentagonal equation.
+\end{corollary}
+
+If $A$ is both unital and counital, then $L$ and $\rho$ inject, and we have
+the following.
+
+\begin{proposition}[Page~431]
+Let $1\in A$ be the unit of $A$, and $\epsilon\in A^*$ be the unit of $A^*$.
+\begin{enumerate}
+\item\label{prop:2.1} If $V$, and so $v$, are invertible, then the map
+$\kappa:A\rightarrow A; a\mapsto (a\otimes\iota)(v^{-1})$ is the antipode of
+$A$.  That is, for $a\in A$,
+\[ m(\iota\otimes\kappa)\delta(a) = m(\kappa\otimes\iota)\delta(a)
+= \epsilon(a) 1. \]
+Here $m:A\otimes A\rightarrow A$ is the multiplication map.
+\item\label{prop:2.2} Conversely, if $A$ has an antipode, then $v$ is
+invertible.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+For (\ref{prop:2.1}), as above, we have that $\delta(a)
+= (a\otimes\iota\otimes\iota)(v_{12} v_{13})$ and
+$(\iota\otimes\kappa)\delta(a)
+= (a\otimes\iota\otimes\iota)(v_{12} v_{13}^{-1})$.  Thus
+\[ m(\iota\otimes\kappa)\delta(a)
+= (a\otimes m)(v_{12} v_{13}^{-1})
+= (a\otimes\iota)(v v^{-1})
+= (a\otimes\iota)(\epsilon\otimes 1) = \epsilon(a) 1. \]
+Similarly, $m(\kappa\otimes\iota)\delta(a) = (a\otimes m)(v_{12}^{-1}v_{13})
+= \epsilon(a)1$.  This shows (\ref{prop:2.1}).
+
+For (\ref{prop:2.2}), compare with \cite{r1}.  Indeed, set
+$u = (\iota\otimes\kappa)(v)$,
+\begin{align*} vu &= (\iota\otimes m)(v_{12} u_{13})
+= (\iota\otimes m(\iota\otimes\kappa))(v_{12} v_{13})
+= (\iota\otimes m(\iota\otimes\kappa)\delta)(v) \\
+&= (\iota\otimes\epsilon)(v)\otimes 1 = \epsilon\otimes 1. \end{align*}
+So $u=v^{-1}$.
+\end{proof}
+\end{enumerate}
+\end{examples}
+
+We continue studying general multiplicative unitaries.
+Let $H$ be a Hilbert space and $V\in\mc B(H\otimes H)$ a multiplicative
+unitary.
+
+\begin{definition}[D\'efinition~1.3]
+Let $\omega\in\mc B(H)_*$, and define $L(\omega),\rho(\omega)\in\mc B(H)$
+by $L(\omega) = (\omega\otimes\iota)(V)$ and
+$\rho(\omega) = (\iota\otimes\omega)(V)$.  
+Let
+\[ A(V) = \{ L(\omega) : \omega\in\mc B(H)_* \} \qquad
+\hat A(V) = \{ \rho(\omega) : \omega\in\mc B(H)_* \}. \]
+Then $A(V)$ and $\hat A(V)$ form a dual pairing:
+\[ \ip{L(\omega)}{\rho(\omega')} = (\omega\otimes\omega')(V)
+= \ip{\rho(\omega')}{\omega} = \ip{L(\omega)}{\omega'}. \]
+\end{definition}
+
+\begin{proposition}[Proposition~1.4]\label{prop:3}
+The spaces $A(V)$ and $\hat A(V)$ are subalgebras of $\mc B(H)$,
+and the spaces $A(V)H$ and $\hat A(V)H$ are linearly dense in $H$.
+\end{proposition}
+\begin{proof}
+Let $\omega,\omega'\in\mc B(H)_*$, and define $\psi\in\mc B(H)_*$ by
+define $\ip{T}{\psi} = \ip{V^*(1\otimes T)V}{\omega\otimes\omega'}$ for
+$T\in\mc B(H)$.  Then, using the pentagonal equation,
+\begin{align*}
+L(\omega) L(\omega') &= (\omega\otimes\iota)(V) (\omega'\otimes\iota)(V)
+= (\omega\otimes\otimes'\otimes\iota)(V_{13}V_{23}) \\
+&= (\omega\otimes\otimes'\otimes\iota)(V_{12}^* V_{23} V_{12})
+= (\psi\otimes\iota)(V) = L(\psi).
+\end{align*}
+Similarly, $\rho(\omega) \rho(\omega') = \rho(\psi')$ where
+$\ip{T}{\psi'} = (\omega\otimes\omega')(V(T\otimes 1)V^*)$.
+
+Given non-zero $\xi,\eta\in H$, we have that $V^*(\xi\otimes\eta)\not=0$,
+and so there are $\alpha,\beta\in H$ with
+$\ip{\xi\otimes\eta}{V(\alpha\otimes\beta)} \not=0$.  Thus
+$L(\omega_{\xi,\alpha})\beta$ is not orthogonal to $\eta$, and
+$\rho(\omega_{\eta,\beta})\alpha$ is not orthogonal to $\xi$, showing
+linear density of the spaces $A(V)H$ and $\hat A(V)H$.
+\end{proof}
+
+\begin{definition}[D\'efinition~1.5]
+Let $V$ be a multiplicative unitary.  We write $S$ for the norm closure of
+the algebra $A(V)$, and similarly denote by $\hat S$ the norm closure of
+$\hat A(V)$.
+\end{definition}
+
+We remark that the functionals $\psi$ which appear in the proof above
+are dense in $\mc B(H)_*$.  It follows that $\{ xy : x,y\in A(V) \}$ is dense
+in $S$, and similarly $\{ xy : x,y\in\hat A(V) \}$ is dense in $\hat S$.
+
+\begin{proposition}[Proposition~1.6]
+Let $C^*(S)$ be the C$^*$-algebra (in $\mc B(H)$) generated by $S$,
+and similarly for $C^*(\hat S)$.  Then $V$ is in the von Neumann algebra
+generated by $C^*(\hat S) \otimes C^*(S)$.
+\end{proposition}
+\begin{proof}
+Let $T\in\mc B(H\otimes H)$.  For $\omega\in\mc B(H)_*$,
+\[ (\iota\otimes\omega\otimes\iota)(T_{13}V_{23} - V_{23}T_{13})
+= T(1\otimes L(\omega)) - (1\otimes L(\omega))T. \]
+So $T$ commutes with $1\otimes S$ if and only if $T_{13}$ commutes
+with $V_{23}$.  A similar calculation shows that $\hat S\otimes 1$
+commutes with $T$ if and only if $T_{13}$ commutes with $V_{12}$.
+
+So if $T\in (\hat S\otimes S)'$ then $T_{13}$ commutes with both $V_{23}$
+$V_{12}$.  As $V_{13} = V_{12}^* V_{23} V_{12} V_{23}^*$, it follows that
+$T_{13}$ commutes with $V_{13}$.  So $V\in (\hat S\otimes S)''$ and
+hence certainly $V \in (C^*(\hat S) \otimes C^*(S))''$.
+\end{proof}
+
+\begin{definition}[D\'efinition~1.7]
+Let $V$ be a multiplicative unitary.  We say that $V$ is of
+\emph{compact type} if $S$ is unital.  We say that $V$ is of
+\emph{discrete type} if $\hat S$ is unital.
+\end{definition}
+
+\begin{definition}[D\'efinition~1.8]\label{defn:2}
+Let $V$ be a multiplicative unitary.  A vector $e\in H$ is
+\emph{fixed} if $V\theta_e = \theta_e$ (that is, $V(e\otimes\xi) =
+e\otimes\xi$ for all $\xi\in H$), and is \emph{cofixed}
+if $V\theta'_e = \theta'_e$ (that is, $V(\xi\otimes e) =
+\xi\otimes e$ for all $\xi\in H$).
+\end{definition}
+
+\begin{proposition}[Proposition~1.9]
+Let $e$ be a fixed (respectively cofixed) unit vector.  Then
+$L(\omega_e)=1$ and $\rho(\omega_e)$ is the projection onto the subspace
+of all fixed vectors (respectively, $\rho(\omega_e)=1$ and $L(\omega_e)$
+is the projection onto the subspace of all cofixed vectors).
+\end{proposition}
+\begin{proof}
+Clearly $L(\omega_e) = (\omega_e\otimes\iota)(V) = 1$.  Define
+$\psi'\in\mc B(H)_*$ by $\psi'(T) = (e\otimes e|
+V(T\otimes 1)V^*(e\otimes e)) = \ip{T}{\omega_e}$, as
+$V^*(e\otimes e)=e\otimes e$.
+By (the proof of) Proposition~\ref{prop:3}, $\rho(\omega_e)$ is
+an idempotent, and as $\|\rho(\omega_e)\|\leq 1$, it follows that
+$\rho(\omega_e)$ is a projection.  Now, $\rho(\omega_e)\xi=xi$
+if and only if $(\xi|\rho(\omega_e)\xi)=\|\xi\|^2$, that is,
+$(\xi\otimes e|V(\xi\otimes e) = \|\xi\otimes e\|^2$.  Thus
+the image of $\rho(\omega_e)$ is $\{ \xi\in H : V(\xi\otimes e)=
+\xi\otimes e \}$.  However, notice that if $V(\xi\otimes e)=\xi\otimes e$,
+then for $\eta\in H$, the vector $\xi\otimes e\otimes\eta$ is fixed by
+both $V_{12}$ and $V_{23}$, and hence by $V_{13} = V_{12}^* V_{23} V_{12}
+V_{23}^*$, showing that $\xi$ is fixed.
+
+The other case follows by working with $\Sigma V^* \Sigma$ instead of $V$.
+\end{proof}
+
+\begin{proposition}[Proposition~1.10]\label{prop:4}
+Let $V$ be a multiplicative unitary on $H$, where $H$ is now separable.
+Then $V$ is of compact type (respectively, discrete type) if and only if
+the spaces of fixed vectors (respectively, cofixed vectors) is not zero.
+\end{proposition}
+\begin{proof}
+If there is a fixed vector $e$ then $L(e)=1$ so $S$ is unital.  Conversely,
+suppose that $S$ is unital, and recall from Proposition~\ref{prop:3} that
+$S$ acts non-degenerately on $H$, so the unit of $S$ is the identity operator
+on $H$.  Thus there is $\omega\in\mc B(H)_*$ with $\|L(\omega)-1\|<1/2$.
+Fix a \emph{faithful} normal state $\psi$, using that $H$ is separable.
+Then $|\ip{\rho(\psi)}{\omega}| = |\ip{L(\omega)}{\psi}| > 1/2$.
+Set $\psi^1=\psi$, and defined inductively
+$\ip{x}{\psi^{n+1}} = \ip{V(x\otimes 1)V^*}{\psi\otimes\psi^n}$.
+Set $\psi_n = \frac1n \sum_{k=1}^n \psi^k$.
+Thus, from Proposition~\ref{prop:3}, $\rho(\psi^n)=\rho(\psi)^n$.
+Notice that $\|\rho(\psi)\|\leq 1$ and $(1-\rho(\psi))\rho(\psi_n) =
+(\rho(\psi) - \rho(\psi)^{n+1})/n$, which converges to $0$ in norm.
+
+If $T=1-\rho(\psi)$ is an injective operator, then $T^*$ has dense range,
+and so there is $\omega'\in\mc B(H)_*$ with $\|\omega - \omega'T\|<1/4$.
+As $|\ip{\rho(\psi_n)}{\omega}| = |\ip{L(\omega)}{\psi_n}|\geq 1/2$, because
+$\psi_n$ is a state, we arrive at a contradiction.
+So $T$ is not injective, and we can find a unit vector $e\in H$ with
+$\rho(\psi)(e)=e$.  Then $1 = \ip{\rho(\psi)}{\omega_e}
+= \ip{L(\omega_e)}{\psi}$.  As $\|L(\omega_e)\|\leq 1$, we have that
+$1-L(\omega_e)$ is positive, and $\ip{1-L(\omega_e)}{\psi}=0$.
+As $\psi$ is faithful, we must have that $L(\omega_e)=1$, as required to show
+that $e$ is a fixed vector.
+\end{proof}
+
+We see that $1\in\mc B(H\otimes H)$ is both compact and discrete.
+If $V$ is a multiplicative unitary, then $V$ is of compact (respectively,
+discrete) type if and only if $\Sigma V^*\Sigma$ is of discrete (respectively,
+compact) type.  The tensor product of two multiplicative unitaries of compact
+(discrete) type is again of compact (discrete) type.
+
+If $G$ is a compact group, and we form $V_G$ as in
+Example~\ref{eg:1}.\ref{eg:1.2}, then the function which is constant $1$ is
+fixed by $V_G$.  Similarly, if $G$ is a discrete group, then the function
+which is $1$ at the identity, and $0$ elsewhere, is fixed by $V_G$.
+
+In Example~\ref{eg:1}.\ref{eg:1.4}, the cyclic vector $\xi$ is fixed.
+
+\begin{remarks}[Remarques~1.11]
+\begin{enumerate}
+\item Let $f\in H$ be a unit vector with $V(f\otimes f)=f\otimes f$.
+Then $L(\omega_f)^2 = L(\omega_f)$ and $\rho(\omega_f)^2 = \rho(\omega_f)$;
+as both $\|L(\omega_f)\| = \|\rho(\omega_f)\| = 1$, both $L(\omega_f)$ and
+$\rho(\omega_f)$ are projections.
+\end{enumerate}
+\end{remarks}
+
+
+
+
+
+\section{Commutative multiplicative unitaries}
+
+We will now study commutative multiplicative unitaries, and show that
+they correspond to locally compact groups.
+
+Let $V$ be a multiplicative unitary on a Hilbert space $H$.
+
+\begin{definition}[D\'efinition~2.1]
+We say that $V$ is \emph{commutative} if $V_{13}$ and $V_{23}$ commute.
+We say that $V$ is \emph{cocommutative} if $V_{12}$ and $V_{13}$ commute.
+\end{definition}
+
+The multiplicative unitary $V_G$ from Example~\ref{eg:1}.\ref{eg:1.2} is
+commutative.  We will show that every commutative multiplicative unitary
+is of this form.  Notice that $V$ is commutative (respectively, cocommutative)
+if and only if $S$ (respectively, $\hat S$) is abelian.  Also, if $V$ is
+commutative, then $V_{13}$ and $V_{23}^*$ commute, and so $C^*(S)$ is abelian.
+
+\begin{theorem}[Th\'eor\`em~2.2]
+Let $V$ be a commutative multiplicative unitary, and let $G$ be the spectrum
+of the abelian C$^*$-algebra $C^*(S)$.  Then $G$ is a locally compact group
+and there is a Hilbert space $J$ such that $V$ is equivalent to the
+multiplicative unitary $V_G \otimes 1_{K\otimes K}$.
+\end{theorem}
+
+
+
+
+
+\section{Regular multiplicative unitaries}
+
+In this section, we define and study \emph{regular} multiplicative unitaries
+and deduce the existence of a densely defined antipode.
+
+\begin{lemma}[Lemme~3.1]\label{lemma:1}
+Let $H$ and $K$ be Hilbert spaces, and let $X\subseteq\mc B(H\otimes K)$.
+The closures of the linear spans of
+\[ \big\{ (1\otimes h)x(1\otimes k) : h,k\in\mc B_0(K), x\in X \big\} \]
+and
+\[ \big\{ (\iota\otimes\omega)(x)\otimes k : x\in X, k\in\mc B_0(K),
+\omega\in\mc B(K)_* \big\}, \]
+agree.
+\end{lemma}
+\begin{proof}
+For $h=\theta_{\xi,\xi'}$ and $k=\theta_{\eta,\eta'}$, and $x\in X$, we have
+\[ (1\otimes h)x(1\otimes k) = (\iota\otimes\omega_{\xi',\eta})(x)
+\otimes \theta_{\xi,\eta'}, \]
+from which the claim follows.
+\end{proof}
+
+Given a multiplicative unitary $V$, we set $\mc C(V) =
+\{ (\iota\otimes\omega)(\Sigma V) : \omega\in\mc B(H)_* \}$.
+
+\begin{proposition}[Proposition~3.2]\label{prop:5}
+The space $\mc C(V)$ is a subalgebra of $\mc B(H)$.  The following conditions
+are equivalent:
+\begin{enumerate}
+\item\label{prop:5.1} The closure of $\mc C(V)$ is $\mc B_0(H)$.
+\item\label{prop:5.2} The closure of the linear span of
+$\{ (x\otimes 1)V(1\otimes y) : x,y\in\mc B_0(H) \}$ is $\mc B_0(H\otimes H)$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+For $\omega,\omega'\in\mc B(H)_*$, we have that
+\[ (\iota\otimes\omega)(\Sigma V) (\iota\otimes\omega')(\Sigma V)
+= (\iota\otimes\omega\otimes\omega')(\Sigma_{13} V_{13} \Sigma_{12} V_{12}). \]
+Now, $\Sigma_{13} V_{13} \Sigma_{12} V_{12} =
+\Sigma_{13} \Sigma_{12} V_{23} V_{12}
+= \Sigma_{23} \Sigma_{13} V_{12} V_{13} V_{23}
+= \Sigma_{23} V_{32} \Sigma_{13} V_{13} V_{23}
+= V_{23} \Sigma_{23} \Sigma_{13} V_{13} V_{23}$.
+Setting $\ip{x}{\psi} = (\omega'\otimes\omega)(V\Sigma(1\otimes x)V)$,
+we see that $\psi\in\mc B(H)_*$, and that
+\[ (\iota\otimes\omega)(\Sigma V) (\iota\otimes\omega')(\Sigma V)
+= (\iota\otimes\psi)(\Sigma V). \]
+Thus $\mc C(V)$ is a subalgebra.
+
+Condition (\ref{prop:5.2}) is equivalent to the closure of the linear span
+of
+\[ \{ \Sigma(x\otimes 1)V(1\otimes y) : x,y\in\mc B_0(H) \}
+= \{ (1\otimes x)\Sigma V(1\otimes y) : x,y\in\mc B_0(H) \} \]
+being equal to $\mc B_0(H\otimes H)$.
+The result follows by Lemma~\ref{lemma:1}.
+\end{proof}
+
+As $V$ is unitary, it is clear that the functionals $\psi$ constructed in
+the proof are norm dense in $\mc B(H)_*$.  Thus $\{ xy: x,y\in\mc C(V) \}$
+is dense in $\mc C(V)$.
+
+\begin{definition}[D\'efinition~3.3]
+A multiplicative unitary $V$ is \emph{regular} if the closure of
+$\mc C(V)$ is $\mc B_0(H)$.
+\end{definition}
+
+Notice that $\mc C(\Sigma V^* \Sigma) = \mc C(V)^*$.  It follows that
+$V$ is regular if and only if $\Sigma V^* \Sigma$ is regular.  Given two
+equivalent multiplicative unitaries, one is regular if and only if the other
+is regular.
+
+\begin{examples}[Exemples~3.4]\label{eg:2}
+\begin{enumerate}
+\item For $\omega=\omega_{\xi,\eta}$, we have that
+$(\iota\otimes\omega)(\Sigma) = \theta_{\eta,\xi}$.
+Thus $1\in\mc B(H\otimes H)$ is a regular multiplicative unitary.
+\item A direct calculation shows that for a locally compact group $G$,
+the multiplicative unitary $V_G$ is regular.  Indeed, this is a special
+case of the following.
+\item Suppose there ia a unitary $J:H\rightarrow \overline{H}$ with
+$J^* \overline{L(\omega)} J = L(\omega^*)$ for each $\omega\in\mc B(H)_*$.
+Let $T$ be a Hilbert-Schmidt operator on $H$, so we can identify $T$ with
+some vector $\tau\in\overline{H} \otimes H$.  Furthermore, suppose that $T$
+is trace class, and let $\omega\in\mc B(H)_*$ be the associated functional.
+Define $W$, a unitary on $\overline{H} \otimes H$, by $W = (1\otimes J^*)
+\overline{V} (1\otimes J)$.  Notice that the composition of operators
+$WT$ is Hilbert-Schmidt, and so can be identified as a member of
+$\overline H\otimes H$, which is just $W(\tau)$.
+
+For $\xi,\eta,\alpha,\beta\in H$
+\begin{align*}
+\big( \overline\beta \otimes \alpha \big| W(\overline\xi\otimes\eta) \big)
+&= \big( \overline\beta \otimes J(\alpha) \big|
+   \overline{V} (\overline\xi\otimes J(\eta)) \big)
+= \big( V(\xi\otimes\overline{J(\eta)}) \big|
+   \beta\otimes\overline{J(\alpha)} \big) \\
+&= \big( L(\omega_{\beta,\xi})\overline{J(\eta)} \big|
+   \overline{J(\alpha)} \big)
+= \big( J(\alpha) \big| \overline{L(\omega_{\beta,\xi})} J(\eta) \big) \\
+&= \big( \alpha \big| L(\omega_{\xi,\beta}) \eta \big)
+= \big( \alpha\otimes\xi \big| \Sigma V(\beta\otimes\eta \big),
+\end{align*}
+and so
+\[ \big( \overline\beta\otimes\alpha \big| WT \big)
+= \big( \overline\beta\otimes\alpha \big| W(\tau) \big)
+= \big( \alpha \big| (\iota\otimes\omega)(\Sigma V) \beta \big). \]
+It follows that $V$ is regular.
+
+In particular, if $V=W^*$ and $W$ is the fundamental unitary for a
+Kac algebra in the sense of \cite{r6}, then \cite[Lemme~2.2.3]{r6},
+together with the preceding argument, shows that $V$ regular.
+\end{enumerate}
+\end{examples}
+
+\begin{proposition}[Proposition~3.4.4]\label{prop:12}
+\begin{enumerate}
+\item\label{prop:12.1} Let $V$ be a multiplicative unitary.  If $V$ is a 
+multiplier of $\mc B_0(H) \otimes \mc B(H)$ (or $\mc B(H) \otimes \mc B_0(H)$)
+then $\mc C(V) \subseteq \mc B_0(H)$.
+\item\label{prop:12.2} Let $A$ be a Hopf-C$^*$-algebra which is unital, and
+right simplifiable, and which has a right Haar state $\phi$ which satisfies
+$\phi(x^*x)=0$ if and only if $\phi(xx^*)=0$.  Let $(H,\pi,\xi)$ be
+the cyclic GNS construction.  Define $V_\phi\in\mc B(H\otimes H)$
+by $V_\phi(\pi(x)\xi\otimes\eta) = (\pi\otimes\pi)\delta(x)(\xi\otimes\eta)$
+for $\eta\in H$.  Then $V_\phi$ is a regular multiplicative unitary.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+For $x,y\in\mc B_0(H)$, we have that $(x\otimes 1)V \in
+\mc B_0(H) \otimes \mc B(H)$ and so $(x\otimes 1)V(1\otimes y)
+\in \mc B_0(H) \otimes \mc B_0(H) = \mc B_0(H\otimes H)$.
+The result follows by the methods used in Lemma~\ref{lemma:1} and
+Proposition~\ref{prop:5}.  The other option follows by working
+with $\Sigma V^* \Sigma$.
+
+As $\phi$ is right invariant, $V_\phi$ is isometric, compare
+Example~\ref{eg:1}.\ref{eg:1.4}.
+Clearly the image of $V_\phi$ contains the set
+\[ \big\{ (\pi\otimes\pi)(\delta(x)(1\otimes y)) : x,y\in A \big\}, \]
+and so, as $(A,\delta)$ is right simplifiable, we conclude that $V_\phi$
+surjects.  So $V_\phi$ is a unitary, and a calculation shows that $V_\phi$
+is multiplicative.
+
+Then, for $a,b\in A$ and $\xi_0,\xi_1,\eta\in H$,
+\[ V_\phi (\theta_{\pi(a)\xi,\xi_0}\otimes\pi(b))(\xi_1\otimes\eta)
+= V_\phi (\pi(a)\xi\otimes\pi(b)\eta) (\xi_0|\xi_1)
+= (\pi\otimes\pi)\delta(a)(\xi\otimes\pi(b)\eta) (\xi_0|\xi_1). \]
+We can approximate $\delta(a)(1\otimes b)$ be a sum of tensors of the
+form $x,y\in A$, so this is approximately
+\[ (\pi(x)\otimes\pi(y))(\xi\otimes\eta) (\xi_0|\xi_1)
+= \big(\theta_{\pi(x)\xi, \xi_0} \otimes \pi(y)\big)(\xi_1\otimes\eta). \]
+Hence $V_\phi$ is a multiplier of $\mc B_0(H)\otimes\pi(A)$.  As $A$ is
+unital, it follows that $V_\phi$ is a multiplier of
+$\mc B_0(H)\otimes\mc B(H)$, and so the first part of the proposition shows
+that $\mc C(V_\phi) \subseteq\mc B_0(H)$.
+
+Then, for $\eta,\eta_1\in H$ and $a\in A$, we have that
+\begin{align*}
+\big( \eta_1 \big| (\iota\otimes\omega_{\xi,\eta})(\Sigma V_\phi) \pi(a)\xi \big)
+&= \big( \xi\otimes\eta_1 \big| V_\phi(\pi(a)\xi\otimes\eta) \big)
+= \big( \xi\otimes\eta_1 \big| (\pi\otimes\pi)\delta(a)(\xi\otimes\eta) \big) \\
+&= \big( \eta_1 \big| \pi\big( (\phi\otimes\iota)\delta(a) \big) \eta \big)
+= \phi(a) (\eta_1|\eta)
+= \big( \eta_1 \big| \theta_{\eta,\xi} \pi(a) \xi \big).
+\end{align*}
+So $(\iota\otimes\omega_{\xi,\eta})(\Sigma V_\phi) = \theta_{\eta,\xi}$.
+
+To show that $\mc C(V_\phi)$ is dense in $\mc B_0(H)$, it suffices to prove
+that for each non-zero $\xi_1\in H$, there is $x\in\mc C(V_\phi)$ with
+$(\xi|x(\xi_1))\not=0$.  Indeed, this would show that $\{ x^*(\xi) :
+x\in\mc C(V_\phi)\}$ is dense in $H$.  Then, for $x\in\mc C(V_\phi)$ and
+$\eta\in H$, we have that $\theta_{\eta,x^*\xi} = \theta_{\eta,\xi} x
+\in\mc C(V_\phi)$, and thus $\mc C(V_\phi)$ is dense in $\mc B_0(H)$.
+
+Now, for $b,c\in A$ and $\xi_1,\xi_2\in H$, we have that
+\begin{align*}
+\big( \xi_1 \big| L(\omega_{\pi(b)\xi,\pi(c)\xi})\xi_2 \big)
+&= \big( \pi(b)\xi\otimes\xi_1 \big| V_\phi( \pi(c)\xi\otimes\xi_2 ) \big) \\
+&= \big( \xi\otimes\xi_1 \big| (\pi\otimes\pi)
+   ((b^*\otimes 1)\delta(c))(\xi\otimes\xi_2) \big)
+= \big( \xi_1 \big| \pi(d) \xi_2 \big),
+\end{align*}
+where $d = (\phi\otimes\iota)((b^*\otimes 1)\delta(c))\in A$, as
+$(b^*\otimes 1)\delta(c) \in A\otimes A$.
+Hence $L(\omega_{\pi(b)\xi,\pi(c)\xi}) = \pi(d) \in \pi(A)$.
+Now, $\pi(A)$ is closed in $\mc B(H)$, and so by continuity,
+$L(\omega)\in\pi(A)$ for all $\omega\in\mc B(H)_*$.
+
+For $\eta,\eta_1,\eta_2\in H$, we have that
+\[ \big( \xi \big| (\iota\otimes\omega_{\eta_2,\eta_1})(\Sigma V_\phi)
+   \eta \big)
+= \big( \eta_2\otimes\xi \big| V_\phi(\eta\otimes\eta_1) \big)
+= \big( \xi \big| L(\omega_{\eta_2,\eta}) \eta_1 \big). \]
+Suppose that $(\xi|x(\eta))=0$ for all $x\in\mc C(V_\phi)$.  Thus
+$(\xi|L(\omega_{\eta_2,\eta})\eta_1)=0$ for all $\eta_2,\eta_1\in H$,
+that is, $L(\omega_{\eta_2,\eta})^*\xi=0$ for all $\eta_2\in H$.
+However, $L(\omega_{\eta_2,\eta})=\pi(a)$ for some $a\in A$, and so
+$a^*\xi=0 \implies \phi(aa^*)=0 \implies \phi(a^*a)=0 \implies a\xi=0$.
+Thus $L(\omega_{\eta_2,\eta})\xi=0$ for all $\eta_2\in H$, which
+shows that $V_{\phi}(\eta\otimes\xi)=0$, so $\eta=0$, as required.
+\end{proof}
+
+In particular, this result applies to compact quantum groups in the
+sense of Woronowicz, \cite{r54}.  Furthermore, in this case, $S=\pi(A)$.
+
+\begin{proposition}[Proposition~3.5]\label{prop:6}
+If $V$ is a regular multiplicative unitary, the algebras $S$ and $\hat S$
+are self-adjoint.
+\end{proposition}
+\begin{proof}
+Let $E$ be the linear span of
+\[ \big\{ (\omega\otimes\omega'\otimes\iota)(\Sigma_{12} V_{23}^*
+V_{12} V_{13})^* : \omega,\omega'\in\mc B(H)_* \big\}. \]
+As $\Sigma_{12} V_{23}^* V_{12} V_{13} = \Sigma_{12} V_{12} V_{23}^*$,
+we see that $E$ is the linear span of
+\[ \big\{ (\omega\otimes\omega'\otimes\iota)(V_{23}^*)^*
+: \omega,\omega'\in\mc B(H)_* \big\}
+= \big\{ (\omega'\otimes\iota)V : \omega'\in\mc B(H)_* \big\}, \]
+and so the closure of $E$ is $S$.  Alternatively,
+$\Sigma_{12} V_{23}^* V_{12} V_{13} = V_{13}^* \Sigma_{12} V_{12} V_{13}$,
+and so
+\[ (\omega\otimes\omega'\otimes\iota)(\Sigma_{12} V_{23}^* V_{12} V_{13})
+= (\omega\otimes\iota)(V^*(y\otimes 1)V), \]
+where $y=(\iota\otimes\omega')(\Sigma V)$.	From this, it follows that
+the norm closure of $E$ is the norm closure of
+\[ \big\{ (\omega\otimes\iota)(V^*(y\otimes 1)V) :
+\omega\in\mc B(H)_*, y\in\mc B_0(H) \big\}, \]
+which is clearly self-adjoint.  So $S$ is self-adjoint.  The $\hat S$
+case follows, as $\hat S=S(\Sigma V^*\Sigma)^*$.
+\end{proof}
+
+\begin{proposition}[Proposition~3.6]\label{prop:7}
+Let $V$ be a regular multiplicative unitary, with associated C$^*$-algebras
+$S$ and $\hat S$.  We have that
+\begin{enumerate}
+\item\label{prop:7.1} $V\in M(\mc B_0(H)\otimes S)$ and
+  $V\in M(\hat S\otimes\mc B_0(H))$;
+\item\label{prop:7.2} The closed linear span of $\{ (x\otimes 1)V(1\otimes y) :
+x\in\mc B_0(H), y\in S \}$ is $\mc B_0(H)\otimes S$, and the closed linear
+span of $\{ (x\otimes 1)V(1\otimes y) : x\in\hat S, y\in\mc B_0(H) \}$
+is $\hat S\otimes\mc B_0(H)$;
+\item\label{prop:7.3} $V\in M(\hat S\otimes S)$;
+\item\label{prop:7.4} The closed linear span of
+$\{ (x\otimes 1)V(1\otimes y) : x\in\hat S, y\in S\}$ is $\hat S\otimes S$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+For $x,y\in\mc B_0(H)$ and $\omega\in\mc B(H)_*$, we have that
+$V(x\otimes L(y\omega)) = (\iota\otimes \omega\otimes\iota)
+((V_{13} V_{23})(x\otimes y\otimes 1)) = (\iota\otimes \omega\otimes\iota)
+((V_{12}^* V_{23} V_{12})(x\otimes y\otimes 1))$.  As $V(x\otimes y)\in
+\mc B_0(H\otimes H)$, we see that $V(x\otimes L(y\omega))$ is in the closed
+linear span of
+\[ \{ (\iota\otimes\omega\otimes\iota)((V_{12}^* V_{23})(a\otimes b\otimes 1))
+: a,b\in\mc B_0(H) \}. \]
+Let $\omega = \omega'c$ for some $\omega'\in\mc B(H)_*$ and $c\in\mc B_0(H)$
+(we may do this, by Lemma~\ref{lem:ap1}).  Then
+\[ (\iota\otimes\omega\otimes\iota)((V_{12}^* V_{23})(a\otimes b\otimes 1))
+= (\iota\otimes b\omega'\otimes 1)((1\otimes c\otimes 1) V_{12}^*
+(a\otimes 1\otimes 1)V_{23}) \in \mc B_0(H) \otimes S, \]
+using Proposition~\ref{prop:5}(\ref{prop:5.2}).
+
+Also $(x\otimes L(\omega^*y^*)^*)V = (x\otimes (y\omega\otimes\iota)(V^*))V
+= (\iota\otimes\omega\otimes\iota)( V^*_{23} (x\otimes y\otimes 1) V_{13} )$,
+so using Proposition~\ref{prop:5}(\ref{prop:5.2}) is in the closed
+linear span of
+\[ \{ (\iota\otimes\omega\otimes\iota)( V^*_{23} (a\otimes 1\otimes 1)
+V_{12} (1\otimes b\otimes 1) V_{13} ) : a,b\in\mc B_0(H) \}. \]
+Notice that $(\iota\otimes\omega\otimes\iota)( V^*_{23} (a\otimes 1\otimes 1)
+V_{12} (1\otimes b\otimes 1) V_{13} ) =
+(\iota\otimes\omega\otimes\iota)( (a\otimes 1\otimes 1) V^*_{23}
+V_{12} V_{13} (1\otimes b\otimes 1)  ) =
+(\iota\otimes b\omega\otimes\iota)( (a\otimes 1\otimes 1) V_{12} V^*_{23} )$.
+Writing $b\omega = \omega' c$, with $c\in\mc B_0(H)$, as $(a\otimes c)V\in
+\mc B_0(H\otimes H)$, we have that
+\[ (\iota\otimes b\omega\otimes\iota)( (a\otimes 1\otimes 1) V_{12} V^*_{23} )
+= (\iota\otimes\omega'\otimes\iota)( (a\otimes c\otimes 1) V_{12} V^*_{23} )
+\in \mc B_0(H) \otimes S, \]
+where here we use Proposition~\ref{prop:6}.  This shows the first part of
+(\ref{prop:7.1}); the second part follows by working with $\Sigma V^*\Sigma$.
+
+Let $a,b\in\mc B_0(H), \omega\in\mc B(H)_*$ and set $y=L(\omega a)$.  Then
+\[ (b\otimes 1)V(1\otimes y) = (\iota\otimes\omega\otimes\iota)\big(
+(b\otimes a\otimes 1)V_{13} V_{23} \big)
+= (\iota\otimes\omega\otimes\iota)\big( ((b\otimes a)V^* \otimes 1)
+V_{23} V_{12} \big). \]
+Again, as $V$ is unitary, the closed linear span of $\{ (b\otimes a)V^*:
+a,b\in\mc B_0(H) \}$ is $\mc B_0(H)\otimes\mc B_0(H)$.  To show
+(\ref{prop:7.2}) it hence suffices to show that
+\begin{align*}
+\big\{ & (\iota\otimes\omega\otimes\iota)\big( (a\otimes 1\otimes 1)
+V_{23} V_{12} \big) : a\in\mc B_0(H), \omega\in\mc B(H)_* \} \\
+&= \big\{ (\iota\otimes b\omega\otimes\iota)\big( (a\otimes 1\otimes 1)
+V_{23} V_{12} \big) : a,b\in\mc B_0(H), \omega\in\mc B(H)_* \}
+\end{align*}
+is linearly dense in $B_0(H)\otimes S$.  However,
+\[ (\iota\otimes b\omega\otimes\iota)\big( (a\otimes 1\otimes 1) V_{23} V_{12}
+= (\iota\otimes\omega\otimes\iota)\big( V_{23} \big( (a\otimes 1)V(1\otimes b)
+\otimes 1 \big) \big), \]
+and so the result follows by Proposition~\ref{prop:5}.  Similarly, the
+second claim of (\ref{prop:7.2}) follows by working with $\Sigma V^*\Sigma$.
+
+For (\ref{prop:7.3}), notice that by (\ref{prop:7.1}), both $V_{12}$ and
+$V_{23}$ are multipliers of $\hat S \otimes \mc B_0(H) \otimes S$, and hence so
+is $V_{13} = V_{12}^* V_{23} V_{12} V_{23}^*$.  Thus $V\in M(\hat S\otimes S)$,
+as claimed.
+
+For (\ref{prop:7.4}), it suffices to show that the closed linear span of
+\[ \big\{ (x\otimes a\otimes 1)V_{13}(1\otimes b\otimes y) :
+a,b\in\mc B_0(H), x\in\hat S, y\in S \big\} \]
+is $\hat S\otimes\mc B_0(H)\otimes S$.  As $V_{13} = V_{12}^* V_{23} V_{12}
+V_{23}^*$, as $V^*\in M(\hat S\otimes\mc B_0(H)$ and $V\in M(\mc B_0(H)
+\otimes S)$, and as $V$ is unitary, we equivalently can show that the closed
+linear span of
+\[ \big\{ (x\otimes a\otimes 1)V_{23}V_{12}(1\otimes b\otimes y) :
+a,b\in\mc B_0(H), x\in\hat S, y\in S \big\} \]
+is $\hat S\otimes\mc B_0(H)\otimes S$.  Notice that
+\[ (x\otimes a\otimes 1)V_{23}V_{12}(1\otimes b\otimes y)
+= \big( x \otimes (a\otimes 1)V(1\otimes y) \big)
+\big( V(1\otimes b) \otimes 1 \big), \]
+and so by (\ref{prop:7.2}), we get the closed linear span of
+\begin{align*}
+\big\{ & \big( x \otimes c\otimes z \big) V_{12}(1\otimes b\otimes 1)
+: b,c\in\mc B_0(H), z\in S, x\in\hat S \big\} \\
+&= \big\{ (1\otimes c\otimes z) \big( (x\otimes 1)V(1\otimes b) \otimes 1 \big)
+: b,c\in\mc B_0(H), z\in S, x\in\hat S \big\},
+\end{align*}
+which again by (\ref{prop:7.2}) is the closed linear span of
+\[ \big\{ (1\otimes c\otimes z) ( x \otimes b \otimes 1)
+: b,c\in\mc B_0(H), z\in S, x\in\hat S \big\}, \]
+which is of course $\hat S \otimes \mc B_0(H) \otimes S$, as required.
+\end{proof}
+
+\begin{corollary}[Corollaire~3.7]\label{corr:1}
+Let $V$ be a regular multiplicative unitary, and let $S,\hat S$ be the
+associated C$^*$-algebras.  Then:
+\begin{enumerate}
+\item\label{corr:1.1} The closed linear spans of
+$\{ V(x\otimes 1)V^*(1\otimes y) : x,y\in S \}$
+and $\{ V(x\otimes 1)V^*(y\otimes 1) : x,y\in S \}$ are both equal to
+$S\otimes S$;
+\item\label{corr:1.2} The closed linear spans of
+$\{ V^*(1\otimes x)V(1\otimes y) : x,y\in\hat S \}$
+and $\{ V^*(1\otimes x)V(y\otimes 1) : x,y\in\hat S \}$ are both equal to
+$\hat S\otimes\hat S$;
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+For $a\in\mc B_0(H), \omega\in\mc B(H)_*$ and $y\in S$,
+\begin{align*}
+V(L(a\omega)\otimes 1)V^*(1\otimes y)
+&= (\omega\otimes\iota\otimes\iota) \big( V_{23} V_{12}(a\otimes 1\otimes 1)
+   V^*_{23}(1\otimes 1\otimes y) \big) \\
+&= (\omega\otimes\iota\otimes\iota) \big(V_{12}V_{13}
+   (a\otimes 1\otimes y)\big). \end{align*}
+By Proposition~\ref{prop:7}(\ref{prop:7.1}) we see that
+\begin{align*}
+\overline{\lin}\{ V(x\otimes 1)V^*(1\otimes y) : x,y\in S \}
+&= \overline{\lin}\{ (\omega\otimes\iota\otimes\iota)
+(V_{12}(a\otimes 1\otimes y) : a\in\mc B_0(H), y\in S \} \\
+&= \overline{\lin}\{ (\omega\otimes\iota)(V(a\otimes 1)) : a\in\mc B_0(H)
+\} \otimes S = S\otimes S. \end{align*}
+Now consider
+\begin{align*} V(L(\omega a)\otimes 1)V^*(y\otimes 1)
+&= (\omega\otimes\iota\otimes\iota)\big( V_{23}(a\otimes 1\otimes 1)
+V_{12} V_{23}^* (1\otimes y\otimes 1) \big) \\
+&= (\omega\otimes\iota\otimes\iota)\big( (a\otimes 1\otimes 1)
+V_{12} V_{13} (1\otimes y\otimes 1) \big). \end{align*}
+Thus, now using Proposition~\ref{prop:7}(\ref{prop:7.2}),
+\begin{align*}
+\overline{\lin}\{ & V(x\otimes 1)V^*(y\otimes 1) : x,y\in S \} \\
+&= \overline{\lin}\{ (\omega\otimes\iota\otimes\iota)\big(
+( (a\otimes 1)V(1\otimes y) \otimes 1 ) V_{13} \big) : a\in\mc B_0(H),
+y\in S \} \\
+&= \overline{\lin}\{ (\omega\otimes\iota\otimes\iota)\big(
+( a\otimes y\otimes 1 ) V_{13} \big) : a\in\mc B_0(H), y\in S \}
+= S\otimes S. \end{align*}
+This shows (\ref{corr:1.1}), and then (\ref{corr:1.2}) follows
+by working with $\Sigma V^*\Sigma$.
+\end{proof}
+
+\begin{theorem}[Th\'eor\`eme 3.8]\label{thm:1}
+Let $V$ be a regular multiplicative unitary, and let $S,\hat S$ be the
+associated C$^*$-algebras.  We may define a coproduct $\delta$ on $S$
+by $\delta(x) = V(x\otimes 1)V^*$, and then $(S,\delta)$ becomes a
+bisimplifiable Hopf-C$^*$-algebra.  We may define a coproduct $\hat\delta$
+on $\hat S$ by $\hat\delta(x) = V^*(1\otimes x)V$, and then
+$(\hat S,\hat\delta)$ becomes a bisimplifiable Hopf-C$^*$-algebra.
+\end{theorem}
+\begin{proof}
+By Corollary~\ref{corr:1}(\ref{corr:1.1}) it follows that
+$\delta$ is indeed a $*$-homomorphism $S\rightarrow M(S\otimes S)$
+such that $\delta(S)(1\otimes S)$ and $\delta(S)(S\otimes 1)$
+are (dense) subsets of $S\otimes S$; this also shows that $(S,\delta)$
+is bisimplifiable.  That $\delta$ is coassociative follows as
+\begin{align*} (\iota\otimes\delta)\delta(x)
+= V_{23} V_{12} (x\otimes 1\otimes 1) V_{12}^* V_{23}^*
+= V_{12} V_{13} V_{23}(x\otimes 1\otimes 1) V_{23}^* V_{13}^* V_{12}^*
+= (\delta\otimes\iota)\delta(x), \end{align*}
+as required.  Let $(u_i)$ be a bounded approximate identity for $S$,
+and let $x,y\in S$, so with $\tau = \delta(x)(1\otimes y)\in S\otimes S$,
+\[ \delta(u_i)\tau = \delta(u_ix)(1\otimes y)
+\rightarrow \delta(x)(1\otimes y) = \tau. \]
+By Corollary~\ref{corr:1}(\ref{corr:1.1}), such $\tau$ are dense,
+and so $\delta$ is non-degenerate.  The results for $\hat S$ follow
+from working with $\Sigma V^* \Sigma$.
+\end{proof}
+
+\begin{proposition}[Proposition 3.9]\label{prop:8}
+The map $\kappa:A(V)\rightarrow S; (\omega\otimes\iota)(V)
+\mapsto (\omega\otimes\iota)(V^*)$ is a well-defined algebra antihomomorphism,
+called the \emph{antipode}.
+\end{proposition}
+\begin{proof}
+We have that $(\omega\otimes\iota)(V^*) = L(\omega^*)^* \in S$
+by Proposition~\ref{prop:6}.  If $L(\omega)=0$ then
+\[ 0 = \ip{L(\omega)}{\omega'} = \ip{\rho(\omega')}{\omega}
+= \ip{x}{\omega} \qquad (\omega'\in\mc B(H)_*,x\in\hat S), \]
+the last equality following by density.  As $\hat S$ is self-adjoint,
+also $\ip{x}{\omega^*} = \overline{\ip{x^*}{\omega}} = 0$ for all
+$x\in \hat S$, and so $\ip{L(\omega^*)}{\omega'}
+= \ip{\rho(\omega')}{\omega^*} = 0$ for all $\omega'\in\mc B(H)_*$.
+Thus $L(\omega^*)=0$, and so $\kappa$ is well-defined.
+
+As in the proof of Proposition~\ref{prop:3}, given $\omega,\omega'\in
+\mc B(H)_*$, if $\psi\in\mc B(H)_*$ is defined by $\ip{T}{\psi}
+= \ip{V^*(1\otimes T)V}{\omega\otimes\omega'}$ then $L(\omega) L(\omega')
+= L(\psi)$.  Then $\ip{T}{\psi^*} = \overline{\ip{V^*(1\otimes T^*)V}
+{\omega\otimes\omega'}} = \ip{V^*(1\otimes T)V}{\omega^*\otimes(\omega')^*}$
+and so $L(\psi^*) = L(\omega^*)L((\omega')^*)$.
+Thus $\kappa(L(\omega) L(\omega')) = L(\psi^*)^* = L((\omega')^*)^*
+L(\omega^*)^* = \kappa(L(\omega')) \kappa(L(\omega))$ and so $\kappa$
+is an antihomomorphism as required.
+\end{proof}
+
+\begin{definition}[D\'efinition 3.10]
+A multiplicative unitary $V$ is \emph{biregular} if it is regular, and if
+$\{ (\omega\otimes\iota)(\Sigma V) : \omega\in\mc B(H)_* \}$ is dense in
+$\mc B_0(H)$.
+\end{definition}
+
+\begin{remark}[Remarques 3.11(a)]\label{defn:1}
+Let $W$ be the fundamental unitary associated to a Kac-von Neumann algebra,
+see \cite{r6}.  Set $V=W^*$ and let $\hat\Delta$ be the modular operator
+associated with the dual Haar weight $\hat\phi$ on the dual Kac algebra
+$\hat M$.  Following \cite[2.1.5(a)]{r6} it follows that $\hat A(V)$ generates
+$\hat M$ as a von Neumann algebra; the same is true of $S$.  Then
+\cite[corollaire~3.1.10]{r6} shows that the restriction of $\hat\phi$ to
+$S^+$, say $\psi$, defines a normal semi-finite weight on $S$.  By
+\cite[Lemme~I.1]{r7}, we have that $V^*(1\otimes\hat\Delta)V = \hat\Delta
+\otimes\hat\Delta$.  Thus, for $\omega\in M_*$ and all $t\in\mathbb R$,
+we have that $L(\hat\Delta^{it}\omega) = \hat\Delta^{it} L(\omega)
+\hat\Delta^{-it}$ and so the modular automorphism group $(\sigma_t)$ of
+$\hat M$ restricts to $S$ to give a norm-continuous group of automorphisms.
+It is now easy to verify that $S$ together with $\kappa$ and $\psi$ gives
+a Kac C$^*$-algebra in the sense of \cite{r50}.
+\end{remark}
+
+\begin{remark}[Remarques 3.11(b)]
+Let $V$ be a regular multiplicative unitary.  For $\omega\in\mc B(H)_*$,
+as in the proof above, we see that $L(\omega)=0$ if and only if $\omega$
+induces the zero functional on $S$.  As $S$ is a non-degenerate C$^*$-algebra
+of $H$ (by Proposition~\ref{prop:3}) we see that if $\omega\geq0$, then
+$\omega$ is zero on $S$ only if $\omega=0$.  (This follows, as let
+$(e_\alpha)$ be a bounded approximate identity in $S$.  Non-degeneracy
+implies that $e_\alpha\rightarrow 1$ strongly, and so $\|\omega\|
+= \ip{1}{\omega} = \lim_\alpha \ip{e_\alpha}{\omega}$.)
+Similarly, if $\omega\geq0$ and $\rho(\omega)=0$, then $\omega=0$.
+
+For $x\in S$ and $\omega,\omega'\in S^*$, define
+\[ x*\omega = (\omega\otimes\iota)\delta(x), \quad
+\omega*x = (\iota\otimes\omega)\delta(x), \quad
+\omega*\omega' = (\omega\otimes\omega')\circ\delta. \]
+By Lemma~\ref{lem:ap1}, we may suppose that $\omega=\omega_0a_0$ for some
+$\omega_0\in S^*,a_0\in S$.  Then $x*\omega
+= (\omega\otimes\iota)((a_0\otimes 1)\delta(x)) \in S$, as
+$(a_0\otimes 1)\delta(x) \in S\otimes S$.  Similarly $\omega*x\in S$.
+
+Suppose now $x\geq0$ and $\omega\geq0$ and that $\omega*x=0$.  If
+$\omega\not=0$, write $x=y^*y$ for some $y\in S$, and let $(\pi,H,\xi)$ be the
+cyclic GNS construction for $\omega$.  Then
+\[ 0 = (\iota\otimes\omega)\delta(x)
+= (\iota\otimes\omega_\xi)(\iota\otimes\pi)(V(y^*y\otimes 1)V^*), \]
+and so $(y\otimes 1)(\iota\otimes\pi)(V^*)(\cdot\otimes\xi)=0$.
+In particular, for $a\in\mc B_0(H), b\in S$, also
+\[ 0 = (y\otimes\pi(b))(\iota\otimes\pi)(V^*)(a(\cdot)\otimes\xi)
+= (y\otimes 1)(\iota\otimes\pi)\big( (1\otimes b)V^*(a\otimes 1) \big)
+(\cdot\otimes\xi). \]
+By Proposition~\ref{prop:7}(\ref{prop:7.2}), this shows that
+\[ 0 = (y\otimes 1) (c\otimes\pi(d)) (\cdot\otimes\xi)
+\qquad (c\in\mc B_0(H), d\in S). \]
+It follows that $y=0$, so $x=0$.  In conclusion,
+$x\geq0,\omega\geq0,\omega*x=0 \implies x=0$ or $\omega=0$.
+\end{remark}
+
+\begin{remark}[Remarques 3.11(c)]
+We say that $(A,\delta)$ is \emph{right reduced} (respectively, \emph{left
+reduced}) if for non-zero $\omega\in A^*_+, x\in A_+$ also $\omega*x$
+(respectively, $x*\omega$) is non-zero.  We have just shown that $(S,\delta)$
+arising from a regular multiplicative unitary is right reduced;
+similarly $\hat S$ will be left reduced.
+\end{remark}
+
+\begin{proposition}[Proposition 3.11.1]\label{prop:9}
+Let $(A,\delta)$ be right (respectively left) reduced.  Then:
+\begin{enumerate}
+\item\label{prop:9.1} For non-zero $\omega,\omega'\in A^*_+$ with
+$\omega$ faithful, and for non-zero $x\in A_+$, we have that
+$\omega*\omega'$ (respectively $\omega'*\omega$) is faithful, and
+$x*\omega$ (respectively $\omega*x$) is strictly positive
+(meaning that $\ip{\mu}{x*\omega}>0$ for all states $\mu$,
+or that the right ideal generated by $x*\omega$ is all of $A$).
+\item\label{prop:9.2} If $A$ is unital and separable, then it admits
+a right (respectively, left) faithful Haar state.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+We prove the assertions in the right reduced case; the left reduced case
+follows by replacing $\delta$ with $\sigma\delta$ where $\sigma:A\otimes A
+\rightarrow A\otimes A$ is the swap map.  For non-zero $y\in A_+$,
+\[ \ip{\omega*\omega'}{y} = \ip{\omega}{\omega'*y} \not= 0, \]
+as $\omega'*y\not=0$ and $\omega$ is faithful.  Similarly, for a state $\mu$,
+\[ \ip{\mu}{x*\omega} = \ip{\omega*\mu}{x} \not=0, \]
+by using the previous calculation.  To show (\ref{prop:9.2}), we
+use the following lemma.
+\end{proof}
+
+\begin{lemma}[Lemme 3.11.2]\label{lem:1}
+With $(A,\delta)$ being unital and right reduced, let $\omega$ be a faithful
+state.  Then:
+\begin{enumerate}
+\item\label{lem:1.1} If $x\in A$ with $x*\omega=x$, then $x\in\mathbb C1$;
+\item\label{lem:1.2} There is a state $\phi$ with $\omega*\phi=\phi*\omega
+=\phi$ (compare \cite{r54}).
+\item\label{lem:1.3} Such $\phi$ is also a faithful right Haar state.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+As $(x*\omega)^* = ((\omega\otimes\iota)\delta(x))^* =
+(\omega\otimes\iota)\delta(x^*) = x^* * \omega$, for (\ref{lem:1.1})
+we may suppose that $x=x^*$.  Notice that $1*\omega =
+(\omega\otimes\iota)\delta(1) = 1$.  So for $\lambda\in\mathbb R$,
+if $x-\lambda\geq0$ is positive and non-zero, then by
+Proposition~\ref{prop:9}(\ref{prop:9.1}) we have that
+$(x-\lambda)*\omega = x-\lambda$ is strictly positive.  Taking $\lambda$ to
+be the minimum of the spectrum of $x$ shows that $x\in\mathbb R1$ as claimed.
+
+For (\ref{lem:1.2}) let $\phi$ be a weak$^*$-limit of the Cesaro means of
+$\omega^n = \omega*\omega*\cdots*\omega$ (n times).  Then $\phi$ is a state,
+and clearly $\phi*\omega = \omega*\phi = \phi$.
+
+For (\ref{lem:1.3}), for $x\in A$ we have that $(x*\phi)*\omega = x*(\phi
+*\omega) = x*\phi$ and so by (\ref{lem:1.1}) $x*\phi$ is a scalar.  But then
+$x*\phi = (x*\phi)*\omega = (\omega\otimes\iota)\delta(x*\phi)
+= \ip{\omega}{x*\phi}1 = \ip{\phi}{x}1$ so $\phi$ is a right Haar state.
+As $\phi = \omega*\phi$, by Proposition~\ref{prop:9}(\ref{prop:9.1}),
+$\phi$ is faithful.
+\end{proof}
+
+
+
+
+\section{Multiplicative unitaries of compact type, and Woronowicz
+C$^*$-algebras}
+
+In this section, we depart from the original paper, and study the relationship
+between Compact Quantum Groups (in the sense of \cite{woro}, a paper not
+published at the time) and multiplicative unitaries of compact type.
+Compact Quantum Groups have subsumed the theory of Matrix Pseudogroups as
+a special case, and an added advantage is that the resulting proofs are
+easier in some cases.
+
+Firstly, let $(A,\delta)$ be a compact quantum group.  That is, $A$ is unital
+and $(A,\delta)$ is bisimplifiable.  Then \cite{woro} shows that $(A,\delta)$
+admits a unique Haar state $\phi$.  By Example~\ref{eg:1}(\ref{eg:1.4}) we
+construct a multiplicative unitary $V$ on the GNS space for $\phi$.
+By Proposition~\ref{prop:12}(\ref{prop:12.2}) $V$ is regular (we note that
+the condition here, that $\phi(x^*x)=0$ if and only if $\phi(xx^*)=0$ is
+quite involved to prove-- see \cite[???]{woro}).  The C$^*$-algebra $S$
+is simply $\pi(A)$, and the coproduct on $S$ is the natural quotient of
+$\delta$.  As $S$ is thus unital, $V$ is of compact type.
+
+[Do we want to give a self-contained (sketch/account) of all of this?  It
+might be rather involved...]
+
+We now start with a multiplicative unitary $V$ on $H$ of compact type which
+admits a non-zero fixed vector $E\in H$ (see Definition~\ref{defn:2}).
+If $H$ is separable, then by Proposition~\ref{prop:4} such a fixed vector 
+automatically exists.  Let $\phi = \omega_e\in\mc B(H)_*$.
+
+\begin{definition}[D\'efinition 4.3]\label{defn:3}
+For $\xi\in H$ define $\lambda_\xi\in\mc B(H)$ by $\lambda_\xi
+= (\theta'_e)^* V^* \theta_\xi$.  That is, for $\eta,\eta'\in H$,
+$(\lambda_\xi(\eta)|\eta') = (V(\xi\otimes\eta)|\eta'\otimes e)$.
+\end{definition}
+
+\begin{proposition}[Proposition 4.4]\label{prop:13}
+For $\xi\in H$, we have that $(\lambda_\xi\otimes 1)V =
+V(\lambda_\xi\otimes 1)$.
+\end{proposition}
+\begin{proof}
+We have that $\lambda_\xi^*\otimes 1 = \theta^*_{1,\xi} V_{12} \theta_{2,e}$.
+Thus
+\begin{align*} V(\lambda_\xi^*\otimes 1) &=
+V \theta^*_{1,\xi} V_{12} \theta_{2,e}
+= \theta^*_{1,\xi} V_{23} V_{12} \theta_{2,e}
+= \theta^*_{1,\xi} V_{12} V_{13} V_{23} \theta_{2,e} \\
+&= \theta^*_{1,\xi} V_{12} V_{13} \theta_{2,e}
+\quad\text{as $e$ is fixed, so $V\theta_e = \theta_e$} \\
+&= \theta^*_{1,\xi} V_{12} \theta_{2,e} V
+= (\lambda_\xi^*\otimes 1)V.
+\end{align*}
+\end{proof}
+
+
+
+
+
+
+
+\section{Constructions with Woronowicz C$^*$-algebras}\label{sec:5}
+
+
+
+
+
+\section{Irreducible multiplicative unitaries}
+
+\begin{proposition}[Proposition 6.1]\label{prop:10}
+Let $V$ be a multiplicative unitary on $H$ and let $U\in\mc B(H)$ be a unitary
+with $U^2=1$ such that $\hat V=\Sigma(U\otimes 1)V(U\otimes 1)\Sigma$
+and $\tilde V=(U\otimes U)\hat V(U\otimes U)$ are both multiplicative.
+Then the following formulae hold:
+\begin{enumerate}
+\item\label{prop:10.1} $V_{12} (1\otimes U\otimes 1) V_{23}
+(1\otimes U\otimes 1)
+= (1\otimes U\otimes 1)V_{23}(1\otimes U\otimes 1)V_{13} V_{12}$;
+\item\label{prop:10.2} $\hat V_{23} V_{12} V_{13} = V_{13} \hat V_{23}$;
+\item\label{prop:10.3} $\tilde V_{12} V_{13} = V_{13} V_{23} \tilde V_{12}$;
+\item\label{prop:10.4} the unitaries $\Sigma_{23} \hat V_{23} V_{23}$ and
+$V_{12}$ commute;
+\item\label{prop:10.5} the unitaries $V_{12} \tilde V_{12} \Sigma_{12}$ and
+$V_{23}$ commute.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+We have that
+\begin{gather*}
+\Sigma_{13} \hat V_{12} \Sigma_{13}
+   = (1\otimes U\otimes 1) V_{23} (1\otimes U\otimes 1), \\
+\Sigma_{13} \hat V_{23} \Sigma_{13}
+   = (U\otimes 1\otimes 1)V_{12}(U\otimes 1\otimes 1),
+\end{gather*}
+That $\hat V$ is multiplicative means that
+\begin{align*} \hat V_{12} \hat V_{13} \hat V_{23}
+&= \hat V_{12} \Sigma_{13} (U\otimes 1\otimes 1) V_{13}
+(U\otimes 1\otimes 1) \Sigma_{13} \hat V_{23} \\
+&= \Sigma_{13}(1\otimes U\otimes 1) V_{23} (U\otimes U\otimes 1) V_{13}
+V_{12}(U\otimes 1\otimes 1)\Sigma_{13}
+= \hat V_{23} \hat V_{12},
+\end{align*}
+that is
+\[ (U\otimes U\otimes 1) V_{23} (1\otimes U\otimes 1) V_{13}
+V_{12}(U\otimes 1\otimes 1)
+= (U\otimes 1\otimes 1)V_{12}(1\otimes U\otimes 1)
+V_{23} (U\otimes U\otimes 1). \]
+Then (\ref{prop:10.1}) follows.
+
+Applying $\Sigma_{23}$ to the left and right of (\ref{prop:10.1}) gives
+(\ref{prop:10.2}).  Using $\Sigma_{12}$ instead gives (\ref{prop:10.3}),
+once we notice that $\tilde V = \Sigma(1\otimes U)V(1\otimes U)\Sigma$.
+
+As $V$ is multiplicative, (\ref{prop:10.2}) gives that
+$\hat V_{23} V_{23} V_{12} = V_{13}\hat V_{23}\hat V_{23}$ and applying
+$\Sigma_{23}$ on the left gives (\ref{prop:10.4}).
+A similar argument applied to (\ref{prop:10.3}) gives (\ref{prop:10.5}).
+\end{proof}
+
+\begin{definition}[D\'efinition 6.2]
+A multiplicative unitary $V$ is \emph{irreducible} is there is a unitary
+$U\in\mc B(H)$ with:
+\begin{enumerate}
+\item $U^2=1$ and $(\Sigma(1\otimes U)V)^3 = 1$;
+\item the unitaries $\hat V=\Sigma(U\otimes 1)V(U\otimes 1)\Sigma$
+and $\tilde V=(U\otimes U)\hat V(U\otimes U)$ are both multiplicative.
+\end{enumerate}
+\end{definition}
+
+Notice that clearly $\tilde V$ is multiplicative if and only if $\hat V$ is
+multiplicative.  That $(\Sigma(1\otimes U)V)^3 = 1$ is equivalent to
+$\hat V V \tilde V = (U\otimes 1)\Sigma$.  Finally, observe that $U$ being
+unitary with $U^2=1$ is equivalent to $U$ being self-adjoint and unitary.
+
+\begin{proposition}[Proposition 6.3]
+Let $V$ be a multiplicative unitary which is regular and irreducible.
+Then $\{xy : x\in S, y\in \hat S \}$ is linearly dense in $\mc B_0(H)$.
+\end{proposition}
+\begin{proof}
+Notice that $\Sigma\tilde V^* = (1\otimes U^*)V^*(1\otimes U^*)\Sigma
+= (1\otimes U^*)\Sigma(\Sigma V^*\Sigma)(U^*\otimes 1)$ and so
+\[ \mc C(\Sigma\tilde V^*) = \{ (\iota\otimes\omega)
+((1\otimes U^*)\Sigma(\Sigma V^*\Sigma)(U^*\otimes 1)) : \omega\in\mc B(H)_* \}
+= \mc C(\Sigma V^*\Sigma) U^* = \mc C(V)^*U^*, \]
+which equals $\mc B_0(H)$ as $V$ is regular.  Hence also
+$\{ (\iota\otimes\omega) ((U\otimes 1)\Sigma\tilde V^*)
+: \omega\in\mc B(H)_* \}$ is dense in $\mc B_0(H)$.  As $V$ is irreducible,
+$(U\otimes 1)\Sigma\tilde V^* = \hat VV$, and so
+$\{ (\iota\otimes\omega) (\hat VV) : \omega\in\mc B(H)_* \}$
+is dense in $\mc B_0(H)$.  As $\hat S$ acts irreducibly on $H$, also
+$\{ (\iota\otimes\omega) (\hat VV)y : \omega\in\mc B(H)_*, y\in\hat S \}$
+is linearly dense in $\mc B_0(H)$.
+
+Now, $(\iota\otimes\omega) (\hat VV)y = (\iota\otimes\omega)
+(\hat VV(y\otimes 1))$ and as $V$ is a unitary multiplier of
+$\hat S\otimes\mc B_0(H)$ (by Proposition~\ref{prop:7}(\ref{prop:7.1}))
+it follows that
+\[ \{ (\iota\otimes\omega) (\hat V(y\otimes 1)) :
+\omega\in\mc B(H)_*, y\in\hat S \} \]
+is linearly dense in $\mc B_0(H)$.  As $(\iota\otimes\omega)(\hat V(y\otimes 1))
+= (U\omega U\otimes\iota)(V) y = L(U\omega U)y$ the result follows.
+\end{proof}
+
+\begin{definition}[D\'efinition 6.4]
+A \emph{Kac system} is a triple $(H,V,U)$ where $H$ is a Hilbert space,
+$V$ is a biregular multiplicative unitary (see Definition~\ref{defn:1})
+and $U$ is a unitary verifing that $V$ is also irreducible.
+\end{definition}
+
+\begin{lemma}[D\'efinition 6.5]\label{lem:2}
+Let $(H,V,U)$ be a Kac system.  Then:
+\begin{enumerate}
+\item\label{lem:2.1} $(H,\Sigma V^* \Sigma,U)$ and $(H,\hat V,U)$
+   are Kac systems;
+\item\label{lem:2.2} The unitaries $V_{12}$ and $\tilde V_{23}$ commute;
+\item\label{lem:2.3} The unitaries $V_{23}$ and $\hat V_{12}$ commute.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+By definition, $V$ is biregular if and only if $\mc C(V) =
+\{(\iota\otimes\omega)(\Sigma V) : \omega\in\mc B(H)_*\}$ is dense in
+$\mc B_0(H)$ and $\{(\omega\otimes\iota(\Sigma V) : \omega\in\mc B(H)_*\}
+= \{(\iota\otimes\omega(V\Sigma) : \omega\in\mc B(H)_*\}
+= \{(\iota\otimes\omega(\Sigma\hat V) : \omega\in\mc B(H)_*\}
+= \mc C(\hat V)$ is dense in $\mc B_0(H)$.  That is, $V$ is biregular
+if and only if $V$ and $\hat V$ are regular.
+
+So set $W=\Sigma V^*\Sigma$, so
+\[ \hat W = \Sigma(U\otimes 1)\Sigma V^*\Sigma(U\otimes 1)\Sigma
+= (1\otimes U) V^* (1\otimes U) = \Sigma \tilde V^* \Sigma. \]
+Similarly $\tilde W = \Sigma \hat V^* \Sigma$.  Then (\ref{lem:2.1}) follows.
+
+As $\hat V V \tilde V = (U\otimes 1)\Sigma$ we see that
+$\tilde V^*_{23} = \Sigma_{23}(1\otimes U\otimes 1)\hat V_{23} V_{23}
+= (1\otimes 1\otimes U)(\Sigma \hat V V)_{23}$ which commutes with $V_{12}$
+by Proposition~\ref{prop:10}(\ref{prop:10.4}).  Hence also $\tilde V_{23}$
+commutes with $V_{12}$, giving (\ref{lem:2.2}).  Similarly,
+Proposition~\ref{prop:10}(\ref{prop:10.5}) shows (\ref{lem:2.3}).
+\end{proof}
+
+\begin{definition}[D\'efinition 6.6]
+We say that $(H,\hat V,U)$ is the \emph{dual Kac system} to $(H,V,U)$, and that
+$(H,\Sigma V^*\Sigma,U)$ is the \emph{opposite Kac system} to $(H,V,U)$.
+Two Kac systems $(H,V,U)$ and $(H',V',U')$ are \emph{isomorphic} if there is a
+unitary $w\in\mc B(H,H')$ with $(w\otimes w)V=V'(w\otimes w)$ and $wU=U'w$.
+We also say that $(H',V',U')$ is \emph{dual to} $(H,V,U)$ if it is isomorphic
+to $(H,\hat V,U)$.
+\end{definition}
+
+Notice that the Kac systems $(H,\hat V,U)$ and $(H,\tilde V,U)$ are isomorphic
+(by $U$).
+
+\begin{definition}[D\'efinition 6.7]
+Let $(H,V,U)$ be a Kac system.  For $\omega\in\mc B(H)_*$, we write
+\[ \lambda(\omega) = L_{\hat V}(\omega) = (\omega\otimes\iota)(\hat V), \quad
+R(\omega) = \rho_{\tilde V}(\omega) = (\iota\otimes\omega)(\tilde V). \]
+\end{definition}
+
+[Note: At this point, the original paper overloads notation, and seems to
+write $L$ for both the map $\mc B(H)_*\rightarrow S\subseteq\mc B(H)$, and
+also for the (trivial) representation of $S$ on $\mc B(H)$.  Then $\lambda$
+is now both a map $\mc B(H)_*\rightarrow U\hat SU$, and also the representation
+$\hat S\rightarrow \mc B(H)$ given by $y\mapsto UyU$.
+We have tried to avoid doing this, and continue to view $S$ and $\hat S$
+as concrete subalgebras of $\mc B(H)$.]
+
+\begin{proposition}(Proposition 6.8)\label{lem:3}
+We have that:
+\begin{enumerate}
+\item\label{lem:3.1} $\lambda(\omega) = U \rho(\omega) U$ and
+$R(\omega) = UL(\omega)U$;
+\item\label{lem:3.2} For all $\omega,\omega'\in\mc B(H)_*$, the operators
+$\rho(\omega)$ and $\lambda(\omega')$ commute, and also
+$L(\omega)$ and $R(\omega')$ commute;
+\item\label{lem:3.3} For $x\in S,y\in\hat S$ we have that
+\[ \delta(x) = \hat V^*(1\otimes x)\hat V, \qquad
+(U\otimes U)\hat\delta(y)(U\otimes U) = \hat V(UyU\otimes 1)\hat V^*. \]
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+For (\ref{lem:3.1}) we simply calculate that
+\[ \lambda(\omega) = (\omega\otimes\iota)(\Sigma(U\otimes 1)V(U\otimes 1)\Sigma)
+= U (\iota\otimes\omega)(V) U = U\rho(\omega)U, \]
+the other case following similarly.
+
+For (\ref{lem:3.2}) we see that
+\[ \rho(\omega) \lambda(\omega')
+= (\iota\otimes\omega)(V) (\omega'\otimes\iota)(\hat V)
+= (\omega'\otimes\iota\otimes\omega)(V_{23} \hat V_{12}), \]
+and so the result follows from Lemma\ref{lem:2}(\ref{lem:2.3}).
+The other case uses Lemma\ref{lem:2}(\ref{lem:2.2}).
+
+Let $\omega\in\mc B(H)_*$ and set $x=L(\omega)$.  Then
+\begin{align*} \delta(x) &= V((\omega\otimes\iota)(V)\otimes 1)V^* = 
+(\omega\otimes\iota\otimes\iota)(V_{23}V_{12}V_{23}^*)
+= (\omega\otimes\iota\otimes\iota)(V_{12}V_{13}) \\
+&= (\omega\otimes\iota\otimes\iota)(\hat V_{23}^* V_{13} \hat V_{23})
+= \hat V^*(1\otimes x)\hat V, \end{align*}
+where we have used that $V$ is multiplicative, and also
+Proposition~\ref{prop:10}(\ref{prop:10.2}).  Then the first part of
+(\ref{lem:3.3}) follows as such $x$ are dense in $S$.
+Similarly, using Proposition~\ref{prop:10}(\ref{prop:10.3}) shows that
+\[ \hat\delta(y) = \tilde V (y\otimes 1) \tilde V^*
+\qquad (y\in\hat S). \]
+Then the second part of (\ref{lem:3.3}) follows immediately.
+\end{proof}
+
+\begin{proposition}[Proposition 6.9]\label{prop:11}
+Let $V$ be a mutliplicative unitary on $H$, and let $U\in\mc B(H)$ be
+a unitary with $U^2=1$, and such that $V_{12}$ and $\tilde V_{23}$ commute,
+and $\hat V_{12}$ and $V_{23}$ commute.   Then:
+\begin{enumerate}
+\item\label{prop:11.1} If the set $\{ \rho(\omega) L(\omega') : \omega,\omega'
+\in\mc B(H)_*\}$ is linearly dense in $\mc B_0(H)$, then $V$ is regular;
+\item\label{prop:11.2} If $\hat V$ is multiplicative, and both
+$(S\cup \hat S)' = \mathbb C1$ and $(S\cup U\hat SU)'=\mathbb C1$, then
+$(1\otimes U)\Sigma \hat V V \tilde V \in\mathbb C 1$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+We first prove (\ref{prop:11.1}).
+Let $\omega,\omega'\in\mc B(H)_*$, set $x = (\iota\otimes\omega)(\Sigma V)
+\in\mc C(V)$ and set $s=UL(\omega')U=R(\omega')
+=(\iota\otimes\omega')(\tilde V)$.  As $V_{12}$ and $\tilde V_{23}$ commute,
+it follows that $(1\otimes s)V = V(1\otimes s)$ and so
+\[ sx = (\iota\otimes\omega)((s\otimes 1)\Sigma V)
+= (\iota\otimes\omega)(\Sigma V(1\otimes s))
+= (\iota\otimes s\omega)(\Sigma V) \in\mc C(V). \]
+As $A(V)H$ is linearly dense in $H$ (by Proposition~\ref{prop:3}) it follows
+that $\mc C(V)$ has the same closure as the linear span of $UA(V)U\mc C(V)$.
+
+Similarly, setting $t=U\rho(\omega')U=(\omega'\otimes \iota)(\hat V)$ and
+using that $\hat V_{12}$ and $V_{23}$ commute will show that
+$\mc C(V) U\hat A(V)U$ has closed linear span equal to the closure of
+$\mc C(V)$.
+
+We hence see that $\mc C(V)^2$ has closed linear span equal to
+$\overline{\lin} \mc C(V) U\hat A(V) \hat A(V) U \mc C(V)$.  As remarked
+after Proposition~\ref{prop:5}, $\mc C(V)^2$ is linearly dense in $\mc C(V)$.
+By hypothesis, $\hat A(V) \hat A(V)$ is linearly dense in $\mc B_0(H)$.
+As $V$ is unitary, it is easy to see that $\mc C(V)H$ and $\mc C(V)^*H$ are
+linearly dense in $H$.  It follows that $\mc C(V) U\hat A(V) \hat A(V) U
+\mc C(V)$ is linearly dense in $\mc B_0(H)$, and so the same is true of
+$\mc C(V)$ showing that $V$ is regular.
+
+For (\ref{prop:11.2}), set $W=(1\otimes U)\Sigma\hat V V \tilde V$.  As
+$V_{12}$ commutes with $\tilde V_{23}$, and as we can now apply
+Proposition~\ref{prop:10}(\ref{prop:10.4}), we conclude that $V_{12}$ and
+$W_{23}$ commute.  Applying Proposition~\ref{prop:10}(\ref{prop:10.4}) to
+$\tilde V$, and noting that $\hat{\tilde V} = V$,
+we see that $\tilde V_{12}$ and $\Sigma_{23} V_{23} \tilde V_{23}$
+commute.  As $\hat V_{12}$ and $V_{23}$ commute, also
+$\tilde V_{12}$ and $(1\otimes U\otimes U)V_{23}(1\otimes U\otimes 1)$
+commute.  As $W=(U\otimes U)V(U\otimes 1)\Sigma V\tilde V$, we conclude
+that $\tilde V_{12}$ and $W_{23}$ commute.  So $W$ will commute with
+$(x\otimes 1)$ for all $x$ of the form $(\omega\otimes\iota)(V)$ and of the
+form $(\omega\otimes\iota)(\tilde V) = (\omega\otimes\iota)(\Sigma(1\otimes U)
+V (1\otimes U)\Sigma) = (\iota\otimes U\omega U)(V)$, that is, for all
+$x\in S \cup \hat S$.
+
+If we replace $V$ by $\hat V$ in the argument of the previous paragraph, then
+as $\hat{\hat V} = (U\otimes U)V(U\otimes U)$ and $\tilde{\hat V}=V$,
+we see that $X=(1\otimes U)\Sigma (U\otimes U)V(U\otimes U)\hat VV$
+commutes with $1\otimes x$ for all $x$ of the form $(\omega\otimes\iota)(\hat V)
+= U\rho(\omega)U$ and of the form $(\iota\otimes\omega)(\hat V)=
+L(U\omega U)$.  That is, for all $x\in S\cup U\hat SU$.  As
+$X = \Sigma(U\otimes 1)W(U\otimes 1)\Sigma$, we conclude that $W$
+commutes with $1\otimes x$ for all $x\in S\cap U\hat SU$.
+Thus $W\in\mathbb C1$ as required.
+\end{proof}
+
+\begin{corollary}[Corollaire 6.10]
+Let $V$ be a multiplicative unitary and let $U\in\mc B(H)$ be a unitary with
+$U^2=1$.  Form $\hat V,\tilde V$ as before, and suppose that $\hat V$ is
+multiplicative, that $V_{12}$ commutes with $\tilde V_{23}$, and that
+$\hat V_{12}$ commutes with $V_{23}$.  If the closed linear span of
+$\{ x UyU : x\in S, y\in \hat S \}$ is $\mc B_0(H)$, then $\tilde V$ and
+$\hat V$ are regular.
+\end{corollary}
+\begin{proof}
+Apply the previous proposition to $\hat V$.
+\end{proof}
+
+\begin{examples}[Exemples 6.11]
+\begin{enumerate}
+\item The multiplicative unitary $1\in\mc B(H\otimes H)$ is not
+irreducible unless $H=\mathbb C$, as $(\Sigma(1\otimes U))^3
+= \Sigma(U\otimes 1)$.
+\item Let $G$ be a locally compact group, equipped with the right Haar measure.
+Define a unitary $U$ on $L^2(G)$ by $(U\xi)(t)=\Delta^{1/2}(t)\xi(t^{-1})$,
+where $\Delta$ is the modular function for the Haar measure.  Then
+$(L^2(G), V_G, U)$ is a Haar system (with $V_G\xi(s,t)=\xi(st,t)$ as
+in Examples~\ref{eg:1}).  Indeed, we showed in Examples~\ref{eg:2} that $V_G$
+is regular.  Then $\Sigma(1\otimes U)V_G\xi(s,t) = V_G\xi(t,s^{-1})\Delta^{1/2}(s)
+= \xi(ts^{-1},s^{-1})\Delta^{1/2}(s)$, and it follows that
+$(\Sigma(1\otimes U)V_G)^3=1$.  Then $\hat V_G\xi(s,t) = \xi(s,s^{-1}t)
+\Delta^{1/2}(s)$ and direct calculation shows this to be multiplicative
+and regular.
+\item Let $(A,\delta)$ be a compact quantum group and form $(H,V,U)$ as
+in Section~\ref{sec:5}.  \textbf{TO FINISH!}
+\item Let $W$ be the fundamental unitary of Kac-von Neumann algebra
+(see \cite{r6}).  Let $V=W^*$ and set $U=J\hat J = \hat JJ$ (see \cite{r38}).
+As $\hat V$ is the fundamental unitary associated with the dual Kac-von Neumann
+algebra, it is regular.  It's a result of \cite{r38}, and
+Proposition~\ref{prop:11}, that $(1\otimes U)\Sigma \hat V V \tilde V$ is a
+scalar, and in fact, it's not hard to show that $(1\otimes U)\Sigma \hat V V
+\tilde V = 1$.  Thus $(H,V,U)$ is a Kac system.
+\end{enumerate}
+\end{examples}
+
+\begin{remark}(Remarque 6.12)
+\begin{enumerate}
+\item Let $(H,U,V)$ be a Kac system.  As $\hat{\hat V} = \tilde{\tilde V}
+= (U\otimes U)V(U\otimes U)$ we have that $(1\otimes U)\Sigma \hat V V \tilde V
+= \hat{\hat V} \hat V V (1\otimes U)\Sigma$.  It follows that $\hat V V \tilde V
+= \hat{\hat V} \hat V V = (U\otimes 1)\Sigma$ and so $\hat V V \tilde V
+= \hat{\hat V} \hat V V = \tilde V \hat{\hat V} \hat V = V \tilde V
+\tilde{\tilde V}$.
+\item The operator $\mc R = V(U\otimes 1)V(U\otimes 1)$ satisfies the Yang-Baxter
+equation: $\mc R_{12} \mc R_{13} \mc R_{23} = \mc R_{23} \mc R_{13} \mc R_{12}$.
+\item Some comments about \cite{r11}.
+\end{enumerate}
+\end{remark}
+
+
+
+
+
+\section{Multiplicative unitaries and Takesaki-Takai biduality}
+
+Fix a Kac system $(H,V,U)$.
+
+\begin{definition}(D\'efinition 7.1)
+Let $\delta_A$ be a coaction of $S$ (or $\hat S$) on a C$^*$-algebra $A$.
+Write $\pi_L$ and $\pi_R$ (respectively, $\hat\pi_\lambda$ and $\hat\pi_\rho$)
+for the representations of $A$ on the Hilbert C$^*$-module $A\otimes H$
+defined by
+\[ \pi_L = (\iota\otimes\iota)\circ\delta_A, \qquad
+\pi_R = (\iota\otimes U(\cdot)U)\circ\delta_A, \]
+respectively,
+\[ \hat\pi_\lambda = (\iota\otimes U(\cdot)U)\circ\delta_A, \qquad
+\hat\pi_\rho = (\iota\otimes\iota)\delta_A. \]
+
+Denote by $A\times\hat S$ (respectively $A\times S$) the \emph{crossed product}
+of $A$ by $S$ (respectively, $\hat S$), which is the C$^*$-algebra generated
+by $\{ \pi_L(a)(1\otimes \rho(\omega)) : a\in A, \omega\in\mc B(H)_*\}$
+(respectively, $\{ \hat\pi_\lambda(a)(1\otimes L(\omega)) : a\in A,
+\omega\in\mc B(H)_*\}$) inside $\mc B(A\otimes H)$.
+\end{definition}
+
+Here $U(\cdot)U$ is the $*$-homomorphism $S\rightarrow \mc B(H);
+x\mapsto UxU$ (the notation $\pi_R$ being inspired by Proposition~\ref{lem:3}).
+[The odd notation is due to the fact that we are concretely viewing
+$S$ as a subalgebra of $\mc B(H)$; whereas the original paper has by this
+point started using $L$ to denote the inclusion map $S\rightarrow
+\mc B(H)$, and so forth; see the comment before Proposition~\ref{lem:3}.]
+
+In fact, it is not really necessary to work with $A\otimes H$.  Instead,
+we could work in $M(A\otimes\mc B_0(H))$, noticing that clearly
+$M(A\otimes S)$ and $M(A\otimes \hat S)$ are subalgebras of 
+$M(A\otimes\mc B_0(H))$.  Then we can form $A\times S$ and $A\times\hat S$
+inside $M(A\otimes\mc B_0(H))$.
+
+\begin{lemma}(Lemme 7.2, see \cite{r23})\label{lem:4}
+The crossed product $A\times\hat S$ (or $A\times S$) is the closed linear
+span of $\{ \pi_L(a)(1\otimes \rho(\omega)) : a\in A, \omega\in\mc B(H)_*\}$
+(respectively, $\{ \hat\pi_\lambda(a)(1\otimes L(\omega)) : a\in A,
+\omega\in\mc B(H)_*\}$).
+\end{lemma}
+\begin{proof}
+We give a proof for $A\times\hat S$; the proof for $A\times S$ follows by
+working with $\hat V$ in place of $V$.  We need to show that, for $a\in A$ and
+$\omega\in\mc B(H)_*$, we have that $(1\otimes\rho(\omega))\pi_L(a)$
+is in the closed linear span of
+$\{ \pi_L(a)(1\otimes \rho(\omega)) : a\in A, \omega\in\mc B(H)_*\}$.
+Let $\tilde\pi$ be the representation of $A$ on the Hilbert C$^*$-module
+$A\otimes H\otimes H$ defined by
+\[ \tilde\pi = (\pi_L\otimes\iota)\circ\delta_A
+= (\iota\otimes\delta)\circ\delta_A, \]
+which follows as $\delta_A$ is a coaction.  As $\delta_A(\cdot)
+= V(\cdot\otimes 1)V^*$, we see that $\tilde\pi(\cdot) =
+V_{23}\delta_A(\cdot)_{12}V_{23}^*$, and so
+\[ (1\otimes\rho(\omega))\pi_L(a) = (\iota\otimes\iota\otimes\omega)
+(V_{23}\pi_L(a)_{12})
+= (\iota\otimes\iota\otimes\omega)(\tilde\pi(a)V_{23}). \]
+Writing $\omega = \omega' s$ for some $\omega'\in\mc B(H)_*$ and $s\in S$,
+we obtain
+\[ (1\otimes\rho(\omega))\pi_L(a) =
+(\iota\otimes\iota\otimes\omega')\big((\pi_L\otimes\iota)
+\big( (1\otimes s)\delta_A(a)\big) V_{23}\big). \]
+Now, $(1\otimes s)\delta_A(a) \in A\otimes S$ and so we can approximate
+it by a linear span of elements of the form $b\otimes t$.  However, then
+observe that
+\[ (\iota\otimes\iota\otimes\omega')\big((\pi_L\otimes\iota)
+(b\otimes t) V_{23}\big) = \pi_L(b) (1\otimes\rho(\omega' t)). \]
+The result follows.
+\end{proof}
+
+The previous lemma shows that for each $a\in A$, we have that $\pi_L(a)
+\in M(A\times\hat S)$ (by the definition of $A\times\hat S$, we see that
+$\pi_L(a)$ is a left multiplier, and the lemma shows that it is also a right
+multiplier).  Denote by $\pi$ the resulting $*$-homomorphism $A\rightarrow
+M(A\times\hat S)$.  This is non-degenerate, as clearly $\pi(A)(A\times\hat S)$
+is dense in $A\times\hat S$.  Similar remarks apply to $A\times S$, leading
+to a non-degenerate $*$-homomorphism $\hat\pi:A\rightarrow A\times S$.
+Similarly, for $x\in\hat S$, the map $1\otimes x \in M(A\times\hat S)$,
+leading to a non-degenerate $*$-homomorphism $\hat\theta:\hat S\rightarrow
+M(A\times\hat S)$.  We also obtain $\theta:S\rightarrow M(A\times S)$.
+
+Denote by $\Psi_{L,\rho}$ and $\Psi_{R,\lambda}$ the representations of
+$A\times\hat S$ on $A\otimes H$ defined by
+\[ \Psi_{L,\rho}\big( \pi(a)\hat\theta(x) \big)
+= \pi_L(a)(1\otimes x), \quad
+\Psi_{R,\lambda}\big( \pi(a)\hat\theta(x) \big)
+= \pi_R(a)(1\otimes UxU)
+\qquad (a\in A, x\in\hat S). \]
+[Again, chasing the definitions shows that $\Psi_{L,\rho}$ is just the
+identity representation.]
+Similarly define representations $\hat\Psi_{\lambda,L}$ and
+$\hat\Psi_{\rho,R}$ of $A\times S$ on $A\otimes H$ by
+\[ \hat\Psi_{\lambda,L}\big( \hat\pi(a) \theta(y) \big)
+= \hat\pi_\lambda(a)(1\otimes y), \quad
+\hat\Psi_{\rho,R}\big( \hat\pi(a) \theta(y) \big)
+= \hat\pi_\rho(a)(1\otimes UyU)
+\qquad (a\in A, y\in S). \]
+
+\begin{definition}(D\'efinition 7.3)
+Let $\delta_A$ be a coaction of $S$ (respectively, $\hat S$) on $A$.
+The \emph{dual coaction} of $\hat S$ (respectively, $S$) on $A\times \hat S$
+(respectively $A\times S$) by
+\[ \delta_{A\times\hat S}:A\times\hat S \rightarrow
+   M(A\times\hat S\otimes\hat S); \quad
+   \pi(a)\hat\theta(x) \mapsto (\pi(a)\otimes 1)
+   (\hat\theta\otimes\iota)\hat\delta(x)
+\qquad (a\in A, x\in\hat S). \]
+\[ \delta_{A\times S}:A\times S \rightarrow
+   M(A\times S\otimes S); \quad
+   \hat\pi(a)\theta(x) \mapsto (\hat\pi(a)\otimes 1)
+   (\theta\otimes\iota)\delta(x)
+\qquad (a\in A, x\in S). \]
+\end{definition}
+
+Notice that for $y=\hat\theta(x) = 1\otimes x$, we have that
+\[ \tilde V_{23}(y\otimes 1)\tilde V_{23}^* 
+= 1 \otimes \tilde V(x\otimes 1)\tilde V^*
+= 1\otimes\hat\delta(x), \]
+thanks to (the proof of) Proposition~\ref{lem:3}.  For $y=\pi(a) =\delta(a)
+= V^*(a\otimes 1)V$, we have that
+\[ \tilde V_{23}(y\otimes 1)\tilde V_{23}^*
+= \tilde V_{23}V_{12}^*(a\otimes 1\otimes 1)V_{12}\tilde V_{23}^*
+= V_{12}^* \tilde V_{23}(a\otimes 1\otimes 1)\tilde V_{23}^*V_{12}
+= \delta(a)\otimes 1, \]
+where here we used Lemma~\ref{lem:2}(\ref{lem:2.2}).  As such elements $y$
+generate $A\times \hat S$, it follows that $\delta_{A\times\hat S}(\cdot)
+= \tilde V_{23}(\cdot\otimes 1)\tilde V_{23}^*$, and so
+$\delta_{A\times\hat S}$ is well-defined and a $*$-homomorphism.
+Similar remarks apply to $\delta_{A\times S}$.
+
+
+
+
+
+\appendix
+\section{Useful results}
+
+The following is an assortment of results which are used implicitly by
+Baaj and Skandalis.  We prove (sketch) proofs to aid the reader.
+
+\begin{lemma}\label{lem:ap1}
+Let $A$ be a C$^*$-algebra.  Then $A^* = \{ a\mu : a\in A, \mu\in A^* \}
+= \{ \mu a : a\in A, \mu\in A^* \}$.  Let $A$ act faithfully on a Hilbert
+space $H$.  Then $\mc B(H)_* = \{ a\omega : a\in A, \omega\in\mc B(H)_* \}
+= \{ \omega a : a\in A, \omega\in\mc B(H)_* \}$.
+\end{lemma}
+\begin{proof}
+We firstly claim that $\{ a\mu : a\in A,\mu\in A^* \}$ is linearly dense in
+$A^*$-- this follows by a GNS argument, see \cite[Appendix~A]{mnw}.
+Then the Cohen Factorisation Theorem shows that actually
+$A^* = \{ a\mu : a\in A, \mu\in A^* \} = \{ \mu a : a\in A, \mu\in A^* \}$.
+Indeed, given $\lambda\in A^*$ and $\epsilon>0$, we can find $a\in A$ with
+$\|a\|\leq 1$ and $\mu\in A^*$ with $a\mu = \lambda$ and
+$\|\mu-\lambda\|<\epsilon$.
+
+That $A$ acts non-degenerately on $H$ means, again using the Cohen Factorisation
+Theorem, that $H = \{ a(\xi) : a\in A, \xi\in H \}$.  It follows that
+$\{ a\omega : a\in A, \omega\in\mc B(H)_* \}$ is linearly dense in $\mc B(H)_*$,
+so the result again follows by Cohen Factorisation.
+\end{proof}
+
+\begin{thebibliography}{99}
+
+\bibitem{r1}
+
+\bibitem{r2}
+
+\bibitem{r6}
+
+\bibitem{r7}
+
+\bibitem{r11}
+
+\bibitem{r13}
+
+\bibitem{r17}
+
+\bibitem{r23}
+
+\bibitem{r30}
+
+\bibitem{r33}
+
+\bibitem{r38}
+
+\bibitem{r50} Ref 50
+
+\bibitem{r54} Ref 54
+
+\medskip
+\hspace{-4ex}The following are extra bibliographic entries not in the original paper.
+
+\bibitem[lan]{lance} Lance's Hilbert C$^*$-module book.
+
+\bibitem[mnw]{mnw} Masuda et al. ``$C^*$-algebraic framework for Quantum Groups''.
+
+\bibitem[wor]{woro} Woronowicz's Compact Quantum Groups paper.
+
+\end{thebibliography}
+
+\end{document}
+
+
+
