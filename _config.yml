@@ -1,0 +1,29 @@
+# Dependencies
+markdown:         redcarpet
+#markdown: kramdown
+#highlighter:      pygments
+highlighter:      rouge
+
+#kramdown:
+#  input: GFM
+
+# Permalinks
+#permalink:        pretty
+permalink: none
+relative_permalinks: true
+
+# Setup
+title:            MD
+tagline:          'A blog'
+description:      'Blog of Matthew Daws'
+url:              http://MatthewDaws.github.io
+baseurl:          /
+
+author:
+  name:           'Matthew Daws'
+  url:            http://MatthewDaws.github.io
+
+paginate:         5
+
+github:
+  repo:           https://github.com/MatthewDaws
