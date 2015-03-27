@@ -3,10 +3,10 @@ safe: true
 lsi: false
 
 # Dependencies
-markdown:         redcarpet
+#markdown:         redcarpet
 #markdown: kramdown
 #highlighter:      pygments
-highlighter:      rouge
+#highlighter:      rouge
 
 #kramdown:
 #  input: GFM
