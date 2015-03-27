@@ -27,3 +27,12 @@ You can use \\(\LaTeX \\) with redcarpet, but remember to markup inline as `\\(\
 
 * Load the MathJAX Javascript renderer.  You can do this by inserting the following into `_includes/head.html`:
 
+{% highlight html %}
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+{% endhighlight %}
+
+* Unfortunately, it seems that redcarpet really wants to use pygments with code blocks.  For now we'll do it manually with the {% raw %} `{% highlight html %} ... {% endhighlight %}` {% endraw %} form.
+* kramdown works as well, but doesn't support code highlighting, so you don't win much.
+* Markdown: [GitHub cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
