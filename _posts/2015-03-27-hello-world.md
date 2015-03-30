@@ -9,16 +9,18 @@ I had a need to update and move my old academic website so thought I would take 
 
 This blog is built using [Jekyll]():
 
+<!--more-->
+
 * How to use Jekyll with pages: [Jekyll with pages](https://help.github.com/articles/using-jekyll-with-pages/)
 * Some Jekyll documentation to the same effect: [Jekyll docs](http://jekyllrb.com/docs/github-pages/)
 
-Jekyll is what you might call a "template engine".  If you have the sort of lack of time and
-artistic skills which I do, you'll need to find a template:
+Jekyll is what you might call a "template engine".  If you have the sort of lack of time and artistic skills which I do, you'll need to find a template:
 
 * Useful article: [Smashing Magazine](http://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/)
 * GitHub page associated with this: [GitHub site](https://github.com/barryclark/jekyll-now)
 * Template this site uses: [Hyde](https://github.com/poole/hyde)
 * Markdown: [GitHub cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+* Visual Design: [VisualMess](http://www.visualmess.com/)
 
 You can use \\(\LaTeX \\), but remember to markup inline as `\\(\frac{a+b}{c}\\)` for example, and:
 

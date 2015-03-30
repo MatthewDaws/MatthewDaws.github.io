@@ -100,7 +100,8 @@ a.sidebar-nav-item:focus {
 }
 
 .sidebar-icon {
-  padding: 10px 10px 3px 0px;
+  /*padding: 10px 10px 3px 0px;*/
+  padding: 0px;
 }
 a.sidebar-icon:hover,
 a.sidebar-icon:focus {
