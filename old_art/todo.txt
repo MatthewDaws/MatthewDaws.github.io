@@ -1,1 +1,0 @@
-Experiment with coloured_discs and nabla again in luxrender.
