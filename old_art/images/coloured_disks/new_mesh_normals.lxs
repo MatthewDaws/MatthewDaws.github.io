@@ -14,7 +14,7 @@ Film "fleximage"
    "float linear_exposure" [0.05]
    "string filename" ["new_mesh_normals"]
    "integer writeinterval" [600]
-   "integer haltspp" [5000]
+   "integer haltspp" [10000]
    "bool write_resume_flm" ["true"]
 
 #PixelFilter "mitchell" "float xwidth" [2] "float ywidth" [2]

@@ -14,7 +14,7 @@ Film "fleximage"
    "float linear_exposure" [0.05]
    "string filename" ["nabla2"]
    "integer writeinterval" [600]
-   "integer haltspp" [1000]
+   "integer haltspp" [2500]
    "bool write_resume_flm" ["true"]
 
 #PixelFilter "mitchell" "float xwidth" [2] "float ywidth" [2]
