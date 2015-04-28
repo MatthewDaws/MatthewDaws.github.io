@@ -7,6 +7,8 @@ title: LuxRender of my profile picture
 
 As a change, here is a puzzle I never quite got to the bottom of a few years ago.  Just some flattened disks arranged in a circle and then rendered using LuxRender.  I rather like the effect.  There are two ways to make a cylinder shape: either use the inbuilt primitive objects (so a cylinder with disks top and bottom) or export a cylinder from Blender as a mesh.  Actually, I rolled my own using a python script:
 
+<!--more-->
+
 ![Flat faces]({{ baseurl }}/public/new_mesh.jpg)
 
 Ah, yes, all the faces are flat which isn't what we want.  If we specify normals, then these are interpolated across the fact of each triangle, as we want.  However, then we get a difference between using a mesh, and using intrinsics.
