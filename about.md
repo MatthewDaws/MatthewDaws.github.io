@@ -3,7 +3,9 @@ layout: page
 title: About
 ---
 
-I'm a Mathematician, worked at the University of Leeds as a lecturer, now looking for opportunities in industry / technology.
+Java Developer in Leeds.
+
+Until mid-2015 I was an academia Mathematician, and using the [Mathematical Work](mathematics/index.html) link below you can see some things of interest, Mathematically speaking.
 
 * Some stuff on [GitHub](https://github.com/MatthewDaws).
 * Email: matthew.daws@gmail.com
