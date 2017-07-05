@@ -28,5 +28,5 @@ Another new task: get going with some GUI programming!
 As culled from Leeds University Library:
 
 - [User interface design : a software engineering perspective](http://lib.leeds.ac.uk/record=b2465501~S5)  2005.  Sounds interesting though.
-- [Designing the user interface : strategies for effective human-computer interaction](http://lib.leeds.ac.uk/record=b3181441~S5)  2010.  Seems like a bit more of a textbook.
+- [Designing the user interface : strategies for effective human-computer interaction](http://lib.leeds.ac.uk/record=b3181441~S5)  2010.  Seems like a bit more of a textbook.  Having read, it does indeed seem to be a textbook, and a somewhat confused one I found.  Each chapter seemed rather self-contained, without much linking them, and without much order.  This is a fast-changing area of technology (think: mobile phones, or single page web apps) and the book felt somewhat out of date, with the odd update bolted on.  Unfortunately, it did little of what I was hoping for: practical ideas, from the development side, of how to design and write GUI code.
 - [Usability engineering](http://lib.leeds.ac.uk/record=b2024752~S5)  2000.  Picked out after looking at books on the shelf.
