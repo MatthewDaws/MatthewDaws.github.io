@@ -21,6 +21,7 @@ tagline:          'A blog'
 description:      'Blog of Matthew Daws'
 url:              http://MatthewDaws.github.io
 baseurl:          /
+#repository:       MatthewDaws/matthewdaws.github.io
 
 author:
   name:           'Matthew Daws'
