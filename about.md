@@ -3,20 +3,26 @@ layout: page
 title: About
 ---
 
-Python developer, part-time statistician, research fellow at [School of Geography, University of Leeds](http://www.geog.leeds.ac.uk).  The current project involves GIS, crime detection algorithms, open source development.  See [QuantCrim on GitHub](https://github.com/QuantCrimAtLeeds).
+Lecture in Mathematics at [UCLAN](www.uclan.ac.uk).  A currently in need of updating [summary of my mathematical work](mathematics/index.html).
 
-Previously, I worked as a Java developer (Spring, Maven, Jenkins, TDD, Tomcat, MongoDB, web-scraping, etc.) at [QuantBet LLP, Leeds](http://www.quantbet.com).  Before this, I was academia Mathematician, and using the [Mathematical Work](mathematics/index.html) link below you can see some things of interest, Mathematically speaking.
+Previously:
 
-* Some stuff on [GitHub](https://github.com/MatthewDaws).
-* Email: matthew.daws@gmail.com
+- Python developer, part-time statistician, research fellow at [School of Geography, University of Leeds](http://www.geog.leeds.ac.uk).  See [QuantCrim on GitHub](https://github.com/QuantCrimAtLeeds), and [SEPP](https://github.com/MatthewDaws/SEPP/).
+- Java developer (Spring, Maven, Jenkins, TDD, Tomcat, MongoDB, web-scraping, etc.) at [QuantBet LLP, Leeds](http://www.quantbet.com).
+- Lecturer in Mathematics at the [University of Leeds](www.maths.leeds.ac.uk).
 
-## Computational past-times
+### Contacts
+
+* My [GitHub](https://github.com/MatthewDaws) profile.
+* Email: mdaws@uclan.ac.uk
+
+### Computational past-times
 
    - ![Project Euler profile](http://projecteuler.net/profile/MattDaws.png) [Project Euler site](https://projecteuler.net/)  A lot of fun for a Mathematician interested in programming.  But a time sink...
 
    - Some [Google Code Jam solutions](https://github.com/MatthewDaws/CodeJam) on GitHub; I was too slow in 2015; and didn't compete beyond the prelim round in 2017.
 
-## Template
+### Template
 
 These GitHub hosted pages are:
 
