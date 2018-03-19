@@ -12,8 +12,8 @@ An aide-memoire for myself:
         \pagestyle{empty}
 
         \newcounter{pdfpagenumber}
-        \forloop{pdfpagenumber}{1}{\value{pdfpagenumber} < 115}{%
-        \raisebox{-225ex}[0ex][0ex]{\makebox[90ex]{\includegraphics[width=12in,page=\arabic{pdfpagenumber}]{mtms.pdf}}}%
+        \forloop{pdfpagenumber}{1}{\value{pdfpagenumber} < 115}&#123;%
+        \raisebox{-225ex}[0ex][0ex]{\makebox[90ex]{\includegraphics[width=12in,page=\arabic{pdfpagenumber}]{mtms.pdf}}&#125;%
         \newpage%
         }
 
