@@ -1,7 +1,3 @@
-- 5015 materials
-- CGQ notes
-- Produit notes
-- Galois
 
 
 - Pictures
