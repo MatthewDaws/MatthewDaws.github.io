@@ -1,0 +1,8 @@
+"Length for C*-algebras: an introduction"
+
+Synopsis:  Gilles Pisier introduced the concept of length for general operator
+algebras, and showed that an operator algebra A has finite length if, and only
+if, there is a positive solution to the similarity problem for the algebra A.
+This talk will concentrate on length for C*-algebras and von Neumann algebras
+with the basic definitions, some examples and an attempt to explain the
+intuition behind the idea. 

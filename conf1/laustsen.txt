@@ -1,0 +1,10 @@
+Niels Laustsen, University of Lancaster
+
+$K$-theory for Banach sequence algebras
+
+Let $\mathcal{A}$ be a Banach algebra which contains the algebra~$c_{00}$ of
+finitely supported, complex-valued sequences as a dense subalgebra, and suppose
+that the canonical basis for $c_{00}$ is a Schauder basis for~$\mathcal{A}$.
+Then $K_0(\mathcal{A})$ is isomorphic to the additive group
+$\mathbb{Z}^{<\infty}$ of finitely supported, integer-valued sequences, while
+$K_1(\mathcal{A}) = \{0\}$.
