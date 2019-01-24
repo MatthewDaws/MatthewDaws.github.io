@@ -1,0 +1,21 @@
+body {
+    padding-top: 54px;
+  }
+
+a {
+  color: #1000c0;
+}
+
+.fixed-ratio-resize { /* basic responsive img */
+	max-width: 100%;
+	height: auto;
+}
+
+.column-fixed-space {
+  padding-top: 80px;
+}
+@media (max-width: 979px) {
+  .column-fixed-space {
+    padding-top: 0px;
+  }
+}

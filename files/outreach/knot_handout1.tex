@@ -1,0 +1,102 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=2cm,nohead]{geometry}
+\usepackage{pstricks}
+\usepackage{graphics}
+\pagestyle{empty}
+
+\begin{document}
+
+\Large Make the following knots from pieces of wire.  Are any of them the same?
+
+\psset{linewidth=4mm}
+
+\scalebox{0.95}{
+\begin{pspicture}(8,8)
+  %\psgrid[subgriddiv=1, griddots=6, gridlabels=7pt](0,0)(8,8)
+  \psccurve(0.5,4)(3,0.5)(5,2)(3,4.5)(2.5,6)(4,7.5)(5.5,6)(5,4.5)(3,2)(5,0.5)(7.5,4)(4,6)
+  \psccurve[linewidth=2mm,linecolor=white](0.5,4)(3,0.5)(5,2)(3,4.5)(2.5,6)(4,7.5)(5.5,6)(5,4.5)(3,2)(5,0.5)(7.5,4)(4,6)
+  \psecurve(0.5,4)(3,0.5)(5,2)(2.5,6)
+  \psecurve[linewidth=2mm,linecolor=white](0.5,4)(3,0.5)(5,2)(2.5,6)
+  \psecurve(5.5,6)(5,4.5)(3,2)(5,0.5)
+  \psecurve[linewidth=2mm,linecolor=white](5.5,6)(5,4.5)(3,2)(5,0.5)
+  \psecurve(5,2)(3,4.5)(2.5,6)(4,7.5)
+  \psecurve[linewidth=2mm,linecolor=white](5,2)(3,4.5)(2.5,6)(4,7.5)
+  \psecurve(5,0.5)(7.5,4)(4,6)(0.5,4)
+  \psecurve[linewidth=2mm,linecolor=white](5,0.5)(7.5,4)(4,6)(0.5,4)
+\end{pspicture}
+\begin{pspicture}(8,8)
+  \psccurve(0.5,4)(3,0.5)(5,2)(3,4.5)(2.5,6)(4,7.5)(5.5,6)(5,4.5)(3,2)(5,0.5)(7.5,4)(4,6)
+  \psccurve[linewidth=2mm,linecolor=white](0.5,4)(3,0.5)(5,2)(3,4.5)(2.5,6)(4,7.5)(5.5,6)(5,4.5)(3,2)(5,0.5)(7.5,4)(4,6)
+  \psecurve(5,4.5)(3,2)(5,0.5)(7.5,4)
+  \psecurve[linewidth=2mm,linecolor=white](5,4.5)(3,2)(5,0.5)(7.5,4)
+  \psecurve(3,0.5)(5,2)(3,4.5)(2.5,6)
+  \psecurve[linewidth=2mm,linecolor=white](3,0.5)(5,2)(3,4.5)(2.5,6)
+  \psecurve(4,7.5)(5.5,6)(5,4.5)(3,2)
+  \psecurve[linewidth=2mm,linecolor=white](4,7.5)(5.5,6)(5,4.5)(3,2)
+  \psecurve(7.5,4)(4,6)(0.5,4)(3,0.5)
+  \psecurve[linewidth=2mm,linecolor=white](7.5,4)(4,6)(0.5,4)(3,0.5)
+\end{pspicture}}
+
+\scalebox{0.85}{\begin{pspicture}(8,8)
+  \psccurve(0.5,2.5)(2,0.5)(4.5,2.5)(5.5,5.5)(4,7.5)(2.5,5.5)(3.5,2.5)(6,0.5)(7.5,2.5)(4,5)
+  \psccurve[linewidth=2mm,linecolor=white](0.5,2.5)(2,0.5)(4.5,2.5)(5.5,5.5)(4,7.5)(2.5,5.5)(3.5,2.5)(6,0.5)(7.5,2.5)(4,5)
+  \psecurve(0.5,2.5)(2,0.5)(4.5,2.5)(5.5,5.5)
+  \psecurve[linewidth=2mm,linecolor=white](0.5,2.5)(2,0.5)(4.5,2.5)(5.5,5.5)
+  \psecurve(4,7.5)(2.5,5.5)(3.5,2.5)(6,0.5)
+  \psecurve[linewidth=2mm,linecolor=white](4,7.5)(2.5,5.5)(3.5,2.5)(6,0.5)
+  \psecurve(6,0.5)(7.5,2.5)(4,5)(0.5,2.5)
+  \psecurve[linewidth=2mm,linecolor=white](6,0.5)(7.5,2.5)(4,5)(0.5,2.5)
+\end{pspicture}
+\qquad\qquad
+\begin{pspicture}(8,8)
+  \psccurve(0.5,2.5)(2,0.5)(4.5,2.5)(5.5,5.5)(4,7.5)(2.5,5.5)(3.5,2.5)(6,0.5)(7.5,2.5)(4,5)
+  \psccurve[linewidth=2mm,linecolor=white](0.5,2.5)(2,0.5)(4.5,2.5)(5.5,5.5)(4,7.5)(2.5,5.5)(3.5,2.5)(6,0.5)(7.5,2.5)(4,5)
+  \psecurve(2,0.5)(4.5,2.5)(5.5,5.5)(4,7.5)
+  \psecurve[linewidth=2mm,linecolor=white](2,0.5)(4.5,2.5)(5.5,5.5)(4,7.5)
+  \psecurve(7.5,2.5)(4,5)(0.5,2.5)(2,0.5)
+  \psecurve[linewidth=2mm,linecolor=white](7.5,2.5)(4,5)(0.5,2.5)(2,0.5)
+  \psecurve(2.5,5.5)(3.5,2.5)(6,0.5)(7.5,2.5)
+  \psecurve[linewidth=2mm,linecolor=white](2.5,5.5)(3.5,2.5)(6,0.5)(7.5,2.5)
+\end{pspicture}}
+
+\begin{pspicture}(10,10)
+  %\psgrid[subgriddiv=1, griddots=10, gridlabels=7pt](0,0)(10,10)
+  \psccurve(0.5,5)(2,3.5)(4,4.5)(7,4)(9.5,4.5)%
+  (7,5.5)(3,6)(2,7.5)(4,9.5)(5.5,8)(4.8,7)(4,8.5)(6,8.5)(8,6)(8,4.5)(8,3)(4,1.5)(2,1.5)%
+  (0.5,3)(2,5)(4,3)(6,5)(6.5,7)(4.5,8)(3,7)
+  \psccurve[linewidth=2mm,linecolor=white](0.5,5)(2,3.5)(4,4.5)(7,4)(9.5,4.5)%
+  (7,5.5)(3,6)(2,7.5)(4,9.5)(5.5,8)(4.8,7)(4,8.5)(6,8.5)(8,6)(8,4.5)(8,3)(4,1.5)(2,1.5)%
+  (0.5,3)(2,5)(4,3)(6,5)(6.5,7)(4.5,8)(3,7)
+  \psecurve(2,1.5)(0.5,3)(2,5)(4,3)
+  \psecurve[linewidth=2mm,linecolor=white](2,1.5)(0.5,3)(2,5)(4,3)
+  \psecurve(0.5,5)(2,3.5)(4,4.5)(7,4)
+  \psecurve[linewidth=2mm,linecolor=white](0.5,5)(2,3.5)(4,4.5)(7,4)
+  \psecurve(2,5)(4,3)(6,5)(6.5,7)(4.5,8)(3,7)
+  \psecurve[linewidth=2mm,linecolor=white](2,5)(4,3)(6,5)(6.5,7)(4.5,8)(3,7)
+  \psecurve(4,4.5)(7,4)(9.5,4.5)(7,5.5)
+  \psecurve[linewidth=2mm,linecolor=white](4,4.5)(7,4)(9.5,4.5)(7,5.5)
+  \psecurve(6,8.5)(8,6)(8,4.5)(8,3)
+  \psecurve[linewidth=2mm,linecolor=white](6,8.5)(8,6)(8,4.5)(8,3)
+  \psecurve(5.5,8)(4.8,7)(4,8.5)(6,8.5)
+  \psecurve[linewidth=2mm,linecolor=white](5.5,8)(4.8,7)(4,8.5)(6,8.5)
+  \psecurve(2,7.5)(4,9.5)(5.5,8)(4.8,7)
+  \psecurve[linewidth=2mm,linecolor=white](2,7.5)(4,9.5)(5.5,8)(4.8,7)
+  \psecurve(4.5,8)(3,7)(0.5,5)(2,3.5)
+  \psecurve[linewidth=2mm,linecolor=white](4.5,8)(3,7)(0.5,5)(2,3.5)
+\end{pspicture}
+\qquad\raisebox{25ex}[0ex][0ex]{\parbox{10ex}{
+\scalebox{0.75}{\begin{pspicture}(8,7)
+  \psccurve(3,0.5)(5.5,3)(3,5.5)(0.5,3)
+  \psccurve[linewidth=2mm,linecolor=white](3,0.5)(5.5,3)(3,5.5)(0.5,3)
+\end{pspicture}}
+\scalebox{0.75}{\begin{pspicture}(8,6)
+  \psccurve(3,0.5)(5.5,3)(4,5.5)(2,4)(3,3.5)(4,4.5)(2,5.5)(0.5,3)
+  \psccurve[linewidth=2mm,linecolor=white](3,0.5)(5.5,3)(4,5.5)(2,4)(3,3.5)(4,4.5)(2,5.5)(0.5,3)
+  \psecurve(5.5,3)(4,5.5)(2,4)(3,3.5)
+  \psecurve[linewidth=2mm,linecolor=white](5.5,3)(4,5.5)(2,4)(3,3.5)
+\end{pspicture}}}}
+
+See \texttt{http://www.youtube.com/watch?v=k9ub2mNyd9M}
+
+\end{document}

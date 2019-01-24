@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Computation</title>
+
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/site.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="">Computation<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="blog/index.html">Blog</a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="my-5" id="comp">Computation</h1>
+
+    <p>I have had an extended dalliance with Computer Science, probably making the mistake of confusing aspects of
+        <a href="https://en.wikipedia.org/wiki/Computer_science">Computer Science</a> with a career in <a href="https://en.wikipedia.org/wiki/Information_technology">IT</a>.
+    I worked for a time as a Java Developer for a high frequency sports betting company, on the IT side of things (data acquisition, building APIs for quants to
+    interact with, and so forth) rather than the quant side.  What <a href="https://en.wikipedia.org/wiki/Java_(programming_language)">Java</a> I learnt I have probably now forgotten.</p>
+
+    
+    <h1 class="my-5" id="ds">Data science</h1>
+
+    <p>I then transferred back to academia, employed as a scientific programmer in the <a href="https://environment.leeds.ac.uk/geography">School of
+    Geography, University of Leeds</a>.  The <a href="https://github.com/QuantCrimAtLeeds/PredictCode">project</a> was to look at (short time frame, spatial, aspects of)
+    <a href="https://en.wikipedia.org/wiki/Predictive_policing">Predictive Policing</a>, developing a Python library and GUI application which would provide an open
+    source implementation of various published algorithms.  Some thoughts from this project:</p>
+
+    <ul>
+        <li>I was keen to take ideas from industry into an academic setting: specifically, using vaguely formal software development workflows.
+            For this project, this meant working with source control daily, instead of just as an "archive" of work performed mainly offline (which seems
+            to be how many academics use GitHub), and using continuous integration tools.</li>
+        <li>I am a convert to <a href="https://en.wikipedia.org/wiki/Test-driven_development">Test Driven Development</a> which I mainly use as
+        a design tool.  I write tests first, which helps me to design APIs from a user perspective, and then write code motivated by those tests.
+        In particular, it was for me a great way to break myself of <a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> based
+        Python prototyping.  Of course, having the tests there also makes for great, evolving, documentation as to the expected use of the API, and running
+        the tests in a CI manner does indeed catch many (silly) mistakes.</li>
+        <li>I organically started writing Python code using a mixture of formally developing a Python package, while at the same time interacting with the code
+        using the package in Jupyter notebooks.  This seems to me to be an excellent way of building medium sized data science projects.  I religiously wrote
+        PyDocs, and found that these self-guides to my code, interactively accessible in a Jupyter notebook, greatly sped up my work.</li>
+        <li>In particular, I essentially stopped work on the GUI side of the project, deciding that Jupyter notebooks, backed by the library I
+            had developed, provided a far more flexible, and far more reproducible (see below), environment.</li>
+    </ul>
+
+    <h3>Reproducible Data Science</h3>
+
+    <p>Towards the end of the project, I became very interested (slightly obsessed) with <a href="https://en.wikipedia.org/wiki/Reproducibility#Reproducible_research">reproducible
+    Research</a> especially in the &quot;computational sciences&quot;.  I firmly believe in the <a href="https://reproducibleresearch.net/"">Manifesto here</a>.  Writing a GUI doesn't
+    really fit this manifesto: what the GUI is doing is too opaque, and documenting exactly the steps used and settings chosen is too hard.  Working in a Jupyter notebook does
+    fit the bill: the code is there to see, you can add prose and Mathematical discussion in situ, and the whole notebook can be re-run by an interested party.</p>
+
+    <p>It strikes me (although I am an outsider looking in) that the &quot;harder&quot; sciences (e.g. computational astronomy) are much further along in this than
+        the social science area I was working in.  I did become somewhat discouraged by reading all too many papers which made strong claims about e.g. the performance of algorithms,
+        but for which code and data were simply not available (even through asking the authors).  In my bleaker moments, I do wonder in what sense this is &quot;science&quot;
+        as the claims being made simply cannot be (easily, or perhaps even with a large amount of work) reproduced by other researchers (nevermind end users).</p>
+
+    <h3>The future</h3>
+
+    <p>I am now working again as a Pure Mathematician, and while I remain very interested in software development, I have little enough time
+        for my mathematics research.  The PI of the project I worked on is on extended leave from his position, and so the project is somewhat
+        moribund.  However, I remain interested, and would welcome collaboration (taking account of my time commitments).</p>
+
+    <h2>Outputs</h2>
+
+    <ul>
+        <li>The primary repo is on GitHub: <a href="https://github.com/QuantCrimAtLeeds/PredictCode">PredictCode</a>.</li>
+    </ul>
+
+    <p>I wrote 3 academic papers, though all remain currently unpublished (see comments above re: lack of time):</p>
+
+    <ul>
+        <li><a href="https://github.com/MatthewDaws/SEPP">Self-excited point process models of crime</a>.  A mathematical explanation of the algorithms
+        which (are believed) to underpin the PredPol system, together with some case studies on openly available crime data.</li>
+        <li><a href="https://github.com/MatthewDaws/OpenCrimeData">Open crime data</a> which provides some standardised Python code to work with
+          some openly available crime data, together with algorithms to randomly modify the data to provide more realistic data.</li>
+        <li><a href="https://github.com/MatthewDaws/PredictionScoring">Prediction scoring</a>.  Some attempt to offer different ways to
+        assess the quality of short term spatial predictions of crime: trying to move beyond the "hit rate".</li>
+    </ul>
+
+    <p>I gave a talk on the &quot;Prediction scoring&quot; work, together with an introduction to Predictive Policing, and some polemics about
+        reproducible research: <a href="files/talks/lida2017.pdf">Talk to Leeds Institute For Data Science</a>.</p>
+
+
+    <h1 class="my-5" id="soft">Software</h1>
+
+    <p>Some software, in order of quality.</p>
+
+    <ul>
+        <li><a href="https://github.com/MatthewDaws/TileMapBase">TileMapBase</a>.
+            
+            <div class="card my-3">
+            <quote class="card-body">
+            Uses OpenStreetMap tiles, or other tile servers, to produce "basemaps" for use with matplotlib. Uses a SQLite database to cache the tiles, so you can experiment with map production without re-downloading the same tiles. Supports Open Data tiles from the UK Ordnance Survey.
+            </quote>
+            </div>
+
+            <p>For bugs, open an issue on GitHub, and I will endeavour to fix.</p>
+
+            <p>The aim was to produce something offering something like <a href="https://leafletjs.com/">Leaflet</a> but designed for off-line work, to produce high-quality figures
+            for inclusion in documents, for example.</p>
+        </li>
+
+        <li><a href="https://github.com/MatthewDaws/PDFImage">PDFImage</a>.  A simple, pure python library, for reading the raw contents of PDF files and writing PDF files composed of images, e.g. from scanned images.
+            Supports PNG images natively, and JBIG2 black and white compression with an external program.  I use for programmatically producing high-quality PDF files from hand-written scans etc.
+        </li>
+
+        <li><a href="https://github.com/MatthewDaws/TileWindow">TileWindow</a>.  Uses <code>tkinter</code> to display large or infinite images built out of tiles.  Originally designed for
+            use with the Python GUI I built (as above) to visualise crime events on top of a basemap, though this functionality was never added to the GUI.  Works, but is not complete.
+        </li>
+    </ul>
+
+
+    <h1 class="my-5" id="pass">Pastimes</h1>
+
+    <p>Back when I was (temporarily) losing interest in Mathematics and coding more, I spent some time:</p>
+
+    <ul>
+        <li>Solving <a href="https://projecteuler.net/">Project Euler</a> problems.  A lot of fun for a Mathematician interested in programming.
+            But a time sink, and I haven't looked at these for some time.
+            <br/>
+            <img class="my-2" src="http://projecteuler.net/profile/MattDaws.png" alt="Project Euler profile">
+        </li>
+        <li>Some <a href="https://github.com/MatthewDaws/CodeJam">Google Code Jam solutions on GitHub</a>; I was too slow in 2015; and didn’t compete beyond the prelim round in 2017.
+        A lot of fun, but to be competitive, I at least need some practice, and I just don't have the time (and often the competition times clash with &quot;real-life&quot;).</li>
+    </ul>
+
+    </div>
+
+
+    <div class="col-md-4">
+            <div class="sticky-top column-fixed-space">
+                <nav class="card nav flex-column">
+                    <a class="nav-link" id="comp_button" href="#comp">Computation</a>
+                    <a class="nav-link" id="ds_button" href="#ds">Data Science</a>
+                    <a class="nav-link" id="soft_button" href="#soft">Software</a>
+                    <a class="nav-link" id="pass_button" href="#pass">Pastimes</a>
+                </nav>
+            </div>
+    </div>
+
+    </div>
+    </div>
+
+    <!--<script src="js/jquery-3.3.1.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!--<script src="js/bootstrap.min.js"></script>-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script>
+        $(".nav-link").each(function(index){
+            var target = this.getAttribute("href");
+            if (this.getAttribute("id") && target) {
+                $(this).click(function(){
+                    var el = $("html, body");
+                    el.stop();
+                    el.animate({scrollTop: $(target).offset().top-70}, 700);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
