@@ -1,5 +1,1 @@
-# Ignore docs files
-_site
-Gemfile*
-make.bat
-_drafts
+.vscode
