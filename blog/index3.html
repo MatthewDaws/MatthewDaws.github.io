@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/blog.css">
 
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="../favicon.ico">
 </head>
 
 <body>
@@ -55,6 +55,30 @@
     <h1 class="my-4">Blog of Matthew Daws</h1>
 
     <div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">RAII in C#/Java?</h2>
+        <p>More a note to a future self than aything else...  In C++ we have the notion of <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">Resource Acquisition Is Initialization</a> which I think I have internalised as the following:</p>
+<blockquote class="card-body">
+<p>Any "resource" (memory, file, handle etc.) should be "owned" by an object.  An object's constructor should allocate the resource, and the destructor should free the resource (with some appropriate choices then made for what copy/move constructors/assignments should do).  By use of C++11 <code>unique_ptr</code> and <code>shared_ptr</code> this model can be extended to pointers.</p>
+</blockquote>
+
+        <a href="2015-06-30-RAII-In-Csharp.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">30th June 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">BF interpreter in C++</h2>
+        <p>BF is an <a href="https://en.wikipedia.org/wiki/Brainfuck">amusingly named, impractical, Turing complete</a> programming language.  It is very like an actual Turing machine: you have an infinite (originally, one-sided, 30K long) array of (8-bit) values, with commands to increase/decrease (+/-) the cell, or move left/right (</>).  Input (,) and output (.) are handled.  Loops are given by [] and implement a "while cell is non-zero" loop.  So a trivial mapping to C is possible (see the Wikipedia article).</p>
+<p>I thought it would be fun to give an object oriented implementation, for which I used C++ for a change.  My implementation decouples the parsing of the programme from running it.  The parse class reads the input in a single pass, using a stack for dealing with nested loops.  It translates the input into a list of commands, represented by an abstract base class with an <code>execute</code> method, overloaded for the various different commands.  This is the "command" pattern (closely related to the "strategy" pattern).</p>
+
+        <a href="2015-06-23-BF.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">23th June 2015</div>
+</div>
+
+<div class="card mb-4">
     <div class="card-body">
         <h2 class="card-title">CodeJam 2015 Round 2</h2>
         <p>Round 2 came and went (and Round 3 and the "distributed" round).  As an effort to practice with C#, I solved these problems in C# (definitely slower than using Python, and actually, the end running time is not that much quicker, for these sort of algorithmic / numerical problems).</p>
@@ -122,32 +146,6 @@
         <a href="2015-05-30-ising.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">30th May 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Removing outliers</h2>
-        <p>So, linear regression isn't so exciting.  What about removing outliers?  I do find this, just a little, magical:</p>
-<p><img class="fixed-ratio-resize" alt="Outliers" src="./public/3.png"></p>
-<p>We define a model where a data point \( y_i \) can either be from a normal linear regression model, or just a random (normally distributed) number.  We then build into our model indicators \( o_i \in \{0,1\} \) to indicate if this is an outlier or not.  Then sample the posterior distribution with an MCMC sampler, integrate out the \(o_i\) and you have your line of best fit.  Fix \(i\) and integerate out everything but \(o_i\) and you get an estimate of probability the point is an outlier.  The above plot shows those points estimated above 90%.</p>
-<p>Rest is in an <a href="http://nbviewer.ipython.org/github/MatthewDaws/Python_bits/blob/master/monte_carlo/Outliers.ipynb">Ipython notebook</a> on GitHub.  This also gave me a chance to play with my own modified Gibbs sampler, which works nicely, if I say so myself.</p>
-        <a href="2015-05-28-outliers.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">28th May 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Regression from a (simple) Bayesian perspective</h2>
-        <p>How might we tackle simple regression from a Bayesian perpsective?  Our model will be that we are given points \( (x_i)_{i=1}^n \) (which we assume we <em>know</em>, at least to a very high accuracy) and dependent points \( y_i^{re} = \alpha + \beta x_i \), but we only observe \( y_i \) where \( y_i = y_i^{re} + e_i \) where the \( e_i \) are our "uncertainties" (I like the line: "if they were errors, we would have corrected them!", see footnote 10 of <a href="http://arxiv.org/abs/1008.4686">arXiv:1008.4686</a>) usually modelled as iid \( N(0,\sigma^2) \).  The likelihood is then</p>
-<p>\[ f(y|\alpha,\beta,\sigma) = \prod (2\pi\sigma^2)^{-1/2}
-\exp\Big( -\frac{1}{2\sigma^2} (y_i - (\alpha + \beta x_i))^2 \Big) \]</p>
-<p>Finding the MLE leads to <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">Least Squares Regression</a>.  A simple Bayesian approach would be to stick some prior on $\alpha, \beta, \sigma$, but of course, this raises the question of <em>how</em> to do this!</p>
-<p>Anyway, another <a href="http://nbviewer.ipython.org/github/MatthewDaws/Python_bits/blob/master/monte_carlo/Bayesian%20Statistics.ipynb">Ipython notebook</a> which develops some of the basic maths, and then uses <a href="http://dan.iel.fm/emcee/current/">emcee</a> and the <a href="https://github.com/dfm/triangle.py">Triangle Plot</a> to make some simulations and draw some plots of posterior distributions.</p>
-
-        <a href="2015-05-27-regression.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">27th May 2015</div>
 </div>
 
 
