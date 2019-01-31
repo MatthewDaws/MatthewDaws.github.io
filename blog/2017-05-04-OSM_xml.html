@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Open Street Map XML data</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Open Street Map XML data</h1>
+    
+    <p>Posted on 4th May 2017</p>
+    <hr>
+
+    <p>I want to process large amounts of XML data from Open Street Map (OSM).  I.e. that obtained from <a href="http://download.geofabrik.de/">GeoFrabrik</a> or <a href="http://wiki.openstreetmap.org/wiki/Planet.osm">OSM.Planet</a>.  For smaller snapshots, do look at <a href="https://github.com/gboeing/osmnx">OSMnx</a>.</p>
+<p>My pure-Python project to read and process OSM data, currently a work in progress, can be found <a href="https://github.com/MatthewDaws/OSMDigest">on GitHub, as "OSMDigest"</a>.</p>
+<p>The XML format is documented on the <a href="http://wiki.openstreetmap.org/wiki/OSM_XML">OSM Wiki</a>.  There is no formal schema, but the data you can download seems to be of quite a constrained type:</p>
+<!--more-->
+
+<ul>
+<li>Start with an &lt;osm&gt; element giving the "version", "generator" and "timestamp".</li>
+<li>Then a &lt;bounds&gt; element giving the rectangle in latitude/longitude coordinates which encloses the data.</li>
+<li>Following this, elements of three types.  (They seem to appear in the order given here, though this I guess is unimportant).  Each of these elements contains some <a href="http://wiki.openstreetmap.org/wiki/Elements#Common_attributes">common attributes</a>: "id" giving the OSM id (which is unique within each type), the (optional) "user", "uid"; giving the user who last modified the object, the "timestamp" of last modification, the edit "version" (which increases on each edit) and the "changeset" number.  There is also a "visible", but in the downloaded data which I've seen, this is always either missing, or "true".</li>
+<li><a href="http://wiki.openstreetmap.org/wiki/Elements#Node">&lt;node&gt;</a> specifies a point on the planet, and has attributes "lon", "lat" for coordinates.  May contain 0 or more &lt;tag&gt; sub-elements.</li>
+<li><a href="http://wiki.openstreetmap.org/wiki/Elements#Way">&lt;way&gt;</a> specifies a path.  Contains, in order, &lt;nd&gt; sub-elements referencing nodes, and 0 or more &lt;tag&gt;s.</li>
+<li><a href="http://wiki.openstreetmap.org/wiki/Elements#Relation">&lt;relation&gt;</a> specifies some logical relationship between other objects (e.g. the route of a bus, the area enclosing woodland, traffic instructions such as "no left turn here").  Contains &lt;member&gt; sub-elements referencing the other objects which make up the relationship, and 0 or more &lt;tag&gt;s.</li>
+<li>Then we have three sub-elements which never contain further elements themselves:</li>
+<li><a href="http://wiki.openstreetmap.org/wiki/Tags">&lt;tag&gt;</a> which is a key/value pair, stored as attributes "k" and "v".</li>
+<li>&lt;nd&gt; which references a node and contains just the attribute "ref"</li>
+<li>&lt;member&gt; which contains attributes "ref", "type" and a (maybe empty, but always present) "role" describing what role the member has in the relationship.</li>
+</ul>
+<p>The meaning of ways and relations is defined by the tags present.  For more details see:
+- <a href="http://wiki.openstreetmap.org/wiki/Way">Way article</a>.  Things rapidly get complicated.  A way which starts and ends at the same node is a "closed" way, and are often, but not always, treated as <a href="http://wiki.openstreetmap.org/wiki/Area">Area</a>s.  For example, a closed way tagged "highway=footway" is assumed to be a circular pathway, unless we also have the tag "area=yes" in which case it is a pedestrian plaza.  But "landuse=forest" is always an "area" even without the "area=yes" tag.
+- <a href="http://wiki.openstreetmap.org/wiki/Relation">Relation article</a> and <a href="http://wiki.openstreetmap.org/wiki/Types_of_relation">types of relation</a>.
+- Possible keys and values can be found here: <a href="http://wiki.openstreetmap.org/wiki/Category:Key_descriptions_by_group">Key descriptions by group</a> and <a href="http://wiki.openstreetmap.org/wiki/Map_Features">Map features</a>.  </p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2017-05-19-pandas_hd5.html">&larr; Pandas, HD5, and large data sets</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2017-05-03-sax.html">Parsing XML via SAX in Python &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

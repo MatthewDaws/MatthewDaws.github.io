@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Jam 2013 Round 1B</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Jam 2013 Round 1B</h1>
+    
+    <p>Posted on 26th April 2015</p>
+    <hr>
+
+    <p>As ever, links to: <a href="https://code.google.com/codejam/contest/2434486/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2013_1b">GitHub</a>.</p>
+<p>I did this under timed conditions, and would have just qualified.  A silly error was all which stood between B large and me...</p>
+<p><strong>Problem A, Osmos:</strong> Start with A and \( (x_i)_{i=1}^N \) integers.  You can absorb one of the \( x_i \) if it's smaller than A, and then A grows by \( x_i \).  Help Armin to be able to absorb all the numbers by adjusting the initial set:</p>
+<ul>
+<li>You can add any new number;</li>
+<li>You can remove a number.</li>
+</ul>
+<p>What is the least number of moves to get a valid set?</p>
+<!--more-->
+
+<ul>
+<li>Order so that \( x_1 \leq x_2 \leq \cdots \leq x_N \) as optimal case is to absorb from small to large.</li>
+<li>If Armin is trying to absorb \( x_i \) but can't then A is too small, so add in a new number \( A-1 \).  Maybe repeat this step a few times.</li>
+<li>Now consider removing numbers: it only makes sense to remove the largest number (if you can't deal with a smaller number, then removing it just makes the next larger number ever harder to deal with!)</li>
+<li>So compare removing the last <code>k</code> terms with how many "additions" these <code>k</code> would take up, and find the smallest overall number of moves.</li>
+<li>My code actually checked if there was any k whereby removing k terms was better, removed them, and then iterated.  I now don't see why this works...</li>
+<li>Corner case: if A=1 initially, Armin can never absorb anything, and the optimal solution is just to remove all numbers.</li>
+</ul>
+<p><strong>Problem B, Falling Diamonds:</strong> The diamonds form this sort of triangular pattern:</p>
+<pre><code>*      *           *              - 
+      * *         * *            - -
+     * * *       * * *          * * -
+                * * * *        * * * -
+               * * * * *      * * * * *
+</code></pre>
+<p>The final picture shows one possible "half-way" point, with <code>-</code> marking slots to be filled in future.  Each new diamond takes a 50/50 split at the top, and falls down one side.</p>
+<ul>
+<li>So test if the coordinates X Y can ever be the centre of a diamond.</li>
+<li>Work out which "layer" the Nth diamond will fall in.  If X Y are in the a previous layer, the probability is 1.0; if X Y is in the next layer, it is 0.0</li>
+<li>Otherwise, we have to work out or simulate the probability.  Consider [a b] to indicate that the left pile contains a diamonds, the right b diamonds.  With n = 0, 2, 4, 6, ... the layer height, then the transition probabilities are:<ul>
+<li>If a, b &lt;= n then 50/50 chance of going to either [a+1 b] or [a b+1]</li>
+<li>If a==n then move to [a b+1], and if b==n then move to [a+1 b]</li>
+</ul>
+</li>
+<li>A little paper analysis shows that you get a variant of Pascal's triangle (where later rows are "truncated").  Alternatively, just naively compute the probabilities, which is what I did.  (Stupid mistake was not to notice that there are in general 2 ways to get to [a b] on the next step, so a dictionary is a better data structure than a list...)</li>
+</ul>
+<p><strong>Problem C, Garbled Email:</strong>  I initially tried a DFS with pruning (aka backtracking) algorithm.  This worked, but was too slow, even for the small case.  So I cheated, and my Python code is just an implementation of the suggested route (elements of which you can see in my initial attempt!) which is a Dynamic Programming solution combined with cunning precalculation.  (Don't walk the dictionary, but rather look up in it!)</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-04-27-coloured_disks.html">&larr; LuxRender of my profile picture</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-04-24-20151a.html">Jam 2015 Round 1A &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

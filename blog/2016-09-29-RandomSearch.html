@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Random sampling</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Random sampling</h1>
+    
+    <p>Posted on 29th September 2016</p>
+    <hr>
+
+    <p>This post, very tangentially, relates to a quiz we set job candidates.  If you are applying for a job at my current company, and somehow work out I work there, and find this, then you probably half deserve a job anyway.</p>
+<p>Suppose you have a population \( P \) and some test as to whether a member of the population is good or bad.  We want to find a "random good member".  There are two methods that come to mind:</p>
+<ul>
+<li>Random sampling: pick a member at random, test it, if it passes return it, otherwise try again.</li>
+<li>Randomly order \( P \) and work through the whole set, returning the first good member.</li>
+</ul>
+<p>The first method has the virtue of being simple.  The second method uses a lot of memory, if \(P\) is large.  But on closer thought, what if the proportion of "good" members is rather small.  The 2nd method is guaranteed to find a good member in \( O(\vert P \vert) \).  How slow can the first method be?</p>
+<!--more-->
+
+<p>Let \(B\subseteq P\) be the set of bad members.  The first method fails to find a good member in \(n\) terms with probability \[ \left( \frac{\vert B\vert }{\vert P\vert} \right)^n \]
+(The chance of repeatedly choosing a bad member).</p>
+<ul>
+<li>So, if half your members are bad, then you need just 7 goes to be 99% sure of finding a good member.</li>
+<li>If only 1% of your population is good then you need 459 trials to be 99% sure of find a good member.</li>
+</ul>
+<p>For the 2nd method, by "random ordering" I mean picking a member of the symmetric group of order $$ N = \vert P \vert $$ at random and applying it to the set.  We can do this <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">in time proportional to \( N \)</a>.  The algorithm is simple: choose an unpicked member of \( P \) at random and take it as the next member of the random ordering, and then repeat.  How long does it take to find a good member?  The chance of choosing only bad members for the first \( n \) goes is
+\[ \frac{\vert B \vert  (\vert B\vert -1) (\vert B\vert-2) \cdots (\vert B\vert - n+1)}
+{\vert P \vert  (\vert P\vert -1) (\vert P\vert-2) \cdots (\vert P\vert - n+1)} \]</p>
+<ul>
+<li>So this will be quicker than method one, always.</li>
+<li>But as \( P \) becomes large, the limit is the same.</li>
+</ul>
+<p>I'm not sure I've come to any conclusion.  Method 1 is simple and fast if the good population is not too small.  Method 2 needs some storage space, but is more predictable if \( P \) is not too large and the proportion of good members is very small.  If \( P \) is very large and the proportion of good members very small, you probably need a better idea than simple sampling.</p>
+<p>A more mathematical question presents itself.  Suppose we do away with the good and bad members and simply ask:</p>
+<blockquote class="card-body">
+<p>Given a population \(P\) and sampling at random ("with replacement") what's the expected number of samples I need to see 50% (or any fixed proportion) of the population.</p>
+</blockquote>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2016-10-03-Sampling.html">&larr; Random sampling to see a percentage of a population.</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-10-20-Java_Enum.html">Java Enum definition &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

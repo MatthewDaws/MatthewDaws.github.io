@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Blog</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="my-4">Blog of Matthew Daws</h1>
+
+    <div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">PyPi and use of ReStructuredText</h2>
+        <p>I've in the process of putting together my first proper Python package to be uploaded to <a href="https://pypi.org/">PyPi</a> / <a href="https://pypi.python.org/pypi">PyPi Old</a>.
+The docs around doing this are not great, but the official docs are pretty good:</p>
+<ul>
+<li><a href="https://docs.python.org/3.6/distutils/index.html">Old docs; still a good read</a></li>
+<li><a href="https://setuptools.readthedocs.io/en/latest/">Setuptools</a></li>
+<li><a href="https://setuptools.readthedocs.io/en/latest/setuptools.html">Guide to <code>setup.py</code></a></li>
+<li><a href="https://packaging.python.org/tutorials/distributing-packages/">Packaging guide</a></li>
+<li><a href="https://packaging.python.org/guides/using-testpypi/">Using TestPyPi</a></li>
+</ul>
+
+        <a href="2017-08-17-PyPi.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">17th August 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">On memory management</h2>
+        <p>I have only ever been a hobbyist C++ programmer, while I have been paid to write Java and Python.  But a common complaint I've read about C++ is that you have to manage memory manually, and worry about it.  Now, I'd slightly dispute this with C++11, but perhaps I don't really have enough experience to comment.</p>
+<p>However, I think there's a strong case that with Garbage Collected languages, you can't really forget about memory, or the difference between copy by reference and copy, but the language rather allows you to <em>pretend</em> that you can cease to worry.  In my experience, this is only true 99% of the time, and the 1% of time it bites you, you've quite forgotten that it's a possibility, which makes debugging a real pain (the classic "unknown unknown").</p>
+
+        <a href="2017-07-05-Memory.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">5th July 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Learning Python UI programming</h2>
+        <p>Another new task: get going with some GUI programming!</p>
+<h3>Some references</h3>
+<ul>
+<li><a href="http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/index.html">Tkinter 8.5 reference: a GUI for Python</a> - Lots and lots.  On the web, or a 168 page PDF file.</li>
+<li><a href="http://www.tkdocs.com/tutorial/index.html">TkDocs</a> - Cross platform, but lots of Python examples.  I found this pretty good!</li>
+<li><a href="https://docs.python.org/3.6/library/tk.html">Official docs</a></li>
+<li><a href="http://effbot.org/tkinterbook/">Effbot Book</a> - A "work in progress" and old, but still, so I've found, is an excellent reference and guide.</li>
+</ul>
+
+        <a href="2017-05-29-python_gui.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">29th May 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Pandas, HD5, and large data sets</h2>
+        <p>I have finally gotten around to playing with the HD5 driver for <code>pandas</code> (which uses, I believe, <code>pytables</code> under
+the hood).  I'm only scratching the surface, but it's easy to do what I want:</p>
+<ul>
+<li>Create a huge data frame storing an entire data set</li>
+<li>Efficiently query subsections of the frame</li>
+</ul>
+
+        <a href="2017-05-19-pandas_hd5.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">19th May 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Open Street Map XML data</h2>
+        <p>I want to process large amounts of XML data from Open Street Map (OSM).  I.e. that obtained from <a href="http://download.geofabrik.de/">GeoFrabrik</a> or <a href="http://wiki.openstreetmap.org/wiki/Planet.osm">OSM.Planet</a>.  For smaller snapshots, do look at <a href="https://github.com/gboeing/osmnx">OSMnx</a>.</p>
+<p>My pure-Python project to read and process OSM data, currently a work in progress, can be found <a href="https://github.com/MatthewDaws/OSMDigest">on GitHub, as "OSMDigest"</a>.</p>
+<p>The XML format is documented on the <a href="http://wiki.openstreetmap.org/wiki/OSM_XML">OSM Wiki</a>.  There is no formal schema, but the data you can download seems to be of quite a constrained type:</p>
+
+        <a href="2017-05-04-OSM_xml.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">4th May 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Parsing XML via SAX in Python</h2>
+        <p>I've worked with XML before (in Java), but always small files using the <a href="https://en.wikipedia.org/wiki/Document_Object_Model">Document Object Model</a>.  Now faced with multi-GB of Open Street Map derived XML files, of which I need to get a small amount of data, some other method is required.  Step forward the <a href="https://en.wikipedia.org/wiki/Simple_API_for_XML">Simple API for XML (SAX)</a>.  This is an <a href="http://www.saxproject.org/event.html">event-driven API</a>: the XML parser calls a "handler" object with information about tags opening and closing, and the character data in between.</p>
+<p>In Python, there is support in the <a href="https://docs.python.org/3/library/xml.sax.html">standard library</a> for SAX parsing.  You need to sub-class (or duck-type, and implement the interface of) <code>xml.sax.handler.ContentHandler</code>.  It seems that duck-typing is frustrating, as you need to implement the whole interface, even if you never expect certain methods to be called.</p>
+
+        <a href="2017-05-03-sax.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">3th May 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Open Street Map Data</h2>
+        <p>I'm currently working on using some address information from open street map to augment other open data sources.  Here are some notes on using data from open street map, in Python.</p>
+<h2>Getting and using Open StreetMap Data</h2>
+<p>It seems like this is a bit of a pain.  Open StreetMap (OSM) uses a custom, XML based, format which is hard/impossible for standard GIS software to read.</p>
+
+        <a href="2017-04-27-OSM_data.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">27th April 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Numpy vectorising</h2>
+        <p>I asked <a href="http://stackoverflow.com/questions/43000309/vectorise-numpy-code-on-demand">this question</a> on Stackoverflow, and got a nice answer, but one which I needed to think through a little more.  Here's my conclusions.</p>
+<p>My aim was to understand how to write robust code which could take scalars, but which would also do "as expected" on arrays.  Let me expand a little on this, by using a slightly easier example than in the original question.  Suppose <code>f(x)</code> is a function which takes a scalar and returns a scalar.  I then want that if <code>x</code> is actually an array, of any shape, then <code>f(x)</code> will return an array of the same shape as <code>x</code>, namely the array obtained by applying <code>f</code> to every entry.</p>
+
+        <a href="2017-03-24-Numpy_vectorising.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">24th March 2017</div>
+</div>
+
+
+    <ul class="pagination justify-content-center mb-4">
+    <li class="page-item">
+        <a class="page-link" href="index.html">&larr; Newer</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" href="index2.html">Older &rarr;</a>
+    </li>
+</ul>
+
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+    <img src="../images/profile.jpg" class="fixed-ratio-resize my-5" alt="Profile image; rendered glass discs">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row">
+            
+        </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled">
+            
+        </ul>
+        </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+    
+    </div>
+    </div>
+
+    <!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!--<script src="../js/bootstrap.min.js"></script>-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+        

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Jam 2014 Round 1B</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Jam 2014 Round 1B</h1>
+    
+    <p>Posted on 17th April 2015</p>
+    <hr>
+
+    <p>As ever, links to: <a href="https://code.google.com/codejam/contest/2984486/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2014_1b">GitHub</a>.</p>
+<p>Of current interest is how to progress: top 1000 people go through, and for that you'd need 42 points in any time faster than basically the whole 2.5 hours.  This seems more reasonable...</p>
+<p><strong>Problem A, The Repeater:</strong> Given some input strings and Omar can make a move: he can pick one string, and one character in that string, and either repeat it once more (so "abc" -&gt; "abbc" or "aabc" or "abcc") or if the character is already repeated, he can delete one copy (so "aabcc" -&gt; "abcc" or "aabc").  Can he make all the strings the same, and if so, what's the minimal number of moves to do so?</p>
+<!--more-->
+
+<p>The "invariant" is obviously the characters ignoring multiplicity, and if they all agree, we can treat each character type independently.  So this reduces to this problem:
+   - Given numbers \(n_1, \cdots, n_k\), each time step we can increase or decrease each number by 1.  What's the minimum number of steps until they are all equal?  This is the same as choosing a target number \(n\), and then the time is \(\sum |n_i-n|\).
+   - Order the numbers \(n_1 \leq n_2 \leq \cdots \leq n_k\), so clearly the optimal \(n\) satisfies \(n_1 \leq n \leq n_k\).
+   - Suppose we have \(n_i \leq n &lt; n_{i+1}\) and we increase \(n\) by 1 (here we allow \(i=k\) and \(n_{k+1}:=\infty\)).  Then we move 1 away from \(n_1,\cdots,n_i\) and 1 closer to \(n_{i+1},\cdots,n_k\) so the "cost" changes by \(i - (k-i) = 2i-k\).
+   - It follows that the best choose for \(n\) is the "mid-point" of the sequence: the middle term if we have an odd number of terms, or otherwise any value between (inclusive) the two middle terms of an even length sequence.</p>
+<p><strong>Problem B, New Lottery:</strong>  In Python, the small case is a trivial search:</p>
+<p><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">combs</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">K</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span>
+</pre></div>
+ </p>
+<p>Or I guess a fancy generator comprehension (which is slightly slower), using the boolean get prompted to ints:</p>
+<p><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">combs</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">K</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+ </p>
+<p>This is too slow for the "large" case though.  Somehow this problem suggests "dynamic programming" and after a lot of thought, we come up with the following.  We want to count the set
+\[ V(A,B,K) = \{ (x,y) : 0 \leq x \le A, 0 \leq y \le B, x\&amp; y \le K \} \]
+and the hint seems to be to consider the <em>pairs</em> \( (x,y) \) as a whole.  The "and" operation works "bit-wise", so look at the lowest-order bits, which can be of four types:</p>
+<ul>
+<li>(0,0) so <code>x</code> and <code>y</code> are both even, say \( x=2x', y=2y' \).  Then \( x\&amp; y = 2(x'\&amp; y') \le K \).  Now, for integers, \( 2a \le b \ \Leftrightarrow \) \( 2a \leq b-1 \ \Leftrightarrow \) \( a \leq \frac{b-1}{2} \ \Leftrightarrow \) \( a \leq \lfloor \frac{b-1}{2} \rfloor  \ \Leftrightarrow \) \( a \le \lfloor \frac{b+1}{2} \rfloor \).  So \( (x,y) \in V(A,B,K) \) if and only if \( (x',y') \in V(\lfloor \frac{A+1}{2} \rfloor, \lfloor \frac{B+1}{2} \rfloor, \lfloor \frac{K+1}{2} \rfloor) \).</li>
+<li>(1,0) so \( x=2x'+1, y=2y' \) and \( x\&amp; y = 2(x'\&amp; y') \) but this time \( x \le A \) if and only if \( 2x' \le A-1 \) so we get \( (x',y') \in V(\lfloor \frac{A}{2} \rfloor, \lfloor \frac{B+1}{2} \rfloor, \lfloor \frac{K+1}{2} \rfloor) \).</li>
+<li>(0,1) leading to \( V(\lfloor \frac{A+1}{2} \rfloor, \lfloor \frac{B}{2} \rfloor, \lfloor \frac{K+1}{2} \rfloor) \).</li>
+<li>(1,1) so \( x=2x'+1, y=2y'+1, x\&amp; y = 2(x'\&amp; y') + 1 \) leading to \( V(\lfloor \frac{A}{2} \rfloor, \lfloor \frac{B}{2} \rfloor, \lfloor \frac{K}{2} \rfloor) \).</li>
+</ul>
+<p>So we can subdivide each case into four "smaller" cases.  As ever, this sort of thing, naively implemented, it slow, because you end up computing small cases repeatedly.  A standard dynamic programming approach (which would be faster with a <code>std::map</code> style data structure, a dictionary which keeps it keys in order) is very fast.  See my <a href="http://nbviewer.ipython.org/github/MatthewDaws/CodeJam/blob/master/2014_1b/Problem%20B.ipynb">IPython Notebook</a> for a comparison.</p>
+<p><strong>Problem C: Bored Travelling Salesman:</strong> Slight proud of myself for figuring this out.  As the ZIP codes are all the same length, the smallest concatenation comes from the "smallest" route where we try to visit the lowest zip code first, and then the next lowest, and so on, subject to having a valid route.  This is very reminiscient of the 2013 Qualification round, Problem D.  Here the algorithm tries the next "best" move, and then tests to see if the problem still has a solution.  So, can we do something similar here?</p>
+<p>The trick is to notice that when visiting a city, we retain a "return" ticket, which we can use later.  So when traversing the graph, we can always "back-track" to the city we started from originally (or just back up part way).  </p>
+<ul>
+<li>This is in fact just a standard Depth First Search, though we have more choice as to what order we visit nodes in.</li>
+<li>In particular, at a given point, we have nodes we can never visit again (those we have been to, and now don't have a return ticket to), nodes we can "return" to, and unvisited nodes.  By following the DFT, we can visit all the remaining nodes so long as the graph, with the impossible to visit nodes removed, is still connected.  And the DFT can test this for us.</li>
+<li>In particular, we can start anywhere (as we're effectively told the graph is connected).  So start at the lowest ZIP code.</li>
+<li>Then each time, we try to the next lowest ZIP code out of the cities we can visit from the current node (either directly, or by using some return tickets).  If we can still solve the problem, then this move is best, and we continue.  Otherwise try the next lowest ZIP code, and so on.</li>
+</ul>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-04-17-20141a.html">&larr; Jam 2014 Round 1A</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-04-14-qualification15.html">Code Jam Qualification 2015 &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

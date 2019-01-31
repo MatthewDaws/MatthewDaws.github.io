@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Java Enum definition</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Java Enum definition</h1>
+    
+    <p>Posted on 20th October 2015</p>
+    <hr>
+
+    <p>At the dying ends of the work day, I came across <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html">this page</a> and was initially confused by</p>
+<pre><code>public abstract class Enum&lt;E extends Enum&lt;E&gt;&gt;
+</code></pre>
+<p>Doesn't that look, well, horribly circular?  <a href="http://stackoverflow.com/questions/3061759/why-in-java-enum-is-declared-as-enume-extends-enume">Stackoverflow</a> <a href="http://stackoverflow.com/questions/211143/java-enum-definition">suggests</a> this is common confusion.</p>
+<!--more-->
+
+<p>Circularity is nothing to be afraid of: consider the type constraint <code>&lt;T extends Comparable&lt;T&gt;&gt;</code> which simply means (slightly loosely speaking) that T must implement <code>compareTo(T o)</code>.  You have to be able to compare to yourself.</p>
+<p>So what does <code>Enum&lt;E extends Enum&lt;E&gt;&gt;</code> mean?  Simply that we can only use <code>Enum&lt;E&gt;</code> for types <code>E</code> which extends <code>Enum&lt;E&gt;</code>, i.e. fulfil the contract guaranteed by <code>Enum&lt;E&gt;</code>.  To my mind, this <em>is slightly</em> circular, as when checking the definition of <code>Enum</code> the compiler may need to decide if <code>E</code> can do something, for which it needs to know the definition <code>Enum&lt;E&gt;</code>.</p>
+<p>The answer by <a href="http://stackoverflow.com/a/758595/3403507">Maurice Naftalin</a> explains why we want this rather well.  We want</p>
+<pre><code>public class MyEnum extends ...
+</code></pre>
+<p>where "..." is something to do with the generic <code>Enum</code>, and we want this to implement <code>Comparable&lt;MyEnum&gt;</code> automatically for us.  What can we paramaterise <code>Enum</code> with?  Well, we only have <code>MyEnum</code> so it better be (in fact, only can be) <code>Enum&lt;MyEnum&gt;</code>.  Thus we need</p>
+<pre><code>MyEnum extends Enum&lt;MyEnum&gt;
+Enum&lt;MyEnum&gt; implements Comparable&lt;MyEnum&gt;
+</code></pre>
+<p>Abstracting, we find that the constraint on <code>E</code> in <code>Enum&lt;E&gt;</code> is simply that <code>E extends Enum&lt;E&gt;</code>.  That is, we arrive at the seemingly odd constraint completely naturally.</p>
+<p>An Enum keeps an "ordinal", or what I'll call <code>place</code> below, to allow ordering.  So, we want something like this:</p>
+<pre><code>public abstract class Thing&lt;E extends Thing&lt;E&gt;&gt;
+    implements Comparable&lt;E&gt;
+{
+    private int place;
+    public final int compareTo(E other) {
+        return this.place - other.place;
+    }
+}
+</code></pre>
+<p>(Note that this is bad practice: I'm assuming <code>place</code> is small so over/underflows can't occur in the <code>compareTo</code> method).  We know that <code>E extends Thing&lt;E&gt;</code> and so <code>other</code> fulfils the contract of <code>Thing</code> and hence has a field named <code>place</code> of type <code>int</code>.  In this case, we could parameterise on <code>&lt;E extends Thing&lt;?&gt;&gt;</code> but for <code>Enum</code> we probably want the strong typing to ensure we don't compare two different Enum types.</p>
+<p>More at <a href="http://www.angelikalanger.com/GenericsFAQ/FAQSections/TypeParameters.html#FAQ106">Generics FAQ</a>.</p>
+<p>In C++, there is the related <a href="https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern">CRTP</a> of which more to come...</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2016-09-29-RandomSearch.html">&larr; Random sampling</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-10-16-leds.html">LED lights and payoff &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

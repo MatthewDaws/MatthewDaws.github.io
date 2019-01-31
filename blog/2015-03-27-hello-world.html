@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Hello World</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Hello World</h1>
+    
+    <p>Posted on 27th March 2015</p>
+    <hr>
+
+    <p>I had a need to update and move my old academic website so thought I would take the plunge and host a site on GitHub.  Here is an aide-memoire for myself as to how I did this:</p>
+<ul>
+<li>How to get a website for your GitHub project: <a href="https://pages.github.com/">Pages</a></li>
+</ul>
+<p>This blog is built using <a href="">Jekyll</a>:</p>
+<!--more-->
+
+<ul>
+<li>How to use Jekyll with pages: <a href="https://help.github.com/articles/using-jekyll-with-pages/">Jekyll with pages</a></li>
+<li>Some Jekyll documentation to the same effect: <a href="http://jekyllrb.com/docs/github-pages/">Jekyll docs</a></li>
+</ul>
+<p>Jekyll is what you might call a "template engine".  If you have the sort of lack of time and artistic skills which I do, you'll need to find a template:</p>
+<ul>
+<li>Useful article: <a href="http://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/">Smashing Magazine</a></li>
+<li>GitHub page associated with this: <a href="https://github.com/barryclark/jekyll-now">GitHub site</a></li>
+<li>Template this site uses: <a href="https://github.com/poole/hyde">Hyde</a></li>
+<li>Markdown: <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">GitHub cheatsheet</a></li>
+<li>Visual Design: <a href="http://www.visualmess.com/">VisualMess</a></li>
+</ul>
+<p>You can use \(\LaTeX \), but remember to markup inline as <code>\\(\frac{a+b}{c}\\)</code> for example, and:</p>
+<ul>
+<li>Load the MathJAX Javascript renderer.  You can do this by inserting the following into <code>_includes/head.html</code>:</li>
+</ul>
+<p><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span>
+  <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
+ </p>
+<p>I'm converted to Python 3, and mainly use Windows right now, a combination which seems problematic for using pygments.  So this site use Rouge, but YMMV:</p>
+<ul>
+<li>
+<p>Jekyll on Windows: <a href="https://github.com/juthilo/run-jekyll-on-windows/blob/gh-pages/3-syntax-highlighting.md">Syntax highlighting</a></p>
+</li>
+<li>
+<p>This all worked absolutely fine locally, but wouldn't work when I uploaded it to GitHub.  After a massive amount of trial and error, and some cryptic error messages, I finally got a useful error message: <code>rouge</code> isn't supported by GitHub at present.  So we comment this out in the <code>_config.yml</code> file and it all works!</p>
+</li>
+<li>
+<p>A final wrickle is that, either locally, or on GitHub, I couldn't get automatic syntax highlighting to work.  So, for now, we'll do it manually with the  <code>{% highlight html %} ... {% endhighlight %}</code>  form.</p>
+</li>
+</ul>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-03-31-jamming.html">&larr; Google Code Jam</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

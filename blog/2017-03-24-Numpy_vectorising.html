@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Numpy vectorising</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Numpy vectorising</h1>
+    
+    <p>Posted on 24th March 2017</p>
+    <hr>
+
+    <p>I asked <a href="http://stackoverflow.com/questions/43000309/vectorise-numpy-code-on-demand">this question</a> on Stackoverflow, and got a nice answer, but one which I needed to think through a little more.  Here's my conclusions.</p>
+<p>My aim was to understand how to write robust code which could take scalars, but which would also do "as expected" on arrays.  Let me expand a little on this, by using a slightly easier example than in the original question.  Suppose <code>f(x)</code> is a function which takes a scalar and returns a scalar.  I then want that if <code>x</code> is actually an array, of any shape, then <code>f(x)</code> will return an array of the same shape as <code>x</code>, namely the array obtained by applying <code>f</code> to every entry.</p>
+<!--more-->
+
+<p>You can do this with the <code>np.frompyfunc</code> method, but we cannot expect to take advantage of the speed of numpy.  Furthermore, we also obtain an array of objects.</p>
+<p>Instead, let me present the "numpy way" and then explain why and how it works.  Firstly, the starting function:</p>
+<pre><code>fixed_array = np.arange(10)
+def f(x):
+    return np.sum((x - fixed_array) ** 2)
+</code></pre>
+<p>Here <code>fixed_array</code> is global for simplicity.  So what <code>f</code> does is to subtract <code>x</code> from each entry of <code>fixed_array</code>, square, and then sum.  Equivalent to <code>sum( (x-t)**2 for t in fixed_array )</code>.  Passing an array into <code>f</code> yields an error as <code>numpy</code> cannot work out how to compute <code>x - fixed_array</code>.  Indeed, we <em>do not want</em> to form this pointwise.  Rather, I think what we really want to do is something like the following:</p>
+<ul>
+<li>For simplicity, suppose <code>x</code> is also a 1D array (though in the end <code>x</code> should be allowed to be any shape.)   </li>
+<li>Form an array <code>xx</code> so that <code>xx[i][j] = x[i]</code> for all <code>i,j</code></li>
+<li>Form an array <code>yy</code> so that <code>yy[i][j] = fixed_array[j]</code> for all <code>i,j</code></li>
+<li><code>xx</code> and <code>yy</code> have the same shape.</li>
+<li>Compute <code>zz = (xx - yy)**2</code> (pointwise) so that <code>`zz[i][j] = (x[i] - fixed_array[j])**2</code> for each <code>i,j</code>.</li>
+<li>Sum over the final dimension, thus giving <code>f(x[i])</code> in the <code>i</code>th position, as required.  </li>
+</ul>
+<p>Okay, so here's the answer:</p>
+<pre><code>def fff(x):
+   return np.sum((np.asarray(x)[...,None] - fixed_array)**2, axis=-1)
+</code></pre>
+<p>How does this work?</p>
+<ul>
+<li><code>np.asarray(x)</code> returns, if <code>x</code> is scalar, an array of shape <code>(1)</code> containing <code>x</code> as it's entry; and if <code>x</code> is already "array like", we get a genuine array.</li>
+<li>Then for an array <code>y</code>, the slice <code>y[...,None]</code> does the same as (the perhaps more clear) <code>y[...,np.newaxis]</code>.  The <code>...</code> means the same as <code>:,:,:</code> however many times required, and <code>np.newaxis</code> gives you a new axis.  If <code>y</code> has shape <code>(2,3,4)</code> then <code>y[...,None]</code> has shape <code>(2,3,4,1)</code>.  See <a href="https://docs.scipy.org/doc/numpy/reference/arrays.indexing.html">Indexing docs</a>. </li>
+<li>Keep working with <code>yy</code> and consider how <a href="https://docs.scipy.org/doc/numpy/reference/ufuncs.html#broadcasting">Broadcasting</a> applies to <code>yy - fixed_array</code></li>
+<li>We <em>prepend</em> 1s to the shape of <code>fixed_array</code> so it has the same <code>ndim</code> as <code>yy</code></li>
+<li>We will get an output of size <code>(2,3,4,n)</code> where <code>fixed_array</code> is of length <code>n</code></li>
+<li>If an input has dimension 1 then the single entry in that dimension will be used.</li>
+<li>This gives us exactly what we want, because the entries of <code>y</code> will be used in the first dimension(s), and the entries of <code>fixes_array</code> in the last dimension.</li>
+<li>We then square entry wise, and sum over the final dimensional, the <code>axis=-1</code> command.</li>
+</ul>
+<p>See <a href="https://github.com/MatthewDaws/Python_bits/blob/master/ipython_notebooks/Numpy%20vectorising.ipynb">Notebook</a> for a quick demo and some code.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2017-04-27-OSM_data.html">&larr; Open Street Map Data</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2017-03-23-Numpy.html">Working with numpy again &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

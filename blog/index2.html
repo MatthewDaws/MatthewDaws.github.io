@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Blog</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="my-4">Blog of Matthew Daws</h1>
+
+    <div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Working with numpy again</h2>
+        <p>In my new job, I find myself working with numpy (after a break of a couple of years, and now professionally, and
+not as a hobby.)  Numpy is great, but it doesn't half require a little thinking upon occasion.</p>
+<blockquote class="card-body">
+<p>Suppose we have an array of 10 points in the plane.  Should this be represented as a <code>numpy</code> array of shape <code>(2,10)</code> or <code>(10,2)</code>?</p>
+</blockquote>
+
+        <a href="2017-03-23-Numpy.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">23th March 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Random sampling to see a percentage of a population.</h2>
+        <blockquote class="card-body">
+<p>Given a population \( P \) and sampling at random ("with replacement") what's the expected number of samples I need to see 50% (or any fixed proportion) of the population.</p>
+</blockquote>
+<p>I deliberately ask for "expected" because calculating expectations is often easier than getting a handle on the whole probability distribution.  A trick is to exploit linearity: express the random variable of interest as a sum of random variables you can calculate the expectation of.</p>
+
+        <a href="2016-10-03-Sampling.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">3th October 2016</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Random sampling</h2>
+        <p>This post, very tangentially, relates to a quiz we set job candidates.  If you are applying for a job at my current company, and somehow work out I work there, and find this, then you probably half deserve a job anyway.</p>
+<p>Suppose you have a population \( P \) and some test as to whether a member of the population is good or bad.  We want to find a "random good member".  There are two methods that come to mind:</p>
+<ul>
+<li>Random sampling: pick a member at random, test it, if it passes return it, otherwise try again.</li>
+<li>Randomly order \( P \) and work through the whole set, returning the first good member.</li>
+</ul>
+<p>The first method has the virtue of being simple.  The second method uses a lot of memory, if \(P\) is large.  But on closer thought, what if the proportion of "good" members is rather small.  The 2nd method is guaranteed to find a good member in \( O(\vert P \vert) \).  How slow can the first method be?</p>
+
+        <a href="2016-09-29-RandomSearch.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">29th September 2016</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Java Enum definition</h2>
+        <p>At the dying ends of the work day, I came across <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html">this page</a> and was initially confused by</p>
+<pre><code>public abstract class Enum&lt;E extends Enum&lt;E&gt;&gt;
+</code></pre>
+<p>Doesn't that look, well, horribly circular?  <a href="http://stackoverflow.com/questions/3061759/why-in-java-enum-is-declared-as-enume-extends-enume">Stackoverflow</a> <a href="http://stackoverflow.com/questions/211143/java-enum-definition">suggests</a> this is common confusion.</p>
+
+        <a href="2015-10-20-Java_Enum.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">20th October 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">LED lights and payoff</h2>
+        <p>LED lights seem a no-brainer: instant on, good colour reproduction, extremely energy efficient (cool to the touch after minutes of use).  But they are expensive.  I wonder what the payback time is?</p>
+
+        <a href="2015-10-16-leds.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">16th October 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Graphs in Windsor</h2>
+        <p>While spending a long weekend in Windsor, we found the following:</p>
+<p><img class="fixed-ratio-resize" alt="Maze problem" src="./public/12.jpg"></p>
+
+        <a href="2015-09-07-GraphTheoryWindsor.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">7th September 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">RAII in C#/Java?</h2>
+        <p>More a note to a future self than aything else...  In C++ we have the notion of <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">Resource Acquisition Is Initialization</a> which I think I have internalised as the following:</p>
+<blockquote class="card-body">
+<p>Any "resource" (memory, file, handle etc.) should be "owned" by an object.  An object's constructor should allocate the resource, and the destructor should free the resource (with some appropriate choices then made for what copy/move constructors/assignments should do).  By use of C++11 <code>unique_ptr</code> and <code>shared_ptr</code> this model can be extended to pointers.</p>
+</blockquote>
+
+        <a href="2015-06-30-RAII-In-Csharp.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">30th June 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">BF interpreter in C++</h2>
+        <p>BF is an <a href="https://en.wikipedia.org/wiki/Brainfuck">amusingly named, impractical, Turing complete</a> programming language.  It is very like an actual Turing machine: you have an infinite (originally, one-sided, 30K long) array of (8-bit) values, with commands to increase/decrease (+/-) the cell, or move left/right (</>).  Input (,) and output (.) are handled.  Loops are given by [] and implement a "while cell is non-zero" loop.  So a trivial mapping to C is possible (see the Wikipedia article).</p>
+<p>I thought it would be fun to give an object oriented implementation, for which I used C++ for a change.  My implementation decouples the parsing of the programme from running it.  The parse class reads the input in a single pass, using a stack for dealing with nested loops.  It translates the input into a list of commands, represented by an abstract base class with an <code>execute</code> method, overloaded for the various different commands.  This is the "command" pattern (closely related to the "strategy" pattern).</p>
+
+        <a href="2015-06-23-BF.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">23th June 2015</div>
+</div>
+
+
+    <ul class="pagination justify-content-center mb-4">
+    <li class="page-item">
+        <a class="page-link" href="index1.html">&larr; Newer</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" href="index3.html">Older &rarr;</a>
+    </li>
+</ul>
+
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+    <img src="../images/profile.jpg" class="fixed-ratio-resize my-5" alt="Profile image; rendered glass discs">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row">
+            
+        </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled">
+            
+        </ul>
+        </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+    
+    </div>
+    </div>
+
+    <!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!--<script src="../js/bootstrap.min.js"></script>-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+        

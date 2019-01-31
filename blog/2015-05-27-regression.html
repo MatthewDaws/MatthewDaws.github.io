@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Regression from a (simple) Bayesian perspective</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Regression from a (simple) Bayesian perspective</h1>
+    
+    <p>Posted on 27th May 2015</p>
+    <hr>
+
+    <p>How might we tackle simple regression from a Bayesian perpsective?  Our model will be that we are given points \( (x_i)_{i=1}^n \) (which we assume we <em>know</em>, at least to a very high accuracy) and dependent points \( y_i^{re} = \alpha + \beta x_i \), but we only observe \( y_i \) where \( y_i = y_i^{re} + e_i \) where the \( e_i \) are our "uncertainties" (I like the line: "if they were errors, we would have corrected them!", see footnote 10 of <a href="http://arxiv.org/abs/1008.4686">arXiv:1008.4686</a>) usually modelled as iid \( N(0,\sigma^2) \).  The likelihood is then</p>
+<p>\[ f(y|\alpha,\beta,\sigma) = \prod (2\pi\sigma^2)^{-1/2}
+\exp\Big( -\frac{1}{2\sigma^2} (y_i - (\alpha + \beta x_i))^2 \Big) \]</p>
+<p>Finding the MLE leads to <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">Least Squares Regression</a>.  A simple Bayesian approach would be to stick some prior on $\alpha, \beta, \sigma$, but of course, this raises the question of <em>how</em> to do this!</p>
+<p>Anyway, another <a href="http://nbviewer.ipython.org/github/MatthewDaws/Python_bits/blob/master/monte_carlo/Bayesian%20Statistics.ipynb">Ipython notebook</a> which develops some of the basic maths, and then uses <a href="http://dan.iel.fm/emcee/current/">emcee</a> and the <a href="https://github.com/dfm/triangle.py">Triangle Plot</a> to make some simulations and draw some plots of posterior distributions.</p>
+<!--more-->
+
+<p>The approach taken at <a href="https://jakevdp.github.io/blog/2014/06/14/frequentism-and-bayesianism-4-bayesian-in-python/">Pythonic Perambulations</a> is to consider transformations, motivated by the fact we can "swap the roles of \( (x_i) \) and \( (y_i) \)".  I'm afraid I think this violates our modelling assumptions (see, for example, footnote 5 in <a href="http://arxiv.org/abs/1008.4686">arXiv:1008.4686</a>).  Similarly, the PP Python code adds "noise" to the \(x_i\) as well, which violates our modelling.  We have \(x_i^{re}\) but only observe \(x_i = x_i^{re}+f_i\) with again \(f_i\) iid \(N(0,\sigma_1^2)\) then \[ y_i = \alpha + \beta (x_i - f_i) + e_i = \alpha + \beta x_i + (e_i - \beta f_i) = \alpha + \beta x_i + g_i \] where now \(g_i\) are iid \( N(0,\sigma^2 + \beta^2 \sigma_1^2) \).  So while the uncertainties are still independent and normal, the variance depends on \( \beta \).  I think one should really include this in the model.</p>
+<p>For a classical Bayesian approach to line fitting, I found <a href="http://www.cs.berkeley.edu/~jordan/courses/260-spring10/lectures/">Michael Jordan's lectures</a> to be a nice reference.  In the case of linear regression using standard Hierarchical models, it's not really necessary to use MCMC methods.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-05-28-outliers.html">&larr; Removing outliers</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-05-22-bayesian_stats.html">Dabbling in Bayesian Statistics &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

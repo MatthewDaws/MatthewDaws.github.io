@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Graphs in Windsor</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Graphs in Windsor</h1>
+    
+    <p>Posted on 7th September 2015</p>
+    <hr>
+
+    <p>While spending a long weekend in Windsor, we found the following:</p>
+<p><img class="fixed-ratio-resize" alt="Maze problem" src="./public/12.jpg"></p>
+<!--more-->
+
+<p>The instructions read, in part:</p>
+<blockquote class="card-body">
+<p>The puzzle challenge is to solve this unique one-way maze by travelling from the entrance Pawn to the central Castle -- always going forwards.</p>
+</blockquote>
+<p>It's not quite clear to me what this means, but there is a good quote from <a href="http://thejoyofshards.co.uk/visits/southtrip/windsor.shtml">Here</a>:</p>
+<blockquote class="card-body">
+<p>The maze should be played as if you are a runaway train - always moving smoothly through the points forwards, and never able to reverse. This maze-movement idea was inspired by the nearby Windsor Railway Station, which brought the Royal Family to Windsor from Victorian times onwards. The maze paths sometimes run together in pairs, like a pair of railway tracks; sometimes they even run through "railway cuttings", where the grass surface rises and falls around them.</p>
+</blockquote>
+<p>I wonder if there is an elegant way to convert this to a directed graph problem?  I couldn't see how to do this cleanly, as in the problem you must pass through a "node", not reverse direction.</p>
+<p>Anyway, here is a solution.  From the pawn you initially get yourself into an outer "loop", from which only the King is accessible.  As we can only visit the King once, we don't want to get back onto the outer loop in the same direction.</p>
+<ul>
+<li>So, we take the loop which the King is on, and reverse direction.  Two choices here.</li>
+<li>We can then either go to the Bishop:<ul>
+<li>In we pass out by the "Raised Banks" then we're back on the outer loop, which is no good.</li>
+<li>So we must reverse direction again, and head in the direction of the Knight.</li>
+<li>We can skip past the knight back onto the outer loop, but that's wrong.</li>
+<li>So visit the Knight.</li>
+<li>Then take the branch down to the Queen, and then to the Castle.  Task complete.</li>
+</ul>
+</li>
+<li>Or we loop back down towards the Pawn, and either:<ul>
+<li>Head towards the Knight, but we can't visit the Knight, so we end up back up near the Bishop, and we've just taken a loop.</li>
+<li>Take the earlier branch, and head up the Castle, but following the track, we're forced to visit the Queen, and then head to the Castle.  But we've missed pieces.</li>
+</ul>
+</li>
+</ul>
+<p>So, the only solution is King, Bishop, Knight, Queen, Castle.  And once we've heading to the Knight, we only have a choice of which direction to pass through the Knight "station" in, everything else is determined.  Before that we can loop about a bit if we wish.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-10-16-leds.html">&larr; LED lights and payoff</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-06-30-RAII-In-Csharp.html">RAII in C#/Java? &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

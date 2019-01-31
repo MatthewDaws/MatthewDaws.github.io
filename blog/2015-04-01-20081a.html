@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Jam 2008 Round 1A</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Jam 2008 Round 1A</h1>
+    
+    <p>Posted on 1st April 2015</p>
+    <hr>
+
+    <p>These seem to me to be essentially pure mathematics, in that once I understood the problem, and the maths behind it, the implementation in code was almost trivial.</p>
+<p>The <a href="https://code.google.com/codejam/contest/32016/dashboard#s=a">Official Contest Analysis</a> is a good writeup, so I won't say a great deal.  See the code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2008_1a">GitHub</a>.</p>
+<p><strong>Problem A, Minimum Scalar Product:</strong>  The only comment I have is that the formal "proof" the contest analysis gives seems overly complicated to me.</p>
+<!--more-->
+
+<ul>
+<li>We are free to reorder both the vectors, so assume x is increasing: \( x_1 \leq x_2 \leq \cdots \leq x_n \)</li>
+<li>As there are only finitely many arrangements, these <em>is</em> a minimal scalar product.  Let the given ordering of y give this minimum.</li>
+<li>Suppose y is <em>not</em> decreasing, so there are \( i &lt; j \) with \( y_i &lt; y_j \).  The current scalar product is \( t + x_iy_i + x_jy_j \) where \( t \) is the rest of the product.  If we swap \( y_i, y_j \) then the scalar product becomes \( t + x_iy_j + x_jy_i \).</li>
+<li>As we have a minimum, we must have that \( t + x_iy_i + x_jy_j \leq t + x_iy_j + x_jy_i \) which rearranges to \( x_i(y_i - y_j) \leq x_j(y_i - y_j) \) or \( 0 \leq (x_j-x_i)(y_i - y_j) \).  As \( x_j-x_i \geq 0 \) and \( y_i - y_j &lt; 0 \) these inequalities can only hold if \( x_j-x_i = 0 \).</li>
+<li>So we can get \( y_i &lt; y_j \) "out of order" only when \( x_i = x_j \).  But within a "block" \( x_i = x_{i+1} = \cdots = x_k \) say we can always re-arrange \( y_i, y_{i+1}, \cdots, y_k \) and we don't change the inner product.</li>
+<li>Conclusion: Any minimum arrangement of y is "out of order" only for equal \(x_i\)s.</li>
+</ul>
+<p><strong>Problem B, Milkshakes:</strong>  I came up with much the same algorithm.  I must say that, right now, I don't see how to get a linear time algorithm, though in practise this doesn't matter.</p>
+<p><strong>Problem C, Numbers:</strong>  This was extremely mathematical.  I, eventually, came up with Solution B from the analysis.  Instead, here I'll present an idea which <em>doesn't</em> work!</p>
+<p>The collection of numbers \( \{ x + y\sqrt 5 : x,y \in\mathbb Z \} \) forms a <a href="https://en.wikipedia.org/wiki/Ring_%28mathematics%29">ring</a> the proof of which is essentially the observation that \( (x+y\sqrt 5)(a+b\sqrt 5) = (xa + 5yb) + (xb + ya)\sqrt 5 \).  Thus, using e.g. Python and its built-in support for large integers and the "repeated squaring" algorithm for finding powers, it's easy to find \( (3+\sqrt 5)^n \) for even very large \( n \).</p>
+<p>The problem is that we want to know the final three digits before the decimal point: that is, find \( \lfloor (3+\sqrt 5)^n \rfloor \mod 1000 \).  If \( (3+\sqrt 5)^n = a+ b\sqrt 5 \) then we want \( \lfloor a+b\sqrt 5 \rfloor \mod 1000 = a + \lfloor b\sqrt 5 \rfloor \mod 1000 \).  Finding \( a \mod 1000 \) is easy, as we can implement the whole "repeated squaring" algorithm modulo 1000, which would also find \( b\mod 1000\).  However, how to find \( b\sqrt 5 \rfloor \mod 1000 \)?</p>
+<p>My initial idea was to find \( b\sqrt 5 = \sqrt{ 5b^2 } \) using a purely integer algorithm (e.g. repeated bisection).  This works, but for the size numbers the "large" problem needs, it's too slow (and it's speed, not memory, on my 2013 era PC, which is the barrier).</p>
+<p>Some more thought, and I came up with the link between \(a\) and \(b\) as detailed in the official answer.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-04-08-2014qual.html">&larr; Code Jam 2014 Qualification</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-03-31-jamming.html">Google Code Jam &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

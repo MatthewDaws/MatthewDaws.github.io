@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>On memory management</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">On memory management</h1>
+    
+    <p>Posted on 5th July 2017</p>
+    <hr>
+
+    <p>I have only ever been a hobbyist C++ programmer, while I have been paid to write Java and Python.  But a common complaint I've read about C++ is that you have to manage memory manually, and worry about it.  Now, I'd slightly dispute this with C++11, but perhaps I don't really have enough experience to comment.</p>
+<p>However, I think there's a strong case that with Garbage Collected languages, you can't really forget about memory, or the difference between copy by reference and copy, but the language rather allows you to <em>pretend</em> that you can cease to worry.  In my experience, this is only true 99% of the time, and the 1% of time it bites you, you've quite forgotten that it's a possibility, which makes debugging a real pain (the classic "unknown unknown").</p>
+<!--more-->
+
+<p>A stupid example which wasted some of my time today is:</p>
+<pre><code>import numpy as np
+...
+indexes = np.argsort(times)
+coords[0] = coords[0][indexes]
+coords[1] = coords[1][indexes]
+</code></pre>
+<p>With <em>hindsight</em> this <em>obviously</em> mutates the data underpinning <code>coords</code> and hence mutates anything which is an alias of <code>coords</code>.  Cue two tests failing, and the first one was silently mutating the data the second test tried to use.  But this is really hard to spot-- <em>both</em> tests failed, so I spend a while looking at the base class because that's the only common code involved.  Unit testing doesn't really help, as I'd never think to test that I'm not accidentally mutating some data reference (because I'd never be that stupid, right...)</p>
+<p>What I meant to do was:</p>
+<pre><code>coords = coords[:,indexes]
+</code></pre>
+<p>This generates a new <code>array</code> instance and assigns the reference to <code>coords</code>.  But this is quite <em>subtle</em>.  To even express it, I have to use language which I learnt from C/C++.  I only finally noticed when I wrote some test code in a notebook, and noticed that there was some period 2 behaviour going on.  "Oh, I must be mutating something... Oh, right..."</p>
+<p>The problem with Python, and Java, is that you get out of the habit of even thinking in this way.  I used to write a lot of <em>immutable</em> code in Java, precisely to avoid such problems.  That seems to make massive sense in a corporate environment.  But for <code>numpy</code>, and trying to squeeze performance out of an interpretted language, you sometimes need mutability.  Which means you need to <em>think</em>.  (And regularly makes me wish I could just use C++, but that's nothing story...)</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2017-08-17-PyPi.html">&larr; PyPi and use of ReStructuredText</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2017-05-29-python_gui.html">Learning Python UI programming &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

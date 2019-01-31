@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>OneDrive for Business, or pleasure.</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">OneDrive for Business, or pleasure.</h1>
+    
+    <p>Posted on 6th February 2018</p>
+    <hr>
+
+    <p>My <a href="https://www.uclan.ac.uk">new job</a> came with a surprise: I get a Surface Pro with docking station as my work PC.  This is actually very nice (I tend normally towards the "good enough" school of technology ownership).  An Office365 subscription also comes with the job, and so 1TB (yes, a few years ago, a good hard-disk) of cloud storage from <a href="https://products.office.com/en-gb/onedrive-for-business/online-cloud-storage">OneDrive for business</a>.</p>
+<p>Hmm, but... The Surface Pro only have GBs of free storage (thanks to a smallish SSD) and that's to be shared with applications I might want to install.  But, surely, I can just sync the folders I want, and keep more in the cloud (swapping things about, perhaps, if needs be).  Right?  A bit of Internet searching suggests that, sure, that's an option.  For normal consumer OneDrive.  But not, it seems, for OneDrive Business.  Until maybe mid-2018 when a new client comes out.  YMMV of course.</p>
+<!--more-->
+
+<p>I <em>did</em> find some instructions and downloads which can turn on hidden features in the consumer version of OneDrive (which you'll have automatically, if you are on Windows 10).  Am I going to run random registry hacks on my new work PC?  No...  But it turns out the edits you need to mark are small, and easily reversible, and safe seeming.  So here's a guide.</p>
+<h3>The default view</h3>
+<p>If you fire up OneDrive, it'll look a bit like this:</p>
+<p><img class="fixed-ratio-resize" alt="Pic" src="./public/od01.png"></p>
+<p>But you won't be able to input a work email.</p>
+<h3>Edit the registry</h3>
+<p>Hit the windows key, and type <code>regedit</code> and enter to tune the "Registry Editor".  You'll need some form of admin rights, I'm afraid.  In the tree view on the left, navigate to, sucessively, "HKEY_CURRENT_USER" then "Software" then "Microsoft" and then "OneDrive".  Now:</p>
+<ul>
+<li>Right-click in the right-hand window, select "new" and then "DWORD (32-bit) value".</li>
+<li>Type the new name as "EnableAddAccounts".</li>
+<li>Double-click on the new entry, and change the "Value data" to 1.</li>
+<li>Do exactly the same with a new entry with name "DefaultToBusinessFRE" (and value 1).</li>
+</ul>
+<p>Close the registry editor</p>
+<h3>The new view</h3>
+<p>Initially, I this didn't work me.  I quit, and restarted, OneDrive, but no luck.</p>
+<ul>
+<li>You could try rebooting your machine.  (I didn't, thanks to some long-running computational tasks I'm performing...)</li>
+<li>However, if you visit the <a href="https://onedrive.live.com/about/en-GB/download/">OneDrive Download</a> site, and click on "Start OneDrive", a new view of OneDrive will open, where I was able to type my work email address, and then was taken to my work's login page.  After that, I can selectively sync the folders I want.</li>
+</ul>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2018-03-19-LaTeX_PDF_Munging.html">&larr; PDF munging with LaTeX</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2018-01-22-AcademicCulture.html">Expectations of brilliance underlie gender distributions across academic disciplines &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

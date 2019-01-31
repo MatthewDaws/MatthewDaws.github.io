@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Open Street Map Data</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Open Street Map Data</h1>
+    
+    <p>Posted on 27th April 2017</p>
+    <hr>
+
+    <p>I'm currently working on using some address information from open street map to augment other open data sources.  Here are some notes on using data from open street map, in Python.</p>
+<h2>Getting and using Open StreetMap Data</h2>
+<p>It seems like this is a bit of a pain.  Open StreetMap (OSM) uses a custom, XML based, format which is hard/impossible for standard GIS software to read.</p>
+<!--more-->
+
+<h2>Data sources</h2>
+<ul>
+<li>http://wiki.openstreetmap.org/wiki/Planet.osm Gives links to download the world and various extracts of it.</li>
+<li>http://wiki.openstreetmap.org/wiki/Overpass_API Details the "Overpass API" which allows targeted querying of data from the OSM database.  (The <code>OSMnx</code> package seems great for making direct, small-scale queries.)</li>
+</ul>
+<h2>GeoFabrik</h2>
+<p>http://download.geofabrik.de/  Offer downloads of regions of the world, either in OSM format, or converted to shape-file format.  The latter can be loaded into geopandas, QGIS etc. etc. but appears, sadly, to be missing useful information.  For example, I can <a href="https://www.openstreetmap.org/way/210164834">locate a building</a> and find the polygon for this (by it's ID) in the shapefile, but there is no meta-data attached to give me e.g. the address!</p>
+<p>However, for off the shelf analysis using existing tools, this is perhaps where to start.</p>
+<h2>Format</h2>
+<p>The standard format is XML, either compressed, or packaged using <a href="https://developers.google.com/protocol-buffers/">Protobuf</a>.</p>
+<ul>
+<li>http://wiki.openstreetmap.org/wiki/OSM_XML Gives the XML format</li>
+<li>http://overpass-api.de/output_formats.html Gives details of the JSON format which the Overpass API can return.</li>
+<li>http://wiki.openstreetmap.org/wiki/Map_Features Gives details of the "features" the returned data can contain.</li>
+</ul>
+<h2>Libraries</h2>
+<p>I should probably be using <a href="http://osmcode.org/pyosmium/">pyOsmium</a> but there is no conda build, and being stuck with either a windows box, or a locked-down linux box, I am scared to try to get it to build.</p>
+<p><strong>GDAL / OGR</strong> can be easily installed (or come for free with geopandas).</p>
+<ul>
+<li>http://www.gdal.org/drv_osm.html Gives some brief details</li>
+<li><a href="https://pcjericks.github.io/py-gdalogr-cookbook/vector_layers.html">A cookbook</a> for GDAL.</li>
+<li>I didn't have a great deal of luck finding the details I wanted.</li>
+</ul>
+<h3>OSMnx</h3>
+<p>It seems that others have had similar thoughts to me.  <a href="https://github.com/gboeing/osmnx">OSMnx</a> looks to be a great tool for network analysis of road networks.  The <a href="https://www.researchgate.net/publication/309738462_OSMnx_New_Methods_for_Acquiring_Constructing_Analyzing_and_Visualizing_Complex_Street_Networks">review paper</a> is also very informative, with some nice background information.</p>
+<p>With Anaconda, it's a one-line install:</p>
+<pre><code>conda install -c conda-forge osmnx
+</code></pre>
+<p>This seems very nice for targeted downloads, but it's a bit too "magic" for my tastes.  The source code is very readable however, and I've been learning a lot from it.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2017-05-03-sax.html">&larr; Parsing XML via SAX in Python</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2017-03-24-Numpy_vectorising.html">Numpy vectorising &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Jam 2014 Round 1C</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Jam 2014 Round 1C</h1>
+    
+    <p>Posted on 23th April 2015</p>
+    <hr>
+
+    <p>As ever, links to: <a href="https://code.google.com/codejam/contest/3004486/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2014_1c">GitHub</a>.</p>
+<p>What did you need to do to progress?  Score 30 points in 100 minutes, or more points.  So doing problems A and B would be enough.  Again, tackling the "small" problems quickly is worthwhile.</p>
+<p><strong>Problem A, Part Elf:</strong> At generation 40, everyone is 1 or 0 elf.  So at generation 39, everyone is \( \frac12 (a+b) \) elf, where \( 0 \leq a,b \leq 1 \).  By induction, at generation \( 40-n \) everyone is \( a/2^n \) elf, for some integer \( 0 \leq a \leq 2^n \).  So read in <code>P</code> and <code>Q</code>, use Euclid's algorithm to find the gcd and hence write <code>P/Q</code> in lowest terms, and then we need \( P/Q = a / 2^{40} \) so <code>Q</code> should be a power of 2, less than or equal to 40, and we need \( P \leq Q \).</p>
+<!--more-->
+
+<p>If we an ancestor who is 1 elf in generation \( 40-n \) then in the next generation, the offspring is \( \frac12 (1 + a/2^n) \) elf, for some \( 0 \leq a \leq 2^n \).  By induction, in generation 0, you are \( \frac{1+x/2^n}{2^{40-n}} \) elf, where \( 0 \leq x \leq 2^{40} - 2^n \).  That is, test \[ \frac{P}{Q} = \frac{2^n + x}{2^{40}} \] and if \( Q = 2^M \) then we need \( 2^n \leq 2^{40-M} P \leq 2^{40} \) for the maximum \( n\) as the answer is \( 40-n\).  So just check all \(n\).</p>
+<p><strong>Problem B, Reordering Train Cars:</strong>  Given a bunch of strings, and want to know how many ways we can concatenate them so that in the final single string, all letters appear consecutively: so "aabbc" is okay but "abac" is not.  My approach was simply to look at each letter in turn:
+   - If no string contains this letter, carry on.
+   - If one string contains this letter, check that the letters are consecutive.  <em>Don't forget this case!</em>
+   - If more than one string contains this letter, then split the strings into those which are just the letter repeated, and those which contains other letters as well.  Say we get <code>x = ___aaa, y = aaa___</code> then we can only arrange these as <code>xy</code> with the various repeats of <code>a</code> in the middle.  Similarly check other cases.
+   - In all cases, we end up with one possible concatenated string (though perhaps many ways to form this one string).  So remove all the old strings and add this new one in, and then repeat with a new letter.</p>
+<p>I guess the difference between the small and large cases is that the small one can be solved by brute force (though this is slow in Python).  The difficult part is remembering all the different cases.  And, in my case, <em>reading the question properly</em> as the final answer should be returned mod 1,000,000,007.</p>
+<p><strong>Problem C, Enclosure:</strong> No way I could have done this in the time limit.  Place rocks on grid points, and then a point is "enclosed" if a rock is on it, or moving up/down/left/right, you'll eventually hit a rock regardless of how you move.  You can solve this by a lot of up front analysis:
+   - Again, <em>carefully</em> reading the problem, given <code>K</code> we want to find the least number of rocks which can enclose <em>at least</em> <code>K</code> points.  This optimisation problem is equivalent to, for a fixed <code>R</code>, finding the maximum number of points we can enclose with <code>R</code> rocks.
+   - Let's think how to "improve" a given arrangement.
+   - Let's say a point which is enclosed, but doesn't have a rock on it, is "internal".
+   - Intuitively the best solution is "connected", in that all the internal points are connected.  I'm not 100% sure how to show this rigourously.
+      - If you have two connected components, you can move them around until they are sharing rocks.
+      - Any rock which is not "enclosing" an internal point (that is, no internal point is next to that rock) can be moved at will.
+      - I think these moves are enough to reduce a disconnected case to a connected one...
+   - Anyway, assuming this, consider all the rows which contain rocks.  If the first row is like this: <code>***...***</code> where <code>* = rock, . = blank</code> then we can walk from column 2 to column 8, say, and so in columns 4,5,6 there must be rocks somewhere below the 1st row.  Move these up, and we increase the number of enclosed points, but don't increase the number of rocks.  So we may assume that the top row is a continuous segment.
+   - The same argument applies to the left, right and bottom.
+   - Now consider the upper-left corner, which could look like:</p>
+<pre><code>    ***                  ****
+  **      ------&gt;       *
+ *                     *
+*                     *
+</code></pre>
+<p>That is, we can always "move up" various rocks, or similarly "move left" rocks (which might then cause other rocks to be moved up or left) until the upper-left corner is just a line of rocks at a 45 degree angle.
+   - Similar do the same transformation to the other corners.  We conclude that the optimal shape is a rectangle which has had triangles, at a 45 degree angle, removed from each corner.  We now analyse all such shapes, in terms of rocks needed and enclosed points.  Then it's very each just to check all such shapes to find the best case.  We could then speed this up by some "memorisation" techniques, but actually, it's already easily fast enough for the "large" case.  (Mental node: the <code>functools</code> decorator <code>@functools.lru_cache</code> can do this automatically in Python!)
+   - Imagine we take the top-left corner and change the first n rows to a triangle.  So <code>n=1</code> does nothing, and <code>n=3</code> does the following:</p>
+<pre><code>****                 **
+*      -------&gt;     *
+*                  *
+*                  *
+</code></pre>
+<p>So we have changed 2n-1 rocks to n rocks (removed n-1 rocks) and changed n*n interior points to 1+2+...+n = n*(n+1)/2 points (removed n*(n-1)/2 points).
+   - So doing this with parameters a,b,c,d on the four corners, we end up using 2*(n+m) - (a+b+c+d) rocks and having n*m - (a*(a-1) + ... + d*(d-1))/2 interior points.  We don't want to remove overlapping corners, and the constraints for this are that a+b, c+d &lt;= n+1 and a+c, b+d &lt;= m+1.
+   - You can check that the maximum occurs when a,b,c,d are roughly equal (that is, all equal to k or k+1 for some k&gt;=1).
+   - So we just check the cases when all a,b,c,d = k, one equals k+1, two equal k+1 or three equal k+1.  You can exactly solve the inequalities, but I just implemented a binary search.
+   - Don't forget the special case when n=1 or m=1 (best we can do is just a row/column of rocks) and that for various values, it doesn't make sense to consider e.g. a,b,c=k+1 and d=k.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-04-24-20151a.html">&larr; Jam 2015 Round 1A</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-04-22-20131a.html">Jam 2013 Round 1A &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

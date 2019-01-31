@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Parsing XML via SAX in Python</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Parsing XML via SAX in Python</h1>
+    
+    <p>Posted on 3th May 2017</p>
+    <hr>
+
+    <p>I've worked with XML before (in Java), but always small files using the <a href="https://en.wikipedia.org/wiki/Document_Object_Model">Document Object Model</a>.  Now faced with multi-GB of Open Street Map derived XML files, of which I need to get a small amount of data, some other method is required.  Step forward the <a href="https://en.wikipedia.org/wiki/Simple_API_for_XML">Simple API for XML (SAX)</a>.  This is an <a href="http://www.saxproject.org/event.html">event-driven API</a>: the XML parser calls a "handler" object with information about tags opening and closing, and the character data in between.</p>
+<p>In Python, there is support in the <a href="https://docs.python.org/3/library/xml.sax.html">standard library</a> for SAX parsing.  You need to sub-class (or duck-type, and implement the interface of) <code>xml.sax.handler.ContentHandler</code>.  It seems that duck-typing is frustrating, as you need to implement the whole interface, even if you never expect certain methods to be called.</p>
+<!--more-->
+
+<p>The methods <code>startDocument</code> and <code>endDocument</code> are called at the start and end of parsing.  The <code>startElement</code> method sends details of the name of an opening tag, and it's attributes (sent as essentially, but not quite the same as, a <code>dict</code> from string to string), and <code>endElement</code> tells you of a closing tag.  Text is sent to you via <code>characters</code> which will also notify of new lines (which probably want ignoring).  There is more, but that's enough for my application.</p>
+<h2>Getting a generator</h2>
+<p>Somehow, a callback doesn't feel very "pythonic" (and does feel terribly Javascript-esq).  The pythonic way to push data to a client is surely to use a generator.  Naively, to convert a callback to a generator, we'd like to:</p>
+<ul>
+<li>Make an <code>__iter__</code> method call the code which requires the callback handler.</li>
+<li>When control is first returned to the callback, store the data and somehow return control to <code>__iter__</code> which builds an iterator, and returns control to the client.</li>
+<li>Each time we call <code>__next__</code> on the iterator, return control to the data generation function...</li>
+<li>???</li>
+<li>Profit?</li>
+</ul>
+<p>Given that we are suspending execution, it should come as no surprise that the way to do this is via threading.  Run the data generation code in a separate thread, and let the callback handler write all its data to a blocking queue.  On the main thread, we simply implement a generator which pulls data off the queue (waiting if necessary for data, hence allowing control back to the thread) and <code>yield</code>s it back to the client.</p>
+<p>For fun, I implement this in the module <a href="https://github.com/MatthewDaws/OSMDigest/blob/master/osmdigest/utils/cbtogen.py"><code>cbtogen</code></a> in my project OSMDigest.  Sadly, in Python, event with a large queue, there is a signifcant overhead in running two threads and passing data over a queue.</p>
+<p>For the application of converting the SAX callback to a generator, the result is incredibly slow code.  This can be significantly improved by moving as much parse logic as possible to the thread, so we send far fewer objects over the queue.  However, this is a better way...</p>
+<h2>Alternative using element-tree</h2>
+<p>The <code>xml.etree.ElementTree</code> module in the Python standard library represents an XML document via elements which have "children" (i.e. nested tags).  The standard usage is to parse the whole document, but it is also possible to parse the document tag by tag using the <code>iterparse</code> function.  There is a caveat however: all children of tags are still collected.  If your document consists of lots of disjoint sub-sections, this is not a problem, but for my application, parsing Open Street Map data, the entire document is contained in an <code>&lt;osm&gt;</code> tag.  As such, we'd eventually collect the entire document as children of this main (or root) tag.  The trick is to capture a reference to the root tag, and then periodically (at a suitable point in the iteration loop) call <code>clear</code> on this object.  This removes references to children, and so allows them to be garbage collected.  The obvious downside here is that different document structures might require different techniques to "clear" the correct tags.</p>
+<p>For OSM data, however, this is a clear winner, giving by fast the quickest way to parse the data.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2017-05-04-OSM_xml.html">&larr; Open Street Map XML data</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2017-04-27-OSM_data.html">Open Street Map Data &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Blog</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="my-4">Blog of Matthew Daws</h1>
+
+    <div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">CodeJam 2015 Round 2</h2>
+        <p>Round 2 came and went (and Round 3 and the "distributed" round).  As an effort to practice with C#, I solved these problems in C# (definitely slower than using Python, and actually, the end running time is not that much quicker, for these sort of algorithmic / numerical problems).</p>
+<p>There's a definite step-up in difficulty here!  Maybe I kid myself I could have done problem A and some "small" problems quickly... that people did them all in 150 minutes is quite scary.  The <a href="">Official Contest Analysis</a> is rather brief (from G+, it seems the organisers were busy with the distributed round; or maybe, if we've come this far, shorter answers are all we need ;-&gt; )  I think my background in pure Maths shows here: I found problem D quite easy, as I found analysing the special cases off-line (pen and paper) to be not so hard.  Problems B and C (in "large" form) were hard, I thought.  (I missed the trick with problem B; and using an off-the-shelf Graph package is obviously the fast way to do Problem C.)</p>
+<p>See the code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2015_2">GitHub</a>.</p>
+
+        <a href="2015-06-17-20152.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">17th June 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Thoughts about C#</h2>
+        <p>On the basis that knowing a modern OO language would be good, and on the basis that everyone and their granny knows JAVA, I thought I'd look at C#.  Getting going with C# was a bit tedious: I end up looking things up endlessly, and puzzling over things for a while before they "click" and seem obvious (which is always annoying, as then I'm left wondering why it wasn't obvious from the start).  You wait for muscle memory to build...  </p>
+<p>Example: A small mistake lead to some musings on how sort algorithms are implemented: <a href="http://stackoverflow.com/questions/30865510/why-does-failing-to-recognise-equality-mess-up-c-sharp-listt-sort">StackOverFlow Question</a> (the actual problem came from thinking about orderings in Python and C++ too much, where you specify a <a href="https://en.wikipedia.org/wiki/Weak_ordering#Strict_weak_orderings">strict weak ordering</a>, basically "less than", and then porting that to a <code>CompareTo</code> method and missing a corner-case.  This came up in a <a href="./20152.html">CodeJam problem</a>.)</p>
+
+        <a href="2015-06-16-ThoughtsCSharp.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">16th June 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Disjoint Paths; Implementation Issues</h2>
+        <p>Mostly as an excuse to <a href="./ThoughtsCSharp.html">learn C#</a> I implemented the <a href="./Paths.html">path finding algorithms</a>.  Running some tests (random graphs, and then computing cuts from found disjoint paths, as to verify a "cut" is easy!) caught some implementation issues.  All obvious with hindsight.</p>
+<h2>Notes on the implementation</h2>
+<p>See the <a href="https://github.com/MatthewDaws/CS_Learning/blob/master/bits/Graphs_Paths.cs">file on GitHub</a>.  I wanted to use interfaces, and extension methods, as they are features of C# which differ from e.g. C++.  In hindsight, I think an abstract base case <code>Graph</code> would have been more sensible, with <code>DirectedGraph</code> and <code>UndirectedGraph</code> inheriting from this.</p>
+
+        <a href="2015-06-15-Paths-Implementation.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">15th June 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Disjoint Paths</h2>
+        <p>A few notes on paths in graphs: finding the maximum number of edge/vertex disjoint paths, and an application to finding disconnections.</p>
+<h2>Edge disjoint paths</h2>
+<p>Consider a graph, for the moment undirected.  We wish to find the maximum number of edge disjoint paths from a fixed vertex \(s\) to a fixed vertex \(t\).  We can do this with the <a href="https://en.wikipedia.org/wiki/Max-flow_min-cut_theorem">Max-Flow Min-Cut theorem</a> and the <a href="https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm">Ford-Fulkerson algorithm</a>, at least in the directed case, but let's specialise this to our case.</p>
+
+        <a href="2015-06-08-Paths.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">8th June 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">AdaBoost and classification</h2>
+        <p>Motivated by another nice post from <a href="http://jeremykun.com/2015/05/18/boosting-census/">Jeremy Kun</a> I've had a play with <a href="https://en.wikipedia.org/wiki/AdaBoost">AdaBoost</a>.  Like Jermey I used the "Adult Census Dataset" and then also the "Titanic" dataset.  The latter requires some data munging, and some decisions about how to process the data.</p>
+<p>Once you understand what AdaBoost does, and how Decision Stumps/Trees work, it seems reasonable to now use <a href="http://scikit-learn.org/stable/">scikit-learn</a> (which can often make you seem like a trained monkey, plugging things into your data).  It's worth noting that an out the box decision tree works almost perfectly on the "Adult" dataset, but much less well on the Titanic Dataset (where AdaBoost and decision stumps now don't look so bad!)</p>
+<p>As ever, Python feels a bit slow for this sort of thing, but also nice because it's interactive, and well aimed at handling data.</p>
+<p><a href="https://github.com/MatthewDaws/Python_bits/tree/master/machine_learning">GitHub Repository</a></p>
+        <a href="2015-06-02-AdaBoost.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">2nd June 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Ising model and image denoising</h2>
+        <p>As a final application of MCMC methods, you can't escape the Ising Model, and it's cute application to denoising images (of a text-like nature).</p>
+<p><img class="fixed-ratio-resize" alt="Denoising" src="./public/4.png"></p>
+<p><a href="http://nbviewer.ipython.org/github/MatthewDaws/Python_bits/blob/master/monte_carlo/Ising%20Model.ipynb">Ipython notebook</a></p>
+        <a href="2015-05-30-ising.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">30th May 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Removing outliers</h2>
+        <p>So, linear regression isn't so exciting.  What about removing outliers?  I do find this, just a little, magical:</p>
+<p><img class="fixed-ratio-resize" alt="Outliers" src="./public/3.png"></p>
+<p>We define a model where a data point \( y_i \) can either be from a normal linear regression model, or just a random (normally distributed) number.  We then build into our model indicators \( o_i \in \{0,1\} \) to indicate if this is an outlier or not.  Then sample the posterior distribution with an MCMC sampler, integrate out the \(o_i\) and you have your line of best fit.  Fix \(i\) and integerate out everything but \(o_i\) and you get an estimate of probability the point is an outlier.  The above plot shows those points estimated above 90%.</p>
+<p>Rest is in an <a href="http://nbviewer.ipython.org/github/MatthewDaws/Python_bits/blob/master/monte_carlo/Outliers.ipynb">Ipython notebook</a> on GitHub.  This also gave me a chance to play with my own modified Gibbs sampler, which works nicely, if I say so myself.</p>
+        <a href="2015-05-28-outliers.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">28th May 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Regression from a (simple) Bayesian perspective</h2>
+        <p>How might we tackle simple regression from a Bayesian perpsective?  Our model will be that we are given points \( (x_i)_{i=1}^n \) (which we assume we <em>know</em>, at least to a very high accuracy) and dependent points \( y_i^{re} = \alpha + \beta x_i \), but we only observe \( y_i \) where \( y_i = y_i^{re} + e_i \) where the \( e_i \) are our "uncertainties" (I like the line: "if they were errors, we would have corrected them!", see footnote 10 of <a href="http://arxiv.org/abs/1008.4686">arXiv:1008.4686</a>) usually modelled as iid \( N(0,\sigma^2) \).  The likelihood is then</p>
+<p>\[ f(y|\alpha,\beta,\sigma) = \prod (2\pi\sigma^2)^{-1/2}
+\exp\Big( -\frac{1}{2\sigma^2} (y_i - (\alpha + \beta x_i))^2 \Big) \]</p>
+<p>Finding the MLE leads to <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">Least Squares Regression</a>.  A simple Bayesian approach would be to stick some prior on $\alpha, \beta, \sigma$, but of course, this raises the question of <em>how</em> to do this!</p>
+<p>Anyway, another <a href="http://nbviewer.ipython.org/github/MatthewDaws/Python_bits/blob/master/monte_carlo/Bayesian%20Statistics.ipynb">Ipython notebook</a> which develops some of the basic maths, and then uses <a href="http://dan.iel.fm/emcee/current/">emcee</a> and the <a href="https://github.com/dfm/triangle.py">Triangle Plot</a> to make some simulations and draw some plots of posterior distributions.</p>
+
+        <a href="2015-05-27-regression.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">27th May 2015</div>
+</div>
+
+
+    <ul class="pagination justify-content-center mb-4">
+    <li class="page-item">
+        <a class="page-link" href="index2.html">&larr; Newer</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" href="index4.html">Older &rarr;</a>
+    </li>
+</ul>
+
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+    <img src="../images/profile.jpg" class="fixed-ratio-resize my-5" alt="Profile image; rendered glass discs">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row">
+            
+        </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled">
+            
+        </ul>
+        </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+    
+    </div>
+    </div>
+
+    <!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!--<script src="../js/bootstrap.min.js"></script>-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+        

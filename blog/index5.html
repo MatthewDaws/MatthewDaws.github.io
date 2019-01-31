@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Blog</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="my-4">Blog of Matthew Daws</h1>
+
+    <div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Jam 2013 Round 1B</h2>
+        <p>As ever, links to: <a href="https://code.google.com/codejam/contest/2434486/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2013_1b">GitHub</a>.</p>
+<p>I did this under timed conditions, and would have just qualified.  A silly error was all which stood between B large and me...</p>
+<p><strong>Problem A, Osmos:</strong> Start with A and \( (x_i)_{i=1}^N \) integers.  You can absorb one of the \( x_i \) if it's smaller than A, and then A grows by \( x_i \).  Help Armin to be able to absorb all the numbers by adjusting the initial set:</p>
+<ul>
+<li>You can add any new number;</li>
+<li>You can remove a number.</li>
+</ul>
+<p>What is the least number of moves to get a valid set?</p>
+
+        <a href="2015-04-26-20131b.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">26th April 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Jam 2015 Round 1A</h2>
+        <p>So, I didn't do this one live, as it ran at 2am UK time...  I did however, for fun, try this under timed conditions a few days later, and I didn't do great, but got enough to qualify (did A and B with 3 silly mistakes from B, then C small, and stupidly didn't think, and tried my slow algorithm on C large.  As large problems are one-shot, it would have been game over, and I'd be around 500 in the ranking.)</p>
+<p>As ever, links to: <a href="https://code.google.com/codejam/contest/4224486/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2015_1a">GitHub</a>.</p>
+<p><strong>Problem A, Mushroom Monster:</strong> Easy, and my solution doesn't differ from the official analysis.</p>
+
+        <a href="2015-04-24-20151a.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">24th April 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Jam 2014 Round 1C</h2>
+        <p>As ever, links to: <a href="https://code.google.com/codejam/contest/3004486/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2014_1c">GitHub</a>.</p>
+<p>What did you need to do to progress?  Score 30 points in 100 minutes, or more points.  So doing problems A and B would be enough.  Again, tackling the "small" problems quickly is worthwhile.</p>
+<p><strong>Problem A, Part Elf:</strong> At generation 40, everyone is 1 or 0 elf.  So at generation 39, everyone is \( \frac12 (a+b) \) elf, where \( 0 \leq a,b \leq 1 \).  By induction, at generation \( 40-n \) everyone is \( a/2^n \) elf, for some integer \( 0 \leq a \leq 2^n \).  So read in <code>P</code> and <code>Q</code>, use Euclid's algorithm to find the gcd and hence write <code>P/Q</code> in lowest terms, and then we need \( P/Q = a / 2^{40} \) so <code>Q</code> should be a power of 2, less than or equal to 40, and we need \( P \leq Q \).</p>
+
+        <a href="2015-04-23-20141c.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">23th April 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Jam 2013 Round 1A</h2>
+        <p>As ever, links to: <a href="https://code.google.com/codejam/contest/2418487/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2013_1a">GitHub</a>.</p>
+<p>I did this under timed conditions: a mild disaster, but then it was for everyone back in 2013.  If I had been clinical, I could have solved A, B-small and C-small, which would have been enough.</p>
+<p><strong>Problem A, Bullseye:</strong> Draw some concentric rings, with a fixed amount of paint.  A bit of maths shows that ring \( n \in \{1,2,3,\cdots\} \) uses \( 2r+4n-3 \) units of paint, so we want the maximal \( N \) with \[ t \geq \sum_{n=1}^N 2r+4n-3 = 2rN + 2N(N+1) - 3N. \]</p>
+
+        <a href="2015-04-22-20131a.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">22nd April 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Jam 2014 Round 1A</h2>
+        <p>As ever, links to: <a href="https://code.google.com/codejam/contest/2984486/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2014_1a">GitHub</a>.</p>
+<p>Of current interest is how to progress: top 1000 people go through, and for that you'd need 55 points in a reasonable time.  That is, solve all but the tricky statistics based question, Problem C.</p>
+<p><strong>Problem A, Charging Chaos:</strong> The problem is the find a "mask" which when xored with each outlet gives each device.  Of course, what makes this tricky is that there is also an unknown permutation to find, to map the outlets bijectively to the devices.  But you can find these iteratively:</p>
+<ul>
+<li>For the first bit, try the mask having bit 0: then you partition the outlets into two sets, those with bit 1 having 0, and those with bit 1 being 1.  Also partition the devices similarly, and then the sets need to match in size for a bijection to exist.  Similarly if the mask has bit 1 (then 0 for outlet maps to 1 for device).</li>
+<li>Then carry on, further subdividing the sets</li>
+<li>This gives a <a href="https://en.wikipedia.org/wiki/Backtracking">Backtracking algorithm</a>, or, what amounts to the same thing, a <a href="https://en.wikipedia.org/wiki/Depth-first_search">Depth First Search</a> with pruning.</li>
+<li>This is rather different from the official solution.</li>
+</ul>
+
+        <a href="2015-04-17-20141a.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">17th April 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Jam 2014 Round 1B</h2>
+        <p>As ever, links to: <a href="https://code.google.com/codejam/contest/2984486/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2014_1b">GitHub</a>.</p>
+<p>Of current interest is how to progress: top 1000 people go through, and for that you'd need 42 points in any time faster than basically the whole 2.5 hours.  This seems more reasonable...</p>
+<p><strong>Problem A, The Repeater:</strong> Given some input strings and Omar can make a move: he can pick one string, and one character in that string, and either repeat it once more (so "abc" -&gt; "abbc" or "aabc" or "abcc") or if the character is already repeated, he can delete one copy (so "aabcc" -&gt; "abcc" or "aabc").  Can he make all the strings the same, and if so, what's the minimal number of moves to do so?</p>
+
+        <a href="2015-04-17-20141b.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">17th April 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Code Jam Qualification 2015</h2>
+        <p>As expected, flight back from Boston to Leeds via Dublin resulted in zero sleep, and so hopes were not overly high for the <a href="https://code.google.com/codejam/contest/6224486/dashboard">2015 Qualification Round</a>.  But, only 20 points needed to progress, which can't be too hard, right?</p>
+<p>Anyway, in the end, I got 100%, and seem to be the highest ranked UK participant.  This, one suspects, won't last...!</p>
+<p>Some code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2015_qual">GitHub</a>.  On the todo list is to update this post with some comments, but my solutions are pretty similar to the <a href="https://code.google.com/codejam/contest/6224486/dashboard#s=a">Offical Analysis</a>.</p>
+        <a href="2015-04-14-qualification15.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">14th April 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Jam 2008 Round 1B</h2>
+        <p>I found this to be somewhat harder than round A.  Also, my solutions in Python, running on my 2013 era laptop, are rather slow, so really a C++ or similar implementation would be needed, especially on 2008 era hardware.</p>
+<p>Again, The <a href="https://code.google.com/codejam/contest/32017/dashboard#s=a">Official Contest Analysis</a> is a good writeup, so I won't say a great deal.  See the code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2008_1b">GitHub</a>.</p>
+
+        <a href="2015-04-10-20081b.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">10th April 2015</div>
+</div>
+
+
+    <ul class="pagination justify-content-center mb-4">
+    <li class="page-item">
+        <a class="page-link" href="index4.html">&larr; Newer</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" href="index6.html">Older &rarr;</a>
+    </li>
+</ul>
+
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+    <img src="../images/profile.jpg" class="fixed-ratio-resize my-5" alt="Profile image; rendered glass discs">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row">
+            
+        </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled">
+            
+        </ul>
+        </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+    
+    </div>
+    </div>
+
+    <!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!--<script src="../js/bootstrap.min.js"></script>-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+        

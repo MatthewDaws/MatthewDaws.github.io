@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Code Jam 2014 Qualification</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Code Jam 2014 Qualification</h1>
+    
+    <p>Posted on 8th April 2015</p>
+    <hr>
+
+    <p>While on holiday, what better way to unwind than solve some old Code Jam puzzles?</p>
+<p>As ever, the <a href="https://code.google.com/codejam/contest/2974486/dashboard#s=a">Official Analysis</a> is very good, and similar to my approaches.  Some code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2014_qual">GitHub</a>.</p>
+<!--more-->
+
+<p><strong>Problem A:</strong> Trivial.</p>
+<p><strong>Problem B:</strong> The official writeup draws some graphs, but you can argue quite algebraically.</p>
+<ul>
+<li>Once you have C cookies, it doesn't make sense to delay upgrading.</li>
+<li>So the optimal strategy is to keep getting to C cookies, upgrade, and then eventually decide to stop and just generate the needed X cookies.</li>
+<li>What to stop?</li>
+<li>If you stop after n=0,1,2,... upgrades then the time taken is
+\[ T_n = \frac{C}{2} + \frac{C}{2+F} + \frac{C}{2+2F} + \cdots + \frac{C}{C+(n-1)F} + \frac{X}{2+nF} \]
+Then we can check that \( T_{n+1} &lt; T_n \) if and only if \( n+1 &lt; \frac{X}{C} - \frac{2}{F} \).  It follows from this if and only if that the sequence \( (T_n) \) will decrease, bottom out, and then forever increase.  So \( T_N \) is minimal if \( N \) is maximal with \( N &lt; \frac{X}{C} - \frac{2}{F} \) or equivalently \( N = \lceil \frac{X}{C} - \frac{2}{F} \rceil - 1 \).</li>
+<li>So we simply compute \( T_N \) for this value; I went to the effort of summing from the least to greatest values to reduce round-off errors.</li>
+</ul>
+<p><strong>Problem C:</strong> Just draw a lot of pictures!</p>
+<p><strong>Problem D:</strong> I worked out Ken's optimal strategy, and it seemed intuitively clear that Naomi couldn't change this, but I couldn't find a formal proof (the official writeup has a very nice one).  The optimal strategy in Deceitful War is also reasonably clear, once you draw a few arrangements of weights.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-04-09-2013qual.html">&larr; Code Jam 2013 Qualification</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-04-01-20081a.html">Jam 2008 Round 1A &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

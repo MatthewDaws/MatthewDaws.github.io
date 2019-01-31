@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Jam 2014 Round 1A</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Jam 2014 Round 1A</h1>
+    
+    <p>Posted on 17th April 2015</p>
+    <hr>
+
+    <p>As ever, links to: <a href="https://code.google.com/codejam/contest/2984486/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2014_1a">GitHub</a>.</p>
+<p>Of current interest is how to progress: top 1000 people go through, and for that you'd need 55 points in a reasonable time.  That is, solve all but the tricky statistics based question, Problem C.</p>
+<p><strong>Problem A, Charging Chaos:</strong> The problem is the find a "mask" which when xored with each outlet gives each device.  Of course, what makes this tricky is that there is also an unknown permutation to find, to map the outlets bijectively to the devices.  But you can find these iteratively:</p>
+<ul>
+<li>For the first bit, try the mask having bit 0: then you partition the outlets into two sets, those with bit 1 having 0, and those with bit 1 being 1.  Also partition the devices similarly, and then the sets need to match in size for a bijection to exist.  Similarly if the mask has bit 1 (then 0 for outlet maps to 1 for device).</li>
+<li>Then carry on, further subdividing the sets</li>
+<li>This gives a <a href="https://en.wikipedia.org/wiki/Backtracking">Backtracking algorithm</a>, or, what amounts to the same thing, a <a href="https://en.wikipedia.org/wiki/Depth-first_search">Depth First Search</a> with pruning.</li>
+<li>This is rather different from the official solution.</li>
+</ul>
+<!--more-->
+
+<p><strong>Problem B, Full Binary Tree:</strong> I solved this using a recursive algorithm:</p>
+<ul>
+<li>Notice that a full binary tree (FBT) has a nice "sub-problem" property: if you delete the root and each child of the old root into roots of new subtrees, then you get either two empty trees, or two rooted FBTs.</li>
+<li>Input is a tree (and we're told it's a tree)</li>
+<li>Try each node as the root of our eventual FBT.</li>
+<li>If it has degree 1, then we'll have to delete everything below it.</li>
+<li>If it has degree greater than 2, then we need to decide which children to delete:<ul>
+<li>Examine each in turn, and see what the smallest number of nodes to delete to make it into a FBT is.</li>
+<li>Select the best 2</li>
+</ul>
+</li>
+<li>Note that the task above is exactly the same task as we're performing overall.</li>
+</ul>
+<p>Thus we get the following:
+   - For a given root, consider each child.  Let \( S_i \) be the total size of the tree rooted at that child, and let \( C_i \) be minimal number of nodes to delete to turn this into an FBT.
+   - We can find these recursively: \( S = 1 + \sum_{\text{children}} S_i \)
+   - For \( C \) we want to find \( i_i, i_2 \) to minimise
+\[ C_{i_1} + C_{i_2} + \sum_{i\not= i_1, i_2} S_i = \sum_i S_i + (C_{i_1} - S_{i_1}) + (C_{i_2} - S_{i_2}) \]
+which is easily found by selecting the two smallest terms of the sequence \( C_j-S_j \).
+   - Recursion doesn't work, so in the end, my code using a "dynamic programming" approach, building up these numbers from the leaves upwards.
+   - See the official writeup for a linear time algorithm.</p>
+<p><strong>Problem C, Proper Shuffles:</strong> I noddled around with this for a bit, got half-way, and then gave up and cheated.  Should have remembered "naive bayes classifiers" as the keyword!  See the writeup as an <a href="http://nbviewer.ipython.org/github/MatthewDaws/CodeJam/blob/master/2014_1a/Random%20Perms.ipynb">IPython Notebook</a>.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-04-22-20131a.html">&larr; Jam 2013 Round 1A</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-04-17-20141b.html">Jam 2014 Round 1B &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

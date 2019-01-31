@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Enumerate in C++</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Enumerate in C++</h1>
+    
+    <p>Posted on 14th May 2015</p>
+    <hr>
+
+    <p>One of the fun things about <a href="https://en.wikipedia.org/wiki/C%2B%2B11">C++11</a> is that minor changes allow you to write somewhat more expressive (aka <a href="http://preshing.com/20141202/cpp-has-become-more-pythonic/">Pythonic</a>) code.</p>
+<p>A common pattern is to iterate over an array while also knowing the index you are at.  Python does this with the <code>enumerate</code> keyword:</p>
+<p><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">container</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="s2">&quot;At {} is {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+ </p>
+<p>In C++ the idiomatic way to do this is perhaps:</p>
+<p><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">container</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;At &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">container</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+ </p>
+<p>This has its flaws though (and is tedious to type).  Using g++, if you have warnings on, <code>-Wall</code>, then you'll see complaint, as the type of <code>container.size()</code> is, typically, of size <code>std::size_t</code> which on my machine is <code>unsigned long long</code> (aka an unsigned 64-bit number).  Warnings aside, as <code>int</code> is on my machine a 32-bit unsigned number, we could potentially have problems if the size of container is more than around 2 billion (unlikely, but possible these days).</p>
+<!--more-->
+
+<p>We could write:</p>
+<p><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>
+ </p>
+<p>or more tediously, but more showy:</p>
+<p><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">decltype</span><span class="p">(</span><span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>
+ </p>
+<p>Surely we can do better?  So I sat down and wrote a little template function <code>enumerate(T container)</code> which returns a class implementing the methods <code>begin()</code> and <code>end()</code>, these in turn returning custom iterators which count up from <code>0</code> to <code>container.size() - 1</code>.  You can thus write:</p>
+<p><div class="highlight"><pre><span></span><span class="n">foreach</span><span class="p">(</span><span class="k">auto</span> <span class="nl">index</span> <span class="p">:</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">container</span><span class="p">))</span> <span class="p">{</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;At &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">index</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">container</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+ </p>
+<h2>Subtle issues 1</h2>
+<p>What makes C++ interesting, and frustrating, is certain subtle issues.  Our iterator returns a number, for which we implement <code>operator*</code>:</p>
+<p><div class="highlight"><pre><span></span>	<span class="n">SizeType</span> <span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">index</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+ </p>
+<p>That's great, but what if the user tries to capture the index by reference:</p>
+<p><div class="highlight"><pre><span></span><span class="n">foreach</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">eneumerate</span><span class="p">(</span><span class="n">container</span><span class="p">))</span>
+</pre></div>
+ </p>
+<p>We get the cryptic error "error: invalid initialization of non-const reference of type 'long long unsigned int&amp;' from an rvalue of type 'long long unsigned int'"  (<a href="http://stackoverflow.com/questions/8293426/error-invalid-initialization-of-non-const-reference-of-type-int-from-an-rval">Explanation from StackOverflow</a>.  Basically, when we <code>return index;</code> we are <em>not</em> returning <code>index</code>, but rather a <em>temporary copy</em> (aka r-value) and, as you might hope, you're not allowed to take the reference of a temporary copy...)  We can "fix" this by:</p>
+<p><div class="highlight"><pre><span></span>	<span class="n">SizeType</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">index</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+ </p>
+<p>However, we've now giving the user access to the index, so this</p>
+<p><div class="highlight"><pre><span></span><span class="n">foreach</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">eneumerate</span><span class="p">(</span><span class="n">container</span><span class="p">))</span> <span class="p">{</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">container</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+ </p>
+<p>prints every second term of container.  Is that what we want?  If not, then we can use a <code>const</code>:</p>
+<p><div class="highlight"><pre><span></span>	<span class="k">const</span> <span class="n">SizeType</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">index</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+ </p>
+<p>The command <code>++i;</code> now gives an error "error: increment of read-only reference 'i'" which is, to my mind, (a) not cryptic; and (b) makes it clear to the user what the issue is.</p>
+<h2>Subtle issues 2</h2>
+<p>Let's get ambitious, and use <code>enumerate</code> for something else:</p>
+<p><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">range</span> <span class="p">{</span>
+   <span class="kt">int</span> <span class="n">size</span><span class="p">()</span><span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">8</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+<span class="p">...</span>
+<span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">n</span> <span class="p">:</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">range</span><span class="p">{})))</span> <span class="p">{</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+ </p>
+<p>This seems to work, so try something more ambitious:</p>
+<p><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">range</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+   <span class="kt">int</span> <span class="n">limit</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+   <span class="n">range</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">l</span><span class="p">)</span> <span class="o">:</span> <span class="n">limit</span><span class="p">{</span><span class="n">l</span><span class="p">}</span> <span class="p">{}</span>
+   <span class="kt">int</span> <span class="n">size</span><span class="p">()</span><span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">limit</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+<span class="p">...</span>
+<span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">n</span> <span class="p">:</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))))</span> <span class="p">{</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+ </p>
+<p>This again seems to work, but it may not...  Suppose we add:</p>
+<p><div class="highlight"><pre><span></span>   <span class="o">~</span><span class="n">range</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;~range() called.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">}</span>
+</pre></div>
+ </p>
+<p>Then the output is:</p>
+<pre><code>range::~range() called.
+0 1 2 3 4 5 6 7
+</code></pre>
+<p>Erm...  Well, a <code>range</code> object is created with initial value <code>8</code>, this is passed to the <code>enumerate</code> function which takes a const reference of the range object which is passed to a class which implements <code>begin()</code> and <code>end()</code>; the class also holds a reference.  Then the <code>range</code> object ends its life, and the destructor is called.  This occurs before the <code>for</code> loop, and with more checking, actually before the call to <code>end</code> which uses the <code>size</code> method.  Why?  Because <code>range(8)</code> creates an object, whose lifespan is just during the call to the function <code>enumerate</code>.  That it works at all is a fluke...</p>
+<p>To fix this, let's examine some design assumptions:</p>
+<ul>
+<li>All we need to know about our "container" is its size.</li>
+<li>If you explore things, then the <code>for (type i : container)</code> expression calls both <code>container.begin</code> and <code>container.end</code> at the start, and <em>caches</em> the two resulting iterators.  It's equivalent to:
+ <div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">container</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="k">auto</span> <span class="n">itend</span> <span class="o">=</span> <span class="n">container</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(;</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">itend</span><span class="p">;</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</pre></div>
+ 
+   and not, as perhaps you might think, to:
+ <div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">container</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">conatiner</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</pre></div>
+ </li>
+<li>Thus, <em>even if we wanted to</em> we cannot support the container length changing in the loop (not quite true: the <code>end</code> iterator could "know" that is was the end iterator, and each time <code>operator!=</code> or <code>operator==</code> was called on the iterators, we could query the container.)</li>
+<li>So why not just read <code>container.size()</code> at the start?  This will simplify things, and fixed our bug.</li>
+</ul>
+<h2>Complexity</h2>
+<p>Of course, we've written quite a lot of code!  What does this do?</p>
+<p><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">container</span><span class="p">))</span> <span class="p">{</span> <span class="n">test_func</span><span class="p">(</span><span class="n">conatiner</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="p">}</span>
+</pre></div>
+ </p>
+<p>It calls <code>test_func</code> on each entry of <code>container</code>.  With <code>-O1</code> this compiles to this inner loop:</p>
+<p><div class="highlight"><pre><span></span><span class="nl">.L4:</span>
+	<span class="nf">movq</span>	<span class="p">(</span><span class="nv">%rsi</span><span class="p">),</span> <span class="nv">%rax</span>
+	<span class="nf">movl</span>	<span class="p">(</span><span class="nv">%rax</span><span class="p">,</span><span class="nv">%rbx</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nv">%ecx</span>
+	<span class="nf">call</span>	<span class="no">_Z9test_funci</span>
+	<span class="nf">addq</span>	<span class="no">$1</span><span class="p">,</span> <span class="nv">%rbx</span>
+	<span class="nf">cmpq</span>	<span class="nv">%rdi</span><span class="p">,</span> <span class="nv">%rbx</span>
+	<span class="nf">jne</span>	<span class="no">.L4</span>
+</pre></div>
+ </p>
+<p>As we might hope, the compiler works its magic, and we pay no overhead for our mucking around.</p>
+<h2>Links</h2>
+<p>I did some playing around with the idea of "generators" in C++ some time ago (you can't do this properly, except maybe with some fooling with lambda expressions, but the idea was to use range based for loops to process data being delivered by a class.)</p>
+<ul>
+<li><a href="https://github.com/MatthewDaws/CPP_Learning/tree/master/generators">GitHub link</a></li>
+<li>For 1st attempt at the "enumerate" idea, <a href="https://github.com/MatthewDaws/CPP_Learning/tree/master/generators/enumerate.cpp">On GitHub</a></li>
+<li>The 2nd attempt, <a href="https://github.com/MatthewDaws/CPP_Learning/tree/master/generators/enumerate2.cpp">On GitHub</a></li>
+</ul>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-05-22-bayesian_stats.html">&larr; Dabbling in Bayesian Statistics</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-05-13-2012qual.html">Jam 2012 Qualification Round &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

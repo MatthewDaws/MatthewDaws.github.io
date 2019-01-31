@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>More formal working</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">More formal working</h1>
+    
+    <p>Posted on 20th October 2017</p>
+    <hr>
+
+    <p>I am a big fan of <a href="http://jupyter.org/">Jupyter notebooks</a> and similar (e.g. <a href="http://rmarkdown.rstudio.com/">R Markdown</a>) systems which allow you to mix code and documentation, preferably in a browser (which allows sharing).</p>
+<p>However, I've found that it's quite easy to fall into a "hacking" work pattern of developing quite a lot of code, and mixing it up with substantial data processing.  This leads to a number of <a href="https://en.wikipedia.org/wiki/Anti-pattern">anti-pattern</a>s:</p>
+<ul>
+<li>The code begins to completely dominate, vs the documentation, or overview, big picture view.</li>
+<li>I fall into the habit of restarting the notebook, wasting time on reloading data, and then making small changes to an analysis.</li>
+<li>Constant minor editing and then "shift-return"ing through a load of cells.</li>
+</ul>
+<!--more-->
+
+<p>This leads to wasting time; to getting lost (have I tried this minor variation before?) and general frustration.</p>
+<p>A better working pattern seems to be the following:</p>
+<ul>
+<li>Prototype quickly in a notebook</li>
+<li>
+<p>But before long, start to formally develop code in a formal package.  A good directory layout is:</p>
+<pre><code>|-- my_package
+    |-- __init__.py
+    |-- load.py
+    |-- analysis.py
+|-- tests
+    |-- __init__.py
+    |-- load_test.py
+    |-- analysis_tets.py
+|-- notebooks
+    |-- Clean Data.ipynb
+</code></pre>
+</li>
+<li>
+<p>A good trick to import data without worrying about <code>setup.py</code> and installing is to start each notebook with</p>
+<pre><code>import os, sys
+sys.path.insert(0, os.abspath("..))
+</code></pre>
+</li>
+</ul>
+<p>With the above directory layout, this adds the base directory to the python search path, so that</p>
+<pre><code>    import my_package
+</code></pre>
+<p>will work; and will load the working version (and not a version which you might have installed).</p>
+<ul>
+<li>Then I move code out of the notebooks into the package</li>
+<li>I write tests as I go along.  I tend not to go full <a href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a>, but with Python especially, having some basic tests which load the package and run most of the code is a great way to catch silly errors which an IDE will struggle to find (e.g. namespace related issues).</li>
+</ul>
+<p>I call this working a bit more "formally".  As with many processes in software development, it slows you down initially, but in the long-run you win.</p>
+<ul>
+<li>By writing formal functions and classes, it forces me to confront design issues, algorithm choice,and scientific/research questions properly.  It's all too easy to hack away in a notebook, think "this is probably okay, but I should think more closely about it later", and then never revisit the decision.</li>
+<li>The code naturally ends up being documented and <a href="https://en.wikipedia.org/wiki/Decomposition_(computer_science)">well-factored</a>.</li>
+<li>With the code packaged away, the notebooks become much cleaner, allowing you to concentrate on presentation.</li>
+<li>Comparing parameters and different algorithms becomes a lot easier.</li>
+<li>From a <a href="http://reproducibleresearch.net/">Reproducible</a> <a href="https://en.wikipedia.org/wiki/Reproducibility#Reproducible_research">research</a> perspective, this is a big win.</li>
+</ul>
+<p>I'm currently using this process with the notebook here: <a href="https://github.com/QuantCrimAtLeeds/PredictCode/blob/master/evaluation/Comparison%20with%20synthetic%20data.ipynb">Comparison methods</a> in the day job.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2017-10-26-Style_Testing.html">&larr; Code style, testing, etc.</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2017-08-29-TileMapBase.html">TileMapBase &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

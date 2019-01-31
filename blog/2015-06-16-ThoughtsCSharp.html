@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Thoughts about C#</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Thoughts about C#</h1>
+    
+    <p>Posted on 16th June 2015</p>
+    <hr>
+
+    <p>On the basis that knowing a modern OO language would be good, and on the basis that everyone and their granny knows JAVA, I thought I'd look at C#.  Getting going with C# was a bit tedious: I end up looking things up endlessly, and puzzling over things for a while before they "click" and seem obvious (which is always annoying, as then I'm left wondering why it wasn't obvious from the start).  You wait for muscle memory to build...  </p>
+<p>Example: A small mistake lead to some musings on how sort algorithms are implemented: <a href="http://stackoverflow.com/questions/30865510/why-does-failing-to-recognise-equality-mess-up-c-sharp-listt-sort">StackOverFlow Question</a> (the actual problem came from thinking about orderings in Python and C++ too much, where you specify a <a href="https://en.wikipedia.org/wiki/Weak_ordering#Strict_weak_orderings">strict weak ordering</a>, basically "less than", and then porting that to a <code>CompareTo</code> method and missing a corner-case.  This came up in a <a href="./20152.html">CodeJam problem</a>.)</p>
+<!--more-->
+
+<p>(Aside: Stackoverflow never ceases to amaze me: I asked a kind-of-silly question, which probably I could have thought about myself, and I get a wonderful, long, complete answer...)</p>
+<h3>LINQ</h3>
+<p>I do really like LINQ, and the way it reminds one of list comprehensions.  Turning this...</p>
+<p><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">allEdges</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Tuple</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">T</span><span class="p">&gt;&gt;()</span>
+<span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">edge</span> <span class="k">in</span> <span class="n">edges</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">e</span> <span class="k">in</span> <span class="n">graph</span><span class="p">.</span><span class="n">AsDirectedEdges</span><span class="p">(</span><span class="n">edge</span><span class="p">.</span><span class="n">Item1</span><span class="p">,</span> <span class="n">edge</span><span class="p">.</span><span class="n">Item2</span><span class="p">))</span>
+	<span class="p">{</span>
+		<span class="n">allEdges</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+ </p>
+<p>into this...</p>
+<p><div class="highlight"><pre><span></span><span class="n">allEdges</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">from</span> <span class="n">edge</span> <span class="k">in</span> <span class="n">edges</span>
+	<span class="k">from</span> <span class="n">e</span> <span class="k">in</span> <span class="n">graph</span><span class="p">.</span><span class="n">AsDirectedEdges</span><span class="p">(</span><span class="n">edge</span><span class="p">.</span><span class="n">Item1</span><span class="p">,</span> <span class="n">edge</span><span class="p">.</span><span class="n">Item2</span><span class="p">)</span>
+	<span class="k">select</span> <span class="n">e</span><span class="p">);</span>
+</pre></div>
+ </p>
+<p>is rather nice.  (The 2nd snippet uses a simple extension method to <code>Add</code>; again, extension methods seem pretty neat.)</p>
+<h3>Generics</h3>
+<p>However, give me templates from C++ anyday!  I really (really) like the duck-typing nature of templates: it's sort of like using a dynamic language, but with compile time checking.  (Of course, one also has to enjoy page long error messages...  Maybe "concepts" will arrive one day.)  That C# just doesn't let you do</p>
+<p><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">static</span> <span class="n">MyMethod</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">one</span><span class="p">,</span> <span class="n">T</span> <span class="n">two</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="k">return</span> <span class="n">one</span> <span class="p">+</span> <span class="n">two</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+ </p>
+<p>is very tedious!  Similary, the limitations of <code>using</code> (i.e. it's lack of being a replacement for <code>typedef</code>) in C# are annoying: I typically like setting up private typedefs in a class, to save typing out long class names.  Or, giving <code>Tuple&lt;T,S&gt;</code> a more domain-specific name: <code>using DirectedEdge = Tuple&lt;T,T&gt;</code> for example.</p>
+<p>An analogue of <code>namedtuple</code> from Python would be neat: a simple way to setup a struct or class which just needs some fields, and default ordering / hashing etc.  C# does do this with anonymous types, but the result is, well, anonymous...</p>
+<h3>Const</h3>
+<p>It would also be nice to have something similar to C++ <code>const</code>.  <code>readonly</code> is too limited, and class only.  A <code>readonly</code> <code>List&lt;T&gt;</code> can still have its items changed, and that's not my definition of "readonly"!  For a statically typed, compile time checked language, decorating methods with <code>const</code> is, I think, a wonderful thing: it's another way to signal to the compiler (and other people reading your code) your intentions.</p>
+<h3>Async</h3>
+<p>Is next up to be toyed with...!</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-06-17-20152.html">&larr; CodeJam 2015 Round 2</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-06-15-Paths-Implementation.html">Disjoint Paths; Implementation Issues &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

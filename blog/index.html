@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Blog</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="my-4">Blog of Matthew Daws</h1>
+
+    <div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">PDF munging with LaTeX</h2>
+        <p>An aide-memoire for myself:</p>
+<p><div class="highlight"><pre><span></span><span class="k">\documentclass</span><span class="na">[a4paper]</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>graphicx,forloop<span class="nb">}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="k">\pagestyle</span><span class="nb">{</span>empty<span class="nb">}</span>
+
+<span class="k">\newcounter</span><span class="nb">{</span>pdfpagenumber<span class="nb">}</span>
+<span class="k">\forloop</span><span class="nb">{</span>pdfpagenumber<span class="nb">}{</span>1<span class="nb">}{</span><span class="k">\value</span><span class="nb">{</span>pdfpagenumber<span class="nb">}</span> &lt; 115<span class="nb">}{</span>
+<span class="k">\raisebox</span><span class="nb">{</span>-225ex<span class="nb">}</span>[0ex][0ex]<span class="nb">{</span><span class="k">\makebox</span><span class="na">[90ex]</span><span class="nb">{</span><span class="k">\includegraphics</span><span class="na">[width=12in,page=\arabic{pdfpagenumber}]</span><span class="nb">{</span>mtms.pdf<span class="nb">}}}</span>
+<span class="k">\newpage</span>
+<span class="nb">}</span>
+
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+ </p>
+        <a href="2018-03-19-LaTeX_PDF_Munging.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">19th March 2018</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">OneDrive for Business, or pleasure.</h2>
+        <p>My <a href="https://www.uclan.ac.uk">new job</a> came with a surprise: I get a Surface Pro with docking station as my work PC.  This is actually very nice (I tend normally towards the "good enough" school of technology ownership).  An Office365 subscription also comes with the job, and so 1TB (yes, a few years ago, a good hard-disk) of cloud storage from <a href="https://products.office.com/en-gb/onedrive-for-business/online-cloud-storage">OneDrive for business</a>.</p>
+<p>Hmm, but... The Surface Pro only have GBs of free storage (thanks to a smallish SSD) and that's to be shared with applications I might want to install.  But, surely, I can just sync the folders I want, and keep more in the cloud (swapping things about, perhaps, if needs be).  Right?  A bit of Internet searching suggests that, sure, that's an option.  For normal consumer OneDrive.  But not, it seems, for OneDrive Business.  Until maybe mid-2018 when a new client comes out.  YMMV of course.</p>
+
+        <a href="2018-02-06-OneDrive.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">6th February 2018</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Expectations of brilliance underlie gender distributions across academic disciplines</h2>
+        <p>I <a href="2018-01-20-ProbProgrammingPython.md">blogged previously</a> about statistical programming in Python.  Here I want to say something about the data I used, which is from the paper:</p>
+<blockquote class="card-body">
+<p>Sarah-Jane Leslie, Andrei Cimpian, Meredith Meyer, Edward Freeland "Expectations of brilliance underlie gender distributions across academic disciplines"  Science 347 (2015) 262--265.  <a href="http://science.sciencemag.org/content/347/6219/262">DOI: 10.1126/science.1261375</a></p>
+</blockquote>
+<p>The abstract explains the results of the survey and data analysis the author perform:</p>
+
+        <a href="2018-01-22-AcademicCulture.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">22nd January 2018</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Probabilistic programming in Python</h2>
+        <p>Later in the week I will <a href="https://csapblog.leeds.ac.uk/an-introduction-to-bayesian-statistics-and-linear-regression-in-python/">give a talk</a>
+to the <a href="https://www.geog.leeds.ac.uk/research/csap/">Centre for Spatial Analysis &amp; Policy</a> group in Geography, at Leeds Uni.  See the <a href="https://github.com/MatthewDaws/Python_bits/tree/master/pymc_etc/Talk">GitHub Repo</a> 
+for details.</p>
+<p>I had a few aims:</p>
+
+        <a href="2018-01-20-ProbProgrammingPython.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">20th January 2018</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">PyMC3</h2>
+        <p>I'm finally doing some work which requires some genuine Bayesian analysis, and so have returned to playing with <code>emcee</code>.  I've also been looking at <code>PyMC3</code> which is an impressive piece of work, but also requires a bit of change of thinking from <code>emcee</code>.</p>
+<p>Some <a href="https://github.com/MatthewDaws/Python_bits/tree/master/pymc_etc">notebooks can be found on GitHub</a>.</p>
+        <a href="2017-11-22-Pymc.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">22nd November 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Code style, testing, etc.</h2>
+        <p>I've written some stuff for the University of Leeds Python Discussion Group on
+<a href="https://github.com/UoLPythonGroup/training/tree/master/style">Code style, tooling, testing, all that Jazz</a>.</p>
+<p>I'll try and do some live coding, and get some debate going tomorrow.  But the above can be read as a bit of blog post as well.</p>
+        <a href="2017-10-26-Style_Testing.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">26th October 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">More formal working</h2>
+        <p>I am a big fan of <a href="http://jupyter.org/">Jupyter notebooks</a> and similar (e.g. <a href="http://rmarkdown.rstudio.com/">R Markdown</a>) systems which allow you to mix code and documentation, preferably in a browser (which allows sharing).</p>
+<p>However, I've found that it's quite easy to fall into a "hacking" work pattern of developing quite a lot of code, and mixing it up with substantial data processing.  This leads to a number of <a href="https://en.wikipedia.org/wiki/Anti-pattern">anti-pattern</a>s:</p>
+<ul>
+<li>The code begins to completely dominate, vs the documentation, or overview, big picture view.</li>
+<li>I fall into the habit of restarting the notebook, wasting time on reloading data, and then making small changes to an analysis.</li>
+<li>Constant minor editing and then "shift-return"ing through a load of cells.</li>
+</ul>
+
+        <a href="2017-10-20-MoreFormalWorking.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">20th October 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">TileMapBase</h2>
+        <p>I've published my first python package on <a href="https://pypi.python.org">PyPi</a>  (See also the <a href="https://pypi.org">New PyPi</a> which seems to have finally synced.)</p>
+<p>Get it here: <a href="https://pypi.python.org/pypi/tilemapbase/0.4.3">TileMapBase</a> or <a href="https://pypi.org/project/tilemapbase/">TileMapBase on new PyPi</a>:</p>
+<blockquote class="card-body">
+<p>Uses OpenStreetMap tiles, or other tile servers, to produce "basemaps" for use with matplotlib. Uses a SQLite database to cache the tiles, so you can experiment with map production without re-downloading the same tiles. Supports Open Data tiles from the UK Ordnance Survey.</p>
+</blockquote>
+<p>My original aim was to produce a simple, high-level way to use OpenStreetMap style tiles as a "basemap" with MatPlotLib in Jupyter Python notebooks.  Since then, I've also been working on <a href="https://github.com/MatthewDaws/TileWindow">TileWindow</a> which uses this library to cache tiles, and provides a <code>tkinter</code> widget which displays a map-- sort of like GoogleMaps but in Python.  Ultimately for use in my current job: <a href="https://github.com/QuantCrimAtLeeds/PredictCode">PredictCode</a>.</p>
+        <a href="2017-08-29-TileMapBase.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">29th August 2017</div>
+</div>
+
+
+    <ul class="pagination justify-content-center mb-4">
+    <li class="page-item disabled">
+        <a class="page-link" href="">&larr; Newer</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" href="index1.html">Older &rarr;</a>
+    </li>
+</ul>
+
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+    <img src="../images/profile.jpg" class="fixed-ratio-resize my-5" alt="Profile image; rendered glass discs">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row">
+            
+        </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled">
+            
+        </ul>
+        </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+    
+    </div>
+    </div>
+
+    <!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!--<script src="../js/bootstrap.min.js"></script>-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+        

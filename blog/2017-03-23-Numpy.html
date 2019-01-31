@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Working with numpy again</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Working with numpy again</h1>
+    
+    <p>Posted on 23th March 2017</p>
+    <hr>
+
+    <p>In my new job, I find myself working with numpy (after a break of a couple of years, and now professionally, and
+not as a hobby.)  Numpy is great, but it doesn't half require a little thinking upon occasion.</p>
+<blockquote class="card-body">
+<p>Suppose we have an array of 10 points in the plane.  Should this be represented as a <code>numpy</code> array of shape <code>(2,10)</code> or <code>(10,2)</code>?</p>
+</blockquote>
+<!--more-->
+
+<h3>Argument from kernels</h3>
+<p>Suppose I want to write a function which represents a two dimensional kernel, for example:</p>
+<pre><code>def ker(x,y):
+   return x + 2 * y
+</code></pre>
+<p>This doesn't vectorise at all: I cannot do</p>
+<pre><code>p = np.array([1,2])
+ker(p)
+</code></pre>
+<p>So instead we might write:</p>
+<pre><code>def ker(p):
+   return p[0] + 2 * p[1]
+</code></pre>
+<p>Then, to vectorise across my array of 10 points, evaluated the kernel at each point, I need my array to have shape <code>(2,10)</code>.</p>
+<p>This is exactly the convention chosen by the <code>kernel</code> object which <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gaussian_kde.html">Scipy stats Gaussian KDE</a> will produce, for example.</p>
+<h3>Argument from broadcasting</h3>
+<p>Given my 10 points, I should be able to translate them all by the same amount, by just adding a point.</p>
+<pre><code>my_array + point
+</code></pre>
+<p>For this to work, I need to work with the <a href="https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html">Numpy broadcasting rules</a> which imply shape <code>(10,2)</code>:</p>
+<pre><code>my_array = np.random.random(20).reshape((10,2))
+point = np.array([2,3])
+my_array + point
+</code></pre>
+<p>So if you're working with things your thinking of as spatial "vectors", the other convention seems most natural.  This is exactly the convention chosen by e.g. <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.KDTree.html#scipy.spatial.KDTree">Scipy Spatial KDTree</a>.</p>
+<h3>What to do?</h3>
+<p>I guess you pick a convention, stick with it, and translate (e.g. using <code>.T</code>) as necessary.</p>
+<p>A further hint is to <a href="https://docs.scipy.org/doc/numpy/reference/ufuncs.html#broadcasting">read the broadcasting rules very closely</a> and to know that indexing with <code>None</code> is the same as adding a new axis:</p>
+<pre><code>my_array = np.random.random(20).reshape((10,2))
+new_array = my_array[:,None,:]
+print(new_array.shape) # (10,1,2)
+</code></pre>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2017-03-24-Numpy_vectorising.html">&larr; Numpy vectorising</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2016-10-03-Sampling.html">Random sampling to see a percentage of a population. &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Jam 2012 Round 1A</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Jam 2012 Round 1A</h1>
+    
+    <p>Posted on 12th May 2015</p>
+    <hr>
+
+    <p>Wrapping up with these... The final problem was rather hard, and in the end was an exercise in profiling...  As ever, links to: <a href="https://code.google.com/codejam/contest/1645485/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2012_1a">GitHub</a>.</p>
+<p><strong>Problem A, Password Problem:</strong> You have typed <code>A</code> characters of your password, and the probability you typed letter <code>i</code> correctly is \( p_i \), for <code>i=1,...,A</code>.  You can press backspace from 0 to <code>A</code> times and type again, or just give up and retype.  All your typing will from now on be 100% accurate, and pressing enter counts as a keypress.  For each strategy compute the expected number of keypresses needed (if you get the password wrong, you'll have to retype it) and return the lowest expected number of keypresses needed.  Your password is <code>B</code> characters in total.</p>
+<!--more-->
+
+<p>It's best to draw a table.  The "give up now" option always takes <code>B+2</code> keypresses.</p>
+<p>|          | 1st error at 1 | 1st error at 2 | ... | 1st error at A | All okay |
+| Strategy | \( p = 1-p_1 \) | \( p = p_1(1-p_2) \) | ... | \( p = p_1\cdots p_{A-1} (1-p_A) \)  | \( p = \prod p_i \) |
+| Backspace 0 times | B-A+1+B+1 | B-A+1+B+1 | ... | B-A+1+B+1 | B-A+1 |
+| Backspace 1 time | B-A+1+B+1+2 | B-A+1+B+1+2 | ... | B-A+1+2 | B-A+1+2 |
+| ... |
+| Backspace A-1 times | A+B-1+B+1 | A+B-1 | ... | A+B-1 |A+B-1 |
+| Backspace A times | A+B+1 | A+B+1 | ... | A+B+1 |A+B+1 |</p>
+<p>The naive way to compute this takes \(O(A)\) to compute each probability, and \(O(A^2)\) for the table, so \(O(A^3)\) overall, which is too slow.  However, there is an obvious diagonal pattern to the table which leads to an obvious \( O(A) \) algorithm.  It's easiest just to read the code: <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2012_1a/a.py">a.py</a>.</p>
+<p><strong>Problem B, Kingdom Rush:</strong> Have games <code>1...N</code> and each game requires \( a_i\) stars to play at level 1 and \( b_i \geq a_i \) stars to play at level 2.</p>
+<ul>
+<li>Playing at level 1 gives you one extra star;</li>
+<li>Playing at level 2, if you have already plays at level 1, gives you one extra star;</li>
+<li>Playing at level 2 for the first time gives you two extra stars.</li>
+</ul>
+<p>If you start with 0 stars, can you play all games to level 2 eventually?  If so, what is the minimum number of levels you need to play?</p>
+<p>An "almost greedy" algorithm works.  If you can play a game at level 2, then there is no reason not to play it (you must do so eventually, and playing only puts you in a stronger position, as you'll have more stars).  Otherwise, can you play a level 1 game?  If not, the task is impossible.  If so, we might have a choice (which I initially missed).  Heuristically, play the game with the largest \( b_i \) as this will be "hardest" to play later.  Can we make this rigourous?</p>
+<ul>
+<li>We can play the level 2 games in order from easiest to hardest.</li>
+<li>We want to avoid playing a level 1 game for which we might be able to play the level 2 version of directly, at some point in the future.</li>
+<li>But then clearly the smallest \( b_i \) will be played first, so save these if possible.</li>
+</ul>
+<p><strong>Problem C, Cruise Control:</strong> On a dual carriageway, you are given a load of cars with initial positions, fixed constant speeds, and each 5 units long.  They can switch lanes instantly so long as another car is not blocking them.  Can the cars continue driving forever, or if not, for how long can they drive before a collision is certain?</p>
+<p><strong>Solution:</strong> This took me ages, but I'm glad to see the official contest analysis also says that this problem is hard.  What killed me in the end was that Python is very slow, especially the <code>Fraction</code> class.</p>
+<ul>
+<li>Cars can continue as they are until the point just before one car starts to overtake another: then we need to make sure they actually can overtake by changing lanes.</li>
+<li>So calculate all these "action points" in time.  Here I used <code>Fraction</code> so I could test things like "The distance between two cars is exactly 5 units" without dealing with floating point issues.</li>
+<li>Then the "lane assignment problem" can be thought of as a graph colouring problem.  The nodes are the cars, and cars are neighbours if they overlap, or will shortly overlap due to overtaking.  Cars which are already adjacent cannot change lanes, so we can "colour" their nodes with "left" or "right" according to their current lane.  Cars which have no neighbours can be either, but I'm in the UK, so force them to the "left" (later this'll stop expoential growth of cases to consider).</li>
+<li>The remaining cars can be assigned to either lane, but we must do this "consistently", so that neighbouring cars are in different lanes.  My algorithm to do this was to consider each "unassigned" car in turn: if all neighbours are in one lane, then we must choose the other lane; if neighbours use both lanes, then we cannot solve.</li>
+<li>But there is third alternative: we can use either lane (which'll probably then force some later choices one way or the other).</li>
+<li>So I keep a list of tentative solutions, and carry these forward.  So a breadth-first search.</li>
+<li>See the contest analysis for fancier solutions.</li>
+<li>This was still too slow in Python, and after some investigation, the slow part turned out to be the use of the <code>Fraction</code> class.  Even after factoring this out and running it once per "time event", my solution was still too slow.  Digging into the code, the slow part seems to be the <code>gcd</code> calls each time a new <code>Fraction</code> object is created.  Instead, I hard-coded the two tests I needed ( <code>abs(a-b)&lt;5</code> and <code>a == b-5</code> ) and immediately the script runs in 2 minutes instead of over 8.  See an <a href="http://nbviewer.ipython.org/github/MatthewDaws/CodeJam/blob/master/2012_1a/Fractions.ipynb">IPython Notebook</a> for details.</li>
+</ul>
+<p>What we learn:
+   - Even for quick coding, I like object oriented thinking, and writing a self-contained class is a good idea.
+   - Profile!  The <code>Fraction</code> class was so slow that this dwafted other considerations, and implementing some hacks solved this more quickly than finessing the rest of the implementation.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-05-13-2012qual.html">&larr; Jam 2012 Qualification Round</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-05-10-20151c.html">Jam 2015 Round 1C &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

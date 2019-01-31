@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Jam 2013 Round 1A</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Jam 2013 Round 1A</h1>
+    
+    <p>Posted on 22nd April 2015</p>
+    <hr>
+
+    <p>As ever, links to: <a href="https://code.google.com/codejam/contest/2418487/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2013_1a">GitHub</a>.</p>
+<p>I did this under timed conditions: a mild disaster, but then it was for everyone back in 2013.  If I had been clinical, I could have solved A, B-small and C-small, which would have been enough.</p>
+<p><strong>Problem A, Bullseye:</strong> Draw some concentric rings, with a fixed amount of paint.  A bit of maths shows that ring \( n \in \{1,2,3,\cdots\} \) uses \( 2r+4n-3 \) units of paint, so we want the maximal \( N \) with \[ t \geq \sum_{n=1}^N 2r+4n-3 = 2rN + 2N(N+1) - 3N. \]</p>
+<!--more-->
+
+<p>You can solve this exactly, but with doubles, the needed square-root loses accuracy (they were nice enough to give an example which shows this).  So I ran a couple of interations of Newton-Rapheson using integer arithematic in Python.  An alternative would have been binary search with 64-bit integers.</p>
+<p><strong>Problem B, Manage Your Energy:</strong> Start with <code>E</code> energy, then each day decide how much energy to use, say \(e_i\) to "gain" \( e_i v_i \), then your energy decreases by this amount (and cannot go below 0) but then is recharged by <code>R</code>, but is capped at <code>E</code>.  So we have something like \( E_0 = E, 0 \leq e_i \leq E_{i-1}, E_i = \min(E, E_{i-1} - e_i + R) \) and we want to maximise the gain \( \sum_{i=1}^N e_iv_i \).</p>
+<p>The small case you can brute-force (in Python, a little optimisation is needed, noting that you can take \( e_1 \geq R \) and \( e_N = E_{N-1} \).)  For the large case, I eventually came up with the following idea (which seems different, though slower, than the offical answer).  For later recursion, suppose we <em>also</em> want to ensure that we finish with at least <code>F</code> energy, so \( E_N \geq F \), so the initial problem has \( F=0 \).  Let \( v_k \) be maximal, and imagine trying to increase \( e_k \):</p>
+<ul>
+<li>If \( e_k = E \) we can't</li>
+<li>If \( e_k = E_{k-1} &lt; E \) then be decreasing \( e_{k-1} \), or if not possible, then \( e_{k-2} \) and so on, we can increase \( E_{k-1} \).  As \( v_k \) is maximal, this cannot decrease the overall "gain".  In this way, we can increase \( E_{k-1} \) to the maximum it can be, which is \( E_0 + (k-1)R \).</li>
+<li>If \( e_k &lt; E_{k-1} \) then increasing \( e_k \) will decrease \( E_k \) and so maybe we'll be forced to decrease \( e_{k+1} \) etc.  Again this is okay as far as overall "gain" is concerned.  So the only constraint is to ensure \( E_N = e_{k-1} + (N-k+1)R \geq F \).</li>
+</ul>
+<p>In this way, we can maximise \( e_k \) and then solve the intervals \( [1,k-1], [k+1,N] \) recursively.  We must do these in order though, as for \( [1,k-1] \) we know the values of \( E_0, F \) but for \( [k+1,N]\) we don't know the eventual starting energy value yet.  So just push onto a LIFO stack in the correct order.  This gives an \( O(N^2) \) algorithm, because of having to find the maximal \( v_k \) for each sub-interval.</p>
+<p><strong>Problem C, Good Luck:</strong> More probability.  Given chosen numbers \( (A_i)_{i=1}^N \) uniformly at random in \( \{ 2,3,\cdots,M \} \) and random subsets \( B_1,\cdots,B_K \) we're told the products \( p_i = \prod_{j\in B_i} A_j \).  Try to guess the \( A_i \).  Well, by Bayes, we're trying to maximise \[ \mathbb P(A\|p) = \frac{\mathbb P(p\|A) \mathbb P(A)}{\mathbb P(p)} \propto \mathbb P(p\|A) \] which as ever makes sense: try to choose the \( A=(A_i) \) which make the products most likely to be seen.</p>
+<p>For the small case, we can compute all choices, because we're given the constraints.  For the large case, we need a better approach.  This is actually easy once you realise the trick: there are seemingly \( (M-1)^N = 7^{12} \) choices for A, but the order of the \( A_i \) doesn't matter!  Let's think about how to count how many unordered choices there are:</p>
+<ul>
+<li>We need to choose how many 2s, 3s, ..., 8s there are, say \( 0 \leq x_2, \cdots, x_8 \) with \( \sum x_i = N = 12 \).</li>
+<li>I'll use the <a href="https://en.wikipedia.org/wiki/Stars_and_bars_%28combinatorics%29">Stars and Bars</a> method.</li>
+<li>Let \( y_i = x_i+1 \) so want to find choices for \( 1\leq y_i \) with \( \sum y\_i = N+(M-1) \).</li>
+<li>Write down \( N+M-1\) stars and then puts \( M-2 \) bars between the stars, and then read off the \( y_i \) the the number of stars in each segment, e.g. <code>**|*|**|***</code> gives \( y_2=2, y_3=1, y_4=2, y_5=3 \).</li>
+<li>There are \( N+M-2 \) gaps between the stars so we have \( N+M-2 \) choose \( M-2 \) choices.</li>
+<li>For the large case, this is 18 choose 6 or just 18564 choices.</li>
+<li><em>Don't forget</em> that now \( \mathbb P(A) \) varies, if we consider \(A\) as an unordered sequence.  The number of choices is given by <a href="https://en.wikipedia.org/wiki/Multinomial_theorem#Number_of_unique_permutations_of_words">Multinomial coefficients</a> so in our case, \( N! / x_2!\cdots x_M! \).</li>
+</ul>
+<p>Then we generate all choices for \(A\) and then find all possible products and the relative chance of that product occuring (the number of choices for subset \(B\) which gives that product).  As each choice of subset (and hence of product) is independent, \( \mathbb P(p\|A) = \prod \mathbb P(p_i\|A) \).  So we search for which choices of \(A\) are consistent will all products, and then select the most likely.</p>
+<p>To speed this up, my Python solution uses some dictionaries: one mapping products to possible choices for A and then one mapping pairs (product, A) to the relative chance.  The <a href="http://nbviewer.ipython.org/github/MatthewDaws/CodeJam/blob/master/2013_1a/Problem%20C.ipynb">IPython notebook</a> shows that out of 8000 goes, even this "perfect" solution can only expect to right around 1300 times.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-04-23-20141c.html">&larr; Jam 2014 Round 1C</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-04-17-20141a.html">Jam 2014 Round 1A &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

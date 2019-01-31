@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Disjoint Paths; Implementation Issues</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Disjoint Paths; Implementation Issues</h1>
+    
+    <p>Posted on 15th June 2015</p>
+    <hr>
+
+    <p>Mostly as an excuse to <a href="./ThoughtsCSharp.html">learn C#</a> I implemented the <a href="./Paths.html">path finding algorithms</a>.  Running some tests (random graphs, and then computing cuts from found disjoint paths, as to verify a "cut" is easy!) caught some implementation issues.  All obvious with hindsight.</p>
+<h2>Notes on the implementation</h2>
+<p>See the <a href="https://github.com/MatthewDaws/CS_Learning/blob/master/bits/Graphs_Paths.cs">file on GitHub</a>.  I wanted to use interfaces, and extension methods, as they are features of C# which differ from e.g. C++.  In hindsight, I think an abstract base case <code>Graph</code> would have been more sensible, with <code>DirectedGraph</code> and <code>UndirectedGraph</code> inheriting from this.</p>
+<!--more-->
+
+<ul>
+<li>That I made the interface explicit is annoying, as you have to cast to the interface.  (In this case, again it's more logical to implicitly implement, as a <code>DirectedGraph</code> should have a <code>GetNeighbours</code> method.)</li>
+<li>I do like extension methods, though I can see that keeping track of them in a large project could be dangerous.  It is odd that for an extension method on the <em>Interface</em>, an explicit cast isn't needed (compared to the previous point).  Of course, LINQ wouldn't work without this...</li>
+</ul>
+<h2>Efficient path finding</h2>
+<p>The Ford-Fulkerson algorithm makes essential use of "unflowing" flow back along a path.  In our case, this allows us the new path to make use of an old path in reverse.  That, at the end of each step, we really do get a set of edge disjoint paths is slightly tricky (and I didn't prove this-- in the full FF algorithm, it follows by noting that the "flow constraints" always hold).</p>
+<p>In my implementation, I simply ignore the issue, and store "paths" as simply a set of (directed) edges.  Then, at the end, we reconstruct the paths (using that each edge can occur in only one path, and that a simple greedy algorithm works.)  The slightly subtle issue here is shown in the following diagram:</p>
+<p><img class="fixed-ratio-resize" alt="Example" src="./public/8.png"></p>
+<p>Namely, we can end up with loops which are divorced from any actual "path".  Once you realise this, we simply need to ignore it at the final step.  In the algorithm itself, we can't run into a problem, as we can always use the "loop" in reverse, when finding a new path, and having a "loop", by definition, means that we don't have to worry about where we start: we can always access all the vertices.</p>
+<h2>Depth-first or breadth-first?</h2>
+<p>In e.g. the <a href="Wikipedia article">https://en.wikipedia.org/wiki/Depth-first_search</a> on depth-first search, the word "backtracking" is used a lot.  So a rather naive way to implement depth-first search might be a recursive algorithm.  This would allow us to save "state" on the stack: at each vertex, where in the list of neighbours we had got to, and, encoded in the call stack, the partial path.</p>
+<p>For simple route finding, a rather different approach is normally used.  Suppose first I simply want to know if I get to vertex <code>target</code> from <code>start</code>.  We'd maintain a "stack" (in the abstract datatype sense) of vertices to visit, and a set of visited vertices.  At each turn:</p>
+<ul>
+<li>We pop off a new vertex from the stack.</li>
+<li>If we haven't visited this vertex, then add to our visited set, check if it's <code>target</code> and stop if so.</li>
+<li>Otherwise the add to the stack all the (unvisited) neighbours of the current vertex</li>
+</ul>
+<p>That we use a "stack" means this is depth-first.  And we visit each vertex exactly once.  Rather than keeping track of state for each vertex, we simply have our set of visited vertices, \(O(V)\) size, and a stack, which in a naive implementation can get as large as \(O(E)\).</p>
+<ul>
+<li>A less naive approach is to keep track of a set of "to visit" vertices as well-- we only add to the stack if we haven't visited the neighbour, and also if we haven't already marked it as "to visit".</li>
+<li>Further thought then shows that we can merge the "to visit" and "visited" sets, so we still just have one set and one stack, now both using at most \( O(V) \) space.</li>
+<li>At worst, we do have to at least examine each edge, so we have an \(O(E)\) time performance.</li>
+</ul>
+<p>If we want to actually find the path, then we can keep track of not only if a vertex has been visited, but also what the "parent" vertex which lead to the vertex is.  (I use this terminology as we are effectively finding a spanning tree rooted at <code>start</code>).  We can then work backwards from the <code>target</code> vertex, using here that we visit each vertex just once, and so we really do build a tree, and hence there is a well-defined path back to <code>start</code>.</p>
+<p>Replacing the "stack" with a "queue" gives a breadth-first search instead.</p>
+<h2>The problem...</h2>
+<p>I implemented the above without really thinking.  But it doesn't work for the vertex-disjoint path case, because of the following example:</p>
+<p><img class="fixed-ratio-resize" alt="Example" src="./public/9.png"></p>
+<p>Here we have one path already, the straight line.  It's possible to find a new vertex-disjoint path:</p>
+<p><img class="fixed-ratio-resize" alt="Example" src="./public/10.png"></p>
+<p>Notice that is traversing the "residual graph", shown on the left, we have the visit the middle vertex <em>twice</em>.  This makes route finding somewhat more tricky, as our "history" changes the permissible future paths.  In a full backtracking approach, this would be easy to implement, as we'd always have a "local copy" of the current path.</p>
+<p>A simple way to implement this in a modification of the above.  The observation is that we only need to visit certain vertices <em>twice</em> and never more so.  So we simply tediously keep track of if we've coming back for a 2nd time, and if so, remember where we came from on the 1st go.  The problem of not keeping track of this extra information is shown here:</p>
+<p><img class="fixed-ratio-resize" alt="Example" src="./public/11.png"></p>
+<p>Here on the 2nd visit to the middle vertex, we over-write the original "parent" and end up in an infinite loop.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-06-16-ThoughtsCSharp.html">&larr; Thoughts about C#</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-06-08-Paths.html">Disjoint Paths &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

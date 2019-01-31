@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Pandas, HD5, and large data sets</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Pandas, HD5, and large data sets</h1>
+    
+    <p>Posted on 19th May 2017</p>
+    <hr>
+
+    <p>I have finally gotten around to playing with the HD5 driver for <code>pandas</code> (which uses, I believe, <code>pytables</code> under
+the hood).  I'm only scratching the surface, but it's easy to do what I want:</p>
+<ul>
+<li>Create a huge data frame storing an entire data set</li>
+<li>Efficiently query subsections of the frame</li>
+</ul>
+<!--more-->
+
+<h3>Create the dataframe</h3>
+<p>We obviously cannot do this in memory.  But if we have some way of generating one row at a time, or a small "chunk" of
+rows at a time, then we can "append" these iteratively to a HD5 store:</p>
+<pre><code> store = pd.HDFStore("test.hd5", "w", complevel=9, complib="bzip2", fletcher32=True)
+ # Generate a data frame as `frame`
+ store.append("main", frame, data_columns=True)
+ # Repeat as necessary
+ store.close()
+</code></pre>
+<p>This creates a new HD5 file, and then creates a table in it named "main".  We can call <code>store.append()</code> repeatedly to add lots of rows.  The <code>data_columns=True</code> is necessary if we wish to query by column (which we do).</p>
+<h3>Read back the data</h3>
+<p>We can then iterate over the whole dataframe in "chunks" of rows:</p>
+<pre><code>store = pd.HDFStore("test.hd5", "r")
+for df in store.select("main", chunksize = 1000):
+    # Do something with `df` which contains the next 1000 rows
+</code></pre>
+<p>Alternatively, we can use the power querying ability.  Suppose we have a column named "one" in the large dataframe, and we just want the rows where the value of "one" is less then 100.  Then we can use:</p>
+<pre><code>store = pd.HDFStore("test.hd5", "r")
+df = store.select("main", where="one &lt; 100")
+</code></pre>
+<p>This seems to be wonderfully fast.</p>
+<h3>Downsides</h3>
+<p>You cannot store "objects" in a table, so e.g. storing a <code>GeoPandas</code> data frame is impossible (or extremely hard).</p>
+<h3>Some sources</h3>
+<ul>
+<li><a href="http://pandas.pydata.org/pandas-docs/stable/io.html#hdf5-pytables">Offical docs</a></li>
+<li><a href="https://mktstk.com/2015/05/22/big-data-in-python-out-of-core-processing/">Nice blog post</a></li>
+</ul>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2017-05-29-python_gui.html">&larr; Learning Python UI programming</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2017-05-04-OSM_xml.html">Open Street Map XML data &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

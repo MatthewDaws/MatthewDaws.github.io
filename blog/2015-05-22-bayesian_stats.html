@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Dabbling in Bayesian Statistics</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Dabbling in Bayesian Statistics</h1>
+    
+    <p>Posted on 22nd May 2015</p>
+    <hr>
+
+    <p>Bayesian statistics appeals to me both because it seems more "philosophically correct" than frequentist arguments (I have this data, and want to make an inference from it, rather than worrying about data which "might" exist, given other circumstances).  Also, Bayesian approaches lead to some interesting computational issues, which are interesting in their own right.</p>
+<p>TL;DR: In the process of thinking about MCMC methods in sampling from posterior distributions, I became interested in the choice of prior distributions.  Emerging from a lot of reading, you can view my <a href="http://nbviewer.ipython.org/github/MatthewDaws/Python_bits/blob/master/monte_carlo/Priors%20and%20transformations.ipynb">IPython Notebook</a> on finding an "invariant" prior: if you have a natural family of transformations on your "data space" which is reflected in transformations in the parameter space, then I argue there's a natural reason to expect certain invariance in the prior.</p>
+<p>For a simple example, consider normally distributed data with known variance.  If you translate your data by, say, 5 units, then you would expect your inference about the (unknown) mean to also be exactly translated by 5 units (but to otherwise be the same).  This leads to a uniform (improper) prior.  I treat the case of unknown mean and variance, which leads to the Jeffreys prior, which is regarded as not so great in the 2 parameter case.  Hey ho.  This was also a good excuse to learn and play with <a href="http://www.sympy.org/">SymPy</a>.</p>
+<!--more-->
+
+<h1>Priors</h1>
+<p>The main problem with "basic" Bayesian Statistics is the choice of prior (don't talk about <a href="https://en.wikipedia.org/wiki/Nonparametric_statistics">nonparametric</a> ideas, which scare me in a Bayesian setting, but are of course of huge interest in machine learning which itself intersects hugely with big data issues).  Here there seems to be endless and amusing debate.</p>
+<p>From a Mathematics background, I'm unused to such debate: in <a href="https://en.wikipedia.org/wiki/Pure_mathematics">pure maths</a> there is really no debate over what is "correct" (people make mistakes, but, once pointed out, there is no debate; and there are <a href="https://en.wikipedia.org/wiki/Shinichi_Mochizuki">debates</a> over things which seems essentially "uncheckable", but that's a difference issue).  Of course, statistics with no real data is just probability theory, and statistics about actual data is science, a different and arguably more interesting matter.</p>
+<p>Amusing example 1 is the following classical thought experiment on "experiment design".  I have a coin, and with the estimate the probability that it comes up heads.  I toss the coin m times and see r heads.  The posterior is</p>
+<p>\[ \begin{pmatrix} m \\ r \end{pmatrix} \theta^r (1-\theta)^{m-r} p(\theta) \]</p>
+<p>Alternatively, perhaps I had actually decided to stop once I'd seen r heads.  So now n is the random variable, and the posterior becomes</p>
+<p>\[ \begin{pmatrix} m-1 \\ r-1 \end{pmatrix} \theta^r (1-\theta)^{m-r} p(\theta) \]</p>
+<ul>
+<li>MacKay <a href="http://www.inference.phy.cam.ac.uk/itprnn/book.pdf">page 463</a> uses this example to support a Bayesian approach.  Once you've fixed the prior \(p(\theta)\) we see that the posteriors are the same (once normalised) and so the experiment design is irrelevant to our inference.</li>
+<li>Jordan <a href="http://www.cs.berkeley.edu/~jordan/courses/260-spring10/lectures/lecture10.pdf">page 3, lecture 10</a> says almost the exact opposite: experiment design does matter.  Of course, Jordan is here taking an "objective" line, and using the Jeffreys prior, which being computed from the likelihood does change (we ultimately take the expectation over m, not over r, in the 2nd case).</li>
+</ul>
+<p>There's no paradox here, but there is a certain irony in using the same thought experiment to make almost contradictory points.</p>
+<p>I also want to think about simple linear regression, but that's a post for another day...</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-05-27-regression.html">&larr; Regression from a (simple) Bayesian perspective</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-05-14-enumerate.html">Enumerate in C++ &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    

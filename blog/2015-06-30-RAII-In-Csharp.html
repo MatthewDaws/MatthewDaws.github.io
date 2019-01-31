@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>RAII in C#/Java?</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">RAII in C#/Java?</h1>
+    
+    <p>Posted on 30th June 2015</p>
+    <hr>
+
+    <p>More a note to a future self than aything else...  In C++ we have the notion of <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">Resource Acquisition Is Initialization</a> which I think I have internalised as the following:</p>
+<blockquote class="card-body">
+<p>Any "resource" (memory, file, handle etc.) should be "owned" by an object.  An object's constructor should allocate the resource, and the destructor should free the resource (with some appropriate choices then made for what copy/move constructors/assignments should do).  By use of C++11 <code>unique_ptr</code> and <code>shared_ptr</code> this model can be extended to pointers.</p>
+</blockquote>
+<!--more-->
+
+<p>Notice I didn't mention "exception", though one major additional use of RAII is exception safety: if an exception is thrown, then all objects currently in scope will have their destructors run, and so any resources will be safely released.</p>
+<p>In C#/Java we have garbage collection.  This takes care of memory, but not any other "resource".  In C# there is the <code>IDisposable</code> interface, and I was for a while confused by what this did.  I am not alone, judging from SO:</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/1065168/does-disposing-streamreader-close-the-stream">Does disposing streamreader close the stream?</a></li>
+<li><a href="http://stackoverflow.com/questions/2529222/class-destructor-problem">Class Destructor Problem</a></li>
+<li><a href="http://stackoverflow.com/questions/339063/what-is-the-difference-between-using-idisposable-vs-a-destructor-in-c?rq=1">What is the difference between using IDisposable vs a destructor in C#?</a></li>
+<li><a href="http://stackoverflow.com/questions/188473/how-do-you-manage-deterministic-finalization-in-c">How do you manage deterministic finalization in C#?</a></li>
+</ul>
+<p>For me, the following is a good way to think:</p>
+<ul>
+<li>Imagine going back to programming in C.  You allocate memory with <code>malloc</code> and then free it later with <code>free</code>.  Similarly, if you open a file, you need to later close it.</li>
+<li>A managed language (let's say C#) removes the need to <code>free</code> anything.  But it does <em>nothing</em> for the file open/close issue.</li>
+<li>So we must manually <code>close()</code> a file, say.</li>
+<li>How then to handle exceptions?  Use the <code>try ... catch ... finally</code> idiom!</li>
+<li>Then the <code>IDisposable</code> interface in C# should be thought of as enabling the syntactic sugar of the <code>using</code> command.  Similarly the <code>AutoCloseable</code> interface in Java 7.</li>
+</ul>
+<p>What of destructors?  Don't use them: they are only of use if you need to free "unmanaged resources", and if you need to do that, you'll know it.</p>
+<p>So why the "IDisposable pattern"?  This seems really to exist merely to support finalizers (aka destructors).  However, if your class is not sealed, then maybe a derived class will need a destructor.  The pattern then exists to ensure unmanaged resources are always freed, but from the destructor no managed resource is freed (as they might have already been freed by the garbage collector).</p>
+<ul>
+<li>To use inheritance, we must <a href="https://msdn.microsoft.com/en-us/library/ms182330.aspx">remember to call the base class <code>dispose</code> method</a></li>
+<li>"Freeing managed resources" amounts to calling <code>dispose</code> on member fields, which is the way to handle "composition".</li>
+</ul>
+<p>All in all, that seems about as much work as writing a destructor in C++!</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2015-09-07-GraphTheoryWindsor.html">&larr; Graphs in Windsor</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2015-06-23-BF.html">BF interpreter in C++ &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+    <div class="row">
+        
+    </div>
+    </div>
+    </div>
+
+    <!-- Recent posts Widget -->
+    <div class="card my-4">
+    <h5 class="card-header">Recent posts</h5>
+    <div class="card-body">
+    <ul class="list-unstyled">
+        
+    </ul>
+    </div>
+    </div>
+
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
+    
