@@ -14,8 +14,3 @@ a {
 .column-fixed-space {
   padding-top: 80px;
 }
-@media (max-width: 979px) {
-  .column-fixed-space {
-    padding-top: 0px;
-  }
-}

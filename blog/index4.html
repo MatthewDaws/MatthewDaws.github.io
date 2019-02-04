@@ -56,6 +56,17 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Ising model and image denoising</h2>
+        <p>As a final application of MCMC methods, you can't escape the Ising Model, and it's cute application to denoising images (of a text-like nature).</p>
+<p><img class="fixed-ratio-resize" alt="Denoising" src="./public/4.png"></p>
+<p><a href="http://nbviewer.ipython.org/github/MatthewDaws/Python_bits/blob/master/monte_carlo/Ising%20Model.ipynb">Ipython notebook</a></p>
+        <a href="2015-05-30-ising.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">30th May 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Removing outliers</h2>
         <p>So, linear regression isn't so exciting.  What about removing outliers?  I do find this, just a little, magical:</p>
 <p><img class="fixed-ratio-resize" alt="Outliers" src="./public/3.png"></p>
@@ -155,18 +166,6 @@
     <div class="card-footer text-muted">10th May 2015</div>
 </div>
 
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Jam 2015 Round 1B</h2>
-        <p>Busy at 5pm Saturday when this ran (so all the eggs in the final basket of round 1C).  Under timed conditions, I did problem A very slowly, and B-small in the time, so would have qualified at around place 770.  B-large took a bit longer, and Problem C wasn't really looked at in the time limit.  Hard problems...</p>
-<p>As ever, links to: <a href="https://code.google.com/codejam/contest/8224486/dashboard#s=a&amp;a=2">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2015_1b">GitHub</a>.</p>
-<p><strong>Problem A, Counter Culture:</strong> How fast can you get from <code>N</code> from 1 if you are allowed moves of: say one more than the last numbers; or reverse the decimal number.  E.g. 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 21, 22, 23 is the quickest route to 23.</p>
-
-        <a href="2015-05-06-20151b.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">6th May 2015</div>
-</div>
-
 
     <ul class="pagination justify-content-center mb-4">
     <li class="page-item">
@@ -184,23 +183,17 @@
     <div class="col-md-4">
     <img src="../images/profile.jpg" class="fixed-ratio-resize my-5" alt="Profile image; rendered glass discs">
 
-    <!-- Categories Widget -->
     <div class="card my-4">
     <h5 class="card-header">Categories</h5>
     <div class="card-body">
-        <div class="row">
-            
-        </div>
+        <div class="row" id="categories"></div>
     </div>
     </div>
 
-    <!-- Recent posts Widget -->
     <div class="card my-4">
         <h5 class="card-header">Recent posts</h5>
         <div class="card-body">
-        <ul class="list-unstyled">
-            
-        </ul>
+        <ul class="list-unstyled" id="recents"></ul>
         </div>
     </div>
 
@@ -214,6 +207,7 @@
     <!--<script src="../js/bootstrap.min.js"></script>-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../js/blog.js"></script>
 </body>
 
 </html>

@@ -56,6 +56,17 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Code style, testing, etc.</h2>
+        <p>I've written some stuff for the University of Leeds Python Discussion Group on
+<a href="https://github.com/UoLPythonGroup/training/tree/master/style">Code style, tooling, testing, all that Jazz</a>.</p>
+<p>I'll try and do some live coding, and get some debate going tomorrow.  But the above can be read as a bit of blog post as well.</p>
+        <a href="2017-10-26-Style_Testing.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">26th October 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">More formal working</h2>
         <p>I am a big fan of <a href="http://jupyter.org/">Jupyter notebooks</a> and similar (e.g. <a href="http://rmarkdown.rstudio.com/">R Markdown</a>) systems which allow you to mix code and documentation, preferably in a browser (which allows sharing).</p>
 <p>However, I've found that it's quite easy to fall into a "hacking" work pattern of developing quite a lot of code, and mixing it up with substantial data processing.  This leads to a number of <a href="https://en.wikipedia.org/wiki/Anti-pattern">anti-pattern</a>s:</p>
@@ -157,17 +168,6 @@ the hood).  I'm only scratching the surface, but it's easy to do what I want:</p
     <div class="card-footer text-muted">4th May 2017</div>
 </div>
 
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Parsing XML via SAX in Python</h2>
-        <p>I've worked with XML before (in Java), but always small files using the <a href="https://en.wikipedia.org/wiki/Document_Object_Model">Document Object Model</a>.  Now faced with multi-GB of Open Street Map derived XML files, of which I need to get a small amount of data, some other method is required.  Step forward the <a href="https://en.wikipedia.org/wiki/Simple_API_for_XML">Simple API for XML (SAX)</a>.  This is an <a href="http://www.saxproject.org/event.html">event-driven API</a>: the XML parser calls a "handler" object with information about tags opening and closing, and the character data in between.</p>
-<p>In Python, there is support in the <a href="https://docs.python.org/3/library/xml.sax.html">standard library</a> for SAX parsing.  You need to sub-class (or duck-type, and implement the interface of) <code>xml.sax.handler.ContentHandler</code>.  It seems that duck-typing is frustrating, as you need to implement the whole interface, even if you never expect certain methods to be called.</p>
-
-        <a href="2017-05-03-sax.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">3th May 2017</div>
-</div>
-
 
     <ul class="pagination justify-content-center mb-4">
     <li class="page-item">
@@ -185,23 +185,17 @@ the hood).  I'm only scratching the surface, but it's easy to do what I want:</p
     <div class="col-md-4">
     <img src="../images/profile.jpg" class="fixed-ratio-resize my-5" alt="Profile image; rendered glass discs">
 
-    <!-- Categories Widget -->
     <div class="card my-4">
     <h5 class="card-header">Categories</h5>
     <div class="card-body">
-        <div class="row">
-            
-        </div>
+        <div class="row" id="categories"></div>
     </div>
     </div>
 
-    <!-- Recent posts Widget -->
     <div class="card my-4">
         <h5 class="card-header">Recent posts</h5>
         <div class="card-body">
-        <ul class="list-unstyled">
-            
-        </ul>
+        <ul class="list-unstyled" id="recents"></ul>
         </div>
     </div>
 
@@ -215,6 +209,7 @@ the hood).  I'm only scratching the surface, but it's easy to do what I want:</p
     <!--<script src="../js/bootstrap.min.js"></script>-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../js/blog.js"></script>
 </body>
 
 </html>

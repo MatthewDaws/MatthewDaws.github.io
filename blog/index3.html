@@ -56,6 +56,17 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Graphs in Windsor</h2>
+        <p>While spending a long weekend in Windsor, we found the following:</p>
+<p><img class="fixed-ratio-resize" alt="Maze problem" src="./public/12.jpg"></p>
+
+        <a href="2015-09-07-GraphTheoryWindsor.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">7th September 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">RAII in C#/Java?</h2>
         <p>More a note to a future self than aything else...  In C++ we have the notion of <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">Resource Acquisition Is Initialization</a> which I think I have internalised as the following:</p>
 <blockquote class="card-body">
@@ -137,17 +148,6 @@
     <div class="card-footer text-muted">2nd June 2015</div>
 </div>
 
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Ising model and image denoising</h2>
-        <p>As a final application of MCMC methods, you can't escape the Ising Model, and it's cute application to denoising images (of a text-like nature).</p>
-<p><img class="fixed-ratio-resize" alt="Denoising" src="./public/4.png"></p>
-<p><a href="http://nbviewer.ipython.org/github/MatthewDaws/Python_bits/blob/master/monte_carlo/Ising%20Model.ipynb">Ipython notebook</a></p>
-        <a href="2015-05-30-ising.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">30th May 2015</div>
-</div>
-
 
     <ul class="pagination justify-content-center mb-4">
     <li class="page-item">
@@ -165,23 +165,17 @@
     <div class="col-md-4">
     <img src="../images/profile.jpg" class="fixed-ratio-resize my-5" alt="Profile image; rendered glass discs">
 
-    <!-- Categories Widget -->
     <div class="card my-4">
     <h5 class="card-header">Categories</h5>
     <div class="card-body">
-        <div class="row">
-            
-        </div>
+        <div class="row" id="categories"></div>
     </div>
     </div>
 
-    <!-- Recent posts Widget -->
     <div class="card my-4">
         <h5 class="card-header">Recent posts</h5>
         <div class="card-body">
-        <ul class="list-unstyled">
-            
-        </ul>
+        <ul class="list-unstyled" id="recents"></ul>
         </div>
     </div>
 
@@ -195,6 +189,7 @@
     <!--<script src="../js/bootstrap.min.js"></script>-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../js/blog.js"></script>
 </body>
 
 </html>
