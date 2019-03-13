@@ -56,6 +56,18 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Disjoint Paths</h2>
+        <p>A few notes on paths in graphs: finding the maximum number of edge/vertex disjoint paths, and an application to finding disconnections.</p>
+<h2>Edge disjoint paths</h2>
+<p>Consider a graph, for the moment undirected.  We wish to find the maximum number of edge disjoint paths from a fixed vertex \(s\) to a fixed vertex \(t\).  We can do this with the <a href="https://en.wikipedia.org/wiki/Max-flow_min-cut_theorem">Max-Flow Min-Cut theorem</a> and the <a href="https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm">Ford-Fulkerson algorithm</a>, at least in the directed case, but let's specialise this to our case.</p>
+
+        <a href="2015-06-08-Paths.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">8th June 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">AdaBoost and classification</h2>
         <p>Motivated by another nice post from <a href="http://jeremykun.com/2015/05/18/boosting-census/">Jeremy Kun</a> I've had a play with <a href="https://en.wikipedia.org/wiki/AdaBoost">AdaBoost</a>.  Like Jermey I used the "Adult Census Dataset" and then also the "Titanic" dataset.  The latter requires some data munging, and some decisions about how to process the data.</p>
 <p>Once you understand what AdaBoost does, and how Decision Stumps/Trees work, it seems reasonable to now use <a href="http://scikit-learn.org/stable/">scikit-learn</a> (which can often make you seem like a trained monkey, plugging things into your data).  It's worth noting that an out the box decision tree works almost perfectly on the "Adult" dataset, but much less well on the Titanic Dataset (where AdaBoost and decision stumps now don't look so bad!)</p>
@@ -148,17 +160,6 @@
         <a href="2015-05-13-2012qual.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">13th May 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Jam 2012 Round 1A</h2>
-        <p>Wrapping up with these... The final problem was rather hard, and in the end was an exercise in profiling...  As ever, links to: <a href="https://code.google.com/codejam/contest/1645485/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2012_1a">GitHub</a>.</p>
-<p><strong>Problem A, Password Problem:</strong> You have typed <code>A</code> characters of your password, and the probability you typed letter <code>i</code> correctly is \( p_i \), for <code>i=1,...,A</code>.  You can press backspace from 0 to <code>A</code> times and type again, or just give up and retype.  All your typing will from now on be 100% accurate, and pressing enter counts as a keypress.  For each strategy compute the expected number of keypresses needed (if you get the password wrong, you'll have to retype it) and return the lowest expected number of keypresses needed.  Your password is <code>B</code> characters in total.</p>
-
-        <a href="2015-05-12-20121a.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">12th May 2015</div>
 </div>
 
 

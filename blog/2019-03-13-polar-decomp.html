@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Polar decomposition of functionals</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Polar decomposition of functionals</h1>
+    
+    <p>Posted on 13th March 2019</p>
+    <hr>
+
+    <p>A well-known fact from the basic theory of von Neumann algebras is the polar decomposition of
+normal functionals: given \( \newcommand{\ip}[2]{\langle #1, #2 \rangle} \)
+\( \varphi\in M_{&ast;}  \) there is \( \omega\in M_{&ast;}^+ \) and a partial isometry \( v\in M \)
+with \( \varphi = v\omega \).  If \( v^* v \) is equal to the support of \( \omega \), then this decomposition is unique, and we write \( |\varphi| \) for \( \omega \).</p>
+<p>I am mostly following <a href="https://books.google.co.uk/books/about/Theory_of_Operator_Algebras_I.html?id=dTnq4hjjtgMC&amp;redir_esc=y">Takesaki's book</a>
+here; but the material is also nicely presented in a the <a href="https://uwspace.uwaterloo.ca/handle/10012/3920">MSc thesis of Zwarich</a>.
+Neither of these sources quite gives a correct proof (IMHO) so I thought I would record here the main
+steps in proving existence.</p>
+<!--more-->
+
+<p>We shall need two lemmas, which are Chapter III, Lemma 3.2 and Lemma 4.1 in Takesaki, and 2.12.1 and 3.6.1 in Zwarich.</p>
+<blockquote class="card-body">
+<p><strong>Claim 1:</strong> Let \( A \) be a \( C^{&ast;} \)-algebra and let \( \omega\in A^*  \).  If there is
+\( a\in A^+ \) with \( \|a\|\leq 1 \) and \( \ip{a}{\omega} = \|\omega\| \), then \( \omega\geq 0 \)</p>
+<p><strong>Claim 2:</strong> Let \( M \) be a von Neumann algebra, and let \( \omega\in M_* \).  If \( e\in M \)
+if a projection with \( \|e\omega\| = \|\omega\| \) then \( e\omega =\omega \).</p>
+</blockquote>
+<p>We can now proceed with the existence part of the proof.
+By Hahn-Banach, there is \( a\in M \) of norm one with \( \|\varphi\| = \ip{a}{\varphi} \).
+Let \( a^{&ast;} = u|a^{&ast;} | \) be the polar decomposition of \( a^{&ast;}  \).  Thus \( u^{&ast;} a^{&ast;} = |a^{&ast;} | \) and \( e=uu^{&ast;}  \) is the projection onto the closure of the image of \( a^{&ast;}  \).  Define \( \omega = u^{&ast;} \varphi \).</p>
+<p>Then \( u\omega = uu^{&ast;} \varphi = e \varphi \).  Also \( ea^{&ast;} = u|a^{&ast;} | = a^{&ast;} \) so \( ae = a \).
+Thus we have that
+\[] \|\varphi\| = \ip{a}{\varphi} = \ip{ae}{\varphi} = \ip{a}{e\varphi}
+\leq \|e\varphi\| \leq \|\varphi\|, \]
+and so there is equality throughout, which implies that \( \|e\varphi\| = \|\varphi\| \).
+By Claim 2, \( \varphi = e\varphi = u\omega \).</p>
+<p>We now observe that
+\[ \|\varphi\| = \ip{a}{\varphi} = \ip{|a^{&ast;} |u^{&ast;} }{\varphi} = \ip{|a^{&ast;} |}{\omega}
+\leq \|\omega\| = \|u^{&ast;} \varphi\| \leq \|\varphi\|, \]
+so again we have equality, and hence \( \ip{|a^{&ast;} |}{\omega} = \|\omega\| \).
+From Claim 1 we conclude that \( \omega \) is positive.</p>
+<p>Finally, as \( u^{&ast;} u \omega = u^{&ast;} u u^{&ast;} \varphi = u^{&ast;} \varphi = \omega \) we have that
+\( u^{&ast;} u \geq s(\omega) \), the support projection of \( \omega \).  Setting
+\( v = us(\omega)\in M \) we have that \( v \) is a partial isometry, because
+\[ v^{&ast;} v v^{&ast;} = s^{&ast;} u^{&ast;} u s s^{&ast;} u^{&ast;} =
+s^{&ast;} s s^{&ast;} u^{&ast;} = s u^{&ast;} = v^{&ast;}, \]
+where I have written \( s=s(\omega) \).
+Also \( v\omega = us(\omega)\omega = u\omega = \varphi \), and finally
+\( v^{&ast;} v = s u^{&ast;} u s = s = s(\omega) \) as required.</p>
+<p>Writing out \( C^{&ast;} \)-algebra theory in markdown is a pain...</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2019-02-26-topology.html">Neighbourhood bases, continued. &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    
