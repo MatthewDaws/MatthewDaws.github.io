@@ -56,6 +56,23 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Learning Python UI programming</h2>
+        <p>Another new task: get going with some GUI programming!</p>
+<h3>Some references</h3>
+<ul>
+<li><a href="http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/index.html">Tkinter 8.5 reference: a GUI for Python</a> - Lots and lots.  On the web, or a 168 page PDF file.</li>
+<li><a href="http://www.tkdocs.com/tutorial/index.html">TkDocs</a> - Cross platform, but lots of Python examples.  I found this pretty good!</li>
+<li><a href="https://docs.python.org/3.6/library/tk.html">Official docs</a></li>
+<li><a href="http://effbot.org/tkinterbook/">Effbot Book</a> - A "work in progress" and old, but still, so I've found, is an excellent reference and guide.</li>
+</ul>
+
+        <a href="2017-05-29-python_gui.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">29th May 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Pandas, HD5, and large data sets</h2>
         <p>I have finally gotten around to playing with the HD5 driver for <code>pandas</code> (which uses, I believe, <code>pytables</code> under
 the hood).  I'm only scratching the surface, but it's easy to do what I want:</p>
@@ -140,22 +157,6 @@ not as a hobby.)  Numpy is great, but it doesn't half require a little thinking 
         <a href="2016-10-03-Sampling.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">3th October 2016</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Random sampling</h2>
-        <p>This post, very tangentially, relates to a quiz we set job candidates.  If you are applying for a job at my current company, and somehow work out I work there, and find this, then you probably half deserve a job anyway.</p>
-<p>Suppose you have a population \( P \) and some test as to whether a member of the population is good or bad.  We want to find a "random good member".  There are two methods that come to mind:</p>
-<ul>
-<li>Random sampling: pick a member at random, test it, if it passes return it, otherwise try again.</li>
-<li>Randomly order \( P \) and work through the whole set, returning the first good member.</li>
-</ul>
-<p>The first method has the virtue of being simple.  The second method uses a lot of memory, if \(P\) is large.  But on closer thought, what if the proportion of "good" members is rather small.  The 2nd method is guaranteed to find a good member in \( O(\vert P \vert) \).  How slow can the first method be?</p>
-
-        <a href="2016-09-29-RandomSearch.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">29th September 2016</div>
 </div>
 
 
