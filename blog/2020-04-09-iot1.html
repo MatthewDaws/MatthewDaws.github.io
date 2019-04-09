@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>In Our Time: Random and Pseudorandom</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">In Our Time: Random and Pseudorandom</h1>
+    
+    <p>Posted on 9th April 2020</p>
+    <hr>
+
+    <p>On my commute, I listen to <a href="https://www.bbc.co.uk/programmes/b006qykl">In Our Time</a>, and I have recently gotten
+back to the delightful episode on <a href="https://www.bbc.co.uk/programmes/b00x9xjb">Random and Pseudorandom</a>.</p>
+<p>The end of discussion touched upon <a href="https://en.wikipedia.org/wiki/Kolmogorov_complexity">Kolmogorov Complexity</a> which I wish I knew more about.  There was also a discussion
+about visual randomness, and how humans are terribly bad at judging random arrangements
+of dots (we think that patterns which are made by inhibiting close points are 
+actually more random than a homogeneous Poisson point process).  Peter Coles was name
+checked in regards to this, and as luck would have it, he has a wonderful
+<a href="https://telescoper.wordpress.com/2019/04/02/poisson-davril-point-processes/">blog post</a> all about it.</p>
+<!--more-->
+
+<p>However, one bit did, yet again, remind me of why I'm a closet Bayesian.  To quote:</p>
+<blockquote class="card-body">
+<p>... apply a test which is called the <a href="https://en.wikipedia.org/wiki/Chi-squared_test">Chi-squared test</a>,
+which was invented by the British mathematician <a href="https://en.wikipedia.org/wiki/Karl_Pearson">Karl Pearson</a> in 1905
+and what that does is gives me a way of saying how likely it is, given the proportion of ones, twos and threes
+that I've seen, that these really did come from chance, and that it really was an unbiased dice that I was
+throwing.</p>
+</blockquote>
+<p>This is of course not quite correct, because we are really performing a <a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_testing">null hypothesis test</a> and so we are really failing to reject the null hypothesis, which in this case is that the dice is not biased.  This is made very clear in <a href="https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test#Fairness_of_dice">an wikipedia example</a>.  What struck me was that even a trained Mathematician can easily fall into the trap of saying "how likely is it ... came from chance", which is of course a classic <a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_testing#Interpretation">mis-interpretation of a p-value</a>.</p>
+<p>A Bayesian approach (at the cost of needing a prior, of course) <em>can</em> give an answer to the question "how likely is it that the dice is biased".  This has been done to death, and I'll just link to my favourite source, which is <a href="http://www.inference.org.uk/mackay/itila/">David MacKay's book</a>.</p>
+<p>This discussion was in the context of <a href="https://en.wikipedia.org/wiki/Randomness_tests">randomness tests</a>, about which I'd like to know more, and on which Wikipedia is oddly not particularly detailed.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2019-03-16-survey-sampling.html">Surveys and sampling &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    

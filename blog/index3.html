@@ -56,6 +56,19 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Random sampling to see a percentage of a population.</h2>
+        <blockquote class="card-body">
+<p>Given a population \( P \) and sampling at random ("with replacement") what's the expected number of samples I need to see 50% (or any fixed proportion) of the population.</p>
+</blockquote>
+<p>I deliberately ask for "expected" because calculating expectations is often easier than getting a handle on the whole probability distribution.  A trick is to exploit linearity: express the random variable of interest as a sum of random variables you can calculate the expectation of.</p>
+
+        <a href="2016-10-03-Sampling.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">3th October 2016</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Random sampling</h2>
         <p>This post, very tangentially, relates to a quiz we set job candidates.  If you are applying for a job at my current company, and somehow work out I work there, and find this, then you probably half deserve a job anyway.</p>
 <p>Suppose you have a population \( P \) and some test as to whether a member of the population is good or bad.  We want to find a "random good member".  There are two methods that come to mind:</p>
@@ -138,17 +151,6 @@
         <a href="2015-06-17-20152.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">17th June 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Thoughts about C#</h2>
-        <p>On the basis that knowing a modern OO language would be good, and on the basis that everyone and their granny knows JAVA, I thought I'd look at C#.  Getting going with C# was a bit tedious: I end up looking things up endlessly, and puzzling over things for a while before they "click" and seem obvious (which is always annoying, as then I'm left wondering why it wasn't obvious from the start).  You wait for muscle memory to build...  </p>
-<p>Example: A small mistake lead to some musings on how sort algorithms are implemented: <a href="http://stackoverflow.com/questions/30865510/why-does-failing-to-recognise-equality-mess-up-c-sharp-listt-sort">StackOverFlow Question</a> (the actual problem came from thinking about orderings in Python and C++ too much, where you specify a <a href="https://en.wikipedia.org/wiki/Weak_ordering#Strict_weak_orderings">strict weak ordering</a>, basically "less than", and then porting that to a <code>CompareTo</code> method and missing a corner-case.  This came up in a <a href="./20152.html">CodeJam problem</a>.)</p>
-
-        <a href="2015-06-16-ThoughtsCSharp.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">16th June 2015</div>
 </div>
 
 
