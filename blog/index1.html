@@ -56,6 +56,30 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">PDF munging with LaTeX</h2>
+        <p>An aide-memoire for myself:</p>
+<p><div class="highlight"><pre><span></span><span class="k">\documentclass</span><span class="na">[a4paper]</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>graphicx,forloop<span class="nb">}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="k">\pagestyle</span><span class="nb">{</span>empty<span class="nb">}</span>
+
+<span class="k">\newcounter</span><span class="nb">{</span>pdfpagenumber<span class="nb">}</span>
+<span class="k">\forloop</span><span class="nb">{</span>pdfpagenumber<span class="nb">}{</span>1<span class="nb">}{</span><span class="k">\value</span><span class="nb">{</span>pdfpagenumber<span class="nb">}</span> &lt; 115<span class="nb">}{</span>
+<span class="k">\raisebox</span><span class="nb">{</span>-225ex<span class="nb">}</span>[0ex][0ex]<span class="nb">{</span><span class="k">\makebox</span><span class="na">[90ex]</span><span class="nb">{</span><span class="k">\includegraphics</span><span class="na">[width=12in,page=\arabic{pdfpagenumber}]</span><span class="nb">{</span>mtms.pdf<span class="nb">}}}</span>
+<span class="k">\newpage</span>
+<span class="nb">}</span>
+
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+ </p>
+        <a href="2018-03-19-LaTeX_PDF_Munging.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">19th March 2018</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">OneDrive for Business, or pleasure.</h2>
         <p>My <a href="https://www.uclan.ac.uk">new job</a> came with a surprise: I get a Surface Pro with docking station as my work PC.  This is actually very nice (I tend normally towards the "good enough" school of technology ownership).  An Office365 subscription also comes with the job, and so 1TB (yes, a few years ago, a good hard-disk) of cloud storage from <a href="https://products.office.com/en-gb/onedrive-for-business/online-cloud-storage">OneDrive for business</a>.</p>
 <p>Hmm, but... The Surface Pro only have GBs of free storage (thanks to a smallish SSD) and that's to be shared with applications I might want to install.  But, surely, I can just sync the folders I want, and keep more in the cloud (swapping things about, perhaps, if needs be).  Right?  A bit of Internet searching suggests that, sure, that's an option.  For normal consumer OneDrive.  But not, it seems, for OneDrive Business.  Until maybe mid-2018 when a new client comes out.  YMMV of course.</p>
@@ -141,24 +165,6 @@ for details.</p>
         <a href="2017-08-29-TileMapBase.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">29th August 2017</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">PyPi and use of ReStructuredText</h2>
-        <p>I've in the process of putting together my first proper Python package to be uploaded to <a href="https://pypi.org/">PyPi</a> / <a href="https://pypi.python.org/pypi">PyPi Old</a>.
-The docs around doing this are not great, but the official docs are pretty good:</p>
-<ul>
-<li><a href="https://docs.python.org/3.6/distutils/index.html">Old docs; still a good read</a></li>
-<li><a href="https://setuptools.readthedocs.io/en/latest/">Setuptools</a></li>
-<li><a href="https://setuptools.readthedocs.io/en/latest/setuptools.html">Guide to <code>setup.py</code></a></li>
-<li><a href="https://packaging.python.org/tutorials/distributing-packages/">Packaging guide</a></li>
-<li><a href="https://packaging.python.org/guides/using-testpypi/">Using TestPyPi</a></li>
-</ul>
-
-        <a href="2017-08-17-PyPi.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">17th August 2017</div>
 </div>
 
 

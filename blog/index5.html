@@ -56,6 +56,18 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Dabbling in Bayesian Statistics</h2>
+        <p>Bayesian statistics appeals to me both because it seems more "philosophically correct" than frequentist arguments (I have this data, and want to make an inference from it, rather than worrying about data which "might" exist, given other circumstances).  Also, Bayesian approaches lead to some interesting computational issues, which are interesting in their own right.</p>
+<p>TL;DR: In the process of thinking about MCMC methods in sampling from posterior distributions, I became interested in the choice of prior distributions.  Emerging from a lot of reading, you can view my <a href="http://nbviewer.ipython.org/github/MatthewDaws/Python_bits/blob/master/monte_carlo/Priors%20and%20transformations.ipynb">IPython Notebook</a> on finding an "invariant" prior: if you have a natural family of transformations on your "data space" which is reflected in transformations in the parameter space, then I argue there's a natural reason to expect certain invariance in the prior.</p>
+<p>For a simple example, consider normally distributed data with known variance.  If you translate your data by, say, 5 units, then you would expect your inference about the (unknown) mean to also be exactly translated by 5 units (but to otherwise be the same).  This leads to a uniform (improper) prior.  I treat the case of unknown mean and variance, which leads to the Jeffreys prior, which is regarded as not so great in the 2 parameter case.  Hey ho.  This was also a good excuse to learn and play with <a href="http://www.sympy.org/">SymPy</a>.</p>
+
+        <a href="2015-05-22-bayesian_stats.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">22nd May 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Enumerate in C++</h2>
         <p>One of the fun things about <a href="https://en.wikipedia.org/wiki/C%2B%2B11">C++11</a> is that minor changes allow you to write somewhat more expressive (aka <a href="http://preshing.com/20141202/cpp-has-become-more-pythonic/">Pythonic</a>) code.</p>
 <p>A common pattern is to iterate over an array while also knowing the index you are at.  Python does this with the <code>enumerate</code> keyword:</p>
@@ -148,23 +160,6 @@
         <a href="2015-04-27-coloured_disks.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">27th April 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Jam 2013 Round 1B</h2>
-        <p>As ever, links to: <a href="https://code.google.com/codejam/contest/2434486/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2013_1b">GitHub</a>.</p>
-<p>I did this under timed conditions, and would have just qualified.  A silly error was all which stood between B large and me...</p>
-<p><strong>Problem A, Osmos:</strong> Start with A and \( (x_i)_{i=1}^N \) integers.  You can absorb one of the \( x_i \) if it's smaller than A, and then A grows by \( x_i \).  Help Armin to be able to absorb all the numbers by adjusting the initial set:</p>
-<ul>
-<li>You can add any new number;</li>
-<li>You can remove a number.</li>
-</ul>
-<p>What is the least number of moves to get a valid set?</p>
-
-        <a href="2015-04-26-20131b.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">26th April 2015</div>
 </div>
 
 
