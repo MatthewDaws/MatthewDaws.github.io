@@ -56,6 +56,17 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">BF interpreter in C++</h2>
+        <p>BF is an <a href="https://en.wikipedia.org/wiki/Brainfuck">amusingly named, impractical, Turing complete</a> programming language.  It is very like an actual Turing machine: you have an infinite (originally, one-sided, 30K long) array of (8-bit) values, with commands to increase/decrease (+/-) the cell, or move left/right (</>).  Input (,) and output (.) are handled.  Loops are given by [] and implement a "while cell is non-zero" loop.  So a trivial mapping to C is possible (see the Wikipedia article).</p>
+<p>I thought it would be fun to give an object oriented implementation, for which I used C++ for a change.  My implementation decouples the parsing of the programme from running it.  The parse class reads the input in a single pass, using a stack for dealing with nested loops.  It translates the input into a list of commands, represented by an abstract base class with an <code>execute</code> method, overloaded for the various different commands.  This is the "command" pattern (closely related to the "strategy" pattern).</p>
+
+        <a href="2015-06-23-BF.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">23th June 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">CodeJam 2015 Round 2</h2>
         <p>Round 2 came and went (and Round 3 and the "distributed" round).  As an effort to practice with C#, I solved these problems in C# (definitely slower than using Python, and actually, the end running time is not that much quicker, for these sort of algorithmic / numerical problems).</p>
 <p>There's a definite step-up in difficulty here!  Maybe I kid myself I could have done problem A and some "small" problems quickly... that people did them all in 150 minutes is quite scary.  The <a href="">Official Contest Analysis</a> is rather brief (from G+, it seems the organisers were busy with the distributed round; or maybe, if we've come this far, shorter answers are all we need ;-&gt; )  I think my background in pure Maths shows here: I found problem D quite easy, as I found analysing the special cases off-line (pen and paper) to be not so hard.  Problems B and C (in "large" form) were hard, I thought.  (I missed the trick with problem B; and using an off-the-shelf Graph package is obviously the fast way to do Problem C.)</p>
@@ -134,20 +145,6 @@
         <a href="2015-05-28-outliers.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">28th May 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Regression from a (simple) Bayesian perspective</h2>
-        <p>How might we tackle simple regression from a Bayesian perpsective?  Our model will be that we are given points \( (x_i)_{i=1}^n \) (which we assume we <em>know</em>, at least to a very high accuracy) and dependent points \( y_i^{re} = \alpha + \beta x_i \), but we only observe \( y_i \) where \( y_i = y_i^{re} + e_i \) where the \( e_i \) are our "uncertainties" (I like the line: "if they were errors, we would have corrected them!", see footnote 10 of <a href="http://arxiv.org/abs/1008.4686">arXiv:1008.4686</a>) usually modelled as iid \( N(0,\sigma^2) \).  The likelihood is then</p>
-<p>\[ f(y|\alpha,\beta,\sigma) = \prod (2\pi\sigma^2)^{-1/2}
-\exp\Big( -\frac{1}{2\sigma^2} (y_i - (\alpha + \beta x_i))^2 \Big) \]</p>
-<p>Finding the MLE leads to <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">Least Squares Regression</a>.  A simple Bayesian approach would be to stick some prior on $\alpha, \beta, \sigma$, but of course, this raises the question of <em>how</em> to do this!</p>
-<p>Anyway, another <a href="http://nbviewer.ipython.org/github/MatthewDaws/Python_bits/blob/master/monte_carlo/Bayesian%20Statistics.ipynb">Ipython notebook</a> which develops some of the basic maths, and then uses <a href="http://dan.iel.fm/emcee/current/">emcee</a> and the <a href="https://github.com/dfm/triangle.py">Triangle Plot</a> to make some simulations and draw some plots of posterior distributions.</p>
-
-        <a href="2015-05-27-regression.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">27th May 2015</div>
 </div>
 
 
