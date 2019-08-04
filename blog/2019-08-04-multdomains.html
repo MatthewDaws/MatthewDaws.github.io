@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Matt Daws">
 
-    <title>TileMapBase</title>
+    <title>Multiplicative Domains</title>
 
     <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -51,26 +51,36 @@
     <div class="row">
     
     <div class="col-md-8">
-    <h1 class="mt-4">TileMapBase</h1>
+    <h1 class="mt-4">Multiplicative Domains</h1>
     
-    <p>Posted on 30th May 2019</p>
+    <p>Posted on 4th August 2019</p>
     <hr>
 
-    <p>My little Python project <a href="https://github.com/MatthewDaws/TileMapBase">TileMapBase</a> automates the process of downloading (and caching locally) map tiles from OpenStreetMap (and similar) and assembling these into the background for a <a href="https://matplotlib.org/">matplotkib</a> plot.  I wrote this when working in Geographic Data Science and wanting to show longitude latitude locations on a map, inside of a Jupyter Notebook.</p>
-<p>Anyway, recently OpenStreetMap started to enforce <a href="https://en.wikipedia.org/wiki/User_agent">User Agents</a> in HTTP requests, which broke my package.  A <a href="https://github.com/MatthewDaws/TileMapBase/pull/10">pull request later</a> and we're back on the road.</p>
-<p>I have spent the last 12 months concentrating on Mathematics, and so am <em>very</em> rusty.  It took me a couple of hours to update my Python distribution, get the tests fixed, get Travis building again, and remembering how to upload to PyPi.  And this is for a trivial change to a small package.  I now understand how Open Source Software becomes unmaintained...</p>
+    <p>Reading <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=3723633">Ng, Viselter, Amenability of locally compact quantum groups and their unitary co-representations</a>
+<a href="https://arxiv.org/abs/1609.08920">Arxiv</a> I was reminded by a result/technique that I often forget: that of the <em>multiplicative domain</em> of a completely positive map.
+The following result is due to <a href="https://projecteuclid.org/download/pdf_1/euclid.ijm/1256051007">M.D. Choi</a> (though I like the presentation in
+<a href="https://www.researchgate.net/publication/200524409_Completely_Bounded_Maps_and_Operator_Algebras">Paulsen's book</a>).</p>
+<p>Let \( \phi:A\rightarrow B \) be a unital completely positive (UCP) map between unital \( C^\ast \)-algebras.  If \( a\in A \) with \( \phi(a)^\ast\phi(a) = \phi(a^\ast a) \) then already \( \phi(ba) = \phi(b)\phi(a) \) for any \( b \).  If this is the "right hand version" then there is a left hand version, and a bimodule version.</p>
+<!--more-->
+
+<p>A nice application is the following: suppose that \( u\in A \) is unitary, and that we know that \( \phi(u) \) is also unitary.  Then \( \phi(au) = \phi(a)\phi(u) \) for any \( a\in A \).  This follows, of course, because \( u^\ast u=1 \) and \( \phi(u)^\ast\phi(u)=1 \) so we have equality as \( \phi \) is unital.</p>
+<p>The application of Chi-Keung and Ami is to multiplicative unitaries which allows them to give an incredibly short proof that amenability of representations respected weak containment.</p>
+<p>I want to just say a couple of words about why this is perhaps not too surprisingly.  (More than a couple of words is maybe not warranted, as the proof itself is not so long, using the Schwarz inequality).  Any UCP map is of the form \( \phi(a) = V^\ast \pi(a)V \) where \( \pi:A\rightarrow B(H) \) is a \( \ast \)-representation, and \( V:K\rightarrow H \) is an isometry (here I assume \( B\subseteq B(K) \)).  If \( u\in A \) is unitary then so is \( \pi(u) \), and so that \( V^\ast \pi(u) V \) is unitary is a strong condition:</p>
+<ul>
+<li>\( \pi(u) \) must restrict to a unitary on the image of \( V \);</li>
+<li>thus \( VV^\ast\pi(u)V = \pi(u)V \);</li>
+<li>then \( \phi(a)\phi(u) = V^\ast\pi(a) VV^\ast\pi(u) V=V^\ast \pi(au)V = \phi(au) \).</li>
+</ul>
+<p>Coda: Looking at the Stinespring dilation is often profitable.</p>
 
     <hr>
 
     <ul class="pagination justify-content-center mb-4">
         <li class="page-item">
-<a class="page-link" href="2019-08-04-multdomains.html">&larr; Multiplicative Domains</a>
-</li>
-<li class="page-item">
 <a class="page-link" href="index.html">Index</a>
 </li>
 <li class="page-item">
-<a class="page-link" href="2019-04-12-bmc.html">British Mathematics Colloquium &rarr;</a>
+<a class="page-link" href="2019-05-30-tilemapbase.html">TileMapBase &rarr;</a>
 </li>
     </ul>
 
