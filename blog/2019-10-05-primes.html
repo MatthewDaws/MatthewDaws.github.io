@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Matt Daws">
 
-    <title>Multiplicative Domains</title>
+    <title>Visualising primes</title>
 
     <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -51,39 +51,30 @@
     <div class="row">
     
     <div class="col-md-8">
-    <h1 class="mt-4">Multiplicative Domains</h1>
+    <h1 class="mt-4">Visualising primes</h1>
     
-    <p>Posted on 4th August 2019</p>
+    <p>Posted on 5th October 2019</p>
     <hr>
 
-    <p>Reading <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=3723633">Ng, Viselter, Amenability of locally compact quantum groups and their unitary co-representations</a>
-<a href="https://arxiv.org/abs/1609.08920">Arxiv</a> I was reminded by a result/technique that I often forget: that of the <em>multiplicative domain</em> of a completely positive map.
-The following result is due to <a href="https://projecteuclid.org/download/pdf_1/euclid.ijm/1256051007">M.D. Choi</a> (though I like the presentation in
-<a href="https://www.researchgate.net/publication/200524409_Completely_Bounded_Maps_and_Operator_Algebras">Paulsen's book</a>).</p>
-<p>Let \( \phi:A\rightarrow B \) be a unital completely positive (UCP) map between unital \( C^\ast \)-algebras.  If \( a\in A \) with \( \phi(a)^\ast\phi(a) = \phi(a^\ast a) \) then already \( \phi(ba) = \phi(b)\phi(a) \) for any \( b \).  If this is the "right hand version" then there is a left hand version, and a bimodule version.</p>
+    <p>Visiting a high school with my son, in the Maths classroom there was a poster on the wall, which visualised primes numbers.  I only half remember what it said (taking a photo might have been a little bit weird, in the circumstances) but I think the little write-up at the bottom said that the calculations had been performed in Python, using trial division, and had taken half an hour.  This immediately made me think of a <a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">prime sieve</a>, so later I had a play with a sieve I had written in Python 3.  I now think I must be misremembering, as I cannot see how even trial division could take half an hour in Python (even some years ago).</p>
 <!--more-->
 
-<p>A nice application is the following: suppose that \( u\in A \) is unitary, and that we know that \( \phi(u) \) is also unitary.  Then \( \phi(au) = \phi(a)\phi(u) \) for any \( a\in A \).  This follows, of course, because \( u^\ast u=1 \) and \( \phi(u)^\ast\phi(u)=1 \) so we have equality as \( \phi \) is unital.</p>
-<p>The application of Chi-Keung and Ami is to multiplicative unitaries which allows them to give an incredibly short proof that amenability of representations respected weak containment.</p>
-<p>I want to just say a couple of words about why this is perhaps not too surprisingly.  (More than a couple of words is maybe not warranted, as the proof itself is not so long, using the Schwarz inequality).  Any UCP map is of the form \( \phi(a) = V^\ast \pi(a)V \) where \( \pi:A\rightarrow B(H) \) is a \( \ast \)-representation, and \( V:K\rightarrow H \) is an isometry (here I assume \( B\subseteq B(K) \)).  If \( u\in A \) is unitary then so is \( \pi(u) \), and so that \( V^\ast \pi(u) V \) is unitary is a strong condition:</p>
-<ul>
-<li>\( \pi(u) \) must restrict to a unitary on the image of \( V \);</li>
-<li>thus \( VV^\ast\pi(u)V = \pi(u)V \);</li>
-<li>then \( \phi(a)\phi(u) = V^\ast\pi(a) VV^\ast\pi(u) V=V^\ast \pi(au)V = \phi(au) \).</li>
-</ul>
-<p>Coda: Looking at the Stinespring dilation is often profitable.</p>
+<p>A 1000 by 1000 grid is quite a boring image, so I compute the first \( 10^8 \) primes (which takes about a minute for my sieve to compute) and plotted on a 10000 square pixel grid.  This results in an almost black square, so I resampled and increased the brightness (in Python directly) which results in a pleasing picture, showing a slow decay in density, in line with the <a href="https://en.wikipedia.org/wiki/Prime_number_theorem">prime number theorem</a>.  One might think that the primes are roughly randomly distributed, but <a href="https://math.stackexchange.com/questions/421353/are-primes-randomly-distributed">this question</a> on math.stackexchange will put you right on this score.  To experiment with visualising, I chose numbers are random, but in line with the decreasing density suggested by the prime number theorem.  The result does look visually rather different:</p>
+<p><img class="fixed-ratio-resize" alt="Primes and randoms" src="public/primes.png"></p>
+<p>To the left is the distribution of primes, and to the right random numbers.  To my eyes, there is a clear difference.</p>
+<p>Finally, a <a href="http://math.uni.lu/eml/projects/reports/prime-distribution.pdf">link to an undergraduate project</a> which explores some further ideas for visualisation.</p>
 
     <hr>
 
     <ul class="pagination justify-content-center mb-4">
         <li class="page-item">
-<a class="page-link" href="2019-10-05-primes.html">&larr; Visualising primes</a>
+<a class="page-link" href="2019-10-06-notes.html">&larr; Mathematical notes</a>
 </li>
 <li class="page-item">
 <a class="page-link" href="index.html">Index</a>
 </li>
 <li class="page-item">
-<a class="page-link" href="2019-05-30-tilemapbase.html">TileMapBase &rarr;</a>
+<a class="page-link" href="2019-08-04-multdomains.html">Multiplicative Domains &rarr;</a>
 </li>
     </ul>
 
