@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Matt Daws">
 
-    <title>Preprint: One-parameter groups</title>
+    <title>JPEGS into PDF</title>
 
     <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -51,25 +51,27 @@
     <div class="row">
     
     <div class="col-md-8">
-    <h1 class="mt-4">Preprint: One-parameter groups</h1>
+    <h1 class="mt-4">JPEGS into PDF</h1>
     
-    <p>Posted on 7th October 2019</p>
+    <p>Posted on 21st October 2019</p>
     <hr>
 
-    <p>A preprint <a href="https://arxiv.org/abs/1907.03661">arXiv:1907.03661</a> which has been on the arXiv for a while, but which is now submitted.  The paper is partly an exposition of some techniques for dealing with Analytic Generators of one-parameter isometry groups: as people explore Type III arguments in von Neumann algebras, I want to revisit these old(ish) ideas and show that developing theory can be rather useful.</p>
-<p>My main motivation was the study of <a href="https://en.wikipedia.org/wiki/Locally_compact_quantum_group">locally compact quantum groups</a> and in particular the fact that the antipode can be understood through studying the scaling group.  One of the facets of topological quantum group theory is the interaction between the \( C^* \)-algebraic and von Neumann algebraic theories; in particular we have an inclusion \( \newcommand{\G}{\mathbb G}C_0(\G) \rightarrow L^\infty(\G) \) which intertwines the relevant scaling groups.  I show that in this general setup, there is a Kaplansky Density type result for the analytic generators involved.  The techniques of the proof also allow me to prove an "automatic normality" result, giving a description of \( L^1_\sharp(\G) \) the natural dense \( \ast \)-subalgebra of \( L^1(\G) \).</p>
+    <p>Some time ago I stumbled across <a href="https://en.wikipedia.org/wiki/Manifold_(magazine)">Manifold</a> an old magazine published in the 1960s out of Warwick university.  It's a whimsical Mathematical magazine, now reproduced on <a href="https://ianstewartjoat.weebly.com/manifold-magazine.html">Ian Stewart's Website</a>.  A python script later and I downloaded the image files (now repeating the exercise after I realised higher-quality scans are available from a slightly different URL base).</p>
+<p>This left me with a large number of jpeg files, which is both annoying, and a pain to try to read.  Fast-forward in time to the start of 2018.  I was interested in PDF files, and got sufficiently interested to research the file format, and write a fairly serious Python module to convert PDF files into Python objects which could be browsed.  I also wrote some code to produce PDF files assembled out of images: using both PNG compression, and JBIG2.  For the latter I used an external converter, but for the PNG files I went so far as to implement my own (slow, but not impossibly so) implementation in Python.</p>
+<!--more-->
+
+<p>Oddly, I left out the possibility to use JPEGs.  This was odd, as PDF files have an extremely minimal implementation: just store, without any processing, a valid JPEG file (with headers and all).  So, a solution presents itself: convert the Manifold JPEG files into a PDF.  This is a reversible procedure, as it's really just bundling together the files with a small amount of extra information to form a valid PDF file.</p>
+<p>I pull up the <a href="https://github.com/MatthewDaws/PDFImage">GitHub repository</a> and look at the code.  Initially reaction is "Wow, this is complicated." followed by "I wrote this?" followed 5 minutes later by "Ah, that's quite a nice (if I say so myself) use of an abstract base class (a use of the "<a href="https://en.wikipedia.org/wiki/Template_method_pattern">Template Pattern</a>".)  5 lines of code, and I can compress images using JPEG.  I have also forgotten a lot of what I knew about software engineering (I doubt now I could structure a module as well).</p>
+<p>It's been about 18 months since I seriously wrote code.  Do I miss it?  Yes, to an extent.  However, life is very busy, and being a Mathematician, or being a decent software engineer, are not hobbies, and I simply don't have the time to do both at the level I'd like to.  At the moment, Maths is winning.</p>
 
     <hr>
 
     <ul class="pagination justify-content-center mb-4">
         <li class="page-item">
-<a class="page-link" href="2019-10-21-jpeg.html">&larr; JPEGS into PDF</a>
-</li>
-<li class="page-item">
 <a class="page-link" href="index.html">Index</a>
 </li>
 <li class="page-item">
-<a class="page-link" href="2019-10-06-notes.html">Mathematical notes &rarr;</a>
+<a class="page-link" href="2019-10-07-one-param.html">Preprint: One-parameter groups &rarr;</a>
 </li>
     </ul>
 
