@@ -26,6 +26,10 @@ body {
   font-size: 110%
 }
 
+table {
+  margin-bottom: 1rem;
+}
+
 
 
 /* Pygments stuff */
