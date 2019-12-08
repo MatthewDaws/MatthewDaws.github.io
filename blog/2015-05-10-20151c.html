@@ -86,7 +86,7 @@
 <li>The proper answer (or a proper answer) is very easy though.  Suppose we can make <code>1,2,...,k</code> but not <code>k+1</code>.  Then we can add a coin of denomination <code>1, 2, ..., k+1</code> (assuming they are not in <code>D</code> already) to allow us to make <code>k+1</code>.  However, the set of new possibilities increases with the value of the coin we add, so the best solution is to add <code>k+1</code> itself.</li>
 <li>We can now make <code>1,2,...,k, k+1, k+2, ..., k+k+1, 2*(k+1), ..., C*(k+1) + k</code> so we have a whole "initial interval" we can form.  If <code>n &lt;= C*(k+1) +k</code> is also in <code>D</code> and we're not yet using it, then we can additionally make all the numbers up to <code>C*n + C*(k+1)+k</code>.</li>
 <li>So each time we add a new denomination, we end up with an "initial interval" of numbers we can form from a certain "used subset" of <code>D</code>, and the remainer of <code>D</code> consists of larger numbers.  We just repeatedly add denominations.</li>
-<li>The worst case is something like adding 1, 2, 4, 8, ... and each time we have to scan over <code>D</code>, so the complexity is something like O( \|D\| * log2(V) ).</li>
+<li>The worst case is something like adding 1, 2, 4, 8, ... and each time we have to scan over <code>D</code>, so the complexity is something like O( |D| * log2(V) ).</li>
 </ul>
 
     <hr>

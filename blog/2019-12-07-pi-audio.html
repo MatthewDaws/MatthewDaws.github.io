@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Raspberry Pi audio</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Raspberry Pi audio</h1>
+    
+    <p>Posted on 7th December 2019</p>
+    <hr>
+
+    <p>My son and I are attempting to follow the <a href="https://magpi.raspberrypi.org/articles/retro-computing-with-raspberry-pi-4-in-the-magpi-issue-88">instructions in Pi Mag 88</a> to build a voice activated LED-powered Christmas tree decoration.  This is part of what I suspect shall be many posts documenting my attempts to actually use the couple of Raspberry Pis which we own.</p>
+<p>Up first is recording audio on the Pi.  I purchased <a href="https://shop.pimoroni.com/products/mini-usb-microphone">this cheap USB microphone</a>.  It works, but it's rather poor quality.  With a bit more research, I might have bought a <a href="https://en.wikipedia.org/wiki/PlayStation_Eye">Playstation Eye</a> which is nearly as cheap, and apparently pretty much works out the box with the Pi.  We played with the Microphone on our Pi 3 connected up to monitor, keyboard etc. but eventually we want to use my Pi 0 in headless mode.</p>
+<!--more-->
+
+<h2>Access a Pi via SSH</h2>
+<p>Install Raspberian and boot the Pi 0.  With only one USB port and no working hub, you can run the initial setup with a keyboard quite easily.  An internet search will reveal how to move the mouse cursor with the keyboard.  Using the Preferences, enable SSH access.  We can now run the Pi 0 headless and SSH in.  I use <a href="https://www.putty.org/">Putty</a> as a windows SSH client.</p>
+<p>To use function keys (which we'll want to use shortly) you need to run Putty with the "keyboard" option as <a href="https://www.raspberrypi.org/forums/viewtopic.php?t=52713">"Xterm R6"</a> (and not "linux"...)</p>
+<h2>Checking the microphone</h2>
+<p>Plug in the USB microphone, reboot the Pi 0, and SSH in.  Run</p>
+<blockquote class="card-body">
+<p>arecord -l</p>
+</blockquote>
+<p>I got the following:</p>
+<pre><code>**** List of CAPTURE Hardware Devices ****
+card 1: Device [USB PnP Sound Device], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+</code></pre>
+<p>The USB microphone shows up as "card 1" for me.  Now run</p>
+<blockquote class="card-body">
+<p>alsamixer -c 1</p>
+</blockquote>
+<p>to access the mixer for card 1.  Here we need our function keys to work.  Increase the capture level to 100.</p>
+<p>To make a test recording:</p>
+<blockquote class="card-body">
+<p>arecord -D hw:1,0 -d 5 -f cd test.wav -c 1</p>
+</blockquote>
+<p>This makes a 5 second recording, cd quality, mono "-c 1", using card 1, subdevice 0.  Once copied to my computer and loaded into <a href="https://www.audacityteam.org/">Audacity</a> the result is okay, though <em>very</em> quiet.</p>
+<h2>Software</h2>
+<p>We'll now need to install <a href="http://www.portaudio.com/">Portaudio</a>.  I am following the instructions <a href="http://docs.kitt.ai/snowboy/#access-microphone">here</a>:</p>
+<blockquote class="card-body">
+<p>sudo apt-get install python-pyaudio python3-pyaudio sox</p>
+<p>sudo pip3 install pyaudio</p>
+</blockquote>
+<p><em>Maybe</em> also:</p>
+<blockquote class="card-body">
+<p>sudo apt-get install libasound-dev</p>
+<p>sudo apt-get install portaudio19-dev</p>
+</blockquote>
+<p>Assuming </p>
+<blockquote class="card-body">
+<p>aplay -l</p>
+</blockquote>
+<p>Shows card 0, subdevice 0 as a suitable playback device (we won't actually use playback) and with card 1, subdevice 0 as the microphone (as above) we now edit (or create)</p>
+<blockquote class="card-body">
+<p>nano ~/.asoundrc</p>
+</blockquote>
+<p>and change / create the file to have contents:</p>
+<pre><code>pcm.!default {
+type asym
+playback.pcm {
+    type plug
+    slave.pcm "hw:0,0"
+}
+capture.pcm {
+    type plug
+    slave.pcm "hw:1,0"
+}
+}
+</code></pre>
+<p>Then run</p>
+<blockquote class="card-body">
+<p>rec test.wav</p>
+</blockquote>
+<p>and check it works.</p>
+<h2>Getting snowboy working</h2>
+<p>I wanted to play with <a href="https://snowboy.kitt.ai/">SnowBoy</a> which is an offline "hot word" detector (rather than following the Pi Mag's suggestion of an electrical button to make the Pi listen for commands).</p>
+<p>First we <a href="http://docs.kitt.ai/snowboy/#downloads">download</a> the file for Raspberry pis, then scp it over:</p>
+<blockquote class="card-body">
+<p>scp .\snowboy-rpi-arm-raspbian-8.0-1.1.1.tar.bz2 pi@192.168.1.17:./snowboy.tar.bz2</p>
+</blockquote>
+<p>Then decompress and extract:</p>
+<blockquote class="card-body">
+<p>bzip2 -d snowboy.tar.bz2</p>
+<p>tar xvf snowboy.tar</p>
+</blockquote>
+<p>We'll need some more libraries:</p>
+<blockquote class="card-body">
+<p>sudo apt-get install libatlas-base-dev</p>
+</blockquote>
+<p>This is Python 2 only, and I get a stream of error messages.  A bit of debugging shows that we get a stream of non-fatal errors when initialising the <code>pyaudio.PyAudio()</code> object.  The fatal error comes from trying to open the audio input at 16000Hz.  44kHz works fine.  However, if I manually change the recording to 44kHz no speech recognition occurs: probably because the "model" and "data" are not incompatible.</p>
+<p>At this point, I get bored with Python 2, and wonder if I can get Python 3 working, before we start some serious re-engineering of the project.  The <a href="https://github.com/kitt-ai/snowboy">GitHub</a> repo has Python 3 support, but it needs building.  Thankfully <a href="https://www.sigmdel.ca/michel/ha/rpi/voice_rec_02_en.html">sigmadel</a> has nicely described the steps to do this.  I followed this up until the point after running Swig.  At this point, my aim is to extract a minimal working copy of the files needed for Python 3.  I copied all the files from <code>examples/Python3</code> to a new directory, and then fixed the missing symbolic links by copying the actual files over them.  The next post will explain what I did then.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2019-11-11-energy.html">Heating energy costs &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    
