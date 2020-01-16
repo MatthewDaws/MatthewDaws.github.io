@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Raspberry Pi LED pixels</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Raspberry Pi LED pixels</h1>
+    
+    <p>Posted on 9th January 2020</p>
+    <hr>
+
+    <p>The final part of building a voice-activated Christmas tree light is the actual lights.
+Following the instructions in <a href="https://magpi.raspberrypi.org/articles/retro-computing-with-raspberry-pi-4-in-the-magpi-issue-88">PiMag 88</a> I bought 2 meters of NeoPixels from <a href="https://shop.pimoroni.com/">Pimoroni</a> and, erm, little else!</p>
+<!--more-->
+
+<p>First step was to find my soldering iron and attempt to solder some connectors to the
+LED strip.  This failed due to my iron being 20 years old and basically broken (I did not <a href="https://www.youtube.com/watch?v=gq-q64ncivM">maintain my tip</a> which was also far too large).  A new soldering-iron later, and some thinner solder, and I had attached a test LED to some jumper leads.</p>
+<p>Various attempts getting my Raspberry Pi Zero to do anything at all with the LED failed.  But I did get it working with my Arduino.  At this point I read</p>
+<ul>
+<li>The uberguide: https://cdn-learn.adafruit.com/downloads/pdf/adafruit-neopixel-uberguide.pdf</li>
+</ul>
+<p>Ah, I need a decent power supply.  And a resistor and capacity etc.  Order these.
+Some more soldering and cable management, and the Arduino at least can do some interesting things with the rest of the LED strip.  Something for the future is to experiment with:</p>
+<ul>
+<li>Better driving with Arduino: https://wp.josh.com/2014/05/13/ws2812-neopixels-are-not-so-finicky-once-you-get-to-know-them/</li>
+</ul>
+<p>Returning to the Raspberry Pi, I borrowed my son's Pi3, installed a clean copy of Raspberian, and followed carefully the instructions here:</p>
+<ul>
+<li><a href="https://learn.adafruit.com/neopixels-on-raspberry-pi">Adafruit guide to Raspberry Pi NeoPixel usage</a></li>
+<li>This means I now had to get a <a href="https://www.diodes.com/assets/Datasheets/74AHCT125.pdf">Level-Shifter</a>.  <a href="https://uk.farnell.com/">Farnell</a> are really good for these sorts of things.</li>
+<li>The <a href="https://github.com/jgarff/rpi_ws281x">GitHub Repo</a> of the WS2821 driver for the Raspberry Pi is also a goldmine of information.</li>
+</ul>
+<p>End result: it works perfectly!  Back to the Raspberry Pi Zero, I trace the problem back to power-supply.  The board itself seems to work flawlessly off any random USB power supply (e.g. running for hours when doing speech recognition testing).  However, for driving LEDs, even with an external power supply, it seems I really do need a beefier USB power supply.  Once I had this, the Pi Zero also worked flawlessly!</p>
+<p>For next year, the plan is write some sort of Object Oriented library for performing
+animations with the LEDs, and also to integrate with speech recognition code.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2020-01-08-speech.html">Raspberry Pi speech recognition &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    

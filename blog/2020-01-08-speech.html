@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Raspberry Pi speech recognition</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Raspberry Pi speech recognition</h1>
+    
+    <p>Posted on 8th January 2020</p>
+    <hr>
+
+    <p>This is a <a href="2019-12-07-pi-audio.html">follow-on post</a> about speech recognition on a Raspberry Pi.  Of course, Christmas and come and gone; perhaps I will finish this project for Christmas 2020!
+The original project was to make some voice activated Christmas tree lights.  The original project had a push-button activation, but to compete with my son's new Alexa, I wanted to use a
+<a href="https://whatis.techtarget.com/definition/hotword">hotword</a> wake-up instead.</p>
+<p>The first attempt was to use <a href="https://snowboy.kitt.ai/">Snowboy</a> which is an open source, but slightly morribund project.  The previous blog post details (with links) how to build a
+Python 3 compatible library.</p>
+<!--more-->
+
+<p>If you create an account, you can train your own models.
+There is a crowd-sourcing aspect whereby with enough independent models, a "universal model" can be created.  Unfortunately, it seems they didn't attract enough of a crowd, and so there are
+only a couple of universal models.  I couldn't get the demos to run, which some debugging revealed to be due to the fact that my cheap USB microphone wouldn't record at 16Khz.  The demo worked,
+but did nothing useful, if I changed this value.  I experimented with the offline mode, by recording my own hotword, making my own model, and then resampling the inputs to 16Khz and feeding them
+back to the code.  This worked!  Some messing about with <code>scipy</code> eventually lead to some working code which on-the-fly resampled the audio.</p>
+<ul>
+<li>My Raspberry Pi Zero is rather slow, and using <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.resample_poly.html#scipy.signal.resample_poly"><code>resample_poly</code></a> seemed to be faster, and yet sufficiently good.</li>
+<li>An advantage of Snowboy is that it is quite fast, using less than 50% CPU load.</li>
+<li>Another nice feature is that it classifies input audio into "silence", "talking" and "hotword" which will be useful once we try to "wake up" on the hotword, and then pass the next audio block to some general-purpose voice detection code / service.</li>
+<li>A down-side is that there seems to be no "continuous" mode: you have to pass blocks of audio.  I ended up with code which sent off 2 second windows, but overlapped these windows
+extensively, so I didn't miss a hotword.  This has the downside of increasing the CPU usage.</li>
+</ul>
+<p>A second attempt was to use <a href="https://github.com/Picovoice/porcupine">Porcupine</a> by Picovoice, a Canadian startup.  This has the advantage of already being a PIP package, and so has a somewhat
+less painful installation process than Snowboy.  Now forewarned about the need to resample to 16Khz, I adapted my code, and failed to achieve any working voice recognition.  Only by carefully
+looking at the examples did I realise that the input needs to be list or tuple of Python <code>int</code>s each being a 16-bit sample.  I had been passing <code>byte</code>s which instead need to be <code>unpacked</code>
+using the <code>struct</code> package.  I sadly had no luck passing a <code>numpy</code> array directly (which would have been more elegant).  I do need to learn more about how Python calls native code.</p>
+<p>The end result works, but seems more CPU intensive than Snowboy, and while far from perfect, does seem a little more accurate.</p>
+<p>The next steps would be to integrate the "wake up" code with some general speech recognition.  Some links for the future:</p>
+<ul>
+<li>https://pypi.org/project/SpeechRecognition/</li>
+<li>https://github.com/Uberi/speech_recognition/blob/master/reference/pocketsphinx.rst</li>
+</ul>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2020-01-09-pixels.html">&larr; Raspberry Pi LED pixels</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2019-12-07-pi-audio.html">Raspberry Pi audio &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    
