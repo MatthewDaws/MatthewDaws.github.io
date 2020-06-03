@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Matt Daws">
 
-    <title>New preprint</title>
+    <title>DJVU and PDF</title>
 
     <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -51,27 +51,40 @@
     <div class="row">
     
     <div class="col-md-8">
-    <h1 class="mt-4">New preprint</h1>
+    <h1 class="mt-4">DJVU and PDF</h1>
     
-    <p>Posted on 25th February 2020</p>
+    <p>Posted on 18th April 2020</p>
     <hr>
 
-    <p>Well, not new really, just I forgot to blog about it.  "Ring-theoretic (in)finiteness in reduced products of Banach algebras" with Bence Horváth
-(currently a postdoc at the Czech academy of sciences).  Available at <a href="https://arxiv.org/abs/1912.07108">arXiv:1912.07108 [math.FA]</a></p>
-<p>We look at ultrapowers and the asymptotic sequence algebra of Banach algebras.  There has been some interest recently in using tools from Model Theory (specifically, the recent area of "Continuous model theory") to study such objects for \( C^* \) and von Neumann algebras.  One of our research themes is that things do not work so nicely for Banach algebras, and in particular, one often has to get one's hands dirty (and not use Model Theory results) because Banach algebras are not very "metrical" objects, unlike operator algebras.  We construct various counter-examples, and also leave open some tantalizing questions about renormings of some rather concrete algebras.</p>
-<p>I worked (in a very "bare hands" way) on ultraproducts in my thesis, and shortly afterwards, and it was fun to return to this topic, but to take a slightly more abstract approach.  Something we wrote in the introduction is that we wonder if the asymptotic sequence algebra of a Banach algebra could be an interesting source of (counter-)examples for other problems?</p>
+    <p>Some notes to myself on working with DJVU and PDF.</p>
+<p>To convert a DJVU file to PDF:</p>
+<ul>
+<li>Download djvulibre for windows.</li>
+<li>Use <code>ddjvu.eve -format=pdf -page=1-10 infile.djvu outfile.pdf</code></li>
+<li>Manual: http://djvu.sourceforge.net/doc/man/ddjvu.html  Notice in particular docs about quality, using JPEG compression etc.</li>
+<li>Source: https://superuser.com/a/571787/503838</li>
+</ul>
+<!--more-->
+
+<p>To convert a PDF file to DJVU:</p>
+<ul>
+<li>Could use <a href="http://jwilk.net/software/pdf2djvu">pdf2djvu</a></li>
+<li>This is nice: it preserves hyperlinks etc. in the PDF file.  Definitely worth playing with the <code>dpi</code> option, as the default often produces rough looking text.  A dpi of 600 seems a nice compromise.</li>
+<li>Usage: <code>pdf2djvu -o out.djvu --dpi=600 input.pdf</code></li>
+<li>Source: https://commons.wikimedia.org/wiki/Help:Converting_PDF_to_DjVu</li>
+</ul>
 
     <hr>
 
     <ul class="pagination justify-content-center mb-4">
         <li class="page-item">
-<a class="page-link" href="2020-04-18-djvu.html">&larr; DJVU and PDF</a>
+<a class="page-link" href="2020-05-17-genetics.html">&larr; Genetics and ancestry</a>
 </li>
 <li class="page-item">
 <a class="page-link" href="index.html">Index</a>
 </li>
 <li class="page-item">
-<a class="page-link" href="2020-01-30-grad-course2.html">Graduate Course 2020 part 2 &rarr;</a>
+<a class="page-link" href="2020-02-25-preprint.html">New preprint &rarr;</a>
 </li>
     </ul>
 

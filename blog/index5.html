@@ -56,6 +56,49 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Working with numpy again</h2>
+        <p>In my new job, I find myself working with numpy (after a break of a couple of years, and now professionally, and
+not as a hobby.)  Numpy is great, but it doesn't half require a little thinking upon occasion.</p>
+<blockquote class="card-body">
+<p>Suppose we have an array of 10 points in the plane.  Should this be represented as a <code>numpy</code> array of shape <code>(2,10)</code> or <code>(10,2)</code>?</p>
+</blockquote>
+
+        <a href="2017-03-23-Numpy.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">23th March 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Random sampling to see a percentage of a population.</h2>
+        <blockquote class="card-body">
+<p>Given a population \( P \) and sampling at random ("with replacement") what's the expected number of samples I need to see 50% (or any fixed proportion) of the population.</p>
+</blockquote>
+<p>I deliberately ask for "expected" because calculating expectations is often easier than getting a handle on the whole probability distribution.  A trick is to exploit linearity: express the random variable of interest as a sum of random variables you can calculate the expectation of.</p>
+
+        <a href="2016-10-03-Sampling.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">3th October 2016</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Random sampling</h2>
+        <p>This post, very tangentially, relates to a quiz we set job candidates.  If you are applying for a job at my current company, and somehow work out I work there, and find this, then you probably half deserve a job anyway.</p>
+<p>Suppose you have a population \( P \) and some test as to whether a member of the population is good or bad.  We want to find a "random good member".  There are two methods that come to mind:</p>
+<ul>
+<li>Random sampling: pick a member at random, test it, if it passes return it, otherwise try again.</li>
+<li>Randomly order \( P \) and work through the whole set, returning the first good member.</li>
+</ul>
+<p>The first method has the virtue of being simple.  The second method uses a lot of memory, if \(P\) is large.  But on closer thought, what if the proportion of "good" members is rather small.  The 2nd method is guaranteed to find a good member in \( O(\vert P \vert) \).  How slow can the first method be?</p>
+
+        <a href="2016-09-29-RandomSearch.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">29th September 2016</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Java Enum definition</h2>
         <p>At the dying ends of the work day, I came across <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html">this page</a> and was initially confused by</p>
 <pre><code>public abstract class Enum&lt;E extends Enum&lt;E&gt;&gt;
@@ -110,41 +153,6 @@
         <a href="2015-06-23-BF.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">23th June 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">CodeJam 2015 Round 2</h2>
-        <p>Round 2 came and went (and Round 3 and the "distributed" round).  As an effort to practice with C#, I solved these problems in C# (definitely slower than using Python, and actually, the end running time is not that much quicker, for these sort of algorithmic / numerical problems).</p>
-<p>There's a definite step-up in difficulty here!  Maybe I kid myself I could have done problem A and some "small" problems quickly... that people did them all in 150 minutes is quite scary.  The <a href="">Official Contest Analysis</a> is rather brief (from G+, it seems the organisers were busy with the distributed round; or maybe, if we've come this far, shorter answers are all we need ;-&gt; )  I think my background in pure Maths shows here: I found problem D quite easy, as I found analysing the special cases off-line (pen and paper) to be not so hard.  Problems B and C (in "large" form) were hard, I thought.  (I missed the trick with problem B; and using an off-the-shelf Graph package is obviously the fast way to do Problem C.)</p>
-<p>See the code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2015_2">GitHub</a>.</p>
-
-        <a href="2015-06-17-20152.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">17th June 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Thoughts about C#</h2>
-        <p>On the basis that knowing a modern OO language would be good, and on the basis that everyone and their granny knows JAVA, I thought I'd look at C#.  Getting going with C# was a bit tedious: I end up looking things up endlessly, and puzzling over things for a while before they "click" and seem obvious (which is always annoying, as then I'm left wondering why it wasn't obvious from the start).  You wait for muscle memory to build...  </p>
-<p>Example: A small mistake lead to some musings on how sort algorithms are implemented: <a href="http://stackoverflow.com/questions/30865510/why-does-failing-to-recognise-equality-mess-up-c-sharp-listt-sort">StackOverFlow Question</a> (the actual problem came from thinking about orderings in Python and C++ too much, where you specify a <a href="https://en.wikipedia.org/wiki/Weak_ordering#Strict_weak_orderings">strict weak ordering</a>, basically "less than", and then porting that to a <code>CompareTo</code> method and missing a corner-case.  This came up in a <a href="./20152.html">CodeJam problem</a>.)</p>
-
-        <a href="2015-06-16-ThoughtsCSharp.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">16th June 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Disjoint Paths; Implementation Issues</h2>
-        <p>Mostly as an excuse to <a href="./ThoughtsCSharp.html">learn C#</a> I implemented the <a href="./Paths.html">path finding algorithms</a>.  Running some tests (random graphs, and then computing cuts from found disjoint paths, as to verify a "cut" is easy!) caught some implementation issues.  All obvious with hindsight.</p>
-<h2>Notes on the implementation</h2>
-<p>See the <a href="https://github.com/MatthewDaws/CS_Learning/blob/master/bits/Graphs_Paths.cs">file on GitHub</a>.  I wanted to use interfaces, and extension methods, as they are features of C# which differ from e.g. C++.  In hindsight, I think an abstract base case <code>Graph</code> would have been more sensible, with <code>DirectedGraph</code> and <code>UndirectedGraph</code> inheriting from this.</p>
-
-        <a href="2015-06-15-Paths-Implementation.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">15th June 2015</div>
 </div>
 
 

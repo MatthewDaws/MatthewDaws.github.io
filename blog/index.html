@@ -56,6 +56,54 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">TALMO</h2>
+        <p>I've spent yesterday afternoon and this morning attending the <a href="http://talmo.uk/">TALMO</a> conference, from the comfort of my home office, via Zoom.  The extremely efficient organisers have already got many of the presentations uploaded to <a href="https://www.youtube.com/channel/UCC1yB03N8tAjQiUyed5iw9g">YouTube</a>.</p>
+<p>Some links which I made during the talks:</p>
+<ul>
+<li><a href="https://obsproject.com/forum/resources/obs-virtualcam.949/">OBS Virtualcam</a> : OBS is a great (free) screen recorder which allows e.g. composing different inputs (so overlaying a webcam image at an arbitrary place in a screen capture of just one window).  The "Virtualcam" is an output which fakes up a new webcam on your system, hence allowing you to pipe the OBS output into any application which uses a webcam.</li>
+<li><a href="https://stem-enable.github.io/Accessibility-of-maths-e-resources/index.html">Accessibility talk slides</a> : This has been rumbling away in the background, but an unhappy confluence of a looming deadline just as we add more things online makes it more important.  Particularly discussed was <a href="https://bookdown.org/">Bookdown</a>.  Perhaps it is time to move all my lecture notes to a new format.  But it's the input of time required, and a new toolchain to learn...</li>
+<li><a href="https://github.com/xournalpp/xournalpp/wiki/User-Manual">Xournal++</a> (a fork of Xournal into C++ I think leads to the title) is a FOSS PDF annotator that supports LaTeX.  Next time I am marking work I will investigate this.</li>
+<li>There was a question asking about Tablets.  Suggestions included Wacom tablets, and those by <a href="https://www.amazon.co.uk/XP-Pen-Drawing-Graphic-Battery-free-Shortcuts/dp/B0814MC827/">xp-pen</a></li>
+<li><a href="http://www.personal.reading.ac.uk/~smsglais/Covid-19_AL-Studies_Videos_etc_to_support_new_intake_to_UG_mathematical_sciences_programmes_in_Autumn_2020.pdf">Videos to help students adapt from A-Levels</a> which is especially important this year, as most students will have missed the end of their A-Level studies.  There was some talk that the <a href="https://amsp.org.uk/">AMSP</a> would be doing something, but I couldn't find much (at a brief glance).</li>
+</ul>
+        <a href="2020-06-03-talmo.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">3th June 2020</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Genetics and ancestry</h2>
+        <p>What feels like a lifetime ago (before some other genetics happened) I listened to Adam Rutherford's book of the week "How to Argue With a Racist" on Radio 4.  It's now been so long that the Radio 4 link is dead, but you can <a href="https://www.amazon.co.uk/Does-Race-Exist-Scientific-Investigation/dp/1474611249">buy the book</a> or <a href="https://www.theguardian.com/books/2020/jan/30/how-to-argue-with-a-racist-adam-rutherford-review">read the book review</a>.  The radio series was interesting, but one particular (slightly off topic) point I remember.  Adam claimed (I mean, I <em>think</em>, it was a while ago) something like</p>
+<blockquote class="card-body">
+<p>Go back around 11 generations, and you will have ancestors who share none of your genetic material.</p>
+</blockquote>
+<p>What argument might lead to this conclusion?  My main initial conclusion was that I did not really know how inheritance works at the genetic level.</p>
+
+        <a href="2020-05-17-genetics.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">17th May 2020</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">DJVU and PDF</h2>
+        <p>Some notes to myself on working with DJVU and PDF.</p>
+<p>To convert a DJVU file to PDF:</p>
+<ul>
+<li>Download djvulibre for windows.</li>
+<li>Use <code>ddjvu.eve -format=pdf -page=1-10 infile.djvu outfile.pdf</code></li>
+<li>Manual: http://djvu.sourceforge.net/doc/man/ddjvu.html  Notice in particular docs about quality, using JPEG compression etc.</li>
+<li>Source: https://superuser.com/a/571787/503838</li>
+</ul>
+
+        <a href="2020-04-18-djvu.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">18th April 2020</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">New preprint</h2>
         <p>Well, not new really, just I forgot to blog about it.  "Ring-theoretic (in)finiteness in reduced products of Banach algebras" with Bence Horváth
 (currently a postdoc at the Czech academy of sciences).  Available at <a href="https://arxiv.org/abs/1912.07108">arXiv:1912.07108 [math.FA]</a></p>
@@ -126,38 +174,6 @@ Python 3 compatible library.</p>
         <a href="2020-01-08-speech.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">8th January 2020</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Raspberry Pi audio</h2>
-        <p>My son and I are attempting to follow the <a href="https://magpi.raspberrypi.org/articles/retro-computing-with-raspberry-pi-4-in-the-magpi-issue-88">instructions in Pi Mag 88</a> to build a voice activated LED-powered Christmas tree decoration.  This is part of what I suspect shall be many posts documenting my attempts to actually use the couple of Raspberry Pis which we own.</p>
-<p>Up first is recording audio on the Pi.  I purchased <a href="https://shop.pimoroni.com/products/mini-usb-microphone">this cheap USB microphone</a>.  It works, but it's rather poor quality.  With a bit more research, I might have bought a <a href="https://en.wikipedia.org/wiki/PlayStation_Eye">Playstation Eye</a> which is nearly as cheap, and apparently pretty much works out the box with the Pi.  We played with the Microphone on our Pi 3 connected up to monitor, keyboard etc. but eventually we want to use my Pi 0 in headless mode.</p>
-
-        <a href="2019-12-07-pi-audio.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">7th December 2019</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Heating energy costs</h2>
-        <p>Having had to do some emergency plumbing on my <a href="https://www.eta.co.at/en/products/product-overview/pellets/eta-pu-7-11-and-15-kw/">ETA Pellet boiler</a> before breakfast, I got to thinking about energy costs for heating.  We are off the mains gas grid, and previously the house was heating by an oil boiler, but the previous owner installed the pellet boiler.  Government subsidies can affect costs, but for reasons I don't fully understand, we are not on the RHI.  So I pay full fuel costs, and maintenance, but obviously didn't pay installation costs.</p>
-
-        <a href="2019-11-11-energy.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">11th November 2019</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">JPEGS into PDF</h2>
-        <p>Some time ago I stumbled across <a href="https://en.wikipedia.org/wiki/Manifold_(magazine)">Manifold</a> an old magazine published in the 1960s out of Warwick university.  It's a whimsical Mathematical magazine, now reproduced on <a href="https://ianstewartjoat.weebly.com/manifold-magazine.html">Ian Stewart's Website</a>.  A python script later and I downloaded the image files (now repeating the exercise after I realised higher-quality scans are available from a slightly different URL base).</p>
-<p>This left me with a large number of jpeg files, which is both annoying, and a pain to try to read.  Fast-forward in time to the start of 2018.  I was interested in PDF files, and got sufficiently interested to research the file format, and write a fairly serious Python module to convert PDF files into Python objects which could be browsed.  I also wrote some code to produce PDF files assembled out of images: using both PNG compression, and JBIG2.  For the latter I used an external converter, but for the PNG files I went so far as to implement my own (slow, but not impossibly so) implementation in Python.</p>
-
-        <a href="2019-10-21-jpeg.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">21st October 2019</div>
 </div>
 
 

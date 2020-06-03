@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Genetics and ancestry</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Genetics and ancestry</h1>
+    
+    <p>Posted on 17th May 2020</p>
+    <hr>
+
+    <p>What feels like a lifetime ago (before some other genetics happened) I listened to Adam Rutherford's book of the week "How to Argue With a Racist" on Radio 4.  It's now been so long that the Radio 4 link is dead, but you can <a href="https://www.amazon.co.uk/Does-Race-Exist-Scientific-Investigation/dp/1474611249">buy the book</a> or <a href="https://www.theguardian.com/books/2020/jan/30/how-to-argue-with-a-racist-adam-rutherford-review">read the book review</a>.  The radio series was interesting, but one particular (slightly off topic) point I remember.  Adam claimed (I mean, I <em>think</em>, it was a while ago) something like</p>
+<blockquote class="card-body">
+<p>Go back around 11 generations, and you will have ancestors who share none of your genetic material.</p>
+</blockquote>
+<p>What argument might lead to this conclusion?  My main initial conclusion was that I did not really know how inheritance works at the genetic level.</p>
+<!--more-->
+
+<p>Humans have 22 pairs of <a href="https://en.wikipedia.org/wiki/Chromosome">chromosomes</a> and one pair of sex chromosomes.  I shall ignore the latter, as they are different, and complicate the argument.  (Aside: I didn't know that the classical picture of a chromosome, as an "X" shape, actually only arises during the <a href="https://en.wikipedia.org/wiki/Metaphase">metaphase</a> stage of <a href="https://en.wikipedia.org/wiki/Mitosis">mitosis</a>: when chromosomes are being replicated).
+The non-sex chromosomes are called <a href="https://en.wikipedia.org/wiki/Autosome">autosomes</a> and in most, <a href="https://en.wikipedia.org/wiki/Ploidy#Diploid">diploid</a>, cells in the body you have a pair, 2 different copies, of each chromosome.</p>
+<h3>Inheritance</h3>
+<p>Inheritance (in my crude understanding) is described by <a href="https://en.wikipedia.org/wiki/Mendelian_inheritance">Mendelian inheritance</a>, which describes observations, and <a href="https://en.wikipedia.org/wiki/Boveri%E2%80%93Sutton_chromosome_theory">chromosome theory</a> which gives a mechanism for these observations to occur.  For us, what is important is that <a href="https://en.wikipedia.org/wiki/Gamete">gametes</a> contain only one copy of each chromosome, and at fertilisation, these are combined to give a diploid cell.</p>
+<p>In our first model, for each chromosome, a (uniformly) randomly chosen copy will end up in the gamete.  Thus, from your father (F) and mother (M) you will receive exactly one copy of each pair.  However, for each chromosome, that copy could have either come from your father's father (FF) or your father's mother (MF), and similarly from your mother' father (FM) or your mother's mother (MM).</p>
+<p>For example, there is a \( (1/2)^{22} \approx 2.4\times 10^{-6} \) chance that FF gave you no chromosomes.  How do we perform the calculations for further back up the family tree?  2 generations back, your father has 2 parents, 3 generations back 4 ancestors lead to your father, and \( n \) generations back \( 2^{n-1} \) ancestors.  When \( n=6 \) we have \( 2^5=32 \) ancestors, and at least 10 of these cannot have contributed a single chromosome!</p>
+<h3>Meiosis</h3>
+<p>This leaves a bit of a puzzle though: how can we get genetic diversity if whole chromosomes are copied around?  Indeed, this model is unreasonably simplistic, as in the process of <a href="https://en.wikipedia.org/wiki/Meiosis">Meiosis</a>, <a href="https://en.wikipedia.org/wiki/Chromosomal_crossover">chromosomal crossover</a> occurs, mixing the two copies of the chromosome together.  How this occurs is a little complicated, with the upshot that "geometry matters": genetic material which is close by is less likely to be mixed than further away material -- for more details see <a href="https://en.wikipedia.org/wiki/Centimorgan">genetic distance</a>.  However, I shall model this using a simple uniform distribution: from your father, say, for each chromosome independently, you get \( p \) proportion of the 1st copy, and \( 1-p \) proportion of 2nd copy, of each chromosome, where \( p\sim U[0,1] \).</p>
+<p>Now we have a genuine probability problem: for each chromosome, you will always have <em>some</em> fraction from every ancestor.  However, that we have 22 chromosomes and not one simplifies things.  There are 22 independent cross-over events, which in our simple model leads to 22 independent uniform random variables.  To obtain the total fraction of chromosomes carries from one ancestor, we add these random variables up, which leads to the <a href="https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution">Irwin–Hall distribution</a>.  More formally, let \( (X_i)_{i=1}^{22} \) be iid \( U[0,1] \) random variables, and then we are interested in \( X = \frac{1}{22}\sum_{i=1}^{22} X_i \) which is the total proportion.  Then \( \mathbb{E}(X) = \frac12 \) and \( \newcommand{\var}{\operatorname{var}}\var(X) = \frac{1}{12\times 22} \).  From the <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">central limit theorem</a> we know that, if \( 22 \) were a large number, then \( X \) would be close to a normal random variable with the stated mean and variance.  In fact, in this particular case, \( 22 \) is "large", and \( X \) is very close to being distributed as a \( N(1/2, 1/264) \) random variable.</p>
+<p>There are already some simplifications here: for example, in <a href="https://en.wikipedia.org/wiki/Chromosome#Human_chromosomes">human chromosomes</a> it is not true that each chromosome has the same amount of "genetic information".  We could make a further simplification, and suppose that actually \( X=1/2 \).  That is, lets assume that cross-over exactly gives a 50/50 mix.  Thus 2 generations back, you have exactly 1/4 of the genetic material from each 4 ancestors MM, MF, FM, FF, 4 generations back you share 1/8, and so forth.  We have again removed any randomness.</p>
+<p>Going back to the general case, let's ask the question: "going back \( n \) generations, what is the distribution of the minimal ancestor?"  By this, I mean the following: we have \( 2^n \) ancestors, and each contributes a fraction of genetic material, say \( F_1,\cdots,F_{2^n} \) (these being random variables, with \( 0\leq F_i\leq 1 \) and \( \sum_i F_i=1 \)).  I am interested in the distribution of \( M=\min_i F_i \).  Let \( X \) be as above, a random variable distributed as the Irwin-Hall distribution with \( N=22 \).  Then if \( M_F \) is the minimum contribution from an ancestor of your father, and similarly \( M_M \) from your mother, we have that \( M = \min(XM_F, (1-X)M_M) \).  Notice that \( M_M, M_F \) are iid with \( 2^{n-1} \) ancestors.  Further \( X \) is symmetric about \( \frac12 \), so if \( M_F, M_M \) has CDF \( G_{n-1} \), and \( X \) has density \( h \),
+\[ G_n(p) = \mathbb P(M\leq p) = 2\int_0^{1/2} h(t) G_{n-1}(p/t) \ dt. \]
+Notice that \( G_1(p) = 2\int_0^p h(t) \ dt \) (again by symmetry of \( h \)).  In principle this allows us to compute \( G_n \) by recursion, but in practice I do not see how to do this.</p>
+<p>However, it's not hard to perform a simulation, and get an idea of what \( G_{11} \) looks like.  For example, the 95th percentile of the distribution of \( G_{11} \) is around \( 1.4\times 10^{-4} \).  There is some debate around how many genes we have, but <a href="https://en.wikipedia.org/wiki/Human_genome#Molecular_organization_and_gene_content">Wikipedia</a> suggests around at most 330000.  This leaves the minimal contribution from an ancestor 11 generations ago at around \( 1.4\times 10^{-4} \times 3.3\times 10^{5} \approx 46 \) genes.  If we just look at protein-coding genes, then there are at most around 21300, so a minimal contribution of \( 1.4\times 10^{-4} \times 2.13\times 10^{4} \approx 3 \) genes.</p>
+<h3>Conclusions?</h3>
+<p>So, I seem to have failed to quite decide why the magic "11 generations ago".  I guess I need to buy the book, check the quote, and see is there is a footnote.  At least I now know more about basic genetics than I did.</p>
+<p>A fuller argument would need to consider the sex chromosomes, and also <a href="https://en.wikipedia.org/wiki/Mitochondrial_DNA">Mitochondrial DNA</a>.  Similarly, as Rutherford's programme already pointed out, going back many generations and assuming a pure tree structure for your family tree (that is, with no common ancestors at all) is basically just wrong.  <a href="https://github.com/MatthewDaws/Python_bits/blob/master/stats_bits/Irwin-Hall.ipynb">Some code on GitHub</a>.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2020-06-03-talmo.html">&larr; TALMO</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2020-04-18-djvu.html">DJVU and PDF &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    
