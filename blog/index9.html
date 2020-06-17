@@ -56,6 +56,24 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Jam 2014 Round 1A</h2>
+        <p>As ever, links to: <a href="https://code.google.com/codejam/contest/2984486/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2014_1a">GitHub</a>.</p>
+<p>Of current interest is how to progress: top 1000 people go through, and for that you'd need 55 points in a reasonable time.  That is, solve all but the tricky statistics based question, Problem C.</p>
+<p><strong>Problem A, Charging Chaos:</strong> The problem is the find a "mask" which when xored with each outlet gives each device.  Of course, what makes this tricky is that there is also an unknown permutation to find, to map the outlets bijectively to the devices.  But you can find these iteratively:</p>
+<ul>
+<li>For the first bit, try the mask having bit 0: then you partition the outlets into two sets, those with bit 1 having 0, and those with bit 1 being 1.  Also partition the devices similarly, and then the sets need to match in size for a bijection to exist.  Similarly if the mask has bit 1 (then 0 for outlet maps to 1 for device).</li>
+<li>Then carry on, further subdividing the sets</li>
+<li>This gives a <a href="https://en.wikipedia.org/wiki/Backtracking">Backtracking algorithm</a>, or, what amounts to the same thing, a <a href="https://en.wikipedia.org/wiki/Depth-first_search">Depth First Search</a> with pruning.</li>
+<li>This is rather different from the official solution.</li>
+</ul>
+
+        <a href="2015-04-17-20141a.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">17th April 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Code Jam Qualification 2015</h2>
         <p>As expected, flight back from Boston to Leeds via Dublin resulted in zero sleep, and so hopes were not overly high for the <a href="https://code.google.com/codejam/contest/6224486/dashboard">2015 Qualification Round</a>.  But, only 20 points needed to progress, which can't be too hard, right?</p>
 <p>Anyway, in the end, I got 100%, and seem to be the highest ranked UK participant.  This, one suspects, won't last...!</p>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Stalled work</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Stalled work</h1>
+    
+    <p>Posted on 17th June 2020</p>
+    <hr>
+
+    <p>Cleaning out my desk, I came across some plans for further work on <a href="https://matthewdaws.github.io/comp.html#ds">predictive policing</a>.  It now seems rather unlikely I will have time to pursue these (what with a fixed number of hours in a day, and a desire to be a research in Mathematics, at least at the moment).  I thought I might as well record the ideas here.</p>
+<!--more-->
+
+<h3>Patrol plans</h3>
+<p>The goal of the original research project was to write open source implementations of various <a href="https://en.wikipedia.org/wiki/Predictive_policing">predictive policing</a> algorithms.  I was only interested in time and space predictions of (relative risk of) crime: e.g. "this area of a city is more likely to suffer burglaries in the next few days".  If such predictions are to be made use of, then they probably inform police "patrol plans" (which is my understanding of how they have been used in trials in the UK).</p>
+<p>The follow-on research idea is to look at predictions thru the lense of producing useful patrol plans.  For example, if a prediction is incredibly finely grained, perhaps flagging up 100s of small areas to be at risk, then it might score well on a some metric on "prediction", but be useless for planning patrols: police forces do not have the resources to make a visible police presence around 100s of disparate areas.</p>
+<ul>
+<li>What are some good "usability" metrics?  There is some literature on this.</li>
+<li>Are there some algorithms for producing patrol plans out of predictions?</li>
+<li>Does the prediction actually matter that much, once a patrol plan has been produced?  (In an extreme case, maybe a police force only have resources to, each day, prioritise 3, 5, 10 (??) general areas.  If we are only highlighting 3 areas to patrol, does the prediction matter that much?)</li>
+</ul>
+<p>Some <a href="public/patrol_plans_plan.pdf">hand-written notes</a> of further ideas.</p>
+<h3>KDEs on a network</h3>
+<p>This project is more mathematical (though applied statistics).  There is interest in performing various geospatial analysis on networks, instead of, for example, using a grid overlaid on a city.  By a network, I mean both a mathematical "graph" (almost always with distances, often embedding into the plane) and the real-world notion of a "street network" or a "road network", with the former obviously being a good model of the latter.</p>
+<p>As far as modelling crime goes, there is probably still some work to be done on how to accurately model "informal networks".  By this, I mean unofficial paths across common land, or a broken fence which people cross over.  This means that <em>only</em> knowing the road network is not enough to model how people really move around a city (especially if said people are moving on foot, and trying not to be detected).</p>
+<p>In particular, I was interested in <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation">Kernel density estimation</a> on a network, which I'll take to mean a connected graph embedded into the plane, with the induced distance metric.  A couple of relevant papers are:</p>
+<ul>
+<li>"A kernel density estimation method for networks, its computational method and a GIS-based tool" <a href="https://doi.org/10.1080/13658810802475491">Okabe, Satoh, Sugihara</a>.  Some <a href="public/okabe_comments.pdf">hand-written notes</a> with some criticisms of their method.</li>
+<li>"Kernel Density Estimation on a Linear Network" <a href="https://doi.org/10.1111/sjos.12255">McSwiggan, Baddeley, Nair</a>.  I don't have any notes.</li>
+<li>Would need to do a further literature review.</li>
+</ul>
+<p><a href="public/kde_plans.pdf">Some more hand-written notes</a> on plans.  I think a key thing here would be to have some application in mind (which need not be policing, and could be a little artificial) in order to illustrate what existing methods do well, and not so well.  Also, writing some decent software would be useful.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2020-06-09-notes.html">Notes &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    
