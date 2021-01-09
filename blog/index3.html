@@ -56,6 +56,46 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Polar decomposition of functionals</h2>
+        <p>A well-known fact from the basic theory of von Neumann algebras is the polar decomposition of
+normal functionals: given \( \newcommand{\ip}[2]{\langle #1, #2 \rangle} \)
+\( \varphi\in M_{&ast;}  \) there is \( \omega\in M_{&ast;}^+ \) and a partial isometry \( v\in M \)
+with \( \varphi = v\omega \).  If \( v^* v \) is equal to the support of \( \omega \), then this decomposition is unique, and we write \( |\varphi| \) for \( \omega \).</p>
+<p>I am mostly following <a href="https://books.google.co.uk/books/about/Theory_of_Operator_Algebras_I.html?id=dTnq4hjjtgMC&amp;redir_esc=y">Takesaki's book</a>
+here; but the material is also nicely presented in a the <a href="https://uwspace.uwaterloo.ca/handle/10012/3920">MSc thesis of Zwarich</a>.
+Neither of these sources quite gives a correct proof (IMHO) so I thought I would record here the main
+steps in proving existence.</p>
+
+        <a href="2019-03-13-polar-decomp.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">13th March 2019</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Neighbourhood bases, continued.</h2>
+        <p>We <a href="2019-01-31-topology.html">saw before</a> that on a set \( X \) we can specify a (unique) topology
+by, for each \( x\in X \), specifying a collection of sets \( U_x \) which will satisfy that:</p>
+<ul>
+<li>Each \( V\in U_x \) contains \( x \) and will be open;</li>
+<li>Every open \( C \ni x \) will be such that there is \( V\in U_x \) with \( V\subseteq C \),</li>
+</ul>
+<p>if and only if we have the conditions that:</p>
+<ul>
+<li>Given \( A_1,\cdots,A_n\in U_x \), there is \( A\in U_x \) with \( A\subseteq A_1\cap\cdots\cap A_n \);</li>
+<li>Given \( B\in U_y \) with \( x\in B \), there is \( A\in U_x \) with \( A\subseteq B \).</li>
+</ul>
+<p>However, we might ask: what is the advantage of specifying the "basic open sets" about each
+point, rather than just specifying a <a href="https://en.wikipedia.org/wiki/Base_(topology)">base</a> for
+the topology?</p>
+
+        <a href="2019-02-26-topology.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">26th February 2019</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Semi-direct products</h2>
         <p>Motivated by some reading about quantum groups, I want to sketch how a semi-direct product of (topological)
 groups is the same as having an idempotent group homomorphism.</p>
@@ -149,29 +189,6 @@ re-creates what I need of Jekyll.  Seems to be working, which is quite pleasing.
         <a href="2018-01-22-AcademicCulture.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">22nd January 2018</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Probabilistic programming in Python</h2>
-        <p>Later in the week I will <a href="https://csapblog.leeds.ac.uk/an-introduction-to-bayesian-statistics-and-linear-regression-in-python/">give a talk</a>
-to the <a href="https://www.geog.leeds.ac.uk/research/csap/">Centre for Spatial Analysis &amp; Policy</a> group in Geography, at Leeds Uni.  See the <a href="https://github.com/MatthewDaws/Python_bits/tree/master/pymc_etc/Talk">GitHub Repo</a> 
-for details.</p>
-<p>I had a few aims:</p>
-
-        <a href="2018-01-20-ProbProgrammingPython.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">20th January 2018</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">PyMC3</h2>
-        <p>I'm finally doing some work which requires some genuine Bayesian analysis, and so have returned to playing with <code>emcee</code>.  I've also been looking at <code>PyMC3</code> which is an impressive piece of work, but also requires a bit of change of thinking from <code>emcee</code>.</p>
-<p>Some <a href="https://github.com/MatthewDaws/Python_bits/tree/master/pymc_etc">notebooks can be found on GitHub</a>.</p>
-        <a href="2017-11-22-Pymc.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">22nd November 2017</div>
 </div>
 
 

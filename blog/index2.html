@@ -56,6 +56,34 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Preprint: One-parameter groups</h2>
+        <p>A preprint <a href="https://arxiv.org/abs/1907.03661">arXiv:1907.03661</a> which has been on the arXiv for a while, but which is now submitted.  The paper is partly an exposition of some techniques for dealing with Analytic Generators of one-parameter isometry groups: as people explore Type III arguments in von Neumann algebras, I want to revisit these old(ish) ideas and show that developing theory can be rather useful.</p>
+<p>My main motivation was the study of <a href="https://en.wikipedia.org/wiki/Locally_compact_quantum_group">locally compact quantum groups</a> and in particular the fact that the antipode can be understood through studying the scaling group.  One of the facets of topological quantum group theory is the interaction between the \( C^* \)-algebraic and von Neumann algebraic theories; in particular we have an inclusion \( \newcommand{\G}{\mathbb G}C_0(\G) \rightarrow L^\infty(\G) \) which intertwines the relevant scaling groups.  I show that in this general setup, there is a Kaplansky Density type result for the analytic generators involved.  The techniques of the proof also allow me to prove an "automatic normality" result, giving a description of \( L^1_\sharp(\G) \) the natural dense \( \ast \)-subalgebra of \( L^1(\G) \).</p>
+        <a href="2019-10-07-one-param.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">7th October 2019</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Mathematical notes</h2>
+        <p>Some while ago, I started an experiment of putting some Mathematical notes up on GitHub.  I'm publishing the LaTeX sources, and using
+<a href="https://latexonline.cc/">LaTex.Online</a> to compile the LaTeX source to PDF for online viewing.  This was motivated by:</p>
+<ul>
+<li>I rather enjoy writing research-level expositions.</li>
+<li>I quite often come across things in my research which I want to understand closely, and for which writing out somewhat formal notes is not a <em>massive</em> misuse of time.</li>
+<li>However, the result is not actual research, and probably wouldn't even be suitable for the arXiv.</li>
+<li>Furthermore, one can imagine wanting to add to these notes as time goes on, and arXiv is not designed for this (indeed, my feeling is that this is discouraged, though with a quick search I could not find evidence to substantiate this).  Of course, GitHub very much is (and, in a dream world, maybe other people could submit "issues", and pull requests, etc.)</li>
+</ul>
+<p>For now, there is just one file, some notes about the Fell Topology (on the space of representations of a \( C^* \)-algebra or locally compact group).</p>
+<p>[I found LaTeX.online to be a very nice service; but it doesn't seem to like spaces in URLs.]</p>
+        <a href="2019-10-06-notes.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">6th October 2019</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Visualising primes</h2>
         <p>Visiting a high school with my son, in the Maths classroom there was a poster on the wall, which visualised primes numbers.  I only half remember what it said (taking a photo might have been a little bit weird, in the circumstances) but I think the little write-up at the bottom said that the calculations had been performed in Python, using trial division, and had taken half an hour.  This immediately made me think of a <a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">prime sieve</a>, so later I had a play with a sieve I had written in Python 3.  I now think I must be misremembering, as I cannot see how even trial division could take half an hour in Python (even some years ago).</p>
 
@@ -134,46 +162,6 @@ two possible ways to model how someone responds:</p>
         <a href="2019-03-16-survey-sampling.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">16th March 2019</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Polar decomposition of functionals</h2>
-        <p>A well-known fact from the basic theory of von Neumann algebras is the polar decomposition of
-normal functionals: given \( \newcommand{\ip}[2]{\langle #1, #2 \rangle} \)
-\( \varphi\in M_{&ast;}  \) there is \( \omega\in M_{&ast;}^+ \) and a partial isometry \( v\in M \)
-with \( \varphi = v\omega \).  If \( v^* v \) is equal to the support of \( \omega \), then this decomposition is unique, and we write \( |\varphi| \) for \( \omega \).</p>
-<p>I am mostly following <a href="https://books.google.co.uk/books/about/Theory_of_Operator_Algebras_I.html?id=dTnq4hjjtgMC&amp;redir_esc=y">Takesaki's book</a>
-here; but the material is also nicely presented in a the <a href="https://uwspace.uwaterloo.ca/handle/10012/3920">MSc thesis of Zwarich</a>.
-Neither of these sources quite gives a correct proof (IMHO) so I thought I would record here the main
-steps in proving existence.</p>
-
-        <a href="2019-03-13-polar-decomp.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">13th March 2019</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Neighbourhood bases, continued.</h2>
-        <p>We <a href="2019-01-31-topology.html">saw before</a> that on a set \( X \) we can specify a (unique) topology
-by, for each \( x\in X \), specifying a collection of sets \( U_x \) which will satisfy that:</p>
-<ul>
-<li>Each \( V\in U_x \) contains \( x \) and will be open;</li>
-<li>Every open \( C \ni x \) will be such that there is \( V\in U_x \) with \( V\subseteq C \),</li>
-</ul>
-<p>if and only if we have the conditions that:</p>
-<ul>
-<li>Given \( A_1,\cdots,A_n\in U_x \), there is \( A\in U_x \) with \( A\subseteq A_1\cap\cdots\cap A_n \);</li>
-<li>Given \( B\in U_y \) with \( x\in B \), there is \( A\in U_x \) with \( A\subseteq B \).</li>
-</ul>
-<p>However, we might ask: what is the advantage of specifying the "basic open sets" about each
-point, rather than just specifying a <a href="https://en.wikipedia.org/wiki/Base_(topology)">base</a> for
-the topology?</p>
-
-        <a href="2019-02-26-topology.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">26th February 2019</div>
 </div>
 
 

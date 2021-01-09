@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Raspberry Pi and LEDS again</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Raspberry Pi and LEDS again</h1>
+    
+    <p>Posted on 14th December 2020</p>
+    <hr>
+
+    <p>It's that time of the year again, so out come the <a href="2020-01-09-pixels.html">Raspberry Pi driven LED pixels</a>.  Here are some notes to myself about how to set this all up, before I forget again for another 11 months.</p>
+<!--more-->
+
+<h3>Setting up the Pi</h3>
+<ul>
+<li>Download the latest <a href="https://www.raspberrypi.org/software/">Raspberry Pi OS</a></li>
+<li>Burn this to a microSD card</li>
+<li>Add details about your <a href="https://www.raspberrypi.org/documentation/configuration/wireless/headless.md">wireless network</a> to the boot partition</li>
+<li>Add a blank <a href="https://www.raspberrypi.org/documentation/remote-access/ssh/README.md">ssh file</a> as well.  Default username/password is "pi"/"raspberry"</li>
+<li>Don't forget that you need a decent power supply, but this basically worked fine on my aging Pi zero.</li>
+</ul>
+<h3>Wiring the level-shifter</h3>
+<p>The following is from <a href="https://learn.adafruit.com/neopixels-on-raspberry-pi/raspberry-pi-wiring">Adafruit guide</a>; 
+<a href="https://learn.adafruit.com/assets/64121">Link to image</a></p>
+<p><img class="fixed-ratio-resize" alt="Wiring diagram" src="public/12.png"></p>
+<p>But I added a 300 ohm resistor between the output of the IC and the data pin of the pixels; and a 1000 μF capacitor across the terminals of my power supply.</p>
+<h3>Python usage</h3>
+<p>Despite Python 2 being end of life, it seems you still need to use <code>python3</code> and <code>pip3</code> etc.  The Python bindings now have their own GitHub repo: https://github.com/rpi-ws281x/rpi-ws281x-python</p>
+<p>I just did:</p>
+<pre><code>sudo pip3 install rpi_ws281x
+</code></pre>
+<p>You do need <code>sudo</code> here as you will need to run Python in <code>sudo</code> mode to access the correct hardware (pwm) on the Pi.  Also remember that the <em>GPIO number is not the same as the pin number!</em>  Using the <code>pinout</code> command is handy here; see also
+<a href="https://www.raspberrypi.org/documentation/usage/gpio/">gpio docs</a></p>
+<ul>
+<li>Using GPIO 18, pwm, works fine.</li>
+<li>Using 10 didn't work, as the SPI won't initialise.</li>
+<li>Using 21, pcm, works fine.</li>
+</ul>
+<p>I then managed to bork the wifi/bluetooth hardware on my Pi Zero (perhaps by over-volting it using a bad Quick Charge usb supply).  Using a Model B
+instead, only GPIO 21 works out the box; for further details perhaps see <a href="https://github.com/jgarff/rpi_ws281x/blob/master/README.md">readme</a>.</p>
+<ul>
+<li>It should be possible to power the Pi by connecting the 5V and GND pins to a decent 5V power supply, but I couldn't get this to work: the Pi just kept rebooting.</li>
+<li>Wiring that worked seemed to be to power the level-shifter off the Pi, have all GNDs joined, but keep 5V power lines separate.</li>
+</ul>
+<p>That's as far as I got.  Maybe next year some custom light-show will actually be written.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2020-07-26-OSS.html">Open source software &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    
