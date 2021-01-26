@@ -59,7 +59,7 @@
     <p>One of the fun things about <a href="https://en.wikipedia.org/wiki/C%2B%2B11">C++11</a> is that minor changes allow you to write somewhat more expressive (aka <a href="http://preshing.com/20141202/cpp-has-become-more-pythonic/">Pythonic</a>) code.</p>
 <p>A common pattern is to iterate over an array while also knowing the index you are at.  Python does this with the <code>enumerate</code> keyword:</p>
 <p><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">container</span><span class="p">):</span>
-   <span class="k">print</span><span class="p">(</span><span class="s2">&quot;At {} is {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At </span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
 </pre></div>
  </p>
 <p>In C++ the idiomatic way to do this is perhaps:</p>
@@ -112,8 +112,8 @@
 <p>The command <code>++i;</code> now gives an error "error: increment of read-only reference 'i'" which is, to my mind, (a) not cryptic; and (b) makes it clear to the user what the issue is.</p>
 <h2>Subtle issues 2</h2>
 <p>Let's get ambitious, and use <code>enumerate</code> for something else:</p>
-<p><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">range</span> <span class="p">{</span>
-   <span class="kt">int</span> <span class="n">size</span><span class="p">()</span><span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">8</span><span class="p">;</span> <span class="p">}</span>
+<p><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">range</span> <span class="p">{</span>
+   <span class="kt">int</span> <span class="nf">size</span><span class="p">()</span><span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">8</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">};</span>
 <span class="p">...</span>
 <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">n</span> <span class="p">:</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">range</span><span class="p">{})))</span> <span class="p">{</span>

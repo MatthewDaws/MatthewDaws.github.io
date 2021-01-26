@@ -56,6 +56,17 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">JPEGS into PDF</h2>
+        <p>Some time ago I stumbled across <a href="https://en.wikipedia.org/wiki/Manifold_(magazine)">Manifold</a> an old magazine published in the 1960s out of Warwick university.  It's a whimsical Mathematical magazine, now reproduced on <a href="https://ianstewartjoat.weebly.com/manifold-magazine.html">Ian Stewart's Website</a>.  A python script later and I downloaded the image files (now repeating the exercise after I realised higher-quality scans are available from a slightly different URL base).</p>
+<p>This left me with a large number of jpeg files, which is both annoying, and a pain to try to read.  Fast-forward in time to the start of 2018.  I was interested in PDF files, and got sufficiently interested to research the file format, and write a fairly serious Python module to convert PDF files into Python objects which could be browsed.  I also wrote some code to produce PDF files assembled out of images: using both PNG compression, and JBIG2.  For the latter I used an external converter, but for the PNG files I went so far as to implement my own (slow, but not impossibly so) implementation in Python.</p>
+
+        <a href="2019-10-21-jpeg.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">21st October 2019</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Preprint: One-parameter groups</h2>
         <p>A preprint <a href="https://arxiv.org/abs/1907.03661">arXiv:1907.03661</a> which has been on the arXiv for a while, but which is now submitted.  The paper is partly an exposition of some techniques for dealing with Analytic Generators of one-parameter isometry groups: as people explore Type III arguments in von Neumann algebras, I want to revisit these old(ish) ideas and show that developing theory can be rather useful.</p>
 <p>My main motivation was the study of <a href="https://en.wikipedia.org/wiki/Locally_compact_quantum_group">locally compact quantum groups</a> and in particular the fact that the antipode can be understood through studying the scaling group.  One of the facets of topological quantum group theory is the interaction between the \( C^* \)-algebraic and von Neumann algebraic theories; in particular we have an inclusion \( \newcommand{\G}{\mathbb G}C_0(\G) \rightarrow L^\infty(\G) \) which intertwines the relevant scaling groups.  I show that in this general setup, there is a Kaplansky Density type result for the analytic generators involved.  The techniques of the proof also allow me to prove an "automatic normality" result, giving a description of \( L^1_\sharp(\G) \) the natural dense \( \ast \)-subalgebra of \( L^1(\G) \).</p>
@@ -145,23 +156,6 @@ checked in regards to this, and as luck would have it, he has a wonderful
         <a href="2019-04-09-iot1.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">9th April 2019</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Surveys and sampling</h2>
-        <p>At work, we have recently had a "staff survey" performed, and yesterday we got some feedback on
-the results.  I don't want to say anything about the content, but rather to speak about some
-basic statistics.  It was stated that a change of about 2% (upon last year) was "statistically
-significant".  The person giving the presentation then muttered about "standard deviation".
-I couldn't see what a standard deviation had to do with it.</p>
-<p>Let us think how to <a href="https://en.wikipedia.org/wiki/Statistical_model">model</a> this problem.
-What was performed was a survey of \( N \) people, of whom \( n \) responded.  Let us think about
-two possible ways to model how someone responds:</p>
-
-        <a href="2019-03-16-survey-sampling.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">16th March 2019</div>
 </div>
 
 

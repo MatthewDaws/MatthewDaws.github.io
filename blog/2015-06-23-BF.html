@@ -56,7 +56,7 @@
     <p>Posted on 23th June 2015</p>
     <hr>
 
-    <p>BF is an <a href="https://en.wikipedia.org/wiki/Brainfuck">amusingly named, impractical, Turing complete</a> programming language.  It is very like an actual Turing machine: you have an infinite (originally, one-sided, 30K long) array of (8-bit) values, with commands to increase/decrease (+/-) the cell, or move left/right (</>).  Input (,) and output (.) are handled.  Loops are given by [] and implement a "while cell is non-zero" loop.  So a trivial mapping to C is possible (see the Wikipedia article).</p>
+    <p>BF is an <a href="https://en.wikipedia.org/wiki/Brainfuck">amusingly named, impractical, Turing complete</a> programming language.  It is very like an actual Turing machine: you have an infinite (originally, one-sided, 30K long) array of (8-bit) values, with commands to increase/decrease (+/-) the cell, or move left/right ().  Input (,) and output (.) are handled.  Loops are given by [] and implement a "while cell is non-zero" loop.  So a trivial mapping to C is possible (see the Wikipedia article).</p>
 <p>I thought it would be fun to give an object oriented implementation, for which I used C++ for a change.  My implementation decouples the parsing of the programme from running it.  The parse class reads the input in a single pass, using a stack for dealing with nested loops.  It translates the input into a list of commands, represented by an abstract base class with an <code>execute</code> method, overloaded for the various different commands.  This is the "command" pattern (closely related to the "strategy" pattern).</p>
 <!--more-->
 

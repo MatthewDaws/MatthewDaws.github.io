@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Matt Daws">
 
-    <title>Raspberry Pi and LEDS again</title>
+    <title>TileMapBase</title>
 
     <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -51,58 +51,51 @@
     <div class="row">
     
     <div class="col-md-8">
-    <h1 class="mt-4">Raspberry Pi and LEDS again</h1>
+    <h1 class="mt-4">TileMapBase</h1>
     
-    <p>Posted on 14th December 2020</p>
+    <p>Posted on 14th January 2021</p>
     <hr>
 
-    <p>It's that time of the year again, so out come the <a href="2020-01-09-pixels.html">Raspberry Pi driven LED pixels</a>.  Here are some notes to myself about how to set this all up, before I forget again for another 11 months.</p>
+    <p>Another release of <a href="https://github.com/MatthewDaws/TileMapBase">TileMapBase</a> which fix some warnings which had started to be been displayed, because of changing APIs in some libraries which we use.  I also had some minor corrections to docstrings.  Released on PyPI.</p>
+<p>A quick further retrospective.  Do I enjoy writing code?  Yes, still.  Do I enjoying fighting with the tools to get things to work?  No, not in the slightest.  Below are some notes to self for how I got various libraries installed.</p>
 <!--more-->
 
-<h3>Setting up the Pi</h3>
+<p>I couldn't get <code>conda</code> to install much for me, even after uninstalling Anaconda, downloading the most recent version, and reinstalling.
+Instead, I installed it manually, using some of the binary builds available (still!) from <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs">Christoph Gohlke's page</a>:</p>
 <ul>
-<li>Download the latest <a href="https://www.raspberrypi.org/software/">Raspberry Pi OS</a></li>
-<li>Burn this to a microSD card</li>
-<li>Add details about your <a href="https://www.raspberrypi.org/documentation/configuration/wireless/headless.md">wireless network</a> to the boot partition</li>
-<li>Add a blank <a href="https://www.raspberrypi.org/documentation/remote-access/ssh/README.md">ssh file</a> as well.  Default username/password is "pi"/"raspberry"</li>
-<li>Don't forget that you need a decent power supply, but this basically worked fine on my aging Pi zero.</li>
+<li>Install <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal">GDAL</a>.  I had to use the <em>exact</em> version which Fiona wanted (so if the next step
+doesn't work, see if it's because the wrong version of GDAL was installed).</li>
+<li>Install <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#fiona">Fiona</a>.  These can both be down by downloading the correct <code>.whl</code> file, and then
+running <code>pip install file.whl</code></li>
+<li>Finally run <code>pip install geopandas</code>.</li>
 </ul>
-<h3>Wiring the level-shifter</h3>
-<p>The following is from <a href="https://learn.adafruit.com/neopixels-on-raspberry-pi/raspberry-pi-wiring">Adafruit guide</a>; 
-<a href="https://learn.adafruit.com/assets/64121">Link to image</a></p>
-<p><img class="fixed-ratio-resize" alt="Wiring diagram" src="public/12.png"></p>
-<p>But I added a 300 ohm resistor between the output of the IC and the data pin of the pixels; and a 1000 μF capacitor across the terminals of my power supply.</p>
-<h3>Python usage</h3>
-<p>Despite Python 2 being end of life, it seems you still need to use <code>python3</code> and <code>pip3</code> etc.  The Python bindings now have their own GitHub repo: https://github.com/rpi-ws281x/rpi-ws281x-python</p>
-<p>I just did:</p>
-<pre><code>sudo pip3 install rpi_ws281x
+<p>I dimly recall that to get GDAL working properly, you might need to fiddle with <code>path</code> variables etc.  However, for the minimal usage I needed,
+the above was enough.</p>
+<h2>More problems</h2>
+<p>In another project, having updated Anaconda for the above work, I now faced the following error, when trying to use <a href="https://pypi.org/project/strictyaml/">strictyaml</a>:</p>
+<pre><code>ModuleNotFoundError: No module named 'ruamel'
 </code></pre>
-<p>You do need <code>sudo</code> here as you will need to run Python in <code>sudo</code> mode to access the correct hardware (pwm) on the Pi.  Also remember that the <em>GPIO number is not the same as the pin number!</em>  Using the <code>pinout</code> command is handy here; see also
-<a href="https://www.raspberrypi.org/documentation/usage/gpio/">gpio docs</a></p>
-<ul>
-<li>Using GPIO 18, pwm, works fine.</li>
-<li>Using 10 didn't work, as the SPI won't initialise.</li>
-<li>Using 21, pcm, works fine.</li>
-</ul>
-<p>I then managed to bork the wifi/bluetooth hardware on my Pi Zero (perhaps by over-volting it using a bad Quick Charge usb supply).  Using a Model B
-instead, only GPIO 21 works out the box; for further details perhaps see <a href="https://github.com/jgarff/rpi_ws281x/blob/master/README.md">readme</a>.</p>
-<ul>
-<li>It should be possible to power the Pi by connecting the 5V and GND pins to a decent 5V power supply, but I couldn't get this to work: the Pi just kept rebooting.</li>
-<li>Wiring that worked seemed to be to power the level-shifter off the Pi, have all GNDs joined, but keep 5V power lines separate.</li>
-</ul>
-<p>That's as far as I got.  Maybe next year some custom light-show will actually be written.</p>
+<p>A massive battle then commenced.  I updated using <code>conda</code>:</p>
+<pre><code>conda update --all
+</code></pre>
+<p>Apart from taking forever, this did nothing.  I tried to get pip to update, but even using:</p>
+<pre><code>python -m pip install --upgrade pip
+</code></pre>
+<p>(You can't use the <code>pip</code> command to upgrade itself, as then, in the background, <code>pip.exe</code> will be running and hence cannot be overwritten.) didn't work.  Whatever.</p>
+<p>Maybe the <a href="https://pypi.org/project/ruamel.yaml/">ruamel.yaml</a> package is out of date?  Running</p>
+<pre><code>python -m pip install ruamel.yaml -U
+</code></pre>
+<p>gave an error message that <code>pip</code> couldn't remove the old install.  Poking around the Anaconda file system and deleting any files related to <code>ruamel</code> in <code>Lib\site-packages</code>, and then running <code>pip</code> again, and success!  Everything now works.</p>
+<p>I should say that when I used <a href="https://winpython.github.io/">WinPython</a> instead, "it just worked".  Maybe it's time to move on from Anaconda...</p>
 
     <hr>
 
     <ul class="pagination justify-content-center mb-4">
         <li class="page-item">
-<a class="page-link" href="2021-01-14-tilemapbase.html">&larr; TileMapBase</a>
-</li>
-<li class="page-item">
 <a class="page-link" href="index.html">Index</a>
 </li>
 <li class="page-item">
-<a class="page-link" href="2020-07-26-OSS.html">Open source software &rarr;</a>
+<a class="page-link" href="2020-12-14-xmas-lights.html">Raspberry Pi and LEDS again &rarr;</a>
 </li>
     </ul>
 

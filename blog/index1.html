@@ -56,6 +56,23 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">DJVU and PDF</h2>
+        <p>Some notes to myself on working with DJVU and PDF.</p>
+<p>To convert a DJVU file to PDF:</p>
+<ul>
+<li>Download djvulibre for windows.</li>
+<li>Use <code>ddjvu.eve -format=pdf -page=1-10 infile.djvu outfile.pdf</code></li>
+<li>Manual: http://djvu.sourceforge.net/doc/man/ddjvu.html  Notice in particular docs about quality, using JPEG compression etc.</li>
+<li>Source: https://superuser.com/a/571787/503838</li>
+</ul>
+
+        <a href="2020-04-18-djvu.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">18th April 2020</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">New preprint</h2>
         <p>Well, not new really, just I forgot to blog about it.  "Ring-theoretic (in)finiteness in reduced products of Banach algebras" with Bence Horváth
 (currently a postdoc at the Czech academy of sciences).  Available at <a href="https://arxiv.org/abs/1912.07108">arXiv:1912.07108 [math.FA]</a></p>
@@ -147,17 +164,6 @@ Python 3 compatible library.</p>
         <a href="2019-11-11-energy.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">11th November 2019</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">JPEGS into PDF</h2>
-        <p>Some time ago I stumbled across <a href="https://en.wikipedia.org/wiki/Manifold_(magazine)">Manifold</a> an old magazine published in the 1960s out of Warwick university.  It's a whimsical Mathematical magazine, now reproduced on <a href="https://ianstewartjoat.weebly.com/manifold-magazine.html">Ian Stewart's Website</a>.  A python script later and I downloaded the image files (now repeating the exercise after I realised higher-quality scans are available from a slightly different URL base).</p>
-<p>This left me with a large number of jpeg files, which is both annoying, and a pain to try to read.  Fast-forward in time to the start of 2018.  I was interested in PDF files, and got sufficiently interested to research the file format, and write a fairly serious Python module to convert PDF files into Python objects which could be browsed.  I also wrote some code to produce PDF files assembled out of images: using both PNG compression, and JBIG2.  For the latter I used an external converter, but for the PNG files I went so far as to implement my own (slow, but not impossibly so) implementation in Python.</p>
-
-        <a href="2019-10-21-jpeg.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">21st October 2019</div>
 </div>
 
 
