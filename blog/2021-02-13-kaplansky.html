@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Matt Daws">
 
-    <title>TileMapBase</title>
+    <title>Counter-examples to Kaplansky Density</title>
 
     <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -51,54 +51,31 @@
     <div class="row">
     
     <div class="col-md-8">
-    <h1 class="mt-4">TileMapBase</h1>
+    <h1 class="mt-4">Counter-examples to Kaplansky Density</h1>
     
-    <p>Posted on 14th January 2021</p>
+    <p>Posted on 13th February 2021</p>
     <hr>
 
-    <p>Another release of <a href="https://github.com/MatthewDaws/TileMapBase">TileMapBase</a> which fix some warnings which had started to be been displayed, because of changing APIs in some libraries which we use.  I also had some minor corrections to docstrings.  Released on PyPI.</p>
-<p>A quick further retrospective.  Do I enjoy writing code?  Yes, still.  Do I enjoying fighting with the tools to get things to work?  No, not in the slightest.  Below are some notes to self for how I got various libraries installed.</p>
-<!--more-->
-
-<p>I couldn't get <code>conda</code> to install much for me, even after uninstalling Anaconda, downloading the most recent version, and reinstalling.
-Instead, I installed it manually, using some of the binary builds available (still!) from <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs">Christoph Gohlke's page</a>:</p>
+    <p>I've added a short document to my <a href="https://github.com/MatthewDaws/Mathematics/tree/master/Kaplansky2">Mathematical writeups</a> collection.  Thanks to Yemon Choi for a conversation which motivated me to write this up, and to Philip Spain who alerted me to the work of Harry Dowson.</p>
+<p>It would be interesting to have a <em>natural</em> Banach Algebra example.  By this, I mean a naturally occurring example of a dual Banach Algebra \( M \) and a weak\( ^\ast \)-dense subalgebra \( A\subseteq M \) such that there is a unit vector in \( M \) which is not the weak\( ^\ast \)-limit of any bounded net in \( A \).</p>
+<p>What do I mean by "natural" here?  Some possible examples:</p>
 <ul>
-<li>Install <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal">GDAL</a>.  I had to use the <em>exact</em> version which Fiona wanted (so if the next step
-doesn't work, see if it's because the wrong version of GDAL was installed).</li>
-<li>Install <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#fiona">Fiona</a>.  These can both be down by downloading the correct <code>.whl</code> file, and then
-running <code>pip install file.whl</code></li>
-<li>Finally run <code>pip install geopandas</code>.</li>
+<li>
+<p>Let \( E \) be a reflexive Banach space with the approximation property. Then it's known that \( \mathcal B(E) \) is the bidual of \( \mathcal K(E) \).  Thus \( \mathcal K(E) \) is weak\( ^\ast \)-dense in \( \mathcal B(E) \), but in this case, we do have an (isometric) version of Kaplansky Density, because biduals satisfy <a href="https://en.wikipedia.org/wiki/Goldstine_theorem">Goldstine's Theorem</a>.  I still think this example is a little interesting: if \( E \) had the metric approximation property, given \( T\in\mathcal B(E) \) it is easy to write down a net in \( \mathcal K(E) \) which converges to \( T \) and is bounded by \( \|T\| \).  If \( E \) merely has the approximation property then this seems less clear to me, though it is ensured by the general theory.</p>
+</li>
+<li>
+<p>Let \( G \) be a locally compact group, and consider \( PM_p(G) \) which by definition is the weak\( ^\ast \) closure of \( PF_P(G) \) inside \( \mathcal B(L^p(G)) \).  Excepting when \( p=2 \) I do not know if we have Kaplansky Density here, though if \( G \) has a suitable approximation-like property (amenability, or a weakening) then I believe one can show this: I don't know if this is explicitly in the literature.</p>
+</li>
 </ul>
-<p>I dimly recall that to get GDAL working properly, you might need to fiddle with <code>path</code> variables etc.  However, for the minimal usage I needed,
-the above was enough.</p>
-<h2>More problems</h2>
-<p>In another project, having updated Anaconda for the above work, I now faced the following error, when trying to use <a href="https://pypi.org/project/strictyaml/">strictyaml</a>:</p>
-<pre><code>ModuleNotFoundError: No module named 'ruamel'
-</code></pre>
-<p>A massive battle then commenced.  I updated using <code>conda</code>:</p>
-<pre><code>conda update --all
-</code></pre>
-<p>Apart from taking forever, this did nothing.  I tried to get pip to update, but even using:</p>
-<pre><code>python -m pip install --upgrade pip
-</code></pre>
-<p>(You can't use the <code>pip</code> command to upgrade itself, as then, in the background, <code>pip.exe</code> will be running and hence cannot be overwritten.) didn't work.  Whatever.</p>
-<p>Maybe the <a href="https://pypi.org/project/ruamel.yaml/">ruamel.yaml</a> package is out of date?  Running</p>
-<pre><code>python -m pip install ruamel.yaml -U
-</code></pre>
-<p>gave an error message that <code>pip</code> couldn't remove the old install.  Poking around the Anaconda file system and deleting any files related to <code>ruamel</code> in <code>Lib\site-packages</code>, and then running <code>pip</code> again, and success!  Everything now works.</p>
-<p>I should say that when I used <a href="https://winpython.github.io/">WinPython</a> instead, "it just worked".  Maybe it's time to move on from Anaconda...</p>
 
     <hr>
 
     <ul class="pagination justify-content-center mb-4">
         <li class="page-item">
-<a class="page-link" href="2021-02-13-kaplansky.html">&larr; Counter-examples to Kaplansky Density</a>
-</li>
-<li class="page-item">
 <a class="page-link" href="index.html">Index</a>
 </li>
 <li class="page-item">
-<a class="page-link" href="2020-12-14-xmas-lights.html">Raspberry Pi and LEDS again &rarr;</a>
+<a class="page-link" href="2021-01-14-tilemapbase.html">TileMapBase &rarr;</a>
 </li>
     </ul>
 
