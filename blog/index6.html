@@ -56,6 +56,54 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Parsing XML via SAX in Python</h2>
+        <p>I've worked with XML before (in Java), but always small files using the <a href="https://en.wikipedia.org/wiki/Document_Object_Model">Document Object Model</a>.  Now faced with multi-GB of Open Street Map derived XML files, of which I need to get a small amount of data, some other method is required.  Step forward the <a href="https://en.wikipedia.org/wiki/Simple_API_for_XML">Simple API for XML (SAX)</a>.  This is an <a href="http://www.saxproject.org/event.html">event-driven API</a>: the XML parser calls a "handler" object with information about tags opening and closing, and the character data in between.</p>
+<p>In Python, there is support in the <a href="https://docs.python.org/3/library/xml.sax.html">standard library</a> for SAX parsing.  You need to sub-class (or duck-type, and implement the interface of) <code>xml.sax.handler.ContentHandler</code>.  It seems that duck-typing is frustrating, as you need to implement the whole interface, even if you never expect certain methods to be called.</p>
+
+        <a href="2017-05-03-sax.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">3th May 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Open Street Map Data</h2>
+        <p>I'm currently working on using some address information from open street map to augment other open data sources.  Here are some notes on using data from open street map, in Python.</p>
+<h2>Getting and using Open StreetMap Data</h2>
+<p>It seems like this is a bit of a pain.  Open StreetMap (OSM) uses a custom, XML based, format which is hard/impossible for standard GIS software to read.</p>
+
+        <a href="2017-04-27-OSM_data.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">27th April 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Numpy vectorising</h2>
+        <p>I asked <a href="http://stackoverflow.com/questions/43000309/vectorise-numpy-code-on-demand">this question</a> on Stackoverflow, and got a nice answer, but one which I needed to think through a little more.  Here's my conclusions.</p>
+<p>My aim was to understand how to write robust code which could take scalars, but which would also do "as expected" on arrays.  Let me expand a little on this, by using a slightly easier example than in the original question.  Suppose <code>f(x)</code> is a function which takes a scalar and returns a scalar.  I then want that if <code>x</code> is actually an array, of any shape, then <code>f(x)</code> will return an array of the same shape as <code>x</code>, namely the array obtained by applying <code>f</code> to every entry.</p>
+
+        <a href="2017-03-24-Numpy_vectorising.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">24th March 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Working with numpy again</h2>
+        <p>In my new job, I find myself working with numpy (after a break of a couple of years, and now professionally, and
+not as a hobby.)  Numpy is great, but it doesn't half require a little thinking upon occasion.</p>
+<blockquote class="card-body">
+<p>Suppose we have an array of 10 points in the plane.  Should this be represented as a <code>numpy</code> array of shape <code>(2,10)</code> or <code>(10,2)</code>?</p>
+</blockquote>
+
+        <a href="2017-03-23-Numpy.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">23th March 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Random sampling to see a percentage of a population.</h2>
         <blockquote class="card-body">
 <p>Given a population \( P \) and sampling at random ("with replacement") what's the expected number of samples I need to see 50% (or any fixed proportion) of the population.</p>
@@ -104,53 +152,6 @@
         <a href="2015-10-16-leds.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">16th October 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Graphs in Windsor</h2>
-        <p>While spending a long weekend in Windsor, we found the following:</p>
-<p><img class="fixed-ratio-resize" alt="Maze problem" src="./public/12.jpg"></p>
-
-        <a href="2015-09-07-GraphTheoryWindsor.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">7th September 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">RAII in C#/Java?</h2>
-        <p>More a note to a future self than aything else...  In C++ we have the notion of <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">Resource Acquisition Is Initialization</a> which I think I have internalised as the following:</p>
-<blockquote class="card-body">
-<p>Any "resource" (memory, file, handle etc.) should be "owned" by an object.  An object's constructor should allocate the resource, and the destructor should free the resource (with some appropriate choices then made for what copy/move constructors/assignments should do).  By use of C++11 <code>unique_ptr</code> and <code>shared_ptr</code> this model can be extended to pointers.</p>
-</blockquote>
-
-        <a href="2015-06-30-RAII-In-Csharp.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">30th June 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">BF interpreter in C++</h2>
-        <p>BF is an <a href="https://en.wikipedia.org/wiki/Brainfuck">amusingly named, impractical, Turing complete</a> programming language.  It is very like an actual Turing machine: you have an infinite (originally, one-sided, 30K long) array of (8-bit) values, with commands to increase/decrease (+/-) the cell, or move left/right ().  Input (,) and output (.) are handled.  Loops are given by [] and implement a "while cell is non-zero" loop.  So a trivial mapping to C is possible (see the Wikipedia article).</p>
-<p>I thought it would be fun to give an object oriented implementation, for which I used C++ for a change.  My implementation decouples the parsing of the programme from running it.  The parse class reads the input in a single pass, using a stack for dealing with nested loops.  It translates the input into a list of commands, represented by an abstract base class with an <code>execute</code> method, overloaded for the various different commands.  This is the "command" pattern (closely related to the "strategy" pattern).</p>
-
-        <a href="2015-06-23-BF.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">23th June 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">CodeJam 2015 Round 2</h2>
-        <p>Round 2 came and went (and Round 3 and the "distributed" round).  As an effort to practice with C#, I solved these problems in C# (definitely slower than using Python, and actually, the end running time is not that much quicker, for these sort of algorithmic / numerical problems).</p>
-<p>There's a definite step-up in difficulty here!  Maybe I kid myself I could have done problem A and some "small" problems quickly... that people did them all in 150 minutes is quite scary.  The <a href="">Official Contest Analysis</a> is rather brief (from G+, it seems the organisers were busy with the distributed round; or maybe, if we've come this far, shorter answers are all we need ;-&gt; )  I think my background in pure Maths shows here: I found problem D quite easy, as I found analysing the special cases off-line (pen and paper) to be not so hard.  Problems B and C (in "large" form) were hard, I thought.  (I missed the trick with problem B; and using an off-the-shelf Graph package is obviously the fast way to do Problem C.)</p>
-<p>See the code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2015_2">GitHub</a>.</p>
-
-        <a href="2015-06-17-20152.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">17th June 2015</div>
 </div>
 
 

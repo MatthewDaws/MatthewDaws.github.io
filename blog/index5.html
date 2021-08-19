@@ -56,6 +56,65 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Code style, testing, etc.</h2>
+        <p>I've written some stuff for the University of Leeds Python Discussion Group on
+<a href="https://github.com/UoLPythonGroup/training/tree/master/style">Code style, tooling, testing, all that Jazz</a>.</p>
+<p>I'll try and do some live coding, and get some debate going tomorrow.  But the above can be read as a bit of blog post as well.</p>
+        <a href="2017-10-26-Style_Testing.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">26th October 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">More formal working</h2>
+        <p>I am a big fan of <a href="http://jupyter.org/">Jupyter notebooks</a> and similar (e.g. <a href="http://rmarkdown.rstudio.com/">R Markdown</a>) systems which allow you to mix code and documentation, preferably in a browser (which allows sharing).</p>
+<p>However, I've found that it's quite easy to fall into a "hacking" work pattern of developing quite a lot of code, and mixing it up with substantial data processing.  This leads to a number of <a href="https://en.wikipedia.org/wiki/Anti-pattern">anti-pattern</a>s:</p>
+<ul>
+<li>The code begins to completely dominate, vs the documentation, or overview, big picture view.</li>
+<li>I fall into the habit of restarting the notebook, wasting time on reloading data, and then making small changes to an analysis.</li>
+<li>Constant minor editing and then "shift-return"ing through a load of cells.</li>
+</ul>
+
+        <a href="2017-10-20-MoreFormalWorking.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">20th October 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">TileMapBase</h2>
+        <p>I've published my first python package on <a href="https://pypi.python.org">PyPi</a>  (See also the <a href="https://pypi.org">New PyPi</a> which seems to have finally synced.)</p>
+<p>Get it here: <a href="https://pypi.python.org/pypi/tilemapbase/0.4.3">TileMapBase</a> or <a href="https://pypi.org/project/tilemapbase/">TileMapBase on new PyPi</a>:</p>
+<blockquote class="card-body">
+<p>Uses OpenStreetMap tiles, or other tile servers, to produce "basemaps" for use with matplotlib. Uses a SQLite database to cache the tiles, so you can experiment with map production without re-downloading the same tiles. Supports Open Data tiles from the UK Ordnance Survey.</p>
+</blockquote>
+<p>My original aim was to produce a simple, high-level way to use OpenStreetMap style tiles as a "basemap" with MatPlotLib in Jupyter Python notebooks.  Since then, I've also been working on <a href="https://github.com/MatthewDaws/TileWindow">TileWindow</a> which uses this library to cache tiles, and provides a <code>tkinter</code> widget which displays a map-- sort of like GoogleMaps but in Python.  Ultimately for use in my current job: <a href="https://github.com/QuantCrimAtLeeds/PredictCode">PredictCode</a>.</p>
+        <a href="2017-08-29-TileMapBase.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">29th August 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">PyPi and use of ReStructuredText</h2>
+        <p>I've in the process of putting together my first proper Python package to be uploaded to <a href="https://pypi.org/">PyPi</a> / <a href="https://pypi.python.org/pypi">PyPi Old</a>.
+The docs around doing this are not great, but the official docs are pretty good:</p>
+<ul>
+<li><a href="https://docs.python.org/3.6/distutils/index.html">Old docs; still a good read</a></li>
+<li><a href="https://setuptools.readthedocs.io/en/latest/">Setuptools</a></li>
+<li><a href="https://setuptools.readthedocs.io/en/latest/setuptools.html">Guide to <code>setup.py</code></a></li>
+<li><a href="https://packaging.python.org/tutorials/distributing-packages/">Packaging guide</a></li>
+<li><a href="https://packaging.python.org/guides/using-testpypi/">Using TestPyPi</a></li>
+</ul>
+
+        <a href="2017-08-17-PyPi.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">17th August 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">On memory management</h2>
         <p>I have only ever been a hobbyist C++ programmer, while I have been paid to write Java and Python.  But a common complaint I've read about C++ is that you have to manage memory manually, and worry about it.  Now, I'd slightly dispute this with C++11, but perhaps I don't really have enough experience to comment.</p>
 <p>However, I think there's a strong case that with Garbage Collected languages, you can't really forget about memory, or the difference between copy by reference and copy, but the language rather allows you to <em>pretend</em> that you can cease to worry.  In my experience, this is only true 99% of the time, and the 1% of time it bites you, you've quite forgotten that it's a possibility, which makes debugging a real pain (the classic "unknown unknown").</p>
@@ -107,54 +166,6 @@ the hood).  I'm only scratching the surface, but it's easy to do what I want:</p
         <a href="2017-05-04-OSM_xml.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">4th May 2017</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Parsing XML via SAX in Python</h2>
-        <p>I've worked with XML before (in Java), but always small files using the <a href="https://en.wikipedia.org/wiki/Document_Object_Model">Document Object Model</a>.  Now faced with multi-GB of Open Street Map derived XML files, of which I need to get a small amount of data, some other method is required.  Step forward the <a href="https://en.wikipedia.org/wiki/Simple_API_for_XML">Simple API for XML (SAX)</a>.  This is an <a href="http://www.saxproject.org/event.html">event-driven API</a>: the XML parser calls a "handler" object with information about tags opening and closing, and the character data in between.</p>
-<p>In Python, there is support in the <a href="https://docs.python.org/3/library/xml.sax.html">standard library</a> for SAX parsing.  You need to sub-class (or duck-type, and implement the interface of) <code>xml.sax.handler.ContentHandler</code>.  It seems that duck-typing is frustrating, as you need to implement the whole interface, even if you never expect certain methods to be called.</p>
-
-        <a href="2017-05-03-sax.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">3th May 2017</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Open Street Map Data</h2>
-        <p>I'm currently working on using some address information from open street map to augment other open data sources.  Here are some notes on using data from open street map, in Python.</p>
-<h2>Getting and using Open StreetMap Data</h2>
-<p>It seems like this is a bit of a pain.  Open StreetMap (OSM) uses a custom, XML based, format which is hard/impossible for standard GIS software to read.</p>
-
-        <a href="2017-04-27-OSM_data.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">27th April 2017</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Numpy vectorising</h2>
-        <p>I asked <a href="http://stackoverflow.com/questions/43000309/vectorise-numpy-code-on-demand">this question</a> on Stackoverflow, and got a nice answer, but one which I needed to think through a little more.  Here's my conclusions.</p>
-<p>My aim was to understand how to write robust code which could take scalars, but which would also do "as expected" on arrays.  Let me expand a little on this, by using a slightly easier example than in the original question.  Suppose <code>f(x)</code> is a function which takes a scalar and returns a scalar.  I then want that if <code>x</code> is actually an array, of any shape, then <code>f(x)</code> will return an array of the same shape as <code>x</code>, namely the array obtained by applying <code>f</code> to every entry.</p>
-
-        <a href="2017-03-24-Numpy_vectorising.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">24th March 2017</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Working with numpy again</h2>
-        <p>In my new job, I find myself working with numpy (after a break of a couple of years, and now professionally, and
-not as a hobby.)  Numpy is great, but it doesn't half require a little thinking upon occasion.</p>
-<blockquote class="card-body">
-<p>Suppose we have an array of 10 points in the plane.  Should this be represented as a <code>numpy</code> array of shape <code>(2,10)</code> or <code>(10,2)</code>?</p>
-</blockquote>
-
-        <a href="2017-03-23-Numpy.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">23th March 2017</div>
 </div>
 
 

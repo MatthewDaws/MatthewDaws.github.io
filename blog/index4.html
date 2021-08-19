@@ -56,6 +56,78 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Semi-direct products</h2>
+        <p>Motivated by some reading about quantum groups, I want to sketch how a semi-direct product of (topological)
+groups is the same as having an idempotent group homomorphism.</p>
+<p>Firstly, let's remember what the (external) <a href="https://en.wikipedia.org/wiki/Semidirect_product">semi-direct product</a>
+of groups is.  I will follow the notation of the book of <a href="https://doi.org/10.1017/CBO9781139045391">Kaniuth and Taylor</a>.
+Let \( N,H \) be (topological) groups, and denote by \( \newcommand{\aut}{\operatorname{Aut}}\aut(N) \) the collection
+of continuous group automorphisms of \( N \).  Suppose we have a group homomorphism \( \alpha:H\rightarrow\aut(N) \),
+written as \( h\mapsto \alpha_h \), which is continuous in the sense that \( N\times H\rightarrow N;
+(n,h)\mapsto \alpha_h(n) \) is continuous.</p>
+
+        <a href="2019-02-04-semi-direct-products.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">4th February 2019</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Neighbourhood base</h2>
+        <p>Reading a paper with my office mate, we ended up having a discussion about the notion of an "open neighbourhood base"
+in a topological space.  For example, I might informally say that the weak topology on a Banach space \( E \)
+has, around a point \( x \), an open neighbourhood base is given by the sets
+\[ \{y\in E : |f_i(x-y)|<\epsilon \ (1\leq i\leq n) \} \]
+where \( f_i \) are members of \( E^* \) and \( \epsilon > 0 \).</p>
+<p>This raises a natural question:</p>
+<blockquote class="card-body">
+<p>Suppose we have a set \( X \) and for each \( x\in X \) we have specified a collection
+\( U_x \) of subsets of \( X \), such that \( A\in U_x \implies x\in A \).
+When is there a topology on \( X \) such that \( U_x \) are the "basic open neighbourhoods" of \( x \)?</p>
+</blockquote>
+
+        <a href="2019-01-31-topology.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">31st January 2019</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">New site</h2>
+        <p>I have refreshed my website, now building it as a purely static site (instead of using Jekyll)
+built on top of Bootstrap.  To keep the blog going, I have quickly written a Python script which
+re-creates what I need of Jekyll.  Seems to be working, which is quite pleasing.</p>
+        <a href="2019-01-31-new-site.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">31st January 2019</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">PDF munging with LaTeX</h2>
+        <p>An aide-memoire for myself:</p>
+<p><div class="highlight"><pre><span></span><span class="k">\documentclass</span><span class="na">[a4paper]</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>graphicx,forloop<span class="nb">}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="k">\pagestyle</span><span class="nb">{</span>empty<span class="nb">}</span>
+
+<span class="k">\newcounter</span><span class="nb">{</span>pdfpagenumber<span class="nb">}</span>
+<span class="k">\forloop</span><span class="nb">{</span>pdfpagenumber<span class="nb">}{</span>1<span class="nb">}{</span><span class="k">\value</span><span class="nb">{</span>pdfpagenumber<span class="nb">}</span> &lt; 115<span class="nb">}{</span>
+<span class="k">\raisebox</span><span class="nb">{</span>-225ex<span class="nb">}</span>[0ex][0ex]<span class="nb">{</span><span class="k">\makebox</span><span class="na">[90ex]</span><span class="nb">{</span><span class="k">\includegraphics</span><span class="na">[width=12in,page=\arabic{pdfpagenumber}]</span><span class="nb">{</span>mtms.pdf<span class="nb">}}}</span>
+<span class="k">\newpage</span>
+<span class="nb">}</span>
+
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+ </p>
+        <a href="2018-03-19-LaTeX_PDF_Munging.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">19th March 2018</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">OneDrive for Business, or pleasure.</h2>
         <p>My <a href="https://www.uclan.ac.uk">new job</a> came with a surprise: I get a Surface Pro with docking station as my work PC.  This is actually very nice (I tend normally towards the "good enough" school of technology ownership).  An Office365 subscription also comes with the job, and so 1TB (yes, a few years ago, a good hard-disk) of cloud storage from <a href="https://products.office.com/en-gb/onedrive-for-business/online-cloud-storage">OneDrive for business</a>.</p>
 <p>Hmm, but... The Surface Pro only have GBs of free storage (thanks to a smallish SSD) and that's to be shared with applications I might want to install.  But, surely, I can just sync the folders I want, and keep more in the cloud (swapping things about, perhaps, if needs be).  Right?  A bit of Internet searching suggests that, sure, that's an option.  For normal consumer OneDrive.  But not, it seems, for OneDrive Business.  Until maybe mid-2018 when a new client comes out.  YMMV of course.</p>
@@ -100,65 +172,6 @@ for details.</p>
         <a href="2017-11-22-Pymc.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">22nd November 2017</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Code style, testing, etc.</h2>
-        <p>I've written some stuff for the University of Leeds Python Discussion Group on
-<a href="https://github.com/UoLPythonGroup/training/tree/master/style">Code style, tooling, testing, all that Jazz</a>.</p>
-<p>I'll try and do some live coding, and get some debate going tomorrow.  But the above can be read as a bit of blog post as well.</p>
-        <a href="2017-10-26-Style_Testing.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">26th October 2017</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">More formal working</h2>
-        <p>I am a big fan of <a href="http://jupyter.org/">Jupyter notebooks</a> and similar (e.g. <a href="http://rmarkdown.rstudio.com/">R Markdown</a>) systems which allow you to mix code and documentation, preferably in a browser (which allows sharing).</p>
-<p>However, I've found that it's quite easy to fall into a "hacking" work pattern of developing quite a lot of code, and mixing it up with substantial data processing.  This leads to a number of <a href="https://en.wikipedia.org/wiki/Anti-pattern">anti-pattern</a>s:</p>
-<ul>
-<li>The code begins to completely dominate, vs the documentation, or overview, big picture view.</li>
-<li>I fall into the habit of restarting the notebook, wasting time on reloading data, and then making small changes to an analysis.</li>
-<li>Constant minor editing and then "shift-return"ing through a load of cells.</li>
-</ul>
-
-        <a href="2017-10-20-MoreFormalWorking.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">20th October 2017</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">TileMapBase</h2>
-        <p>I've published my first python package on <a href="https://pypi.python.org">PyPi</a>  (See also the <a href="https://pypi.org">New PyPi</a> which seems to have finally synced.)</p>
-<p>Get it here: <a href="https://pypi.python.org/pypi/tilemapbase/0.4.3">TileMapBase</a> or <a href="https://pypi.org/project/tilemapbase/">TileMapBase on new PyPi</a>:</p>
-<blockquote class="card-body">
-<p>Uses OpenStreetMap tiles, or other tile servers, to produce "basemaps" for use with matplotlib. Uses a SQLite database to cache the tiles, so you can experiment with map production without re-downloading the same tiles. Supports Open Data tiles from the UK Ordnance Survey.</p>
-</blockquote>
-<p>My original aim was to produce a simple, high-level way to use OpenStreetMap style tiles as a "basemap" with MatPlotLib in Jupyter Python notebooks.  Since then, I've also been working on <a href="https://github.com/MatthewDaws/TileWindow">TileWindow</a> which uses this library to cache tiles, and provides a <code>tkinter</code> widget which displays a map-- sort of like GoogleMaps but in Python.  Ultimately for use in my current job: <a href="https://github.com/QuantCrimAtLeeds/PredictCode">PredictCode</a>.</p>
-        <a href="2017-08-29-TileMapBase.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">29th August 2017</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">PyPi and use of ReStructuredText</h2>
-        <p>I've in the process of putting together my first proper Python package to be uploaded to <a href="https://pypi.org/">PyPi</a> / <a href="https://pypi.python.org/pypi">PyPi Old</a>.
-The docs around doing this are not great, but the official docs are pretty good:</p>
-<ul>
-<li><a href="https://docs.python.org/3.6/distutils/index.html">Old docs; still a good read</a></li>
-<li><a href="https://setuptools.readthedocs.io/en/latest/">Setuptools</a></li>
-<li><a href="https://setuptools.readthedocs.io/en/latest/setuptools.html">Guide to <code>setup.py</code></a></li>
-<li><a href="https://packaging.python.org/tutorials/distributing-packages/">Packaging guide</a></li>
-<li><a href="https://packaging.python.org/guides/using-testpypi/">Using TestPyPi</a></li>
-</ul>
-
-        <a href="2017-08-17-PyPi.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">17th August 2017</div>
 </div>
 
 
