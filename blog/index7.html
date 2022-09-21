@@ -56,6 +56,19 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Java Enum definition</h2>
+        <p>At the dying ends of the work day, I came across <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html">this page</a> and was initially confused by</p>
+<pre><code>public abstract class Enum&lt;E extends Enum&lt;E&gt;&gt;
+</code></pre>
+<p>Doesn't that look, well, horribly circular?  <a href="http://stackoverflow.com/questions/3061759/why-in-java-enum-is-declared-as-enume-extends-enume">Stackoverflow</a> <a href="http://stackoverflow.com/questions/211143/java-enum-definition">suggests</a> this is common confusion.</p>
+
+        <a href="2015-10-20-Java_Enum.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">20th October 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">LED lights and payoff</h2>
         <p>LED lights seem a no-brainer: instant on, good colour reproduction, extremely energy efficient (cool to the touch after minutes of use).  But they are expensive.  I wonder what the payback time is?</p>
 
@@ -132,18 +145,6 @@
         <a href="2015-06-15-Paths-Implementation.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">15th June 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Disjoint Paths</h2>
-        <p>A few notes on paths in graphs: finding the maximum number of edge/vertex disjoint paths, and an application to finding disconnections.</p>
-<h2>Edge disjoint paths</h2>
-<p>Consider a graph, for the moment undirected.  We wish to find the maximum number of edge disjoint paths from a fixed vertex \(s\) to a fixed vertex \(t\).  We can do this with the <a href="https://en.wikipedia.org/wiki/Max-flow_min-cut_theorem">Max-Flow Min-Cut theorem</a> and the <a href="https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm">Ford-Fulkerson algorithm</a>, at least in the directed case, but let's specialise this to our case.</p>
-
-        <a href="2015-06-08-Paths.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">8th June 2015</div>
 </div>
 
 

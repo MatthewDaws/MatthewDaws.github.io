@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>LaTeX editing and typing</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">LaTeX editing and typing</h1>
+    
+    <p>Posted on 24th August 2022</p>
+    <hr>
+
+    <p>Continuing the theme of the previous post, this time concerning latex on the desktop.  But first, typing.  A confession: I am a <a href="https://en.wikipedia.org/wiki/Typing#Hybrid">"hybrid"</a> typist.  Or, let us be optimistic, and say was a hybrid typist.  I know where all the keys are, but I used to use mainly my index fingers, sometimes the middle fingers.  On a old IBM keyboard, or whatever horror one of my laptops, or work, has provided for me.  I had deluded myself that this was sufficient, but from observing people who can type properly, finally decided it was not.</p>
+<p>I have also unpacked and started using this:</p>
+<p><img class="fixed-ratio-resize" alt="Cherry keyboard" src="public/cherry.jpg"></p>
+<!--more-->
+
+<p>I was given this mechanical keyboard when I left an IT job, but for some reason never unboxed it.  I have no idea why, as it is so nice!  Though one observation about learning to type properly is that the keyboard actually begins to feel less important.  When typing with 2-4 fingers, the mechanical keyboard makes an impressive amount of noise, and my hands dart about frantically.  When using all 10 fingers, the whole point is that your hands don't have to move much, so there is less noise, less frantic movement, but a faster outcome.</p>
+<p>I am using <a href="https://www.typingclub.com">Typing Club</a> to learn; a web search will come up with lots of alternatives.  I spent some weeks in the summer learning the muscle memory of which key is pressed by which finger.  The original plan was to write about how to decide when to switch from pecking to using all fingers in daily life, not just when learning.  Time rushes on, and I have now made the conscious effort to switch all the time, even on the laptop.  I don't actually think I have sacrificed much speed, and the long term goal has to be for all-finger typing to become automatic.</p>
+<p>The difficulty is that long years of typing badly mean that my brain already knows where all the keys are, just not which finger to automatically use.  I can feel myself using the wrong fingers, and am aware of the need to build the correct muscle memory.  <a href="https://en.wikipedia.org/wiki/Muscle_memory">Muscle memory</a> is a strange thing: certainly when initially learning, and even now, I find that if I stop to think, I cannot remember which finger to use, but a more basic part of my mind knows automatically: the correct finger almost starts to move of its own accord.</p>
+<p>Anyway, practise, practise, practise.  Moving on the LaTeX, I have been experimenting with the <a href="https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop">LaTeX plugin</a> for Visual Studio Code.  It works really pretty well:</p>
+<ul>
+<li>You can preview mathematics by hovering the mouse, though quickly this becomes a gimmick, as I can read LaTeX without issue.</li>
+<li>The autocomplete is annoying, trying to format things in a way I don't like.</li>
+<li>But the autocomplete lookup of bibliographic citations and cross-references is amazingly useful.</li>
+<li>When Windows hibernates (which I use all the time) the auto-updating of the PDF preview breaks, which is frustrating.</li>
+<li>It is recommended to use with TeXLive, but I had no problems with MiKTeX, after some light editing of the build sequence.</li>
+</ul>
+<p>I usually just use TeXWorks, which is hardly feature rich.  But it works for me, excepting when working with longer documents, when it starts to become very slow.  Sadly the spell checker I use with VSCode also bogs down (even worse) with long documents.  While VSCode works well, I haven't found the need to changedmy day-to-day LaTeX work to it, and I still search for the ideal LaTeX editor.</p>
+<p>A final thought: I haven't yet worked out how best to type LaTeX commands with 10 fingers.  Writing some Python code yesterday also brought to mind the same thoughts.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2022-06-27-LaTeX.html">An update &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    
