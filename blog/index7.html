@@ -56,6 +56,22 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Random sampling</h2>
+        <p>This post, very tangentially, relates to a quiz we set job candidates.  If you are applying for a job at my current company, and somehow work out I work there, and find this, then you probably half deserve a job anyway.</p>
+<p>Suppose you have a population \( P \) and some test as to whether a member of the population is good or bad.  We want to find a "random good member".  There are two methods that come to mind:</p>
+<ul>
+<li>Random sampling: pick a member at random, test it, if it passes return it, otherwise try again.</li>
+<li>Randomly order \( P \) and work through the whole set, returning the first good member.</li>
+</ul>
+<p>The first method has the virtue of being simple.  The second method uses a lot of memory, if \(P\) is large.  But on closer thought, what if the proportion of "good" members is rather small.  The 2nd method is guaranteed to find a good member in \( O(\vert P \vert) \).  How slow can the first method be?</p>
+
+        <a href="2016-09-29-RandomSearch.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">29th September 2016</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Java Enum definition</h2>
         <p>At the dying ends of the work day, I came across <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html">this page</a> and was initially confused by</p>
 <pre><code>public abstract class Enum&lt;E extends Enum&lt;E&gt;&gt;
@@ -133,18 +149,6 @@
         <a href="2015-06-16-ThoughtsCSharp.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">16th June 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Disjoint Paths; Implementation Issues</h2>
-        <p>Mostly as an excuse to <a href="./ThoughtsCSharp.html">learn C#</a> I implemented the <a href="./Paths.html">path finding algorithms</a>.  Running some tests (random graphs, and then computing cuts from found disjoint paths, as to verify a "cut" is easy!) caught some implementation issues.  All obvious with hindsight.</p>
-<h2>Notes on the implementation</h2>
-<p>See the <a href="https://github.com/MatthewDaws/CS_Learning/blob/master/bits/Graphs_Paths.cs">file on GitHub</a>.  I wanted to use interfaces, and extension methods, as they are features of C# which differ from e.g. C++.  In hindsight, I think an abstract base case <code>Graph</code> would have been more sensible, with <code>DirectedGraph</code> and <code>UndirectedGraph</code> inheriting from this.</p>
-
-        <a href="2015-06-15-Paths-Implementation.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">15th June 2015</div>
 </div>
 
 
