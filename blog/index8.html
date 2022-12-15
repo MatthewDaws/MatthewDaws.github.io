@@ -56,6 +56,17 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Thoughts about C#</h2>
+        <p>On the basis that knowing a modern OO language would be good, and on the basis that everyone and their granny knows JAVA, I thought I'd look at C#.  Getting going with C# was a bit tedious: I end up looking things up endlessly, and puzzling over things for a while before they "click" and seem obvious (which is always annoying, as then I'm left wondering why it wasn't obvious from the start).  You wait for muscle memory to build...  </p>
+<p>Example: A small mistake lead to some musings on how sort algorithms are implemented: <a href="http://stackoverflow.com/questions/30865510/why-does-failing-to-recognise-equality-mess-up-c-sharp-listt-sort">StackOverFlow Question</a> (the actual problem came from thinking about orderings in Python and C++ too much, where you specify a <a href="https://en.wikipedia.org/wiki/Weak_ordering#Strict_weak_orderings">strict weak ordering</a>, basically "less than", and then porting that to a <code>CompareTo</code> method and missing a corner-case.  This came up in a <a href="./20152.html">CodeJam problem</a>.)</p>
+
+        <a href="2015-06-16-ThoughtsCSharp.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">16th June 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Disjoint Paths; Implementation Issues</h2>
         <p>Mostly as an excuse to <a href="./ThoughtsCSharp.html">learn C#</a> I implemented the <a href="./Paths.html">path finding algorithms</a>.  Running some tests (random graphs, and then computing cuts from found disjoint paths, as to verify a "cut" is easy!) caught some implementation issues.  All obvious with hindsight.</p>
 <h2>Notes on the implementation</h2>
@@ -137,30 +148,6 @@
         <a href="2015-05-22-bayesian_stats.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">22nd May 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Enumerate in C++</h2>
-        <p>One of the fun things about <a href="https://en.wikipedia.org/wiki/C%2B%2B11">C++11</a> is that minor changes allow you to write somewhat more expressive (aka <a href="http://preshing.com/20141202/cpp-has-become-more-pythonic/">Pythonic</a>) code.</p>
-<p>A common pattern is to iterate over an array while also knowing the index you are at.  Python does this with the <code>enumerate</code> keyword:</p>
-<p><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">container</span><span class="p">):</span>
-   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At </span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
-</pre></div>
- </p>
-<p>In C++ the idiomatic way to do this is perhaps:</p>
-<p><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">container</span><span class="p">;</span>
-<span class="p">...</span>
-<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;At &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">container</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
- </p>
-<p>This has its flaws though (and is tedious to type).  Using g++, if you have warnings on, <code>-Wall</code>, then you'll see complaint, as the type of <code>container.size()</code> is, typically, of size <code>std::size_t</code> which on my machine is <code>unsigned long long</code> (aka an unsigned 64-bit number).  Warnings aside, as <code>int</code> is on my machine a 32-bit unsigned number, we could potentially have problems if the size of container is more than around 2 billion (unlikely, but possible these days).</p>
-
-        <a href="2015-05-14-enumerate.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">14th May 2015</div>
 </div>
 
 
