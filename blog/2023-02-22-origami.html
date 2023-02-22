@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Origami</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Origami</h1>
+    
+    <p>Posted on 22nd February 2023</p>
+    <hr>
+
+    <p>I got roped into (okay, volunteered) giving a talk at <a href="https://www.uclan.ac.uk/news/nine-times-a-charm-japan-day-returns-to-uclan">UClan's Japan Day</a> on the theme of Origami.  To quote Tom Lehrer, this I know from nothing.  But one can learn, and I hope I said something interesting in my short talk.</p>
+<p><img class="fixed-ratio-resize" alt="Me giving the talk" src="public/talk.jpg"></p>
+<p><img class="fixed-ratio-resize" alt="Some models" src="public/origami1.jpg"></p>
+<!--more-->
+
+<p>There is a lot of Mathematics in Origami, and huge scope for motivating mathematics via Origami (who doesn't like the Trojan Horse approach?) </p>
+<ul>
+<li>
+<p>I started with <a href="https://www.youtube.com/watch?v=NYKcOFQCeno">Robert Lang's TED talk</a>.  Of interest here is talk about <a href="https://en.wikipedia.org/wiki/Akira_Yoshizawa">Akira Yoshizawa</a> and the <a href="https://en.wikipedia.org/wiki/Yoshizawa%E2%80%93Randlett_system">Yoshizawa–Randlett system</a>; talk of a common language; some explicit mention of Mathematics.  To me, the idea of having a systematic language which allows you to discuss an abstraction is what gets to the heart of what Mathematics is.</p>
+</li>
+<li>
+<p>Then follow up with <a href="https://www.youtube.com/watch?v=c3SJ7W6OWfM">Thomas Hull's MAA talk</a>.  This is really excellent, and contains lots of ways to link Origami to Mathematics.</p>
+</li>
+</ul>
+<p>In the end, I spoke about how intricate modern Origami is (this seemed to be new to almost everyone in the audience), and then started talking about crease patterns.</p>
+<p><img class="fixed-ratio-resize" alt="Creases" src="public/origami2.jpg"></p>
+<p>In the small picture above, you can see this model folded up.  It is surprisingly hard (or so I found) to locate all the folds to highlight them with a pen: inside folds seem to disappear from my awareness, which lead to a number of false attempts.</p>
+<p>I then looked at counting valleys and mountains around a vertex (a la Hull's talk), spoke about flat folability and two-colouring (getting a mention of the four-colour theorem in).  In the above picture, you can see that some faces are shaded.  There is some satisfaction (and surprise from the audience!) to do this, then re-fold the model, and end up with a swan which is shaded on one side, and white on the other.  Correctly highlighting <em>all</em> the folds is key to getting this trick to work!</p>
+<p>I then mentioned <a href="https://en.wikipedia.org/wiki/Kawasaki%27s_theorem">Kawasaki's theorem</a>.  I then spoke about axioms, and Mathematics, before finishing with the <a href="https://en.wikipedia.org/wiki/Miura_fold">Miura fold</a> and applications.</p>
+<p><img class="fixed-ratio-resize" alt="Miura fold" src="public/origami3.jpg"></p>
+<p>I think a lot of what Hull speaks about could be adapted into a longer, interactive, outreach style session.  His book <a href="https://www.amazon.co.uk/Project-Origami-Thomas-Hull/dp/1466567910">Project Origami</a> seems like an excellent source for such activities.</p>
+<p>Finally, if you want a guide to folding some more simple models, then, of course, the internet is happy to oblige, and you just need to use your favour search engine.</p>
+<p>(Re: my previous post: images not responsive?  What rot!  This was an artefact of how I locally preview posts; it works fine "in production", as it were.)</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2022-12-15-board.html">Outside the office &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    
