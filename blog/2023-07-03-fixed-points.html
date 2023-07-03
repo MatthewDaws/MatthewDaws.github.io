@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Fixed points of complete positive maps</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Fixed points of complete positive maps</h1>
+    
+    <p>Posted on 3th July 2023</p>
+    <hr>
+
+    <p>The first of hopefully a few posts about actual Mathematics, the context of which will follow.  In <a href="https://cs.uwaterloo.ca/~watrous/TQI/">Watrous's QIT book</a>, Theorem 4.25 states the following:</p>
+<blockquote class="card-body">
+<p>Let \( \Phi:\mathbb M_n\rightarrow\mathbb M_n \) be a unital quantum channel with Kraus representation \( \Phi(x) = \sum_a A_a x A_a^* \).  Then \( \Phi(x)=x \) if and only if \( A_a x = x A_a \) for each \( a \).</p>
+</blockquote>
+<p>(Here I translate slightly the language).  Whenever I see a statement about quantum channels, I ask myself if I can translate it into a more Operator Algebraic statement making more use of the Stinespring representation theorem, for example.  After much messing about, I realised that the key property is that \( \Phi \) is <em>trace preserving</em>, and that this, together with <a href="2019-08-04-multdomains.html">multiplicative domain theory</a>, can be used to give a simple proof.  (Well, maybe not <em>simple</em>, but one adding some context.)</p>
+<!--more-->
+
+<p>Let's start by recalling some basic results, which I always forget somehow.  Let \( A,B \) be \( C^* \)-algebras and \( \Phi:A\rightarrow B \) be a completely positive map.  The Stinespring representation theorem tells us that if \( B\subseteq \mathcal B(H) \) is a faithful representation, then there is a Hilbert space \( K \), a \( * \)-representation \( \pi:A\rightarrow\mathcal B(K) \), and a bounded linear map \( V:H\rightarrow K \) such that \( \Phi(a) = V^*\pi(a)V \) for each \( a\in A \).  We call \( (\pi,K,V) \) a <em>Stinespring dilation</em> of \( \Phi \), which is said to be <em>minimal</em> if \( \{ \pi(a)V\xi: \xi\in H, a\in A\} \) has dense linear span in \( K \).  A minimal dilation is unique up to (obvious) unitary equivalence.  (It can sometimes be helpful to know that when \( (\pi,K,V) \) is minimal, there is a \( * \)-homomorphism \( \rho:\Phi(A)' \rightarrow \pi(A)' \) with \( \rho(x)V = Vx \) for each \( x\in\Phi(A)'\subseteq\mathcal B(H) \).  Then \( \rho \) is automatially normal.)</p>
+<p>For the following, see <a href="https://zbmath.org/1160.46001">Brozwn+Ozawa</a> Proposition 1.5.7.</p>
+<blockquote class="card-body">
+<p><strong>Theorem:</strong> Let \( \Phi:A\rightarrow B \) be a contractive completely positive map.  Then:
+1. (The Schwarz Inequality) We have that \( \Phi(a)^*\Phi(a) \leq a^*a \) for each \( a\in A \);
+2. (Bimodule structure) For \( a\in A \), if \( \Phi(a^*a) = \Phi(a)^*\Phi(a) \) then \( \Phi(ba)=\Phi(b)\Phi(a) \) for each \( b\in A \); and if \( \Phi(aa^*) = \Phi(a)\Phi(a)^* \) then \( \Phi(ab)=\Phi(a)\Phi(b) \) for each \( b\in A \);
+3. The space \( A_{\Phi}=\{a\in A:\Phi(a^*a) = \Phi(a)^*\Phi(a), \Phi(aa^*)=\Phi(a)\Phi(a)^*\} \) is a \( C^* \)-subalgebra of \( A \), and \( \Phi \) restricted to \( A_\Phi \) is a \( * \)-homomorphism.</p>
+<p><em>Proof:</em> Let \( B\subseteq\mathcal B(H) \) be faithful, and let \( (\pi,K,V) \) be a Stinespring dilation of \( \Phi \).  As \( \Phi \) is a contraction, \( \|V\|\leq 1 \) and so \( VV^*\leq 1 \).  For \( a\in A \) we have
+\[ \begin{split} \Phi(a^*a)-\Phi(a)^*\Phi(a) &= V^*\pi(a)^*\pi(a)V^* - V^*\pi(a)^*VV^*\pi(a)V \\
+&= V^* \pi(a)^* (1-VV^*) \pi(a)V \geq 0, \end{split} \]
+giving the Schwarz Inequality.</p>
+<p>Furthermore, we notice that \( \Phi(a^*a) = \Phi(a)^*\Phi(a) \) if and only if \( (1-VV^*)^{1/2}\pi(a)V=0 \).  If this holds, then for \( b\in A \),
+\[ \Phi(ba) - \Phi(b)\Phi(a) = V^*\pi(b)(1-VV^*)\pi(a)V = 0. \]
+Similarly, \( \Phi(aa^*)=\Phi(a)\Phi(a)^* \) is equivalent to \( (1-VV^*)^{1/2}\pi(a)^*V=0 \), equivalently, \( V^* \pi(a) (1-VV^*)^{1/2} = 0 \).  This implies that \( \Phi(a)\Phi(b) = \Phi(ab) \) for each \( b\in A \).</p>
+<p>We now consider (3).  As \( \Phi \) is positive, it is a \( * \)-map, and so \( a\in A_\Phi \) implies that \( a^*\in A_\Phi \).  If both \( \Phi(a^*a) = \Phi(a)^*\Phi(a) \) and \( \Phi(aa^*)=\Phi(a)\Phi(a)^* \)
+then by (2) we know that \( \Phi(ba)=\Phi(b)\Phi(a) \) and \( \Phi(ab)=\Phi(a)\Phi(b) \) for each \( b\in A \).  Hence, given \( a,b\in A_\Phi \) we have
+\[ \Phi((ab)^*ab) = \Phi(b^*a^*a) \Phi(b) = \Phi(b^*a^*) \Phi(a) \Phi(b) = \Phi((ab)^*) \Phi(ab), \]
+using that \( b\in A_\Phi \), then that \( a\in A_\Phi \), and then that \( b\in A_\Phi \).  Similarly, \( \Phi((ab)(ab)^*) = \Phi(ab)\Phi((ab)^*) \) and so \( ab\in A_\Phi \).  As \( \Phi \) is continuous, it is easy to see that \( A_\Phi \) is closed, hence a \( C^* \)-subalgebra of \( A \).  We have already shown that \( \Phi \) restricted to \( A_\Phi \) is a \( * \)-homomorphism.</p>
+</blockquote>
+<p>We can now prove our abstract commutation result.</p>
+<blockquote class="card-body">
+<p><strong>Proposition:</strong> Let \( \Phi:A\rightarrow A \) be completely positive, and suppose there is a faithful state \( \varphi\in A^* \) with \( \varphi\circ\Phi = \varphi \).  The collection of fixed points of \( \Phi \) (those \( a\in A \) with \( \Phi(a)=a \)) forms a \( C^* \)-subalgebra of \( A_\Phi \).</p>
+<p><em>Proof:</em> Given \( a\in A \) with \( \Phi(a)=a \), also \( \Phi(a^*)=a^* \), by the Schwarz Inequality, \( a^*a \leq \Phi(a^*a) \), and so \( \Phi(a^*a)-a^*a\geq 0 \), but also \( \varphi( \Phi(a^*a)-a^*a ) = 0 \), and so as \( \varphi \) is faithful, \( \Phi(a^*a) = a^*a \).  As \( a^* \) is also fixed by \( \Phi \), also \( \Phi(aa^*) = aa^* \).  Hence \( a\in A_\Phi \).  Given \( a,b \) fixed, also \( a^* \) is fixed, and \( \Phi(ab) = \Phi(a)\Phi(b) \) because \( a,b\in A_\Phi \), so \( \Phi(ab)=ab \).  We conclude that the fixed points form a \( C^* \)-subalgebra of \( A_\Phi \).</p>
+</blockquote>
+<p>A Cesaro mean arguments shows that if \( \Phi \) is unital, there is always some invariant state.  However, without there being a <em>faithful</em> invariant state, the collection of fixed points can fail to be an algebra.  For example, let \( A=\mathbb C^3 \) with the pointwise product, let \( \Phi \) be the linear map with matrix form
+\[ \begin{pmatrix} 1/4 & 1/4 & 1/2 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
+This is positive, hence completely positive (as \( A \) is abelian), but for example, the vector \( (1,-1,2)^T \) is fixed while its square \( (1,1,4)^T \) is not.</p>
+<blockquote class="card-body">
+<p><strong>Proposition:</strong>  Let \( \Phi:A\rightarrow A \) be completely positive and unital, and suppose there is a faithful state \( \varphi\in A^* \) with \( \varphi\circ\Phi = \varphi \).  Let \( (\pi,K,V) \) be a minimal dilation of \( \Phi \).  Then \( a\in A \) is fixed by \( \Phi \) if and only if \( \pi(a)V = Va \).</p>
+<p><em>Proof:</em> If \( \pi(a)V=Va \) then \( \Phi(a) = V^*\pi(a)V=V^*Va=a \), as \( V^*V=1 \) as \( \Phi \) is unital.  Conversely, by the above, we know that if \( \Phi(a)=a \) then \( a\in A_{\Phi} \) so \( \Phi(ba)=\Phi(b)\Phi(a) = \Phi(b)a \) for each \( b\in A \).  For \( \xi,\eta\in H \),
+\[ (\pi(b) V \eta | \pi(a) V \xi) = (\eta | \Phi(b^*a) \xi) = (\eta | \Phi(b^*)a\xi) = (\pi(b)V\eta | Va\xi). \]
+(Here I write my inner-products linear on the right.)  By minimality, vectors of the form \( \pi(b)V\eta \) are linearly dense, and so we conclude that \( \pi(a)V\xi = Va\xi \), that is, \( \pi(a)V = Va \) as claimed.</p>
+</blockquote>
+<p>If \( (\pi',K',V') \) is another dilation, not assumed minimal, then there is always a unitary \( u:K' \rightarrow K' \) which intertwines \( \pi \) and \( \pi' \), and satisfies \( uV = V' \).  (Use that \( (\pi,K,V) \) is minimal, and check that \( u : \pi(a)V\xi \mapsto \pi'(a)V'\xi \) extends by linearity to a well-defined isometry.)  Then \( \pi'(a)V' = u \pi(a)V = uVa = V'a \) if \( a \) is fixed (and \( \Phi \) satisfies our hypotheses).</p>
+<p>Now come back to a quantum channel \( \Phi:\mathbb M_n \rightarrow \mathbb M_n \) (so \( \Phi \) is completely positive and trace-preserving).  As the trace is invariant (and can be normlised to a state!) our proposition applies.  To make a link with Kraus operators, we need to recall what the Stinespring representation looks like in this case.  Any \( * \)-representation \( \pi:\mathbb M_n\rightarrow\mathcal B(K) \) has the form \( \pi(a)=a\otimes 1 \) where \( K\cong\mathbb C^n \otimes H \) for some auxiliary Hilbert space \( H \).  Let \( (e_i) \) be an orthonormal basis for \( H \), so \( V:\mathbb C^n\rightarrow K = \mathbb C^n\otimes H \) has the form \( V\xi = \sum_i A_i\xi \otimes e_i \) for some matrices \( (A_i) \subseteq \mathbb M_n \) with \( 1 = V^*V = \sum_i A_i^*A_i \).  Then \( \Phi(a) = V^*(a\otimes 1)V = \sum_i A_i^* a A_i \) gives the Kraus form (here I adopt a convention that privilages UCP maps).  That \( \Phi \) is trace-preserving means that \( \sum_i A_i A_i^* = 1 \) as well.  (Notice that any <em>minimal</em> dilation will have \( K \) finite-dimensional, so \( H \) will also be finite-dimensional, and all sums will be finite.)</p>
+<blockquote class="card-body">
+<p><strong>Theorem:</strong> Let \( \Phi:\mathbb M_n\rightarrow\mathbb M_n \) be a unital quantum channel with Kraus representation \( \Phi(x) = \sum_a A_a x A_a^* \).  Then \( \Phi(x)=x \) if and only if \( A_a x = x A_a \) for each \( a \).</p>
+<p><em>Proof:</em> From the proposition above and the discussion after, \( \Phi(x)=x \) if and only if \( \pi(x)V=Vx \) for any Stinespring dilation \( (\pi,K,V) \).  Such a dilation is given by \( \pi(x)=x\otimes 1 \) on \( K=\mathbb C^n\otimes K' \) and \( V\xi = \sum_a A_a^*(\xi)\otimes e_a \) where \( (e_a) \) is an orthonormal basis of \( K' \).  Then \( \pi(x)V=Vx \) if and only if \( A_a^* x = x A_a^* \) for each \( a \), which is equivalent to \( A_a x^* = x^* A_a \) for each \( a \).  As \( \Phi(x)=x \) if and only if \( \Phi(x^*)=x^* \), the claim follows.</p>
+</blockquote>
+<p>So we have our more abstract proof.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2023-06-19-mittag-leffler.html">Mittag-Leffler &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    
