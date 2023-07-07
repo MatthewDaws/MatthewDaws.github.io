@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Quantum chromatic numbers</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Quantum chromatic numbers</h1>
+    
+    <p>Posted on 7th July 2023</p>
+    <hr>
+
+    <p>Continuing from the <a href="2023-07-04-spectral-bounds.html">last post</a> I want to now consider the <em>Quantum Chromatic Number</em> of a graph.  These ideas arose from Quantum Information Theory, which explore how <a href="https://en.wikipedia.org/wiki/Quantum_entanglement">quantum entanglement</a> can be used in certain two-person "games", which are very similar to <a href="https://en.wikipedia.org/wiki/Interactive_proof_system">Interactive proof systems</a>.  While the motivation can be a little hard to explain, the resulting mathematical formalism is straightforward.</p>
+<blockquote class="card-body">
+<p><strong>Definition:</strong> A <em>quantum \( c \)-colouring</em> of \( G \) is a collection of orthogonal projections \( \{P_{v,k} : v\in V_G, k\in [c] \} \) on some Hilbert space \( H \) (usually assumed finite-dimensional) such that:</p>
+<ol>
+<li>\( \sum_{k=1}^c P_{v,k} = 1_H \) for each \( v \);</li>
+<li>\( P_{v,k} P_{w,k} = 0 \) for each \( k \) and each edge \( v\sim w \) in \( G \).</li>
+</ol>
+</blockquote>
+<p>There is a more complicated (but motivated) definition in [Cameron et al.] (see references below) where the reduction to this definition is essentially shown Proposition 1 and the later observations.  It is also shown there that, when \( H \) is finite dimensional, we can always assume that each projection has the same rank (though this is sometimes not natural.)  The following is the same spectral bound which we discussed before, but now for the <em>quantum chromatic number</em> \( \chi_q(G) \), the least \( c \) for which \( G \) has a quantum \( c \)-colouring.</p>
+<blockquote class="card-body">
+<p><strong>Theorem: [Elphick-Wocjan]</strong> \( \chi_q(G) \geq 1+\frac{\lambda_1}{-\lambda_n} \).</p>
+</blockquote>
+<!--more-->
+
+<h3>Quantum colourings and related ideas</h3>
+<p>Given a classical colouring \( f:V\rightarrow [c] \) we take \( H=\mathbb C \), so projections on \( H \) are just the numbers \( 0,1 \), and then set \( P_{v,k}=1 \) if and only if \( k=f(v) \).  Condition (1) is obvious, and (2) holds if and only if \( f(v)\not=f(w) \) for \( v\sim w \), that is, we really do have a vertex-colouring.</p>
+<p>Of course, here each \( P_{v,k} \) does not have the same rank.  To fix this, we consider the "Fourier matrix" \( F_c \) which has \( (j,k) \) entry \( e^{2\pi ijk/c} \).  Given \( f:V\rightarrow [c] \) define a map \( \phi': V\rightarrow\mathbb C^c \) by setting \( \xi'(v) \) to be the \( f(v) \) row of \( F_c \).  That is,
+\[ \phi'(v) = \sum_{k=1}^c e^{2\pi i f(v)k/c} e_k. \]
+Notice that \( (\phi'(v)|\phi'(w))=0 \) when \( v\sim w \), and that if all \( c \) colours are used then the span of \( \{ \phi'(v) : v\in V_G \} \) is all of \( \mathbb C^c \).  This final point follows because the rows of \( F_c \) form an orthogonal basis of \( \mathbb C^c \).</p>
+<blockquote class="card-body">
+<p><strong>Definition:</strong> An <em>orthogonal representation</em> of \( G \) is a map \( \phi:V_G\rightarrow H \) for some (finite-dimensional) Hilbert space \( H \) such that \( \phi(v)\not=0 \) for each \( v \), and \( \phi(v) \perp \phi(w) \) for each edge \( v\sim w \).  Let \( \xi(G) \) be the smallest dimension of \( H \) supporting such a map.</p>
+<p>Let \( \xi'(G) \) be the smallest dimension of \( H \) for which there exists a map \( \phi':V_G\rightarrow H \) with the additional property that the modulus of each entry of \( \phi'(v) \) is constant (which could then be normalised to be \( 1 \) if we wished).</p>
+</blockquote>
+<p>Clearly \( \xi(G) \leq \xi'(G) \) and we've just shown that \( \xi'(G) \leq \chi(G) \).  Given such a \( \phi':V\rightarrow\mathbb C^c \), say with each entry having \( |\phi'(v)_l|=1 \), we defined a quantum \( c \)-colouring via setting
+\[ \phi'_{v,k} = \sum_{l=1}^c \phi'(v)_l e^{2\pi ilk/c} e_l \in \mathbb C^c, \]
+and then defining \( P_{v,k} \) to be the orthogonal projection onto the (one-dimensional) span of \( \phi'_{v,k} \).  As
+\[ (\phi'_{v,k}|\phi'_{v,k'}) = \sum_{l=1}^c e^{-2\pi ilk/c} |\phi'(v)_l|^2 e^{2\pi ilk'/c}
+= \sum_{l=1}^c e^{2\pi il(k'-k)/c} = c\delta_{k,k'}
+\]
+it follows that \( (\phi'_{v,k})_{k=1}^c \) is a family of \( c \) orthogonal vectors in \( \mathbb C^c \), and hence a basis.  So \( \sum_k P_{v,k} = 1 \).  Given \( v\sim w \), we similarly compute that
+\[ (\phi'_{v,k}|\phi'_{w,k}) = \sum_{l=1}^c e^{-2\pi ilk/c} \overline{\phi'(v)_l} \phi'(w)_l e^{2\pi ilk/c} = (\phi'(v)|\phi'(w)) = 0, \]
+and so \( P_{v,k} P_{w,k} = 0 \).  Hence \( (P_{v,k}) \) is a quantum \( c \)-colouring, with the additional property that each projection has rank one.</p>
+<blockquote class="card-body">
+<p><strong>Definition:</strong> Let \( \chi_q^{(r)}(G) \) be the smallest \( c \) for which there exists a quantum \( c \)-colouring of \( G \), with the additional property that each projection has rank equal to \( r \).</p>
+</blockquote>
+<p>We have just shown that \( \chi_q^{(1)}(G) \leq \xi'(G) \), and obviously \( \chi_q(G) \leq \chi_q^{(1)}(G) \).  Given a quantum \( c \)-colouring \( (P_{v,k}) \) such that each projection has rank one, notice that as \( \sum_k P_{v,k} = 1_H \), the Hilbert space must have dimensional \( c \) and so be (isomorphic to) \( \mathbb C^c \).  Let \( P_{v,k} \) have range spanned by the unit vector \( \phi_{v,k} \in \mathbb C^c \).  Define \( \phi:V\rightarrow\mathbb C^c \) by \( \phi(v) = \phi_{v,1} \).  Then, given \( v\sim w \), we have that
+\[ ( \phi(v) | \phi(w) ) = ( \phi_{v,1} | \phi_{w,1} ) = 0 \]
+as \( P_{v,1} P_{w,1} = 0 \).  So \( \phi \) is an orthogonal representation, and we see that \( \xi(G) \leq \chi_q^{(1)}(G) \).</p>
+<p>We have just summarised some arguments from [Cameron et al].  Now let's look at spectral bounds.</p>
+<h3>Spectral bounds</h3>
+<p>The <a href="2023-07-04-spectral-bounds.html">previous post</a> discussed Pinchings and Twirlings.  Given a quantum \( c \)-colouring \( (P_{v,k}) \) on a Hilbert space \( H \), for each \( k \) define
+\[ P_k = \sum_{v\in V} e_v e_v^* \otimes P_{v,k} \in \mathbb M_n \otimes \mathcal B(H), \]
+were \( e_v e_v^* \) is the rank-one projection onto the span of the \( v^{\text{th}} \) coordinate, that is, the diagonal matrix with a \( 1 \) in the \( (v,v) \) position.  Recall that \( A=A_G \) is the adjacency matrix of \( G \).</p>
+<blockquote class="card-body">
+<p><strong>Lemma:</strong> The \( (P_k) \) are mutually orthogonal projections which sum to \( 1 \).  The associated pinching \( \mathcal C \) satisfies that \( \mathcal C(A\otimes 1_H) = 0 \) and \( \mathcal C(D\otimes 1_H) = D\otimes 1_H \) for any diagonal matrix \( D \).</p>
+<p><em>Proof:</em> We simply calculate that
+\[ \sum_k P_k = \sum_v e_ve_v^* \otimes \sum_k P_{v,k} = \sum_v e_ve_v^* \otimes 1_H = 1, \]
+which implies that the \( (P_k) \) are orthogonal.  For any matrix \( M \) the pinching is
+\[ \mathcal C(M\otimes 1_H) = \sum_k P_k (M\otimes 1_H) P_k
+= \sum_{u,v\in V} e_u e_u^* M e_v e_v^* \otimes \sum_{k} P_{v,k} P_{u,k}, \]
+where \( e_u^* M e_v = M_{u,v} \).  As \( A_{u,v}=1 \implies u\sim v \implies P_{u,k} P_{v,k}=0 \) it follows that \( \mathcal C(A\otimes 1_H)=0 \).  If \( M \) is diagonal, then
+\[ \mathcal C(M\otimes 1_H) = \sum_u M_{u,u} e_u e_u^* \otimes \sum_k P_{u,k}^2 = M\otimes 1_H. \]</p>
+</blockquote>
+<p>We now simply copy the proof from before: let \( \mathcal D(\cdot) = c^{-1} \sum_k U^k (\cdot) (U^*)^k \) be the twirling associated to this pinching, so that \( \mathcal D(A\otimes 1_H)=0 \) and so
+\[ A\otimes 1_H = \sum_{k=1}^{c-1} U^k (-A\otimes 1_H) (U^*)^k. \]
+For example, to show the Hoffman bound for the quantum chromatic number, let \( \xi \) be a unit vector associated to the maximal eigenvalue \( \lambda_1 \), and let \( \xi_0\in H \) be any unit vector.  As \( (U^*)^k(\xi\otimes\xi_0) \) is a unit vector, and \( (\xi\otimes\xi_0| (A\otimes 1_H)\xi\otimes\xi_0) = \lambda_1 \), we see that \( \lambda_1 \leq (c-1) \sigma(-A\otimes 1_H) \) where \( \sigma(\cdot) \) denotes the <a href="https://en.wikipedia.org/wiki/Spectral_radius">spectral radius</a> of the self-adjoint operator \( -A\otimes 1_H \).  As the spectrum of \( -A\otimes 1_H \) agrees with the spectrum of \( -A \), we again conclude that \( \lambda_1 \leq (c-1)(-\lambda_n) \) and hence \( \chi_q(G) \geq 1 + \frac{\lambda_1}{-\lambda_n} \).</p>
+<h3>A conjecture</h3>
+<p>I want to finish with a conjecture of Elphick.  Let \( s^+(G) = \sum \{ \lambda_i^2 : \lambda_i > 0 \} \) and \( s^-(G) = \sum \{ \lambda_i^2 : \lambda_i < 0 \} \).  Notice that \( s^+(G) + s^-(G) = \sum_i \lambda_i^2 = \operatorname{Tr}(A^2) = 2|E_G| \) because the \( (v,v) \) entry of \( A^2 \) counts the number of \( u \) with \( A_{u,v}=1 \), that is, the number of neighbours of \( v \).</p>
+<blockquote class="card-body">
+<p><strong>Conjecture (Elphick, Farber, Goldberg, Wocjan):</strong> Let \( G \) be connected.  Then \( |V_G|-1 \leq \min(s^+(G), s^-(G) ) \).</p>
+</blockquote>
+<p>To my in-expert eye, this seems of a different character to the bounds on the chromatic number which we have been discussing.  There is no real property of \( G \) occuring in this conjecture: we could fix \( n = |V| \) and then to verify the conjecture, we essentially need to find the minimal value of \( \min(s^+(G), s^-(G) ) \) for <em>all</em> graphs on \( n \) vertices.</p>
+<h3>References / Further reading</h3>
+<p>Liu, Lele Liu; Ning, Bo
+"Unsolved Problems in Spectral Graph Theory"
+<a href="https://doi.org/10.48550/arXiv.2305.10290">arXiv:2305.10290 [math.CO]</a></p>
+<p>Elphick, Clive; Wocjan, Pawel
+Spectral lower bounds for the quantum chromatic number of a graph.
+J. Comb. Theory, Ser. A 168, 338-347 (2019). 
+<a href="https://zbmath.org/1421.05042">Zbl 1421.05042</a></p>
+<p>Elphick, Clive; Farber, Miriam; Goldberg, Felix; Wocjan, Pawel
+"Conjectured bounds for the sum of squares of positive eigenvalues of a graph."
+Discrete Math. 339, No. 9, 2215-2223 (2016). 
+<a href="https://zbmath.org/1339.05228">Zbl 1339.05228</a></p>
+<p>Cameron, Peter J.; Montanaro, Ashley; Newman, Michael W.; Severini, Simone; Winter, Andreas
+On the quantum chromatic number of a graph.
+Electron. J. Comb. 14, No. 1, Research Paper R81, 15 p. (2007). 
+<a href="https://zbmath.org/1182.05054">Zbl 1182.05054</a></p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2023-07-04-spectral-bounds.html">Spectral bounds on the chromatic number &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)'], ['$','$']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+    };
+</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    

@@ -56,6 +56,27 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Quantum chromatic numbers</h2>
+        <p>Continuing from the <a href="2023-07-04-spectral-bounds.html">last post</a> I want to now consider the <em>Quantum Chromatic Number</em> of a graph.  These ideas arose from Quantum Information Theory, which explore how <a href="https://en.wikipedia.org/wiki/Quantum_entanglement">quantum entanglement</a> can be used in certain two-person "games", which are very similar to <a href="https://en.wikipedia.org/wiki/Interactive_proof_system">Interactive proof systems</a>.  While the motivation can be a little hard to explain, the resulting mathematical formalism is straightforward.</p>
+<blockquote class="card-body">
+<p><strong>Definition:</strong> A <em>quantum \( c \)-colouring</em> of \( G \) is a collection of orthogonal projections \( \{P_{v,k} : v\in V_G, k\in [c] \} \) on some Hilbert space \( H \) (usually assumed finite-dimensional) such that:</p>
+<ol>
+<li>\( \sum_{k=1}^c P_{v,k} = 1_H \) for each \( v \);</li>
+<li>\( P_{v,k} P_{w,k} = 0 \) for each \( k \) and each edge \( v\sim w \) in \( G \).</li>
+</ol>
+</blockquote>
+<p>There is a more complicated (but motivated) definition in [Cameron et al.] (see references below) where the reduction to this definition is essentially shown Proposition 1 and the later observations.  It is also shown there that, when \( H \) is finite dimensional, we can always assume that each projection has the same rank (though this is sometimes not natural.)  The following is the same spectral bound which we discussed before, but now for the <em>quantum chromatic number</em> \( \chi_q(G) \), the least \( c \) for which \( G \) has a quantum \( c \)-colouring.</p>
+<blockquote class="card-body">
+<p><strong>Theorem: [Elphick-Wocjan]</strong> \( \chi_q(G) \geq 1+\frac{\lambda_1}{-\lambda_n} \).</p>
+</blockquote>
+
+        <a href="2023-07-07-quantum-chromatic-numbers.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">7th July 2023</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Spectral bounds on the chromatic number</h2>
         <p>Recently <a href="https://www.researchgate.net/profile/Clive-Elphick-2">Clive Elphink</a> gave us a nice seminar where he discussed some of his "conjectures in spectral graph theory".  Clive has an interesting history: after a career in business, he is now semi-retired and returned to research mathematics.  By his own admission, he is more on the experimental side, and his talk said almost nothing about proofs.  Here is a old result in this area:</p>
 <blockquote class="card-body">
@@ -139,18 +160,6 @@
         <a href="2022-08-24-typing.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">24th August 2022</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">An update</h2>
-        <p>An update of sorts.  I have finally submitted my long paper "Quantum graphs: different perspectives, homomorphisms and quantum automorphisms".</p>
-<p>We have been teaching back in person all year, and really, long may this continue.  Given the sort of teaching I do, to the sort of students I teach, in person lectures seem much, much better from a continuing engagement point of view.  This year I modified my first year tutorials, making them fully "flipped" and completely de-coupled from any homework.  I think this worked well: students seemed more willing to experiment and collaborate when there is no "assessment" (formative or otherwise).  Next we need to work on encouraging out of class work.</p>
-<p>I wrote before about virtual seminars.  I have continued to find travel difficult for a variety of reasons.  As such, I have really enjoyed being able to attend various virtual seminars; let me mention the Athens Functional Analysis and Operator Algebra seminar, and the (virtual) <a href="https://sites.google.com/view/ruben-martos/seminars/qg-seminar">Quantum Groups Seminar</a>.  It is hard to think that pre-pandemic, I essentially attended no seminars at all.  Long may virtual things continue!</p>
-
-        <a href="2022-06-27-LaTeX.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">27th June 2022</div>
 </div>
 
 
