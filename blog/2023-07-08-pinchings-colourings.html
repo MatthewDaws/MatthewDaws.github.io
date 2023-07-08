@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>From pinchings to quantum colourings</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">From pinchings to quantum colourings</h1>
+    
+    <p>Posted on 8th July 2023</p>
+    <hr>
+
+    <p>Finally, I can combine the <a href="2023-07-07-quantum-chromatic-numbers.html">last post</a> with <a href="2023-07-03-fixed-points.html">a post 3 ago</a>.  This argument is from a paper of Elphick and Wocjan, attributed there to Roberson.</p>
+<p>Fix a graph \( G \) with adjacency matrix \( A \).</p>
+<blockquote class="card-body">
+<p><strong>Theorem:</strong> Let \( \mathcal C \) be a pinching on \( \mathbb M_n\otimes\mathcal B(H) \) with \( \mathcal C(A\otimes 1_H)=0 \) and \( \mathcal C(D\otimes 1_H)=D\otimes 1_H \) for each diagonal matrix \( D \).  Then \( \mathcal C \) arises from a quantum colouring of \( G \), in the manner described before.</p>
+</blockquote>
+<!--more-->
+
+<blockquote class="card-body">
+<p><em>Proof:</em> Let the pinching be \( \mathcal C(x) = \sum_k P_k x P_k \) for some projections \( (P_k) \) on \( \mathbb C^n\otimes H \) with \( \sum_k P_k=1 \).  As \( P_k=P_k^* \), we see that \( \mathcal C \) is completely positive, and unital as \( \sum_k P_k=1 \).  If \( H \) is finite-dimensional, we compute that
+\[ \newcommand{\tr}{\operatorname{Tr}} \tr(\mathcal C(x)) = \sum_k \tr(P_kx_Pk) = \sum_k \tr(P_k^2x) = \tr(x), \]
+so \( \mathcal C \) is a quantum channel.</p>
+<p>(If \( H \) is infinite-dimensional separable, then \( \mathbb C^c\otimes H \cong H \) and we can regard \( \mathcal C \) as acting on \( \mathcal B(H) \).  We can find a trace-class operator \( d \) with full support which is diagonal with respect to the orthogonal decomposition given by the \( (P_k) \).  Thus \( P_kd=dP_k \) for each \( k \).  Then the functional \( \phi(x) = \tr(xd) \) is faithful, and invariant, because
+\[ \phi(\mathcal C(x)) = \sum_k \tr(P_kxP_kd)
+= \sum_k \tr(x dP_k) = \tr(dx) = \phi(x). \]
+If \( H \) is not separable, then we can find a family of invariant functions which together are faithful, and this is sufficient for the proof of our <a href="2023-07-03-fixed-points.html">fixed point result</a> to still work.)</p>
+<p>As \( \mathcal C \) is written in Kraus form, we conclude that each \( P_k \) commutes with the fixed points, in particular, with \( D\otimes 1_H \) for each diagonal matrix \( D \).  This means that each \( P_k \) has the form
+\[ P_k = \sum_{v\in V} e_v e_v^* \otimes P_{v,k} \]
+for some projections \( (P_{v,k}) \) on \( H \).  (Here recall that \( n=|V| \) so \( \mathbb C^n \) is indexed by \( V \).)  Then
+\[ 1 = \sum_k P_k = \sum_v e_ve_v^* \otimes \sum_k P_{v,k} \]
+and so \( \sum_k P_{v,k}=1 \) for each \( v \).</p>
+<p>Finally,
+\[ \begin{split} 0 &= \mathcal C(A\otimes 1_H) = \sum_{u,v} e_u e_u^* A e_v e_v^* \otimes \sum_k P_{u,k} P_{v,k} \\
+&= \sum_{u\sim v} e_u e_v^* \otimes \sum_k P_{u,k} P_{v,k}, \end{split} \]
+as \( e_u^*Ae_v = A_{u,v}=1 \) only when \( u\sim v \).  Choose \( u\sim v \), so we have that \( \sum_k P_{u,k} P_{v,k} = 0 \).  As \( \sum_k P_{u,k} = 1 \), the projections \( (P_{u,k})_k \) are orthogonal, so given \( l \),
+\[ 0 = \sum_k P_{u,l} P_{u,k} P_{v,k} = P_{u,l} P_{v,l} \]
+which is the second condition to be a quantum colouring.</p>
+</blockquote>
+<p>I wonder if some similar result holds for <a href="https://arxiv.org/abs/2203.08716">quantum graphs</a>.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2023-07-07-quantum-chromatic-numbers.html">Quantum chromatic numbers &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)'], ['$','$']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+    };
+</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    

@@ -56,6 +56,21 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Pandas, HD5, and large data sets</h2>
+        <p>I have finally gotten around to playing with the HD5 driver for <code>pandas</code> (which uses, I believe, <code>pytables</code> under
+the hood).  I'm only scratching the surface, but it's easy to do what I want:</p>
+<ul>
+<li>Create a huge data frame storing an entire data set</li>
+<li>Efficiently query subsections of the frame</li>
+</ul>
+
+        <a href="2017-05-19-pandas_hd5.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">19th May 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Open Street Map XML data</h2>
         <p>I want to process large amounts of XML data from Open Street Map (OSM).  I.e. that obtained from <a href="http://download.geofabrik.de/">GeoFrabrik</a> or <a href="http://wiki.openstreetmap.org/wiki/Planet.osm">OSM.Planet</a>.  For smaller snapshots, do look at <a href="https://github.com/gboeing/osmnx">OSMnx</a>.</p>
 <p>My pure-Python project to read and process OSM data, currently a work in progress, can be found <a href="https://github.com/MatthewDaws/OSMDigest">on GitHub, as "OSMDigest"</a>.</p>
@@ -141,19 +156,6 @@ not as a hobby.)  Numpy is great, but it doesn't half require a little thinking 
         <a href="2016-09-29-RandomSearch.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">29th September 2016</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Java Enum definition</h2>
-        <p>At the dying ends of the work day, I came across <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html">this page</a> and was initially confused by</p>
-<pre><code>public abstract class Enum&lt;E extends Enum&lt;E&gt;&gt;
-</code></pre>
-<p>Doesn't that look, well, horribly circular?  <a href="http://stackoverflow.com/questions/3061759/why-in-java-enum-is-declared-as-enume-extends-enume">Stackoverflow</a> <a href="http://stackoverflow.com/questions/211143/java-enum-definition">suggests</a> this is common confusion.</p>
-
-        <a href="2015-10-20-Java_Enum.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">20th October 2015</div>
 </div>
 
 
