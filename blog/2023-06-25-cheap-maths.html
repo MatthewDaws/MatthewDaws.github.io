@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>Cheap mathematics</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">Cheap mathematics</h1>
+    
+    <p>Posted on 25th June 2023</p>
+    <hr>
+
+    <p>A long-time-coming comment on a <a href="https://golem.ph.utexas.edu/category/2023/04/bargainbasement_mathematics.html">post by John Baez</a> about "bargin-basement mathematics".  (But let's not do ourselves down-- the rest of the system is more than happy enough to do that for us-- so I shall say "cheap" not quite "bargain-basement").</p>
+<p>The setup here is a <a href="https://en.wikipedia.org/wiki/Galois_connection">(monotone Galois connection)</a>, which consists of two posets \( X \) and \( Y \), and order-preserving maps
+\[ L:X\rightarrow Y, \qquad R:Y\rightarrow X, \]
+which satisfy \( L(x)\leq y \) if and only if \( x\leq R(y) \).  The exercise, whose solution I'll give below, is that while \( L \) and \( R \) may of course fail to be mutual inverses, if we define \( X'=R(Y) \) and \( Y'=L(X) \) then \( L,R \) restrict to \( X',Y' \) respectively to become mutual inverses.</p>
+<!--more-->
+
+<blockquote class="card-body">
+<p><strong>Lemma 1:</strong> For any \( x\in X \) we have \( x\leq R(L(x)) \), and for any \( y\in Y \) with have \( L(R(y)) \leq y \).</p>
+<p><em>Proof:</em> Given \( x \), set \( y=L(x) \) so certainly \( L(x) \leq y \), and hence by the defining assumption, \( x \leq R(y) = R(L(x)) \).  Similarly, \( R(y) \leq R(y) \) implies that \( L(R(y)) \leq y \).</p>
+<p><strong>Lemma 2:</strong> For any \( x\in X' \) we have that \( x=R(L(x)) \).  For any \( y\in Y' \) we have that \( y=L(R(y)) \).</p>
+<p><em>Proof:</em> Given \( x\in X' \) there is \( y\in Y \) with \( x=R(y) \).  For any \( z \), by Lemma 1, we have \( L(R(z)) \leq z \) and so \( L(R(L(x))) \leq L(x) \) and \( x\leq R(y) \) so \( L(x)\leq y \), hence conclude that \( L(R(L(x))) \leq y \).  This implies that \( R(L(x)) \leq R(y) = x \).  By Lemma 1, \( x \leq R(L(x)) \), and so \( R(L(x)) = x \).</p>
+<p>Now given \( y\in Y' \) there is \( x\in X \) with \( L(x)=y \), which implies that \( x\leq R(y) \).  By Lemma 1, for any \( z \), we have that \( z\leq R(L(z)) \) and so \( R(y) \leq R(L(R(y))) \) so \( x \leq R(L(R(y))) \).  This implies that \( y = L(x) \leq L(R(y)) \).  Lemma 1 tells us that \( y \geq L(R(y)) \), and so we conclude that \( y = L(R(y)) \).</p>
+</blockquote>
+<p>We can now prove the main claim.</p>
+<blockquote class="card-body">
+<p><strong>Claim:</strong> \( L \) and \( R \) restrict to mutually inverse bijections between \( X' \) and \( Y' \).</p>
+<p><em>Proof:</em> By definition, \( L \) maps into \( Y' \) and \( R \) maps into \( X' \), so we obtain restricted maps \( L:X'\rightarrow Y' \) and \( R:Y'\rightarrow X' \).  We have shown that \( x=R(L(x)) \) for \( x\in X' \) and \( y=L(R(y)) \) for \( y\in Y' \).  We claim that \( L \) is bijective.  This is clear, as \( L(R(y))=y \) for any \( y\in Y' \) shows \( L \) is surjective, while \( R(L(x))=x \) for any \( x\in X' \) shows that \( L \) injects.  Similarly \( R \) is a bijection.</p>
+</blockquote>
+<p>Notice that we never used that \( L \) and \( R \) preserve order, only that \( L(x)\leq y \Leftrightarrow x\leq R(y) \).</p>
+<p>The wikipedia article says a lot more, of course.</p>
+<p>This is all quite neat, but I have struggled to think of a naturally occurring example in the sort of algebraic functional analysis which I study.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="2023-07-03-fixed-points.html">&larr; Fixed points of complete positive maps</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2023-06-19-mittag-leffler.html">Mittag-Leffler &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)'], ['$','$']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+    };
+</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    
