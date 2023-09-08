@@ -56,6 +56,23 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Cheap analysis</h2>
+        <p>This is a follow-on to <a href="2023-06-25-cheap-maths.html">an older post</a> prompted by a comment from Yemon Choi (an old friend who is now a colleague).  There are of course many examples of monotone Galois connections in Functional Analysis.  Here is one example which I like.</p>
+<p>Let \( E \) be a Banach space. Let \( \mathcal X \) be the collection of all linear subspaces of \( E \), ordered by inclusion.  Let \( \mathcal Y \) be the collection of all linear subspaces of \( E^* \) (the dual space of all continuous linear functionals) ordered by reverse inclusion.</p>
+<p>Given \( F\in\mathcal X \) we define
+\[ \mathcal L(F) = \{ f\in E^* : f(x)=0 \ (x\in F) \} \in \mathcal Y, \]
+the annihilator of \( F \), easily seen to be a subspace.  If \( F_1 \leq F_2 \) then \( F_1 \subseteq F_2 \) and so \( \mathcal L(F_1) \supseteq \mathcal L(F_2) \) (if \( f \) vanishes on \( F_2 \) it will vanish on \( F_1 \)).  So \( \mathcal L(F_1) \leq \mathcal L(F_2) \) and \( \mathcal L \) is order-preserving.</p>
+<p>Similarly given \( F\in\mathcal Y \) define
+\[ \mathcal R(F) = \{ x\in E : f(x)=0 \ (f\in F) \}\in \mathcal X, \]
+the pre-annihilator of \( F \).  This is again an order-preserving map.</p>
+
+        <a href="2023-09-08-cheap-analysis.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">8th September 2023</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">From pinchings to quantum colourings</h2>
         <p>Finally, I can combine the <a href="2023-07-07-quantum-chromatic-numbers.html">last post</a> with <a href="2023-07-03-fixed-points.html">a post 3 ago</a>.  This argument is from a paper of Elphick and Wocjan, attributed there to Roberson.</p>
 <p>Fix a graph \( G \) with adjacency matrix \( A \).</p>
@@ -152,18 +169,6 @@ which satisfy \( L(x)\leq y \) if and only if \( x\leq R(y) \).  The exercise, w
         <a href="2023-02-22-origami.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">22nd February 2023</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Outside the office</h2>
-        <p>There has, for more time than I care to think about, been a large, empty display board right outside my office.  My fellow corridor occupants, being (astro)physicists, actually have a culture of making posters, which are then perfect for displaying on said boards.  But what is a Mathematician to do?  I have been planning this for, again, longer than I care to remember, but finally here it is:</p>
-<p><img class="fixed-ratio-resize" alt="Photo of the board" src="public/board.jpg"></p>
-<p>The evenings spent watching Masterchef and cutting out bits of paper were, well, almost worth it.  It occurs to me that the display of images on this site is not particularly "responsive", but who has the time?</p>
-<p>The <a href="https://en.wikipedia.org/wiki/Collatz_conjecture">Collatz Conjecture</a> is well-known, and fun to play around with (especially into an introduction to programming class).  Some recent progress was <a href="https://terrytao.wordpress.com/2019/09/10/almost-all-collatz-orbits-attain-almost-bounded-values/">Tao's work</a> but this all is way outside my zone of expertise.  Still, I think it does make for a nice use of a notice board.</p>
-        <a href="2022-12-15-board.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">15th December 2022</div>
 </div>
 
 

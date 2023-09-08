@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Matt Daws">
 
-    <title>From pinchings to quantum colourings</title>
+    <title>Cheap analysis</title>
 
     <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -51,51 +51,41 @@
     <div class="row">
     
     <div class="col-md-8">
-    <h1 class="mt-4">From pinchings to quantum colourings</h1>
+    <h1 class="mt-4">Cheap analysis</h1>
     
-    <p>Posted on 8th July 2023</p>
+    <p>Posted on 8th September 2023</p>
     <hr>
 
-    <p>Finally, I can combine the <a href="2023-07-07-quantum-chromatic-numbers.html">last post</a> with <a href="2023-07-03-fixed-points.html">a post 3 ago</a>.  This argument is from a paper of Elphick and Wocjan, attributed there to Roberson.</p>
-<p>Fix a graph \( G \) with adjacency matrix \( A \).</p>
-<blockquote class="card-body">
-<p><strong>Theorem:</strong> Let \( \mathcal C \) be a pinching on \( \mathbb M_n\otimes\mathcal B(H) \) with \( \mathcal C(A\otimes 1_H)=0 \) and \( \mathcal C(D\otimes 1_H)=D\otimes 1_H \) for each diagonal matrix \( D \).  Then \( \mathcal C \) arises from a quantum colouring of \( G \), in the manner described before.</p>
-</blockquote>
+    <p>This is a follow-on to <a href="2023-06-25-cheap-maths.html">an older post</a> prompted by a comment from Yemon Choi (an old friend who is now a colleague).  There are of course many examples of monotone Galois connections in Functional Analysis.  Here is one example which I like.</p>
+<p>Let \( E \) be a Banach space. Let \( \mathcal X \) be the collection of all linear subspaces of \( E \), ordered by inclusion.  Let \( \mathcal Y \) be the collection of all linear subspaces of \( E^* \) (the dual space of all continuous linear functionals) ordered by reverse inclusion.</p>
+<p>Given \( F\in\mathcal X \) we define
+\[ \mathcal L(F) = \{ f\in E^* : f(x)=0 \ (x\in F) \} \in \mathcal Y, \]
+the annihilator of \( F \), easily seen to be a subspace.  If \( F_1 \leq F_2 \) then \( F_1 \subseteq F_2 \) and so \( \mathcal L(F_1) \supseteq \mathcal L(F_2) \) (if \( f \) vanishes on \( F_2 \) it will vanish on \( F_1 \)).  So \( \mathcal L(F_1) \leq \mathcal L(F_2) \) and \( \mathcal L \) is order-preserving.</p>
+<p>Similarly given \( F\in\mathcal Y \) define
+\[ \mathcal R(F) = \{ x\in E : f(x)=0 \ (f\in F) \}\in \mathcal X, \]
+the pre-annihilator of \( F \).  This is again an order-preserving map.</p>
 <!--more-->
 
-<blockquote class="card-body">
-<p><em>Proof:</em> Let the pinching be \( \mathcal C(x) = \sum_k P_k x P_k \) for some projections \( (P_k) \) on \( \mathbb C^n\otimes H \) with \( \sum_k P_k=1 \).  As \( P_k=P_k^* \), we see that \( \mathcal C \) is completely positive, and unital as \( \sum_k P_k=1 \).  If \( H \) is finite-dimensional, we compute that
-\[ \newcommand{\tr}{\operatorname{Tr}} \tr(\mathcal C(x)) = \sum_k \tr(P_kx_Pk) = \sum_k \tr(P_k^2x) = \tr(x), \]
-so \( \mathcal C \) is a quantum channel.</p>
-<p>(If \( H \) is infinite-dimensional separable, then \( \mathbb C^c\otimes H \cong H \) and we can regard \( \mathcal C \) as acting on \( \mathcal B(H) \).  We can find a trace-class operator \( d \) with full support which is diagonal with respect to the orthogonal decomposition given by the \( (P_k) \).  Thus \( P_kd=dP_k \) for each \( k \).  Then the functional \( \phi(x) = \tr(xd) \) is faithful, and invariant, because
-\[ \phi(\mathcal C(x)) = \sum_k \tr(P_kxP_kd)
-= \sum_k \tr(x dP_k) = \tr(dx) = \phi(x). \]
-If \( H \) is not separable, then we can find a family of invariant functions which together are faithful, and this is sufficient for the proof of our <a href="2023-07-03-fixed-points.html">fixed point result</a> to still work.)</p>
-<p>As \( \mathcal C \) is written in Kraus form, we conclude that each \( P_k \) commutes with the fixed points, in particular, with \( D\otimes 1_H \) for each diagonal matrix \( D \).  This means that each \( P_k \) has the form
-\[ P_k = \sum_{v\in V} e_v e_v^* \otimes P_{v,k} \]
-for some projections \( (P_{v,k}) \) on \( H \).  (Here recall that \( n=|V| \) so \( \mathbb C^n \) is indexed by \( V \).)  Then
-\[ 1 = \sum_k P_k = \sum_v e_ve_v^* \otimes \sum_k P_{v,k} \]
-and so \( \sum_k P_{v,k}=1 \) for each \( v \).</p>
-<p>Finally,
-\[ \begin{split} 0 &= \mathcal C(A\otimes 1_H) = \sum_{u,v} e_u e_u^* A e_v e_v^* \otimes \sum_k P_{u,k} P_{v,k} \\
-&= \sum_{u\sim v} e_u e_v^* \otimes \sum_k P_{u,k} P_{v,k}, \end{split} \]
-as \( e_u^*Ae_v = A_{u,v}=1 \) only when \( u\sim v \).  Choose \( u\sim v \), so we have that \( \sum_k P_{u,k} P_{v,k} = 0 \).  As \( \sum_k P_{u,k} = 1 \), the projections \( (P_{u,k})_k \) are orthogonal, so given \( l \),
-\[ 0 = \sum_k P_{u,l} P_{u,k} P_{v,k} = P_{u,l} P_{v,l} \]
-which is the second condition to be a quantum colouring.</p>
-</blockquote>
-<p>I wonder if some similar result holds for <a href="https://arxiv.org/abs/2203.08716">quantum graphs</a>.</p>
+<p>Let \( F\in\mathcal X \) and \( G\in\mathcal Y \).  Then
+\[ \begin{split}
+& \mathcal L(F) \leq G \\
+\Leftrightarrow\quad & \mathcal L(F) \supseteq G \\
+\Leftrightarrow\quad & f\in G \implies f(x)=0 \ (x\in F) \\
+\Leftrightarrow\quad & x\in F \implies f(x)=0 \ (f\in G) \\
+\Leftrightarrow\quad & F \subseteq \mathcal R(G) \\
+\Leftrightarrow\quad & F \leq \mathcal R(G).
+\end{split} \]
+Hence we have the required condition.</p>
+<p>If we run the abstract argument, we obtain a bijection between the images of \( \mathcal R \) and \( \mathcal L \).  Here some non-trivial Functional Analysis appears in the guise of the <a href="https://en.wikipedia.org/wiki/Hahn%E2%80%93Banach_theorem">Hahn-Banach Theorem</a>.  The image of \( \mathcal L \) is the collection of all weak\( ^* \)-closed subspaces of \( E^\ast \), while the image of \( \mathcal R \) is the collection of all (norm) closed subspaces of \( E \).  This bijection is of course well-known, but it's fun to see it appear here.</p>
 
     <hr>
 
     <ul class="pagination justify-content-center mb-4">
         <li class="page-item">
-<a class="page-link" href="2023-09-08-cheap-analysis.html">&larr; Cheap analysis</a>
-</li>
-<li class="page-item">
 <a class="page-link" href="index.html">Index</a>
 </li>
 <li class="page-item">
-<a class="page-link" href="2023-07-07-quantum-chromatic-numbers.html">Quantum chromatic numbers &rarr;</a>
+<a class="page-link" href="2023-07-08-pinchings-colourings.html">From pinchings to quantum colourings &rarr;</a>
 </li>
     </ul>
 

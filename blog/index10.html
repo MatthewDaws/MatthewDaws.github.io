@@ -56,6 +56,30 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Enumerate in C++</h2>
+        <p>One of the fun things about <a href="https://en.wikipedia.org/wiki/C%2B%2B11">C++11</a> is that minor changes allow you to write somewhat more expressive (aka <a href="http://preshing.com/20141202/cpp-has-become-more-pythonic/">Pythonic</a>) code.</p>
+<p>A common pattern is to iterate over an array while also knowing the index you are at.  Python does this with the <code>enumerate</code> keyword:</p>
+<p><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">container</span><span class="p">):</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At </span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+ </p>
+<p>In C++ the idiomatic way to do this is perhaps:</p>
+<p><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">container</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;At &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">container</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+ </p>
+<p>This has its flaws though (and is tedious to type).  Using g++, if you have warnings on, <code>-Wall</code>, then you'll see complaint, as the type of <code>container.size()</code> is, typically, of size <code>std::size_t</code> which on my machine is <code>unsigned long long</code> (aka an unsigned 64-bit number).  Warnings aside, as <code>int</code> is on my machine a 32-bit unsigned number, we could potentially have problems if the size of container is more than around 2 billion (unlikely, but possible these days).</p>
+
+        <a href="2015-05-14-enumerate.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">14th May 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Jam 2012 Qualification Round</h2>
         <p>Last one of these for a while.  Problem D became an obsession.  As ever, links to: <a href="https://code.google.com/codejam/contest/1460488/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2012_qual">GitHub</a>.</p>
 <p><strong>Problem A, Speaking in Tongues:</strong> Could be solved with pen and paper, as all the information you need is sneakily in the question.</p>
@@ -141,18 +165,6 @@
         <a href="2015-04-26-20131b.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">26th April 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Jam 2015 Round 1A</h2>
-        <p>So, I didn't do this one live, as it ran at 2am UK time...  I did however, for fun, try this under timed conditions a few days later, and I didn't do great, but got enough to qualify (did A and B with 3 silly mistakes from B, then C small, and stupidly didn't think, and tried my slow algorithm on C large.  As large problems are one-shot, it would have been game over, and I'd be around 500 in the ranking.)</p>
-<p>As ever, links to: <a href="https://code.google.com/codejam/contest/4224486/dashboard#s=a">Official Contest Analysis</a> and my code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2015_1a">GitHub</a>.</p>
-<p><strong>Problem A, Mushroom Monster:</strong> Easy, and my solution doesn't differ from the official analysis.</p>
-
-        <a href="2015-04-24-20151a.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">24th April 2015</div>
 </div>
 
 

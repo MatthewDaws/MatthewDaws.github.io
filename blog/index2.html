@@ -56,6 +56,25 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Counter-examples to Kaplansky Density</h2>
+        <p>I've added a short document to my <a href="https://github.com/MatthewDaws/Mathematics/tree/master/Kaplansky2">Mathematical writeups</a> collection.  Thanks to Yemon Choi for a conversation which motivated me to write this up, and to Philip Spain who alerted me to the work of Harry Dowson.</p>
+<p>It would be interesting to have a <em>natural</em> Banach Algebra example.  By this, I mean a naturally occurring example of a dual Banach Algebra \( M \) and a weak\( ^\ast \)-dense subalgebra \( A\subseteq M \) such that there is a unit vector in \( M \) which is not the weak\( ^\ast \)-limit of any bounded net in \( A \).</p>
+<p>What do I mean by "natural" here?  Some possible examples:</p>
+<ul>
+<li>
+<p>Let \( E \) be a reflexive Banach space with the approximation property. Then it's known that \( \mathcal B(E) \) is the bidual of \( \mathcal K(E) \).  Thus \( \mathcal K(E) \) is weak\( ^\ast \)-dense in \( \mathcal B(E) \), but in this case, we do have an (isometric) version of Kaplansky Density, because biduals satisfy <a href="https://en.wikipedia.org/wiki/Goldstine_theorem">Goldstine's Theorem</a>.  I still think this example is a little interesting: if \( E \) had the metric approximation property, given \( T\in\mathcal B(E) \) it is easy to write down a net in \( \mathcal K(E) \) which converges to \( T \) and is bounded by \( \|T\| \).  If \( E \) merely has the approximation property then this seems less clear to me, though it is ensured by the general theory.  <strong>Update:</strong> This was a little naive: if \( E \) is <em>reflexive</em> then it goes back to Grothendieck that \( E \) having the AP already implies that \( E \) has the MAP.  So really there is no mystery here.</p>
+</li>
+<li>
+<p>Let \( G \) be a locally compact group, and consider \( PM_p(G) \) which by definition is the weak\( ^\ast \) closure of \( PF_P(G) \) inside \( \mathcal B(L^p(G)) \).  Excepting when \( p=2 \) I do not know if we have Kaplansky Density here, though if \( G \) has a suitable approximation-like property (amenability, or a weakening) then I believe one can show this: I don't know if this is explicitly in the literature.</p>
+</li>
+</ul>
+        <a href="2021-02-13-kaplansky.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">13th February 2021</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">TileMapBase</h2>
         <p>Another release of <a href="https://github.com/MatthewDaws/TileMapBase">TileMapBase</a> which fix some warnings which had started to be been displayed, because of changing APIs in some libraries which we use.  I also had some minor corrections to docstrings.  Released on PyPI.</p>
 <p>A quick further retrospective.  Do I enjoy writing code?  Yes, still.  Do I enjoying fighting with the tools to get things to work?  No, not in the slightest.  Below are some notes to self for how I got various libraries installed.</p>
@@ -141,20 +160,6 @@
         <a href="2020-06-03-talmo.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">3th June 2020</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Genetics and ancestry</h2>
-        <p>What feels like a lifetime ago (before some other genetics happened) I listened to Adam Rutherford's book of the week "How to Argue With a Racist" on Radio 4.  It's now been so long that the Radio 4 link is dead, but you can <a href="https://www.amazon.co.uk/Does-Race-Exist-Scientific-Investigation/dp/1474611249">buy the book</a> or <a href="https://www.theguardian.com/books/2020/jan/30/how-to-argue-with-a-racist-adam-rutherford-review">read the book review</a>.  The radio series was interesting, but one particular (slightly off topic) point I remember.  Adam claimed (I mean, I <em>think</em>, it was a while ago) something like</p>
-<blockquote class="card-body">
-<p>Go back around 11 generations, and you will have ancestors who share none of your genetic material.</p>
-</blockquote>
-<p>What argument might lead to this conclusion?  My main initial conclusion was that I did not really know how inheritance works at the genetic level.</p>
-
-        <a href="2020-05-17-genetics.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">17th May 2020</div>
 </div>
 
 
