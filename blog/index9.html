@@ -56,6 +56,18 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">CodeJam 2015 Round 2</h2>
+        <p>Round 2 came and went (and Round 3 and the "distributed" round).  As an effort to practice with C#, I solved these problems in C# (definitely slower than using Python, and actually, the end running time is not that much quicker, for these sort of algorithmic / numerical problems).</p>
+<p>There's a definite step-up in difficulty here!  Maybe I kid myself I could have done problem A and some "small" problems quickly... that people did them all in 150 minutes is quite scary.  The <a href="">Official Contest Analysis</a> is rather brief (from G+, it seems the organisers were busy with the distributed round; or maybe, if we've come this far, shorter answers are all we need ;-&gt; )  I think my background in pure Maths shows here: I found problem D quite easy, as I found analysing the special cases off-line (pen and paper) to be not so hard.  Problems B and C (in "large" form) were hard, I thought.  (I missed the trick with problem B; and using an off-the-shelf Graph package is obviously the fast way to do Problem C.)</p>
+<p>See the code on <a href="https://github.com/MatthewDaws/CodeJam/tree/master/2015_2">GitHub</a>.</p>
+
+        <a href="2015-06-17-20152.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">17th June 2015</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Thoughts about C#</h2>
         <p>On the basis that knowing a modern OO language would be good, and on the basis that everyone and their granny knows JAVA, I thought I'd look at C#.  Getting going with C# was a bit tedious: I end up looking things up endlessly, and puzzling over things for a while before they "click" and seem obvious (which is always annoying, as then I'm left wondering why it wasn't obvious from the start).  You wait for muscle memory to build...  </p>
 <p>Example: A small mistake lead to some musings on how sort algorithms are implemented: <a href="http://stackoverflow.com/questions/30865510/why-does-failing-to-recognise-equality-mess-up-c-sharp-listt-sort">StackOverFlow Question</a> (the actual problem came from thinking about orderings in Python and C++ too much, where you specify a <a href="https://en.wikipedia.org/wiki/Weak_ordering#Strict_weak_orderings">strict weak ordering</a>, basically "less than", and then porting that to a <code>CompareTo</code> method and missing a corner-case.  This came up in a <a href="./20152.html">CodeJam problem</a>.)</p>
@@ -136,18 +148,6 @@
         <a href="2015-05-27-regression.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">27th May 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Dabbling in Bayesian Statistics</h2>
-        <p>Bayesian statistics appeals to me both because it seems more "philosophically correct" than frequentist arguments (I have this data, and want to make an inference from it, rather than worrying about data which "might" exist, given other circumstances).  Also, Bayesian approaches lead to some interesting computational issues, which are interesting in their own right.</p>
-<p>TL;DR: In the process of thinking about MCMC methods in sampling from posterior distributions, I became interested in the choice of prior distributions.  Emerging from a lot of reading, you can view my <a href="http://nbviewer.ipython.org/github/MatthewDaws/Python_bits/blob/master/monte_carlo/Priors%20and%20transformations.ipynb">IPython Notebook</a> on finding an "invariant" prior: if you have a natural family of transformations on your "data space" which is reflected in transformations in the parameter space, then I argue there's a natural reason to expect certain invariance in the prior.</p>
-<p>For a simple example, consider normally distributed data with known variance.  If you translate your data by, say, 5 units, then you would expect your inference about the (unknown) mean to also be exactly translated by 5 units (but to otherwise be the same).  This leads to a uniform (improper) prior.  I treat the case of unknown mean and variance, which leads to the Jeffreys prior, which is regarded as not so great in the 2 parameter case.  Hey ho.  This was also a good excuse to learn and play with <a href="http://www.sympy.org/">SymPy</a>.</p>
-
-        <a href="2015-05-22-bayesian_stats.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">22nd May 2015</div>
 </div>
 
 

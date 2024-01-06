@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Matt Daws">
 
-    <title>Cheap analysis</title>
+    <title>Travelling and a New Year</title>
 
     <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -51,44 +51,28 @@
     <div class="row">
     
     <div class="col-md-8">
-    <h1 class="mt-4">Cheap analysis</h1>
+    <h1 class="mt-4">Travelling and a New Year</h1>
     
-    <p>Posted on 8th September 2023</p>
+    <p>Posted on 5th January 2024</p>
     <hr>
 
-    <p>This is a follow-on to <a href="2023-06-25-cheap-maths.html">an older post</a> prompted by a comment from Yemon Choi (an old friend who is now a colleague).  There are of course many examples of monotone Galois connections in Functional Analysis.  Here is one example which I like.</p>
-<p>Let \( E \) be a Banach space. Let \( \mathcal X \) be the collection of all linear subspaces of \( E \), ordered by inclusion.  Let \( \mathcal Y \) be the collection of all linear subspaces of \( E^* \) (the dual space of all continuous linear functionals) ordered by reverse inclusion.</p>
-<p>Given \( F\in\mathcal X \) we define
-\[ \mathcal L(F) = \{ f\in E^* : f(x)=0 \ (x\in F) \} \in \mathcal Y, \]
-the annihilator of \( F \), easily seen to be a subspace.  If \( F_1 \leq F_2 \) then \( F_1 \subseteq F_2 \) and so \( \mathcal L(F_1) \supseteq \mathcal L(F_2) \) (if \( f \) vanishes on \( F_2 \) it will vanish on \( F_1 \)).  So \( \mathcal L(F_1) \leq \mathcal L(F_2) \) and \( \mathcal L \) is order-preserving.</p>
-<p>Similarly given \( F\in\mathcal Y \) define
-\[ \mathcal R(F) = \{ x\in E : f(x)=0 \ (f\in F) \}\in \mathcal X, \]
-the pre-annihilator of \( F \).  This is again an order-preserving map.</p>
+    <p>Somehow it is 2024 already.  I spent the week before Christmas at a pleasant conference in Besançon, France.  A photo of us all in the initial lecture theatre:</p>
+<p><img class="fixed-ratio-resize" alt="Library" src="public/besancon_Dec23.jpg"></p>
 <!--more-->
 
-<p>Let \( F\in\mathcal X \) and \( G\in\mathcal Y \).  Then
-\[ \begin{split}
-& \mathcal L(F) \leq G \\
-\Leftrightarrow\quad & \mathcal L(F) \supseteq G \\
-\Leftrightarrow\quad & f\in G \implies f(x)=0 \ (x\in F) \\
-\Leftrightarrow\quad & x\in F \implies f(x)=0 \ (f\in G) \\
-\Leftrightarrow\quad & F \subseteq \mathcal R(G) \\
-\Leftrightarrow\quad & F \leq \mathcal R(G).
-\end{split} \]
-Hence we have the required condition.</p>
-<p>If we run the abstract argument, we obtain a bijection between the images of \( \mathcal R \) and \( \mathcal L \).  Here some non-trivial Functional Analysis appears in the guise of the <a href="https://en.wikipedia.org/wiki/Hahn%E2%80%93Banach_theorem">Hahn-Banach Theorem</a>.  The image of \( \mathcal L \) is the collection of all weak\( ^* \)-closed subspaces of \( E^\ast \), while the image of \( \mathcal R \) is the collection of all (norm) closed subspaces of \( E \).  This bijection is of course well-known, but it's fun to see it appear here.</p>
+<p>I write "initial" as some (apparently vastly overrunning) refurbishment work meant we had to move rooms later in the week.  The old town of Besancon is interesting to wander around, architecturally distinct from the more modern suburbs in which the University of Franche-Comté is located, and nestled in the meander of the river Doubs.  The river, wide and fast flowing, and unlike anything I am used to from the Pennines here in the UK, was low; we had a nice conference dinner in a restaurant located on a boat.</p>
+<p>The academic heart of the conference was probably around non-commutative \( L^p \) spaces and harmonic analysis.  This is not my field, but after a few conferences which featured this topic a lot, and some good talks, I'm beginning to get a grip on what it's about.  However, the range of topics in the conference was wide, and it was nice to be exposed to things I wouldn't, say, have the time to read on the arXiv.</p>
+<p>I spoke about the contents of <a href="https://arxiv.org/abs/2312.13626">Averaging multipliers on locally compact quantum groups</a> a new preprint, again authored with Jacek Krajczok and Christian Voigt.  We explore how to use an averaging procedure when one has a compact quantum subgroup to study multipliers and the Fourier algebra.  Applied to Drinfeld doubles of discrete quantum groups, this gives a precise correspondence between various "approximation properties" for the Double, and the corresponding "central" properties for the discrete quantum group.</p>
+<p>A couple of projects have also come to a close over the break.  Our first paper with Jacek and Christian is now published with <a href="https://www.sciencedirect.com/science/article/pii/S0001870823005959">Advances</a>, while my <a href="https://arxiv.org/abs/2203.08716">paper about Quantum Graphs</a> has been accepted by the Communications of the American Mathematical Society (which is an open-access journal, fulfilling my obligations under the terms of having EPSRC funding).</p>
 
     <hr>
 
     <ul class="pagination justify-content-center mb-4">
         <li class="page-item">
-<a class="page-link" href="2024-01-05-travels-and-new-year.html">&larr; Travelling and a New Year</a>
-</li>
-<li class="page-item">
 <a class="page-link" href="index.html">Index</a>
 </li>
 <li class="page-item">
-<a class="page-link" href="2023-07-08-pinchings-colourings.html">From pinchings to quantum colourings &rarr;</a>
+<a class="page-link" href="2023-09-08-cheap-analysis.html">Cheap analysis &rarr;</a>
 </li>
     </ul>
 
