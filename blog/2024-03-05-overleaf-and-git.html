@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Matt Daws">
 
-    <title>Travelling and a New Year</title>
+    <title>Overleaf and Git</title>
 
     <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -51,31 +51,38 @@
     <div class="row">
     
     <div class="col-md-8">
-    <h1 class="mt-4">Travelling and a New Year</h1>
+    <h1 class="mt-4">Overleaf and Git</h1>
     
-    <p>Posted on 5th January 2024</p>
+    <p>Posted on 5th March 2024</p>
     <hr>
 
-    <p>Somehow it is 2024 already.  I spent the week before Christmas at a pleasant conference in Besançon, France.  A photo of us all in the initial lecture theatre:</p>
-<p><img class="fixed-ratio-resize" alt="Library" src="public/besancon_Dec23.jpg"></p>
+    <p>More of a note to myself than anything else.  Lancaster University has recently obtained a uni-wide <a href="https://www.overleaf.com/">Overleaf</a> license.  Overleaf is of course the online LaTeX editing system (as an aside, I didn't realise until now that the underlying web-app is <a href="https://github.com/overleaf/">Open Source</a>).  I haven't used Overleaf much, as I don't like the idea of needing a stable internet connection to work on my LaTeX files, and have a reasonable system going with MikTeX and VSCode with the LaTeX plugin.</p>
+<p>One advantage, however, is collaboration, especially as I can't convince collaborators to work with GitHub.  The license is needed to have more than one collaborator, but it also gets you Git integration.  Basically, the Overleaf project will act as a Git repository which you can push/pull from (but not <em>branch</em>; still, if I get a collaborator who is up for using branches, then (a) we can just use GitHub; and (b) I need to worry about why my Mathematics article is some complex...)</p>
 <!--more-->
 
-<p>I write "initial" as some (apparently vastly overrunning) refurbishment work meant we had to move rooms later in the week.  The old town of Besancon is interesting to wander around, architecturally distinct from the more modern suburbs in which the University of Franche-Comté is located, and nestled in the meander of the river Doubs.  The river, wide and fast flowing, and unlike anything I am used to from the Pennines here in the UK, was low; we had a nice conference dinner in a restaurant located on a boat.</p>
-<p>The academic heart of the conference was probably around non-commutative \( L^p \) spaces and harmonic analysis.  This is not my field, but after a few conferences which featured this topic a lot, and some good talks, I'm beginning to get a grip on what it's about.  However, the range of topics in the conference was wide, and it was nice to be exposed to things I wouldn't, say, have the time to read on the arXiv.</p>
-<p>I spoke about the contents of <a href="https://arxiv.org/abs/2312.13626">Averaging multipliers on locally compact quantum groups</a> a new preprint, again authored with Jacek Krajczok and Christian Voigt.  We explore how to use an averaging procedure when one has a compact quantum subgroup to study multipliers and the Fourier algebra.  Applied to Drinfeld doubles of discrete quantum groups, this gives a precise correspondence between various "approximation properties" for the Double, and the corresponding "central" properties for the discrete quantum group.</p>
-<p>A couple of projects have also come to a close over the break.  Our first paper with Jacek and Christian is now published with <a href="https://www.sciencedirect.com/science/article/pii/S0001870823005959">Advances</a>, while my <a href="https://arxiv.org/abs/2203.08716">paper about Quantum Graphs</a> has been accepted by the Communications of the American Mathematical Society (which is an open-access journal, fulfilling my obligations under the terms of having EPSRC funding).</p>
+<p>Some notes to self:</p>
+<ul>
+<li><a href="https://www.overleaf.com/learn/how-to/Git_integration">Git Integration</a> docs</li>
+<li>I use an auth token.  On my personal computers, I seem to have configured Git for Windows to store passwords / tokens, and nothing needs to be done after the first clone.</li>
+<li>On my work laptop, I seem to need to run <code>git credential-manager-core configure</code> in the cloned directory.  Then things will work as expected.</li>
+<li>For a new project, now setup a suitable <code>.gitignore</code> file and commit it.</li>
+<li>You can also sync to Github.  Make a new, empty repository on Github, and then use <code>git remote add github &lt;url&gt;</code> where <code>github</code> is an arbitrary name for this remote, and <code>&lt;url&gt;</code> points to the repository on github.  You can now pull and push via <code>git push github</code> and <code>git pull github master</code>, the later manually specifying the branch on the Github repository to push to.</li>
+</ul>
+<p>Thus, at least in principle, I can now work just on Github, occasionally pushing back to Overleaf.  Even better</p>
+<ul>
+<li>Running <code>git branch -u github/master master</code> now makes git track the Github repository, and <code>git pull</code> and <code>git push</code> now use Github, ignoring Overleaf.</li>
+<li><code>git push origin</code> will update to Overleaf.</li>
+<li><code>git pull origin master</code> will pull from Overleaf.</li>
+</ul>
 
     <hr>
 
     <ul class="pagination justify-content-center mb-4">
         <li class="page-item">
-<a class="page-link" href="2024-03-05-overleaf-and-git.html">&larr; Overleaf and Git</a>
-</li>
-<li class="page-item">
 <a class="page-link" href="index.html">Index</a>
 </li>
 <li class="page-item">
-<a class="page-link" href="2023-09-08-cheap-analysis.html">Cheap analysis &rarr;</a>
+<a class="page-link" href="2024-01-05-travels-and-new-year.html">Travelling and a New Year &rarr;</a>
 </li>
     </ul>
 
