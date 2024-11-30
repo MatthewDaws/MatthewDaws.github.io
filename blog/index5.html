@@ -56,6 +56,20 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Multiplicative Domains</h2>
+        <p>Reading <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=3723633">Ng, Viselter, Amenability of locally compact quantum groups and their unitary co-representations</a>
+<a href="https://arxiv.org/abs/1609.08920">Arxiv</a> I was reminded by a result/technique that I often forget: that of the <em>multiplicative domain</em> of a completely positive map.
+The following result is due to <a href="https://projecteuclid.org/download/pdf_1/euclid.ijm/1256051007">M.D. Choi</a> (though I like the presentation in
+<a href="https://www.researchgate.net/publication/200524409_Completely_Bounded_Maps_and_Operator_Algebras">Paulsen's book</a>).</p>
+<p>Let \( \phi:A\rightarrow B \) be a unital completely positive (UCP) map between unital \( C^\ast \)-algebras.  If \( a\in A \) with \( \phi(a)^\ast\phi(a) = \phi(a^\ast a) \) then already \( \phi(ba) = \phi(b)\phi(a) \) for any \( b \).  If this is the "right hand version" then there is a left hand version, and a bimodule version.</p>
+
+        <a href="2019-08-04-multdomains.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">4th August 2019</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">TileMapBase</h2>
         <p>My little Python project <a href="https://github.com/MatthewDaws/TileMapBase">TileMapBase</a> automates the process of downloading (and caching locally) map tiles from OpenStreetMap (and similar) and assembling these into the background for a <a href="https://matplotlib.org/">matplotkib</a> plot.  I wrote this when working in Geographic Data Science and wanting to show longitude latitude locations on a map, inside of a Jupyter Notebook.</p>
 <p>Anyway, recently OpenStreetMap started to enforce <a href="https://en.wikipedia.org/wiki/User_agent">User Agents</a> in HTTP requests, which broke my package.  A <a href="https://github.com/MatthewDaws/TileMapBase/pull/10">pull request later</a> and we're back on the road.</p>
@@ -167,26 +181,6 @@ written as \( h\mapsto \alpha_h \), which is continuous in the sense that \( N\t
         <a href="2019-02-04-semi-direct-products.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">4th February 2019</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Neighbourhood base</h2>
-        <p>Reading a paper with my office mate, we ended up having a discussion about the notion of an "open neighbourhood base"
-in a topological space.  For example, I might informally say that the weak topology on a Banach space \( E \)
-has, around a point \( x \), an open neighbourhood base is given by the sets
-\[ \{y\in E : |f_i(x-y)|<\epsilon \ (1\leq i\leq n) \} \]
-where \( f_i \) are members of \( E^* \) and \( \epsilon > 0 \).</p>
-<p>This raises a natural question:</p>
-<blockquote class="card-body">
-<p>Suppose we have a set \( X \) and for each \( x\in X \) we have specified a collection
-\( U_x \) of subsets of \( X \), such that \( A\in U_x \implies x\in A \).
-When is there a topology on \( X \) such that \( U_x \) are the "basic open neighbourhoods" of \( x \)?</p>
-</blockquote>
-
-        <a href="2019-01-31-topology.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">31st January 2019</div>
 </div>
 
 

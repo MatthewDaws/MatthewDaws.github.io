@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Matt Daws">
+
+    <title>It's all operational</title>
+
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ccc200;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Matthew Daws</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../teaching.html">Teaching</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../comp.html">Computation</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <div class="row">
+    
+    <div class="col-md-8">
+    <h1 class="mt-4">It's all operational</h1>
+    
+    <p>Posted on 20th November 2024</p>
+    <hr>
+
+    <p>I'm currently at the <a href="https://www.newton.ac.uk">Isaac Newton Institute</a> where I am a co-organiser of the <a href="https://www.newton.ac.uk/event/qia/">Quantum information, quantum groups and operator algebras</a> 5-week programme.  We're about half-way through now, and so far it's been a really fun event.  We started with a "school", and then went into the programme proper, while still encouraging visiting researchers to give talks, ideally explaining things slowly and giving background, rather than straight up seminars (which come at the end, when we have a conference).</p>
+<p>I feel like I've learnt a huge amount.  While attending a traditional conference is good, I often find myself very busy, listening to lots of talks, and the pressure speakers feel to be impressive, to give all their results, means that it can be hard to get into the details of people's work.  (Which comes later, when you read the papers, but that requires time, usually lacking at the meeting itself.)  With being at the programme for longer, and having less pressure from talks, it feels like I've had more time to think about ideas, and to talk informally with people about those ideas.  In fact, I'm not sure I've felt this engaged with the research area for really quite some time.</p>
+<p>In Quantum Information, I've come across the word "operational" quite a bit, while never really knowing what it means.  I took the opportunity to ask, and here paraphrase the answer, at least as I understand it.  In Mathematics, we are used to just making a definition, and then working with it.  (This of course obscures a huge amount of subtlety: at least in private, mathematicians argue endlessly about definitions, sometimes yes in a silly way, but mainly because we seek definitions which are beautiful, which capture the correct behaviour, that generalise well, which are useful.  These are all subjective of course.)  Sometimes these definitions are meant to capture some real-world behaviour or situation.  "Operational" means some definition which comes from a real-world interpretation of the mathematics.</p>
+<!--more-->
+
+<p>An example is the graph colour game.  One can just write down what a "quantum colouring" of a graph is (indeed, see some <a href="https://matthewdaws.github.io/blog/2023-07-07-quantum-chromatic-numbers.html">older blog posts here</a>) as a Mathematical thing.  However, the "graph colouring game" from QIT gives a real-world (for certain values of "real", perhaps) situation where the definition essentially just emerges naturally.</p>
+<p>This discussion lead to an amusing incident when the Mathematicians in the room started arguing about what exactly this (informal, hastily written on the board) definition meant.  I don't think this was quite as ironic as some of the QIT people thought, but it did nicely illustrate an example of "research culture".  Because, <em>of course</em> Mathematicians are going to question a definition: it's what we are trained to do.  See a defintion; come up with some examples; come up with some non-examples; try to prove some results.  But it is a reminder that sometimes, taking a little bit of time to think about the motivations behind a definition might be a good idea.</p>
+<p>Talking to someone else a few days later, I got another meaning of "operational".  It sort of means a protocol, or algorithm, which a (quantum) computer could be given to follow.  Or, rather, given a mathematical definition, is there a protocol from which the definition naturally arises.</p>
+<p>I'm left with the feeling that this is still something "<a href="https://en.wikipedia.org/wiki/I_know_it_when_I_see_it">that I know it when I see it</a>" (and so not a definition in the sense this Mathematician likes!) but my understanding has definitely improved.</p>
+
+    <hr>
+
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+<a class="page-link" href="index.html">Index</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="2024-03-05-overleaf-and-git.html">Overleaf and Git &rarr;</a>
+</li>
+    </ul>
+
+    </div> <!-- End of main column -->
+
+    <!-- Side bar -->
+    <div class="col-md-4">
+
+    <div class="card my-4">
+    <h5 class="card-header">Categories</h5>
+    <div class="card-body">
+        <div class="row" id="categories"></div>
+    </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Recent posts</h5>
+        <div class="card-body">
+        <ul class="list-unstyled" id="recents"></ul>
+        </div>
+    </div>
+    
+    </div>  <!-- Side bar end -->
+
+</div>
+</div>
+
+<!--<script src="../js/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!--<script src="../js/bootstrap.min.js"></script>-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)'], ['$','$']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+    };
+</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="../js/blog.js"></script>
+</body>
+
+</html>
+    
