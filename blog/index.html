@@ -56,6 +56,17 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Distinguishable</h2>
+        <p>A little mathematics: I have claimed the following in a number of talks, hence perhaps a proof is called for.  Given two <a href="https://en.wikipedia.org/wiki/Density_matrix">Density Matrices</a> \( \rho_1, \rho_2 \) (so positive-semidefinite, trace one matrices) we say that the associated quantum states are <em>distinguishable</em> when \( \newcommand{\Tr}{\operatorname{Tr}}\Tr(\rho_1 \rho_2) = 0 \).  Let \( T \) be a quantum channel; we are interested in when \( T(\rho_1) \) and \( T(\rho_2) \) are distinguishable.</p>
+<p><strong>Claim:</strong> \( T(\rho_1) \) and \( T(\rho_2) \) are distinguishable if and only if \( \Tr\big(T(|\xi\rangle\langle\xi|) T(|\eta\rangle\langle\eta|) \big)=0 \) for each \( \newcommand{\im}{\operatorname{Im}}\xi \in \im(\rho_1) \) and \( \eta \in \im(\rho_2) \).</p>
+
+        <a href="2025-02-04-distinguishable.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">4th February 2025</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">It's all operational</h2>
         <p>I'm currently at the <a href="https://www.newton.ac.uk">Isaac Newton Institute</a> where I am a co-organiser of the <a href="https://www.newton.ac.uk/event/qia/">Quantum information, quantum groups and operator algebras</a> 5-week programme.  We're about half-way through now, and so far it's been a really fun event.  We started with a "school", and then went into the programme proper, while still encouraging visiting researchers to give talks, ideally explaining things slowly and giving background, rather than straight up seminars (which come at the end, when we have a conference).</p>
 <p>I feel like I've learnt a huge amount.  While attending a traditional conference is good, I often find myself very busy, listening to lots of talks, and the pressure speakers feel to be impressive, to give all their results, means that it can be hard to get into the details of people's work.  (Which comes later, when you read the papers, but that requires time, usually lacking at the meeting itself.)  With being at the programme for longer, and having less pressure from talks, it feels like I've had more time to think about ideas, and to talk informally with people about those ideas.  In fact, I'm not sure I've felt this engaged with the research area for really quite some time.</p>
@@ -152,20 +163,6 @@ the pre-annihilator of \( F \).  This is again an order-preserving map.</p>
         <a href="2023-07-04-spectral-bounds.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">4th July 2023</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Fixed points of complete positive maps</h2>
-        <p>The first of hopefully a few posts about actual Mathematics, the context of which will follow.  In <a href="https://cs.uwaterloo.ca/~watrous/TQI/">Watrous's QIT book</a>, Theorem 4.25 states the following:</p>
-<blockquote class="card-body">
-<p>Let \( \Phi:\mathbb M_n\rightarrow\mathbb M_n \) be a unital quantum channel with Kraus representation \( \Phi(x) = \sum_a A_a x A_a^* \).  Then \( \Phi(x)=x \) if and only if \( A_a x = x A_a \) for each \( a \).</p>
-</blockquote>
-<p>(Here I translate slightly the language).  Whenever I see a statement about quantum channels, I ask myself if I can translate it into a more Operator Algebraic statement making more use of the Stinespring representation theorem, for example.  After much messing about, I realised that the key property is that \( \Phi \) is <em>trace preserving</em>, and that this, together with <a href="2019-08-04-multdomains.html">multiplicative domain theory</a>, can be used to give a simple proof.  (Well, maybe not <em>simple</em>, but one adding some context.)</p>
-
-        <a href="2023-07-03-fixed-points.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">3th July 2023</div>
 </div>
 
 

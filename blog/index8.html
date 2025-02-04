@@ -56,6 +56,17 @@
 
     <div class="card mb-4">
     <div class="card-body">
+        <h2 class="card-title">Parsing XML via SAX in Python</h2>
+        <p>I've worked with XML before (in Java), but always small files using the <a href="https://en.wikipedia.org/wiki/Document_Object_Model">Document Object Model</a>.  Now faced with multi-GB of Open Street Map derived XML files, of which I need to get a small amount of data, some other method is required.  Step forward the <a href="https://en.wikipedia.org/wiki/Simple_API_for_XML">Simple API for XML (SAX)</a>.  This is an <a href="http://www.saxproject.org/event.html">event-driven API</a>: the XML parser calls a "handler" object with information about tags opening and closing, and the character data in between.</p>
+<p>In Python, there is support in the <a href="https://docs.python.org/3/library/xml.sax.html">standard library</a> for SAX parsing.  You need to sub-class (or duck-type, and implement the interface of) <code>xml.sax.handler.ContentHandler</code>.  It seems that duck-typing is frustrating, as you need to implement the whole interface, even if you never expect certain methods to be called.</p>
+
+        <a href="2017-05-03-sax.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">3th May 2017</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
         <h2 class="card-title">Open Street Map Data</h2>
         <p>I'm currently working on using some address information from open street map to augment other open data sources.  Here are some notes on using data from open street map, in Python.</p>
 <h2>Getting and using Open StreetMap Data</h2>
@@ -141,17 +152,6 @@ not as a hobby.)  Numpy is great, but it doesn't half require a little thinking 
         <a href="2015-10-16-leds.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">16th October 2015</div>
-</div>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title">Graphs in Windsor</h2>
-        <p>While spending a long weekend in Windsor, we found the following:</p>
-<p><img class="fixed-ratio-resize" alt="Maze problem" src="./public/12.jpg"></p>
-
-        <a href="2015-09-07-GraphTheoryWindsor.html" class="btn btn-primary btn-light" style="background-color: #ccc200;">Read More &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">7th September 2015</div>
 </div>
 
 

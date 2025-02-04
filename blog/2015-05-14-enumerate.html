@@ -63,10 +63,10 @@
 </pre></div>
  </p>
 <p>In C++ the idiomatic way to do this is perhaps:</p>
-<p><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">container</span><span class="p">;</span>
+<p><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">container</span><span class="p">;</span>
 <span class="p">...</span>
-<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;At &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">container</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;At &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">container</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
  </p>
@@ -74,69 +74,69 @@
 <!--more-->
 
 <p>We could write:</p>
-<p><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+<p><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </pre></div>
  </p>
 <p>or more tediously, but more showy:</p>
-<p><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">decltype</span><span class="p">(</span><span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+<p><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">decltype</span><span class="p">(</span><span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </pre></div>
  </p>
 <p>Surely we can do better?  So I sat down and wrote a little template function <code>enumerate(T container)</code> which returns a class implementing the methods <code>begin()</code> and <code>end()</code>, these in turn returning custom iterators which count up from <code>0</code> to <code>container.size() - 1</code>.  You can thus write:</p>
-<p><div class="highlight"><pre><span></span><span class="n">foreach</span><span class="p">(</span><span class="k">auto</span> <span class="nl">index</span> <span class="p">:</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">container</span><span class="p">))</span> <span class="p">{</span>
-   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;At &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">index</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">container</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<p><div class="highlight"><pre><span></span><span class="n">foreach</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">enumerate</span><span class="p">(</span><span class="n">container</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;At &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">container</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
  </p>
 <h2>Subtle issues 1</h2>
 <p>What makes C++ interesting, and frustrating, is certain subtle issues.  Our iterator returns a number, for which we implement <code>operator*</code>:</p>
-<p><div class="highlight"><pre><span></span>	<span class="n">SizeType</span> <span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">index</span><span class="p">;</span> <span class="p">}</span>
+<p><div class="highlight"><pre><span></span><span class="w">	</span><span class="n">SizeType</span><span class="w"> </span><span class="k">operator</span><span class="o">*</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
  </p>
 <p>That's great, but what if the user tries to capture the index by reference:</p>
-<p><div class="highlight"><pre><span></span><span class="n">foreach</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">eneumerate</span><span class="p">(</span><span class="n">container</span><span class="p">))</span>
+<p><div class="highlight"><pre><span></span><span class="n">foreach</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">eneumerate</span><span class="p">(</span><span class="n">container</span><span class="p">))</span>
 </pre></div>
  </p>
 <p>We get the cryptic error "error: invalid initialization of non-const reference of type 'long long unsigned int&amp;' from an rvalue of type 'long long unsigned int'"  (<a href="http://stackoverflow.com/questions/8293426/error-invalid-initialization-of-non-const-reference-of-type-int-from-an-rval">Explanation from StackOverflow</a>.  Basically, when we <code>return index;</code> we are <em>not</em> returning <code>index</code>, but rather a <em>temporary copy</em> (aka r-value) and, as you might hope, you're not allowed to take the reference of a temporary copy...)  We can "fix" this by:</p>
-<p><div class="highlight"><pre><span></span>	<span class="n">SizeType</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">index</span><span class="p">;</span> <span class="p">}</span>
+<p><div class="highlight"><pre><span></span><span class="w">	</span><span class="n">SizeType</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">*</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
  </p>
 <p>However, we've now giving the user access to the index, so this</p>
-<p><div class="highlight"><pre><span></span><span class="n">foreach</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">eneumerate</span><span class="p">(</span><span class="n">container</span><span class="p">))</span> <span class="p">{</span>
-   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">container</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span> <span class="p">}</span>
+<p><div class="highlight"><pre><span></span><span class="n">foreach</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">eneumerate</span><span class="p">(</span><span class="n">container</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">container</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
  </p>
 <p>prints every second term of container.  Is that what we want?  If not, then we can use a <code>const</code>:</p>
-<p><div class="highlight"><pre><span></span>	<span class="k">const</span> <span class="n">SizeType</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">index</span><span class="p">;</span> <span class="p">}</span>
+<p><div class="highlight"><pre><span></span><span class="w">	</span><span class="k">const</span><span class="w"> </span><span class="n">SizeType</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">*</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
  </p>
 <p>The command <code>++i;</code> now gives an error "error: increment of read-only reference 'i'" which is, to my mind, (a) not cryptic; and (b) makes it clear to the user what the issue is.</p>
 <h2>Subtle issues 2</h2>
 <p>Let's get ambitious, and use <code>enumerate</code> for something else:</p>
-<p><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">range</span> <span class="p">{</span>
-   <span class="kt">int</span> <span class="nf">size</span><span class="p">()</span><span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">8</span><span class="p">;</span> <span class="p">}</span>
+<p><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">range</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="nf">size</span><span class="p">()</span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">};</span>
 <span class="p">...</span>
-<span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">n</span> <span class="p">:</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">range</span><span class="p">{})))</span> <span class="p">{</span>
-   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">enumerate</span><span class="p">(</span><span class="n">range</span><span class="p">{})))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
  </p>
 <p>This seems to work, so try something more ambitious:</p>
-<p><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">range</span> <span class="p">{</span>
+<p><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">range</span><span class="w"> </span><span class="p">{</span>
 <span class="k">private</span><span class="o">:</span>
-   <span class="kt">int</span> <span class="n">limit</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">limit</span><span class="p">;</span>
 <span class="k">public</span><span class="o">:</span>
-   <span class="n">range</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">l</span><span class="p">)</span> <span class="o">:</span> <span class="n">limit</span><span class="p">{</span><span class="n">l</span><span class="p">}</span> <span class="p">{}</span>
-   <span class="kt">int</span> <span class="n">size</span><span class="p">()</span><span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">limit</span><span class="p">;</span> <span class="p">}</span>
+<span class="w">   </span><span class="n">range</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">limit</span><span class="p">{</span><span class="n">l</span><span class="p">}</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">()</span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">limit</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">};</span>
 <span class="p">...</span>
-<span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">n</span> <span class="p">:</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))))</span> <span class="p">{</span>
-   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">enumerate</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
  </p>
 <p>This again seems to work, but it may not...  Suppose we add:</p>
-<p><div class="highlight"><pre><span></span>   <span class="o">~</span><span class="n">range</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;~range() called.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">}</span>
+<p><div class="highlight"><pre><span></span><span class="w">   </span><span class="o">~</span><span class="n">range</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;~range() called.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
  </p>
 <p>Then the output is:</p>
@@ -148,13 +148,13 @@
 <ul>
 <li>All we need to know about our "container" is its size.</li>
 <li>If you explore things, then the <code>for (type i : container)</code> expression calls both <code>container.begin</code> and <code>container.end</code> at the start, and <em>caches</em> the two resulting iterators.  It's equivalent to:
- <div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">container</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-<span class="k">auto</span> <span class="n">itend</span> <span class="o">=</span> <span class="n">container</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
-<span class="k">for</span> <span class="p">(;</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">itend</span><span class="p">;</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+ <div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">container</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">itend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">container</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">itend</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">it</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
  
    and not, as perhaps you might think, to:
- <div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">container</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">conatiner</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+ <div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">container</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">conatiner</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">it</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
  </li>
 <li>Thus, <em>even if we wanted to</em> we cannot support the container length changing in the loop (not quite true: the <code>end</code> iterator could "know" that is was the end iterator, and each time <code>operator!=</code> or <code>operator==</code> was called on the iterators, we could query the container.)</li>
@@ -162,17 +162,17 @@
 </ul>
 <h2>Complexity</h2>
 <p>Of course, we've written quite a lot of code!  What does this do?</p>
-<p><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">container</span><span class="p">))</span> <span class="p">{</span> <span class="n">test_func</span><span class="p">(</span><span class="n">conatiner</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="p">}</span>
+<p><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">enumerate</span><span class="p">(</span><span class="n">container</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">test_func</span><span class="p">(</span><span class="n">conatiner</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
  </p>
 <p>It calls <code>test_func</code> on each entry of <code>container</code>.  With <code>-O1</code> this compiles to this inner loop:</p>
 <p><div class="highlight"><pre><span></span><span class="nl">.L4:</span>
-	<span class="nf">movq</span>	<span class="p">(</span><span class="nv">%rsi</span><span class="p">),</span> <span class="nv">%rax</span>
-	<span class="nf">movl</span>	<span class="p">(</span><span class="nv">%rax</span><span class="p">,</span><span class="nv">%rbx</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nv">%ecx</span>
-	<span class="nf">call</span>	<span class="no">_Z9test_funci</span>
-	<span class="nf">addq</span>	<span class="no">$1</span><span class="p">,</span> <span class="nv">%rbx</span>
-	<span class="nf">cmpq</span>	<span class="nv">%rdi</span><span class="p">,</span> <span class="nv">%rbx</span>
-	<span class="nf">jne</span>	<span class="no">.L4</span>
+<span class="w">	</span><span class="nf">movq</span><span class="w">	</span><span class="p">(</span><span class="nv">%rsi</span><span class="p">),</span><span class="w"> </span><span class="nv">%rax</span>
+<span class="w">	</span><span class="nf">movl</span><span class="w">	</span><span class="p">(</span><span class="nv">%rax</span><span class="p">,</span><span class="nv">%rbx</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="nv">%ecx</span>
+<span class="w">	</span><span class="nf">call</span><span class="w">	</span><span class="no">_Z9test_funci</span>
+<span class="w">	</span><span class="nf">addq</span><span class="w">	</span><span class="no">$1</span><span class="p">,</span><span class="w"> </span><span class="nv">%rbx</span>
+<span class="w">	</span><span class="nf">cmpq</span><span class="w">	</span><span class="nv">%rdi</span><span class="p">,</span><span class="w"> </span><span class="nv">%rbx</span>
+<span class="w">	</span><span class="nf">jne</span><span class="w">	</span><span class="no">.L4</span>
 </pre></div>
  </p>
 <p>As we might hope, the compiler works its magic, and we pay no overhead for our mucking around.</p>

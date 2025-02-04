@@ -63,28 +63,28 @@
 <p>(Aside: Stackoverflow never ceases to amaze me: I asked a kind-of-silly question, which probably I could have thought about myself, and I get a wonderful, long, complete answer...)</p>
 <h3>LINQ</h3>
 <p>I do really like LINQ, and the way it reminds one of list comprehensions.  Turning this...</p>
-<p><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">allEdges</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Tuple</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">T</span><span class="p">&gt;&gt;()</span>
-<span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">edge</span> <span class="k">in</span> <span class="n">edges</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">allEdges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Tuple</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+<span class="k">foreach</span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">edges</span><span class="p">)</span>
 <span class="p">{</span>
-	<span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">e</span> <span class="k">in</span> <span class="n">graph</span><span class="p">.</span><span class="n">AsDirectedEdges</span><span class="p">(</span><span class="n">edge</span><span class="p">.</span><span class="n">Item1</span><span class="p">,</span> <span class="n">edge</span><span class="p">.</span><span class="n">Item2</span><span class="p">))</span>
-	<span class="p">{</span>
-		<span class="n">allEdges</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
-	<span class="p">}</span>
+<span class="w">	</span><span class="k">foreach</span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">graph</span><span class="p">.</span><span class="n">AsDirectedEdges</span><span class="p">(</span><span class="n">edge</span><span class="p">.</span><span class="n">Item1</span><span class="p">,</span><span class="w"> </span><span class="n">edge</span><span class="p">.</span><span class="n">Item2</span><span class="p">))</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="n">allEdges</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
  </p>
 <p>into this...</p>
-<p><div class="highlight"><pre><span></span><span class="n">allEdges</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">from</span> <span class="n">edge</span> <span class="k">in</span> <span class="n">edges</span>
-	<span class="k">from</span> <span class="n">e</span> <span class="k">in</span> <span class="n">graph</span><span class="p">.</span><span class="n">AsDirectedEdges</span><span class="p">(</span><span class="n">edge</span><span class="p">.</span><span class="n">Item1</span><span class="p">,</span> <span class="n">edge</span><span class="p">.</span><span class="n">Item2</span><span class="p">)</span>
-	<span class="k">select</span> <span class="n">e</span><span class="p">);</span>
+<p><div class="highlight"><pre><span></span><span class="n">allEdges</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">edges</span>
+<span class="w">	</span><span class="k">from</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">graph</span><span class="p">.</span><span class="n">AsDirectedEdges</span><span class="p">(</span><span class="n">edge</span><span class="p">.</span><span class="n">Item1</span><span class="p">,</span><span class="w"> </span><span class="n">edge</span><span class="p">.</span><span class="n">Item2</span><span class="p">)</span>
+<span class="w">	</span><span class="k">select</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
 </pre></div>
  </p>
 <p>is rather nice.  (The 2nd snippet uses a simple extension method to <code>Add</code>; again, extension methods seem pretty neat.)</p>
 <h3>Generics</h3>
 <p>However, give me templates from C++ anyday!  I really (really) like the duck-typing nature of templates: it's sort of like using a dynamic language, but with compile time checking.  (Of course, one also has to enjoy page long error messages...  Maybe "concepts" will arrive one day.)  That C# just doesn't let you do</p>
-<p><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">static</span> <span class="n">MyMethod</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">one</span><span class="p">,</span> <span class="n">T</span> <span class="n">two</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">MyMethod</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">one</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">two</span><span class="p">)</span>
 <span class="p">{</span>
-   <span class="k">return</span> <span class="n">one</span> <span class="p">+</span> <span class="n">two</span><span class="p">;</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">two</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
  </p>
