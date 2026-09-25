@@ -67,7 +67,7 @@
    - Suppose we have \(n_i \leq n &lt; n_{i+1}\) and we increase \(n\) by 1 (here we allow \(i=k\) and \(n_{k+1}:=\infty\)).  Then we move 1 away from \(n_1,\cdots,n_i\) and 1 closer to \(n_{i+1},\cdots,n_k\) so the "cost" changes by \(i - (k-i) = 2i-k\).
    - It follows that the best choose for \(n\) is the "mid-point" of the sequence: the middle term if we have an odd number of terms, or otherwise any value between (inclusive) the two middle terms of an even length sequence.</p>
 <p><strong>Problem B, New Lottery:</strong>  In Python, the small case is a trivial search:</p>
-<p><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">combs</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+<p><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">combs</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
@@ -77,7 +77,7 @@
 </pre></div>
  </p>
 <p>Or I guess a fancy generator comprehension (which is slightly slower), using the boolean get prompted to ints:</p>
-<p><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">combs</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+<p><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">combs</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">K</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="p">)</span> <span class="p">)</span>
 </pre></div>
  </p>
